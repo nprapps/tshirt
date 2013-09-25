@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    
+    <style type="text/css">
+        #video-wrapper { 
+            position: relative;
+            overflow: hidden;
+        }
+        #video-wrapper iframe {
+/*            position: absolute; */
+        }
+    </style>
+  </head>
+  <body>
+  
+    <div id="video-wrapper">
+        <iframe id="video" src="http://player.vimeo.com/video/73443972?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
+        <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h3>h3. Lorem ipsum dolor sit</h3> 
+                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/libs/froogaloop2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    var $w = $(window);
+	    var $video = $('#video');
+        var $iframe = $('#video')[0];
+        var $player = $f($iframe);
+	    var $player_wrapper = $('#video-wrapper');
+
+        var player_offset = 60;
+        
+        
+        function resize_window() {
+            console.log('resize_window');
+            var window_width = $w.width();
+            var window_height = $w.height();
+            console.log(window_width, window_height);
+
+            var w = window_width + (player_offset * 2);
+            var h = window_height + (player_offset * 2);
+
+            $player_wrapper.width('100%');
+            $player_wrapper.height(window_height + 'px');
+            
+            var optimal_width = ((window_height + (player_offset * 2)) * 16) / 9;
+            var width_diff = optimal_width - window_width;
+            console.log(optimal_width, window_width, width_diff);
+            
+            /*
+            var optimal_height = (window_width * 9) / 16;
+            var height_diff = optimal_height - window_height;
+            console.log(optimal_height, window_height, height_diff);
+            */
+            
+            if (width_diff > 0) {
+                w = optimal_width;
+            }
+
+            $video.width(w);
+            $video.height(h + 'px');
+            $video.css('position', 'absolute');
+            $video.css('top', (0 - player_offset) + 'px');
+            $video.css('left', (0 - (width_diff / 2)) + 'px');
+        }
+        
+        $w.on('resize', resize_window);
+        resize_window();
+
+        $player.addEvent('ready', function() {
+            console.log('player ready');
+            $player.api('setVolume', 0);
+            $player.api('play');
+        });
+    });
+	</script>
+	
+  </body>
+</html>
