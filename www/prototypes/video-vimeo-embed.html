@@ -19,7 +19,7 @@
   <body>
   
     <div id="video-wrapper">
-        <iframe id="video" src="http://player.vimeo.com/video/73443972?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
+        <iframe id="video" src="http://player.vimeo.com/video/13768695?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
         <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
     </div>
 
@@ -49,7 +49,6 @@
 	    var $player_wrapper = $('#video-wrapper');
 
         var player_offset = 60;
-        
         
         function resize_window() {
             console.log('resize_window');
@@ -90,6 +89,7 @@
         $player.addEvent('ready', function() {
             console.log('player ready');
             $player.api('setVolume', 0);
+            $player.api('seekTo', 10);
             $player.api('play');
         });
     });
