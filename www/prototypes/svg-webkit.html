@@ -10,6 +10,8 @@
             margin: 0 auto;
             display: block;
             border: 1px solid #ccc;
+            width: 20%;
+            height: 20%;
         }
         .svg-wrapper path {
             stroke: #333;
@@ -104,6 +106,10 @@
 	    var paths;
 	    var paths_count;
 	    var paths_target;
+	    var $svg = $('.svg-wrapper').find('svg');
+	    var svg_orig_width = $svg.width();
+	    var svg_orig_height = $svg.height();
+	    var $w = $(window);
 
 	    paths = document.querySelectorAll('.svg-wrapper path');
 	    paths_count = paths.length;
@@ -115,8 +121,7 @@
             path.style.strokeDashoffset = path_length;
             path.getBoundingClientRect();
 	    }
-        
-        
+	    
         $('.svg-wrapper').on('click', function() {
             console.log('clicked!');
             if (paths_target == null || paths_target == 'end') {
@@ -133,6 +138,19 @@
             paths[1].style.transition = paths[1].style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
             paths[1].style.transitionDelay = paths[1].style.WebkitTransitionDelay = '2s';
         });
+        
+        /*
+        function on_resize() {
+            // scale the SVG to match the screen width
+            var window_width = $w.width();
+            var svg_new_width = window_width * .5;
+            var svg_new_height = svg_orig_height * (svg_new_width / svg_orig_width)
+            $svg.width(svg_new_width + 'px');
+            $svg.height(svg_new_height + 'px');
+        }
+//        $w.on('resize', on_resize);
+//        on_resize();
+        */
     });
 	</script>
 	
