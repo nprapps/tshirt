@@ -56,6 +56,7 @@
         
         nav.navbar-fixed-top { 
             top: -50px;
+            -webkit-transition: top 0.25s ease-in-out;
         }
         nav.navbar-fixed-top.active {
             top: 0;
@@ -173,24 +174,24 @@
         });
         
         function on_scroll() {
+            var scroll_position = $(this).scrollTop();
+
             // stop background animation when the user scrolls down the page
-            if ($filmstrip.hasClass('animated') && $(this).scrollTop() >= window_height) {
+            if ($filmstrip.hasClass('animated') && scroll_position >= window_height) {
                 $filmstrip.removeClass('animated');
             // resume animation when the user scrolls up
-            } else if (!$filmstrip.hasClass('animated') && $(this).scrollTop() < window_height) {
+            } else if (!$filmstrip.hasClass('animated') && scroll_position < window_height) {
                 $filmstrip.addClass('animated');
-                $nav.removeClass('active');
             }
             
             // show or hide navbar based on scroll position
             var nav_activation_point = window_height / 2;
-            if (!$nav.hasClass('active') && $(this).scrollTop() >= nav_activation_point) {
+            if (!$nav.hasClass('active') && scroll_position >= nav_activation_point) {
                 $nav.addClass('active');
-            } else if ($nav.hasClass('active') && $(this).scrollTop() < nav_activation_point) {
+            } else if ($nav.hasClass('active') && scroll_position < nav_activation_point) {
                 $nav.removeClass('active');
             }
         }
-        
         $(window).on('scroll', on_scroll);
     });
 	</script>
