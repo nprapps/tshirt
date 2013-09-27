@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    
+    <link href="skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+    
     <style type="text/css">
         /* ZEEGA-STYLE ANIMATED GIF / FILMSTRIP, TESTED IN CHROME/FIREFOX SO FAR */
 
@@ -24,7 +27,7 @@
         .filmstrip {
             width: 100%;
             height: 100%;
-            background: url('img/filmstrip-test.jpg');
+            background: url('../img/filmstrip-test.jpg');
             background-size: 100% 2000%;
 
             -webkit-backface-visibility: hidden;
@@ -47,12 +50,41 @@
             font-size: 100px;
         }
         
-        #wl {
+        #story {
             z-index: 2;
             position: relative;
             background-color: #fff;
             padding: 100px 0;
         }
+        
+        div.jp-video-360p {width: 100%; position: relative;} 
+
+		a.jp-video-play-icon {
+			margin: auto;
+			position: absolute;
+			top: 0; 
+			left: 0; 
+			bottom: 0; 
+			right: 0;
+			width: 80px;
+			height: 80px;
+			background: url("skin/blue.monday/playicon.png") 0 0 no-repeat;
+			text-indent:-9999px;
+		}
+
+		#subtitle-overlay {
+		position: absolute;
+		bottom: 50px;
+		left: 0;
+		color: #fff;
+		width: 100%;
+		} 
+		
+		#subtitle-overlay div {
+			text-align: center;
+			font-size: 20px;
+			font-family: helvetica, arial, sans-serif;
+		}
 
         @-webkit-keyframes filmstrip { 0% {background-position:0 -0%;-webkit-animation-timing-function:steps(1);}5%{background-position:0 -100%;-webkit-animation-timing-function:steps(1);}10%{background-position:0 -200%;-webkit-animation-timing-function:steps(1);}15%{background-position:0 -300%;-webkit-animation-timing-function:steps(1);}20%{background-position:0 -400%;-webkit-animation-timing-function:steps(1);}25%{background-position:0 -500%;-webkit-animation-timing-function:steps(1);}30%{background-position:0 -600%;-webkit-animation-timing-function:steps(1);}35%{background-position:0 -700%;-webkit-animation-timing-function:steps(1);}40%{background-position:0 -800%;-webkit-animation-timing-function:steps(1);}45%{background-position:0 -900%;-webkit-animation-timing-function:steps(1);}50%{background-position:0 -1000%;-webkit-animation-timing-function:steps(1);}55%{background-position:0 -1100%;-webkit-animation-timing-function:steps(1);}60%{background-position:0 -1200%;-webkit-animation-timing-function:steps(1);}65%{background-position:0 -1300%;-webkit-animation-timing-function:steps(1);}70%{background-position:0 -1400%;-webkit-animation-timing-function:steps(1);}75%{background-position:0 -1500%;-webkit-animation-timing-function:steps(1);}80%{background-position:0 -1600%;-webkit-animation-timing-function:steps(1);}85%{background-position:0 -1700%;-webkit-animation-timing-function:steps(1);}90%{background-position:0 -1800%;-webkit-animation-timing-function:steps(1);}95%{background-position:0 -1900%;-webkit-animation-timing-function:steps(1);} }
         @-moz-keyframes filmstrip {0%{background-position:0 -0%;-moz-animation-timing-function:steps(1);}5%{background-position:0 -100%;-moz-animation-timing-function:steps(1);}10%{background-position:0 -200%;-moz-animation-timing-function:steps(1);}15%{background-position:0 -300%;-moz-animation-timing-function:steps(1);}20%{background-position:0 -400%;-moz-animation-timing-function:steps(1);}25%{background-position:0 -500%;-moz-animation-timing-function:steps(1);}30%{background-position:0 -600%;-moz-animation-timing-function:steps(1);}35%{background-position:0 -700%;-moz-animation-timing-function:steps(1);}40%{background-position:0 -800%;-moz-animation-timing-function:steps(1);}45%{background-position:0 -900%;-moz-animation-timing-function:steps(1);}50%{background-position:0 -1000%;-moz-animation-timing-function:steps(1);}55%{background-position:0 -1100%;-moz-animation-timing-function:steps(1);}60%{background-position:0 -1200%;-moz-animation-timing-function:steps(1);}65%{background-position:0 -1300%;-moz-animation-timing-function:steps(1);}70%{background-position:0 -1400%;-moz-animation-timing-function:steps(1);}75%{background-position:0 -1500%;-moz-animation-timing-function:steps(1);}80%{background-position:0 -1600%;-moz-animation-timing-function:steps(1);}85%{background-position:0 -1700%;-moz-animation-timing-function:steps(1);}90%{background-position:0 -1800%;-moz-animation-timing-function:steps(1);}95%{background-position:0 -1900%;-moz-animation-timing-function:steps(1);}}
@@ -68,7 +100,7 @@
         </div>
         <h1>Bangladesh</h1>
     </div>
-	<div id="wl">
+	<div id="story">
 	
 	 <div class="container">
         <div class="row">
@@ -79,9 +111,31 @@
         </div><!-- /.row -->  
     </div><!-- /.container -->
 	
-	<div id="viddy" class="video-container">
-        <iframe id="video" src="http://player.vimeo.com/video/13768695?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
-    </div>
+	<div class="video-container">
+	
+	<div id="jp_container_1" class="jp-video jp-video-360p">
+			<div class="jp-type-single">
+				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+				
+				
+				<div class="jp-gui">
+					<div class="jp-video-play">
+						<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+					</div>
+					
+					<ul class="jp-controls">
+								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+							</ul>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>
+        
+    </div><!-- /.video-container -->
     
     <div class="container">
         <div class="row">
@@ -107,16 +161,19 @@
 	</div><!-- /#content -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="js/libs/jquery.fitvids.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	
+	<script type="text/javascript" src="js/popcorn.js"></script>
+	<script type="text/javascript" src="js/popcorn.player.js"></script>
+	<script type="text/javascript" src="js/popcorn.jplayer.js"></script>
+	<script type="text/javascript" src="js/popcorn.subtitle.js"></script>
+	
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function() {
-	
-		$('.video-container').fitVids();
-		
-	    var $container = $('#wl');
+
+		// aly filmstrip
+	    var $container = $('#story');
 	    var $filmstrip = $('.filmstrip');
 	    var $filmstrip_wrapper = $('.filmstrip-wrapper')
 	    var $filmstrip_outer_wrapper = $('.filmstrip-outer-wrapper');
@@ -180,6 +237,39 @@
         }
         
         $(window).on('scroll', on_scroll);
+        
+        // popcorn and jplayer video
+        
+	        var p = Popcorn.jplayer('#jquery_jplayer_1', {
+			media: {
+				m4v: "http://argoproject.org/prototypes/seed/j1.mp4",
+				webmv: "http://argo.npr.org/prototypes/seed/jasmine.webm",
+				ogv: "http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer.ogv",
+				poster: "http://argo.npr.org/prototypes/seed/jasmine.jpg"
+			},
+			options: {
+				swfPath: "js",
+				supplied: "webmv, m4v",
+				size: {
+					width: "100%",
+					height: "auto",
+					cssClass: "jp-video-360p"
+				},
+				smoothPlayBar: true,
+				keyEnabled: true
+			}
+		})
+		.subtitle({
+			start: 2,
+			end: 6,
+			text: "This text is the Popcorn Subtitle Plugin"
+		})
+		.subtitle({
+			start: 6,
+			end: 10,
+			text: "Working with the Popcorn jPlayer Player Plugin"
+		})
+	
     });
 	</script>
 	
