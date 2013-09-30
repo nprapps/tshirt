@@ -10,6 +10,8 @@
             margin: 0 auto;
             display: block;
             border: 1px solid #ccc;
+            width: 20%;
+            height: 20%;
         }
         .svg-wrapper path {
             stroke: #333;
@@ -17,8 +19,6 @@
             stroke-dasharray: 0;
             stroke-dashoffset: 0;
             fill: none;
-            -webkit-transition: stroke-dashoffset 2s ease-in-out
-            transition: stroke-dashoffset 2s ease-in-out
         }
         .svg-wrapper path:nth-child(2) {
             stroke: #ccc;
@@ -30,7 +30,7 @@
     <div class="svg-wrapper">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
              width="300px" height="300px" viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
-            <path class="path-one" d="M11.747,133.269c15.905-9.655,26-26.647,32.549-43.601c6.793-17.584,10.603-38.352,5.957-56.947
+            <path d="M11.747,133.269c15.905-9.655,26-26.647,32.549-43.601c6.793-17.584,10.603-38.352,5.957-56.947
                 c-0.191-0.766-1.757-0.153-1.934,0.371c-10.158,30.099-2.743,63.73-2.63,94.711c0.003,0.845,1.89,0.46,1.937-0.225
                 c1.211-17.75-0.826-47.489,20.217-54.62c-0.368-0.086-0.736-0.172-1.104-0.258c3.709,16.115-7.456,52.33,20.334,51.735
                 c10.074-0.216,18.088-9.63,22.703-17.6c4.482-7.742,9.001-21.208,0.917-28.204c-0.443-0.384-1.288-0.169-1.675,0.205
@@ -55,7 +55,7 @@
                 c0.646-0.075,1.291-0.15,1.937-0.225c-0.113-31.018-7.534-64.593,2.63-94.711c-0.645,0.124-1.29,0.248-1.934,0.371
                 c4.34,17.372,1.048,36.2-4.596,52.881c-6.058,17.902-16.644,36.471-33.193,46.517C9.413,133.316,11.092,133.667,11.747,133.269
                 L11.747,133.269z"/>
-            <path class="path one" fill="#CCCCCC" d="M11.747,253.812c15.905-9.655,26-26.647,32.549-43.602c6.793-17.584,10.603-38.352,5.957-56.947
+            <path d="M11.747,253.812c15.905-9.655,26-26.647,32.549-43.602c6.793-17.584,10.603-38.352,5.957-56.947
                 c-0.191-0.766-1.757-0.153-1.934,0.371c-10.158,30.099-2.743,63.731-2.63,94.711c0.003,0.845,1.89,0.46,1.937-0.225
                 c1.211-17.75-0.826-47.489,20.217-54.62c-0.368-0.086-0.736-0.172-1.104-0.258c3.709,16.115-7.456,52.33,20.334,51.735
                 c10.074-0.216,18.088-9.63,22.703-17.6c4.482-7.742,9.001-21.208,0.917-28.204c-0.443-0.384-1.288-0.169-1.675,0.205
@@ -106,6 +106,10 @@
 	    var paths;
 	    var paths_count;
 	    var paths_target;
+	    var $svg = $('.svg-wrapper').find('svg');
+	    var svg_orig_width = $svg.width();
+	    var svg_orig_height = $svg.height();
+	    var $w = $(window);
 
 	    paths = document.querySelectorAll('.svg-wrapper path');
 	    paths_count = paths.length;
@@ -117,8 +121,7 @@
             path.style.strokeDashoffset = path_length;
             path.getBoundingClientRect();
 	    }
-        
-        
+	    
         $('.svg-wrapper').on('click', function() {
             console.log('clicked!');
             if (paths_target == null || paths_target == 'end') {
@@ -135,6 +138,19 @@
             paths[1].style.transition = paths[1].style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out';
             paths[1].style.transitionDelay = paths[1].style.WebkitTransitionDelay = '2s';
         });
+        
+        /*
+        function on_resize() {
+            // scale the SVG to match the screen width
+            var window_width = $w.width();
+            var svg_new_width = window_width * .5;
+            var svg_new_height = svg_orig_height * (svg_new_width / svg_orig_width)
+            $svg.width(svg_new_width + 'px');
+            $svg.height(svg_new_height + 'px');
+        }
+//        $w.on('resize', on_resize);
+//        on_resize();
+        */
     });
 	</script>
 	
