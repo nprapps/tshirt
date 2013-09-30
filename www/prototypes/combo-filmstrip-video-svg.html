@@ -102,12 +102,17 @@
 		
 
 		/* svg */
+		.svg-wrapper {
+		    margin: 33px 0;
+		    position: relative;
+            cursor: pointer;
+		}
         .svg-wrapper svg {
             margin: 0 auto;
             display: block;
             border: 1px solid #ccc;
-            width: 60%;
-            height: 60%;
+            width: 100%;
+            height: 100%;
             background-color: #f1f1f1;
         }
         .svg-wrapper path {
@@ -116,6 +121,20 @@
             stroke-dasharray: 0;
             stroke-dashoffset: 0;
             fill: none;
+        }
+        .svg-wrapper .btn-play {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            position: absolute;
+            top: 45%;
+            left: 0;
+            width: 100%;
+            color: #6D8AC4;
+        }
+        .svg-wrapper .btn-play:hover {
+            opacity: 0.7;
+            cursor: pointer;
         }
     </style>
     
@@ -130,90 +149,92 @@
     </div>
 	<div id="story">
 	
-	 <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>h3. Lorem ipsum dolor sit</h3> 
-                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div><!-- /.row -->  
-    </div><!-- /.container -->
-	
-	<div class="video-container">
-	
-	<div id="jp_container_1" class="jp-video jp-video-360p">
-			<div class="jp-type-single">
-				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-				
-				
-				<div class="jp-gui">
-					<div class="jp-video-play">
-						<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
-					</div>
-					
-					<ul class="jp-controls">
-								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
-								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
-							</ul>
-				</div>
-				<div class="jp-no-solution">
-					<span>Update Required</span>
-					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-				</div>
-			</div>
-		</div>
-        
-    </div><!-- /.video-container -->
+         <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>h3. Lorem ipsum dolor sit</h3> 
+                    <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div><!-- /.row -->  
+        </div><!-- /.container -->
     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>h3. Lorem ipsum dolor sit</h3> 
-                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="video-container">
+    
+        <div id="jp_container_1" class="jp-video jp-video-360p">
+                <div class="jp-type-single">
+                    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
                 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                    <div class="jp-gui">
+                        <div class="jp-video-play">
+                            <a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+                        </div>
+                    
+                        <ul class="jp-controls">
+                                    <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                    <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                </ul>
+                    </div>
+                    <div class="jp-no-solution">
+                        <span>Update Required</span>
+                        To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                    </div>
+                </div>
+            </div>
+        
+        </div><!-- /.video-container -->
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>h3. Lorem ipsum dolor sit</h3> 
+                    <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="svg-wrapper">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="300px" height="100px" viewBox="0 0 300 100" enable-background="new 0 0 300 100" xml:space="preserve">
-        <path fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" d="M16.138,12.033
-            c-2.485,8.111-15.343,69.029,2.893,66.245c12.056-1.841,8.218-36.276-8.12-33.368c9.304,11.137,14.827-13.757,20.939-13.593
-            c0.181,4.126-2.067,15.229,2.169,16.652c6.231,2.09,7.711-11.293,7.658-14.936c0.107,3.199,0.851,11.31,5.283,12.702
-            c6.537,2.053,8.131-8.463,13.388-10.81c1.416,0.357,1.103,1.279,2.045,2.135c-3.177-11.587-12.195,5.186-8.175,8.755
-            c7.783,6.912,9.349-19.802,8.577-24.043c-0.78,6.356-2.077,24.729,7.774,25.974c8.495,1.075,10.758-12.098,19.471-13.81
-            c-4.976-6.635-14.895,0.5-13.803,8.335c1.529,10.975,10.997,2.298,10.648-5.482c-4.031,13.718,12.237,11.993,13.685,0.561
-            c-0.786,3.164-0.086,7.221,0.267,10.36c6.816-1.504,6.84-9.737,10.114-15.056c4.439,13.009,11.999,27.615,13.163,41.34
-            c0.755,8.893-6.226,26.016-18.44,16.942c-21.825-16.215,23.662-49.683,42.277-29.341"/>
-        <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M34.065,7.815c1.038,1.979,1.383,4.107,1.054,6.327"/>
-        <path fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" d="M145.842,49.468
-            c10.256-5.411,25.308-23.199,19.081-39.358c-16.972,6.143-10.888,72.541-4.846,80.485c2.818-7.324,4.398-39.312-3.501-43.607
-            c7.059,0.411,17.107-4.022,16.69-12.245c-2.464,15.286,15.674,17.207,12.575,2.037c5.713,14.196,13.557-0.613,18.056-5.476
-            c4.828,4.123,4.613,12.967,10.146,16.78c0.42-5.207,0.558-10.83,3.396-15.458c14.719,14.078,33.368,17.881,47.561,0.497"/>
-        </svg>
-    </div>
+        <div class="svg-wrapper">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="300px" height="100px" viewBox="0 0 300 100" enable-background="new 0 0 300 100" xml:space="preserve">
+                <path fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" d="M16.138,12.033
+                    c-2.485,8.111-15.343,69.029,2.893,66.245c12.056-1.841,8.218-36.276-8.12-33.368c9.304,11.137,14.827-13.757,20.939-13.593
+                    c0.181,4.126-2.067,15.229,2.169,16.652c6.231,2.09,7.711-11.293,7.658-14.936c0.107,3.199,0.851,11.31,5.283,12.702
+                    c6.537,2.053,8.131-8.463,13.388-10.81c1.416,0.357,1.103,1.279,2.045,2.135c-3.177-11.587-12.195,5.186-8.175,8.755
+                    c7.783,6.912,9.349-19.802,8.577-24.043c-0.78,6.356-2.077,24.729,7.774,25.974c8.495,1.075,10.758-12.098,19.471-13.81
+                    c-4.976-6.635-14.895,0.5-13.803,8.335c1.529,10.975,10.997,2.298,10.648-5.482c-4.031,13.718,12.237,11.993,13.685,0.561
+                    c-0.786,3.164-0.086,7.221,0.267,10.36c6.816-1.504,6.84-9.737,10.114-15.056c4.439,13.009,11.999,27.615,13.163,41.34
+                    c0.755,8.893-6.226,26.016-18.44,16.942c-21.825-16.215,23.662-49.683,42.277-29.341"/>
+                <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M34.065,7.815c1.038,1.979,1.383,4.107,1.054,6.327"/>
+                <path fill="none" stroke="#000000" stroke-linejoin="round" stroke-miterlimit="10" d="M145.842,49.468
+                    c10.256-5.411,25.308-23.199,19.081-39.358c-16.972,6.143-10.888,72.541-4.846,80.485c2.818-7.324,4.398-39.312-3.501-43.607
+                    c7.059,0.411,17.107-4.022,16.69-12.245c-2.464,15.286,15.674,17.207,12.575,2.037c5.713,14.196,13.557-0.613,18.056-5.476
+                    c4.828,4.123,4.613,12.967,10.146,16.78c0.42-5.207,0.558-10.83,3.396-15.458c14.719,14.078,33.368,17.881,47.561,0.497"/>
+            </svg>
+            <div class="btn-play">Play Animation</div>
+        </div>
 
     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>h3. Lorem ipsum dolor sit</h3> 
-                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <h3>h3. Lorem ipsum dolor sit</h3> 
+                    <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                <h3>h3. Lorem ipsum dolor sit</h3> 
-                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div><!-- /.row -->  
-    </div><!-- /.container -->
-	</div><!-- /#content -->
+                    <h3>h3. Lorem ipsum dolor sit</h3> 
+                    <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div><!-- /.row -->  
+        </div><!-- /.container -->
+
+	</div><!-- /#story -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -247,6 +268,7 @@
 	    var $svg = $('.svg-wrapper').find('svg');
 	    var svg_orig_width = $svg.width();
 	    var svg_orig_height = $svg.height();
+	    var $svg_play = $('.svg-wrapper').find('.btn-play');
 	    var animation_durations = [];
 	    var animation_speed = 225;
 //	    var animation_durations = [ 1.75, .1, 1 ];
@@ -362,6 +384,9 @@
 	    
         $('.svg-wrapper').on('click', function() {
             console.log('clicked');
+            
+            $svg_play.hide();
+
             if (parseInt(paths[0].style.strokeDashoffset) == 0) {
                 reset_paths(); 
             }
