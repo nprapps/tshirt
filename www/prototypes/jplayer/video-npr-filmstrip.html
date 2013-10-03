@@ -109,7 +109,7 @@
   <body>
   
     <div id="video-wrapper">
-        <iframe id="video" src="http://player.vimeo.com/video/61487989?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
+        <iframe id="video" src="http://player.vimeo.com/video/76086055?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
         <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
        
         <h1>Bangladesh</h1>
@@ -232,8 +232,8 @@
 
         $player.addEvent('ready', function() {
             console.log('player ready');
-            $player.api('setVolume', 0);
-            $player.api('seekTo', 120);
+            $player.api('setVolume', 1);
+            //$player.api('seekTo', 120);
             $player.api('play');
         });
 		
@@ -241,14 +241,14 @@
         
 	        var p = Popcorn.jplayer('#jquery_jplayer_1', {
 			media: {
-				m4v: "http://argoproject.org/prototypes/seed/j1.mp4",
-				webmv: "http://argoproject.org/prototypes/seed/jasmine.webm",
+				m4v: "http://argoproject.org/prototypes/seed/j1.m4v",
+				//webmv: "http://argoproject.org/prototypes/seed/jasmine.webm",
 				//ogv: "http://www.jplayer.org/video/ogv/Big_Buck_Bunny_Trailer.ogv",
 				poster: "http://argoproject.org/prototypes/seed/jasmine.jpg"
 			},
 			options: {
 				swfPath: "js",
-				supplied: "webmv, m4v",
+				supplied: "m4v",
 				size: {
 					width: "100%",
 					height: "auto",
