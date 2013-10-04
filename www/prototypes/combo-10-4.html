@@ -11,6 +11,8 @@
     <link href="http://s.npr.org/templates/css/fonts/GothamSSm.css" rel="stylesheet" type="text/css" />
     
     <style type="text/css">
+    	
+    
     	h1 {
 			font-family: 'Gotham SSm',Helvetica,Arial,sans-serif;
 			font-weight: 400;
@@ -32,6 +34,34 @@
 		color: #666;
 		}
 
+
+		.animator{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:5s;-moz-animation-duration:5s;-ms-animation-duration:5s;-o-animation-duration:5s;animation-duration:5s;}.animated.hinge{-webkit-animation-duration:5s;-moz-animation-duration:5s;-ms-animation-duration:5s;-o-animation-duration:5s;animation-duration:5s;}
+		
+		@-webkit-keyframes fadeIn {
+			0% {opacity: 0;}	100% {opacity: 1;}
+		}
+		
+		@-moz-keyframes fadeIn {
+			0% {opacity: 0;}	
+			100% {opacity: 1;}
+		}
+		
+		@-o-keyframes fadeIn {
+			0% {opacity: 0;}	
+			100% {opacity: 1;}
+		}
+		
+		@keyframes fadeIn {
+			0% {opacity: 0;}	
+			100% {opacity: 1;}
+		}
+		
+		.fadeIn {
+			-webkit-animation-name: fadeIn;
+			-moz-animation-name: fadeIn;
+			-o-animation-name: fadeIn;
+			animation-name: fadeIn;
+		}
     
         .video-container {margin: 80px 0;}
         
@@ -58,7 +88,7 @@
 	        height: auto;
         }
         
-        #video-wrapper h1 {
+        #video-wrapper h1, .filmstrip h1 {
             display: table;
             text-align: center;
             vertical-align: middle;
@@ -71,11 +101,27 @@
             text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
         }
         
+         #video-wrapper h3 {
+            display: table;
+            text-align: center;
+            vertical-align: middle;
+            position: absolute;
+            top: 52%;
+            width: 100%;
+            color: #fff;
+            font-size: 50px;
+            z-index: 100;
+            padding: 0 15%;
+            text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+            font-weight: 400;
+            
+        }
+        
         #story {
             z-index: 2;
             position: relative;
             background-color: #fff;
-            padding: 40px 0;
+            padding: 40px 0 0 0;
 			border-top: 10px solid #000;
 			margin-top: -10px;
         }
@@ -151,18 +197,19 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            margin-bottom: 33px;
+            
         }
         .filmstrip-wrapper {
             width: 100%;
-            height: 600px;
+            height: 900px;
+            position: relative;
         }
         .filmstrip {
             width: 100%;
             height: 100%;
             background: url('img/filmstrip-test.jpg');
             background-size: 100% 2000%;
-
+			
             -webkit-backface-visibility: hidden;
             -moz-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -192,6 +239,7 @@
 	  </video>
        
         <h1>Bangladesh</h1>
+        <h3 class="animator fadeIn">&quot;A powerful quote from Jasmine sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;</h3>
     </div>
    
 	<div id="story">
@@ -201,7 +249,7 @@
                 <div class="col-md-10  col-md-offset-1">
                     <h3>Bangladesh makes a lot of the clothes people in America wear.</h3> 
                     
-                    <p> You’ve bought pants from JC Penney, underwear from Target, lots of other retailers. There’s a good chance they were made in Bangladesh.</p>
+                    <p> You've bought pants from JC Penney, underwear from Target, lots of other retailers. There's a good chance they were made in Bangladesh.</p>
                     <p>There are 4 million people working in the garment industry today in Bangladesh, quadruple what it was just 10 years ago. Twenty years ago­ there was essentially no one.</p>
                     
                     <p>To understand why 4 million people are making this choice. making the choice to come to an overcrowded city, work long days, for very little money. to work in a clothing factory. to understand why so many people making a choice just like Shumi and Minu. you have to go back to the village where they came from.</p>
@@ -284,17 +332,7 @@
                     <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <h3>h3. Lorem ipsum dolor sit</h3> 
-                    <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     
-                    <div class="filmstrip-outer-wrapper">
-						<div class="filmstrip-wrapper">
-							<div class="filmstrip animated"></div>
-						</div>
-					</div><!-- /.filmstrip-outer-wrapper --> 
             </div><!-- /.row -->  
         </div><!-- /.container -->
         
@@ -302,6 +340,13 @@
     
 
 	</div><!-- /#story -->
+	
+	<div class="filmstrip-outer-wrapper">
+			
+						<div class="filmstrip-wrapper">
+							<div class="filmstrip animated"><h1>Colombia</h1> </div>
+						</div>
+					</div><!-- /.filmstrip-outer-wrapper --> 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -384,17 +429,7 @@
 	    //filmstrip vars
 	    var $filmstrip = $('.filmstrip');
 	    
-        function on_scroll() {
-            // stop animation when the user scrolls down the page
-            if ($filmstrip.hasClass('animated') && $(this).scrollTop() >= window_height) {
-                $filmstrip.removeClass('animated');
-            // resume animation when the user scrolls up
-            } else if (!$filmstrip.hasClass('animated') && $(this).scrollTop() < window_height) {
-                $filmstrip.addClass('animated');
-            }
-        }        
-	    $w.on('resize', on_resize);
-        $w.on('scroll', on_scroll);
+        
 
         $filmstrip.on('click', function() {
             $(this).toggleClass('animated');
