@@ -118,7 +118,7 @@
 <video id="walk" autoplay="autoplay" loop="loop"><!-- MP4 must be first for iPad! -->
 <source src="http://argoproject.org/prototypes/seed/walk.mp4" type="video/mp4" />
 <!-- fallback image. note the title field below, put the title of the video there -->
-<img src="walk.jpg" alt="walk" title="No video playback capabilities, please download the video below" />
+<img src="http://argoproject.org/prototypes/seed/walk.jpg" alt="walk" title="No video playback capabilities, please download the video below" />
 </object>
 </video>
        
@@ -195,13 +195,17 @@
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function() {
 	
+		
+	
+		//control volume on scroll
 		var leadVid = $('#walk').get(0);
 		leadVid.play();
+		leadVid.volume = 0.4;
 
 		var height = $(document).height() - $(window).height();
 
 		$(window).scroll(function() {
-        	leadVid.volume = 1 - $(window).scrollTop() / height;
+        	leadVid.volume = .4 - $(window).scrollTop() / height;
 			console.log(leadVid.volume);
 		});	
 		
