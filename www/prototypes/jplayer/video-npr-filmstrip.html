@@ -81,6 +81,11 @@
 /*            position: absolute; */
         }
         
+        #walk {
+	        width: 100%;
+	        height: auto;
+        }
+        
         #video-wrapper h1 {
             display: table;
             text-align: center;
@@ -109,8 +114,13 @@
   <body>
   
     <div id="video-wrapper">
-        <iframe id="video" src="http://player.vimeo.com/video/76086055?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
-        <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
+       
+<video id="walk" autoplay="autoplay" loop="loop"><!-- MP4 must be first for iPad! -->
+<source src="http://argoproject.org/prototypes/seed/walk.mp4" type="video/mp4" />
+<!-- fallback image. note the title field below, put the title of the video there -->
+<img src="walk.jpg" alt="walk" title="No video playback capabilities, please download the video below" />
+</object>
+</video>
        
         <h1>Bangladesh</h1>
     </div>
@@ -184,58 +194,16 @@
 	
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function() {
-		
-		// big video
-		var $w = $(window);
-	    var $video = $('#video');
-        var $iframe = $('#video')[0];
-        var $player = $f($iframe);
-	    var $player_wrapper = $('#video-wrapper');
+	
+		var leadVid = $('#walk').get(0);
+		leadVid.play();
 
-        var player_offset = 60;
-        
-        function resize_window() {
-            console.log('resize_window');
-            var window_width = $w.width();
-            var window_height = $w.height();
-            console.log(window_width, window_height);
+		var height = $(document).height() - $(window).height();
 
-            var w = window_width + (player_offset * 2);
-            var h = window_height + (player_offset * 2);
-
-            $player_wrapper.width('100%');
-            $player_wrapper.height(window_height + 'px');
-            
-            var optimal_width = ((window_height + (player_offset * 2)) * 16) / 9;
-            var width_diff = optimal_width - window_width;
-            console.log(optimal_width, window_width, width_diff);
-            
-            /*
-            var optimal_height = (window_width * 9) / 16;
-            var height_diff = optimal_height - window_height;
-            console.log(optimal_height, window_height, height_diff);
-            */
-            
-            if (width_diff > 0) {
-                w = optimal_width;
-            }
-
-            $video.width(w);
-            $video.height(h + 'px');
-            $video.css('position', 'absolute');
-            $video.css('top', (0 - player_offset) + 'px');
-            $video.css('left', (0 - (width_diff / 2)) + 'px');
-        }
-        
-        $w.on('resize', resize_window);
-        resize_window();
-
-        $player.addEvent('ready', function() {
-            console.log('player ready');
-            $player.api('setVolume', 1);
-            //$player.api('seekTo', 120);
-            $player.api('play');
-        });
+		$(window).scroll(function() {
+        	audioElm.volume = 1 - $(window).scrollTop() / height;
+			console.log(audioElm.volume);
+		});	
 		
         // popcorn and jplayer video
         
