@@ -8,61 +8,41 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <style type="text/css">
-		/* svg 
-		.svg-wrapper {
-		    margin: 33px 0;
-		    position: relative;
-            cursor: pointer;
-		}
-        .svg-wrapper svg {
-            margin: 0 auto;
-            display: block;
-            border: 1px solid #ccc;
-            width: 100%;
-            height: 100%;
-            background-color: #f1f1f1;
+        .axis {
+            font-size: 12px;
+            color: #666;
         }
-        .svg-wrapper path {
-            stroke: #333;
-            stroke-width: 2;
-            stroke-dasharray: 0;
-            stroke-dashoffset: 0;
-            fill: none;
-        }
-        .svg-wrapper .btn-play {
-            text-align: center;
-            font-size: 48px;
-            font-weight: bold;
-            position: absolute;
-            top: 45%;
-            left: 0;
-            width: 100%;
-            color: #6D8AC4;
-        }
-        .svg-wrapper .btn-play:hover {
-            opacity: 0.7;
-            cursor: pointer;
-        }
-        */
-
         .axis path,
         .axis line {
-          fill: none;
-          stroke: #666;
-          shape-rendering: crispEdges;
+            fill: none;
+            stroke: #666;
+            shape-rendering: crispEdges;
         }
-
         .y.axis path {
           display: none;
         }
-
-        .line {
-          fill: none;
-          stroke: steelblue;
-          stroke-width: 2px;
+        .y.axis .tick line {
+            display: none;
         }
-
-
+        .line {
+            fill: none;
+            stroke: #333;
+            stroke-width: 2px;
+        }
+        .grid .tick {
+            stroke: #ccc;
+            stroke-dasharray: 1px 3px;
+            stroke-width: 1px;
+            shape-rendering: crispEdges;
+        }
+        .grid path {
+            display: none;
+        }
+        .country text {
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+        }
     </style>
   </head>
   <body>
@@ -95,16 +75,17 @@
 	    var $graphic = $('#apparel-imports');
 	    var graphic_data;
         var parseDate = d3.time.format("%Y").parse;
-	    
+        var x, y;
+        
 	    function draw_graph() {
-            var margin = {top: 20, right: 120, bottom: 50, left: 120};
+            var margin = {top: 20, right: 120, bottom: 50, left: 80};
             var width = $w.width() - margin.left - margin.right;
             var height = $w.height() - margin.top - margin.bottom;
 
-            var x = d3.time.scale()
+            x = d3.time.scale()
                 .range([0, width]);
 
-            var y = d3.scale.linear()
+            y = d3.scale.linear()
                 .range([height, 0]);
 
             var color = d3.scale.category10()
@@ -114,11 +95,25 @@
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("bottom");
+                
+            var x_axis_grid = function() { return xAxis; }
 
             var yAxis = d3.svg.axis()
                 .scale(y)
-                .orient("left");
-
+                .orient("left")
+                .tickFormat(function(d) {
+                    var units = [ '', ' thousand', ' million', ' billion', ' trillion'];
+                    var i = 0;
+                    while (d >= 1000) {
+                        i++;
+                        d = d / 1000;
+                    }
+                    d = d + units[i];
+                    return d;
+                });
+            
+            var y_axis_grid = function() { return yAxis; }
+            
             var line = d3.svg.line()
                 .interpolate("basis")
                 .x(function(d) { return x(d.year); })
@@ -157,6 +152,21 @@
             svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis);
+
+            svg.append("g")
+                .attr("class", "x grid")
+                .attr("transform", "translate(0," + height + ")")
+                .call(x_axis_grid()
+                    .tickSize(-height, 0, 0)
+                    .tickFormat("")
+                );
+
+            svg.append("g")
+                .attr("class", "y grid")
+                .call(y_axis_grid()
+                    .tickSize(-width, 0, 0)
+                    .tickFormat("")
+                );
 
             var country = svg.selectAll(".country")
                 .data(countries)
