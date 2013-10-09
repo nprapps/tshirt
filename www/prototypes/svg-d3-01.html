@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <style type="text/css">
-		/* svg */
+		/* svg 
 		.svg-wrapper {
 		    margin: 33px 0;
 		    position: relative;
@@ -43,37 +43,33 @@
             opacity: 0.7;
             cursor: pointer;
         }
+        */
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #666;
+          shape-rendering: crispEdges;
+        }
+
+        .y.axis path {
+          display: none;
+        }
+
+        .line {
+          fill: none;
+          stroke: steelblue;
+          stroke-width: 2px;
+        }
+
+
     </style>
   </head>
   <body>
   
 
     <div class="svg-wrapper">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-             width="500px" height="100px" viewBox="0 0 500 100" enable-background="new 0 0 500 100" xml:space="preserve">
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M53.801,32.298c-4.822-3.047-14.162-3.77-14.744,4.404c-0.708,9.973,28.188,16.125,20.892,35.143
-                c-8.805,22.951-43.458-8.423,2.489-14.05c9.167-1.124,20.256,0,24.003-12.487c3.554-11.837-9.396-7.367-12.876-0.361
-                c-14.431,29.048,41.378,25.04,35.146-5.82c-14.271,0.165-18.118,24.267-2.226,25.323c9.624,0.641,17.494-38.226,40.472-16.611
-                c-7.529-13.175-34.326-2.443-24.438,11.413c16.603,23.264,22.419-35.055,23.381-40.642c-2.297,16.639-6.676,62.495,24.761,43.966"
-                />
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M205.72,30.822c0.423,8.335-5.079,23.225,0.814,29.901c5.321,6.029,14.954,5.251,18.309-1.217"/>
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M195.173,46.758c10.183,0.442,18.044-1.368,23.904-1.593"/>
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M242.372,41.977c-10.244-5.994-20.775,17.194-4.004,18.666c20.328,1.787,14.451-20.841-5.557-19.708"/>
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M291.773,39.232c-2.745-3.196-7.38-5.674-11.248,0.1c-3.591,5.363,16.494,20.732,15.73,30.051c-3.025,6.917-9.814,8.61-16.64,2.312
-                c-0.087-12.765,12.813-11.342,20.639-18.407c9.652-8.715,15.238-18.388,13.822-32.067c0.026,16.104,0.945,31.968,1.6,47.979
-                c-0.876-7.623,1.81-16.172,9.244-18.874c1.691,14.921,16.417,19.188,19.908,2.394c0.112,4.693,4.062,10.038,5.835,13.81
-                c7.502-4.319,11.156-13.949,20.547-12.55c-2.569,30.148,31.977,10.237,28.988-12.789c-1.811,16.807,16.531,49.096,33.402,26.727"/>
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M384.2,47.2c-0.503,1.224,32.958,4.631,41.362,4.9c2.246-0.115,1.739-0.156-1.522-0.119"/>
-            <path fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-                M347.548,20.109c-1.47,1.248-2.022,2.913-1.593,4.781"/>
-        </svg>
-        <div class="btn-play">Play Animation</div>
+        <div id="apparel-imports" class="graphic"></div>
     </div>
 
 
@@ -96,62 +92,107 @@
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function() {
 	    var $w = $(window);
+	    var $graphic = $('#apparel-imports');
+	    var graphic_data;
+        var parseDate = d3.time.format("%Y").parse;
+	    
+	    function draw_graph() {
+            var margin = {top: 20, right: 120, bottom: 50, left: 120};
+            var width = $w.width() - margin.left - margin.right;
+            var height = $w.height() - margin.top - margin.bottom;
 
-	    // svg vars
-	    var paths;
-	    var paths_count;
-	    var paths_target;
-	    var $svg = $('.svg-wrapper').find('svg');
-	    var svg_orig_width = $svg.width();
-	    var svg_orig_height = $svg.height();
-	    var $svg_play = $('.svg-wrapper').find('.btn-play');
-	    var animation_durations = [];
-	    var animation_speed = 250;
+            var x = d3.time.scale()
+                .range([0, width]);
 
-        // svg animation
-	    function set_paths() {
-            for (var i = 0; i < paths_count; i++) {
-                var path = paths[i];
-                var path_length = path.getTotalLength();
-                path.style.transition = path.style.WebkitTransition = 'none'; // reset existing transforms
-                path.style.strokeDasharray = path_length + ' ' + path_length;
-                path.style.strokeDashoffset = path_length;
-                animation_durations.push(path_length / animation_speed);
-            }
-	    }
-	    function reset_paths() {
-            for (var i = 0; i < paths_count; i++) {
-                var path = paths[i];
-                path.style.transition = path.style.WebkitTransition = 'none'; // reset existing transforms
-                path.style.strokeDashoffset = path.getTotalLength();
-            }
-	    }
-        $('.svg-wrapper').on('click', function() {
-            $svg_play.hide();
+            var y = d3.scale.linear()
+                .range([height, 0]);
 
-            if (parseInt(paths[0].style.strokeDashoffset) == 0) {
-                reset_paths(); 
-            }
+            var color = d3.scale.category10()
+                .domain(d3.keys(graphic_data[0]).filter(function(key) { return key !== "year"; }));
+            // more: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
 
-            var transition_offset = 0;
-            for (var i = 0; i < paths_count; i++) {
-                var path = paths[i];
-                path.getBoundingClientRect();
-                path.style.transition = path.style.WebkitTransition = 'stroke-dashoffset ' + animation_durations[i] + 's ease-out';
-                path.style.transitionDelay = path.style.WebkitTransitionDelay = transition_offset + 's';
-                path.style.strokeDashoffset = '0';
-                transition_offset += animation_durations[i];
-            }
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom");
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left");
+
+            var line = d3.svg.line()
+                .interpolate("basis")
+                .x(function(d) { return x(d.year); })
+                .y(function(d) { return y(d.imports); });
+
+            var svg = d3.select('#apparel-imports').append('svg')
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            
+            var countries = color.domain().map(function(country) {
+                return {
+                    country: country,
+                    values: graphic_data.map(function(d) {
+                        return {
+                            year: d.year, 
+                            imports: +d[country]
+                        };
+                    })
+                };
+            });
+
+            x.domain(d3.extent(graphic_data, function(d) { return d.year; }));
+
+            y.domain([
+                d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.imports; }); }),
+                d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.imports; }); })
+            ]);
+
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+            var country = svg.selectAll(".country")
+                .data(countries)
+                .enter().append("g")
+                .attr("class", "country");
+
+            country.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) { return line(d.values); })
+                .style("stroke", function(d) { return color(d.country); });
+
+            country.append("text")
+                .datum(function(d) { return {country: d.country, value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.imports) + ")"; })
+                .attr("x", 3)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.country; });
+        }
+
+        $w.on('resize', function() {
+            d3.select('#apparel-imports').select('svg')
+                .remove();
+            draw_graph();
         });
 
 
         /* ---------- */        
         /* INITIALIZE */
         function setup() {
-            // set up the svg
-            paths = document.querySelectorAll('.svg-wrapper path');
-            paths_count = paths.length;
-            set_paths();
+            d3.tsv("data/us-tshirt-imports-units.tsv", function(error, data) {
+                graphic_data = data;
+                graphic_data.forEach(function(d) {
+                    d.year = parseDate(d.year);
+                });
+                draw_graph();
+            });
         }
         setup();
     });
