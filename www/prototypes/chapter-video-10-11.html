@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+
+<!-- Website Design By: www.happyworm.com -->
+<title>Demo : jPlayer as a video player</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link href="css/pink.flag/jplayer.pink.flag.css" rel="stylesheet" type="text/css" />
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+    <![endif]-->
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/libs/jquery.jplayer.js"></script>
+	
+	<!--popcorn breaks ie8 
+	<script type="text/javascript" src="js/libs/popcorn.ie8.js"></script>-->
+	<script type="text/javascript" src="js/libs/popcorn.js"></script>
+	<script type="text/javascript" src="js/libs/popcorn.code.js"></script>
+	
+	<!-- filament -->
+	<script src="carousel/responsive-carousel.js"></script>
+	 <script src="carousel/responsive-carousel.touch.js"></script>
+	 <script src="carousel/responsive-carousel.drag.js"></script>
+	 <script src="carousel/responsive-carousel.autoinit.js"></script>
+	
+	
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+
+
+	$("#jquery_jplayer_1").jPlayer({
+		ready: function () {
+			
+		
+			$(this).jPlayer("setMedia", {
+				m4v: "http://argoproject.org/prototypes/seed/walk.mp4",
+				webmv: "http://argoproject.org/prototypes/seed/walk.webm",
+				poster: "http://argoproject.org/prototypes/seed/walk.jpg"
+			});
+		},
+		play: function() { // To avoid multiple jPlayers playing together.
+			$(this).jPlayer("pauseOthers");
+		},
+		swfPath: "jplayer-demos/js/",
+		supplied: "m4v, webmv",
+		size: {
+			width: "100%",
+			height: "auto",
+			cssClass: "nee"
+		},
+		cssSelectorAncestor: "#jp_container_1",
+		smoothPlayBar: true,
+		keyEnabled: true
+	});
+	
+	$("#jquery_jplayer_2").jPlayer({
+		ready: function () {
+			$(this).jPlayer("setMedia", {
+				m4v: "http://argoproject.org/prototypes/seed/bangladesh_clifton_test.mp4",
+				webmv: "http://argoproject.org/prototypes/seed/bangladesh_clifton_test.webm",
+				poster: "http://argoproject.org/prototypes/seed/bangladesh_clifton_test.jpg"
+			});
+		},
+		play: function() { // To avoid multiple jPlayers playing together.
+			$(this).jPlayer("pauseOthers");
+		},
+		swfPath: "jplayer-demos/js/",
+		supplied: "m4v, webmv",
+		size: {
+			width: "100%",
+			height: "auto",
+			cssClass: "incred"
+		},
+		cssSelectorAncestor: "#jp_container_2",
+		smoothPlayBar: true,
+		keyEnabled: true
+	});
+	
+	 // Associate jPlayer with Popcorn and add events
+        var pop;
+        pop = Popcorn('#jp_video_0');
+        
+		pop.code({
+			start: 1,
+			onStart: function( options ) {         
+				$( "p" ).addClass( "yellow-test" );
+				return false;
+			}
+			
+		});
+        pop.code({
+            start: 3,
+            onStart: function(options) {
+                $( "p" ).removeClass( "yellow-test" );
+				return false;
+            } 
+        });
+
+});
+//]]>
+</script>
+
+<style type="text/css">
+
+        
+        .yellow-test {color: #ffcc00;}
+        
+        .nee, .incred, #jp_video_0, #jp_video_1  {width: 100% !important;}
+        
+        .container, .carousel-item {background-color: #fff;}
+                
+          /*
+ * responsive-carousel
+ * https://github.com/filamentgroup/responsive-carousel
+ *
+ * Copyright (c) 2012 Filament Group, Inc.
+ * Licensed under the MIT, GPL licenses.
+*/
+
+.carousel {
+	width: 100%;
+	position: relative;
+}
+.carousel .carousel-item {
+	display: none;
+}
+.carousel .carousel-active {
+	display: block;
+}
+.carousel .carousel-nav:nth-child(2) {
+	display: none;
+}
+
+.carousel-slide {
+	position: relative;
+	overflow: hidden;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.carousel-slide .carousel-item {
+	position: absolute;
+	left: 100%;
+	top: 0;
+	width: 100%; /* necessary for non-active slides */
+	display: block; /* overrides basic carousel styles */
+	z-index: 1;
+	-webkit-transition: left .2s ease;
+	-moz-transition: left .2s ease;
+	-ms-transition: left .2s ease;
+	-o-transition: left .2s ease;
+	transition: left .2s ease;
+}
+.carousel-no-transition .carousel-item {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-ms-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+.carousel-slide .carousel-active {
+	left: 0;
+	position: relative;
+	z-index: 2;
+}
+.carousel-slide .carousel-in {
+	left: 0;
+}
+.carousel-slide-reverse .carousel-out {
+	left: 100%;
+}
+.carousel-slide .carousel-out,
+.carousel-slide-reverse .carousel-in {
+	left: -100%;
+}
+.carousel-slide-reverse .carousel-item {
+	-webkit-transition: left .1s ease;
+	-moz-transition: left .1s ease;
+	-ms-transition: left .1s ease;
+	-o-transition: left .1s ease;
+	transition: left .1s ease;
+}
+.carousel-slide-reverse .carousel-active {
+	left: 0;
+}
+
+/*custom carousel css*/
+
+.carousel-item img, .carousel-item video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.carousel-nav {
+  position: absolute;
+  bottom: 0;
+  z-index: 4;
+  width: 100%;
+}
+.carousel-nav a {
+  text-decoration: none;
+  font-size: .8em;
+  background: #fff;
+  color: #333;
+  opacity: .8;
+  padding: .5em;
+  position: absolute;
+  bottom: 0;
+  font-weight: bold;
+}
+.carousel-nav a.prev {
+  left: 0;
+}
+.carousel-nav a.next {
+  right: 0;
+}
+.carousel-nav-paginated .carousel-active-page a {
+	background: #333;
+	color: #fff;
+	opacity: .8;
+}
+
+
+/* styled arrows */
+.arrows .carousel-nav {
+  
+}
+.arrows .carousel-nav a {
+  text-indent: -9999px;
+  width: 8em;
+  height: 8em;
+  background: #fff;
+  opacity: .5;
+  overflow: hidden;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border-radius: 100%;
+  position: fixed;
+}
+.arrows .carousel-nav a:hover,
+.arrows .carousel-nav a:focus {
+  opacity: 1;
+}
+.arrows .carousel-nav a.next {
+  background-image: url(carousel/arrow-right.png);
+  top: 300px;
+  right: 50px;
+  
+}
+.arrows .carousel-nav a.prev {
+  background-image: url(carousel/arrow-left.png);
+  top: 300px;
+  left: 50px;
+}
+
+/*ipad video full width hack*/       
+#vcon {
+    position: relative;
+  }
+  
+  #vcon video, #vcon canvas {
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid red;
+  }
+  #vcon video {
+    height: 100%;
+    position: absolute;
+  }
+  
+        
+    </style>
+
+</head>
+<body>
+
+<div class="carousel arrows" data-transition="slide">
+<div>
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-12"> 
+            
+            
+		<div id="jp_container_1" class="jp-video jp-video-360p">
+			<div class="jp-type-single">
+				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+				<div class="jp-gui">
+					<div class="jp-interface">
+						<div class="jp-progress">
+							<div class="jp-seek-bar">
+								<div class="jp-play-bar"></div>
+							</div>
+						</div>
+						<div class="jp-current-time"></div>
+						<div class="jp-duration"></div>
+						
+						<div class="jp-controls-holder">
+							<ul class="jp-controls">
+								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+								<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+								<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+								<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+								<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+							</ul>
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+
+							<ul class="jp-toggles">
+								<li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+								<li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+								<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+								<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div><!-- #jp_container_1-->
+		           
+                <h3 class="tile">h3. Lorem ipsum dolor sit</h3> 
+                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            </div>
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+</div><!--/slide1-->
+	    <div>
+	    
+	    <div id="jp_container_2" class="jp-video jp-video-360p1">
+			<div class="jp-type-single">
+				<div id="jquery_jplayer_2" class="jp-jplayer"></div>
+				<div class="jp-gui">
+					<div class="jp-interface">
+						<div class="jp-progress">
+							<div class="jp-seek-bar">
+								<div class="jp-play-bar"></div>
+							</div>
+						</div>
+						<div class="jp-current-time"></div>
+						<div class="jp-duration"></div>
+						
+						<div class="jp-controls-holder">
+							<ul class="jp-controls">
+								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+								<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+								<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+								<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+								<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+							</ul>
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+
+							<ul class="jp-toggles">
+								<li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+								<li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+								<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+								<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div><!-- #jp_container_2-->
+	        <div class="container">
+        <div class="row">
+            <div class="col-md-12"> 
+		           
+                <h3 class="tile">h3. Lorem ipsum dolor sit</h3> 
+                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+            </div>
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+	    </div><!--/slide2-->
+	    </div><!--/carousel-->    
+    
+</body>
+
+</html>
