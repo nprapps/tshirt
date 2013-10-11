@@ -1,4 +1,5 @@
 <!-- PROTOTYPE: RESPONSIVE D3-DRIVEN GRAPH PULLING DATA FROM A TSV -->
+<!-- incomplete iteration on that: making the lines animate in -->
 
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,7 @@
             font-weight: bold;
             font-size: 14px;
             color: #333;
+            display: none;
         }
     </style>
   </head>
@@ -174,18 +176,41 @@
                 .attr("class", "country");
 
             country.append("path")
-                .attr("class", "line")
+                .attr("class", function(d) { return "line " + d.country.toLowerCase(); })
                 .attr("d", function(d) { return line(d.values); })
+                .attr("stroke-dasharray", function(d) { return get_path_total_length(d3.select(this)) + " " + get_path_total_length(d3.select(this)); })
+                .attr("stroke-dashoffset", function(d) { return get_path_total_length(d3.select(this)); })
                 .style("stroke", function(d) { return color(d.country); });
-
+            
             country.append("text")
-                .datum(function(d) { return {country: d.country, value: d.values[d.values.length - 1]}; })
+                .datum(function(d) { return { country: d.country, value: d.values[d.values.length - 1] }; })
                 .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.imports) + ")"; })
                 .attr("x", 3)
                 .attr("dy", ".35em")
+                .attr("class", function(d) { return "label " + d.country.toLowerCase(); })
                 .text(function(d) { return d.country; });
+                
+            animate_path('china');
         }
 
+        function get_path_total_length(d) {
+            return d.node().getTotalLength();
+        }
+        
+        function animate_path(p) {
+            var path = d3.select('path.' + p);
+            console.log(path);
+            var label = d3.select('text.' + p)[0][0];
+
+            path.transition()
+                .duration(3000)
+                .ease('linear')
+                .attr('stroke-dashoffset', 0)
+                .each('end', function() {
+                    label.style.display = 'block';
+                });
+        }
+        
         $w.on('resize', function() {
             d3.select('#apparel-imports').select('svg')
                 .remove();
