@@ -176,7 +176,7 @@
                 .attr("class", "country");
 
             country.append("path")
-                .attr("class", function(d) { return "line " + d.country.toLowerCase(); })
+                .attr("class", function(d) { return "line " + strip_whitespace(d.country); })
                 .attr("d", function(d) { return line(d.values); })
                 .attr("stroke-dasharray", function(d) { return get_path_total_length(d3.select(this)) + " " + get_path_total_length(d3.select(this)); })
                 .attr("stroke-dashoffset", function(d) { return get_path_total_length(d3.select(this)); })
@@ -187,14 +187,21 @@
                 .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.imports) + ")"; })
                 .attr("x", 3)
                 .attr("dy", ".35em")
-                .attr("class", function(d) { return "label " + d.country.toLowerCase(); })
+                .attr("class", function(d) { return "label " + strip_whitespace(d.country); })
                 .text(function(d) { return d.country; });
                 
             animate_path('china');
+            animate_path('southkorea');
+            animate_path('bangladesh');
         }
 
         function get_path_total_length(d) {
             return d.node().getTotalLength();
+        }
+        
+        function strip_whitespace(str) {
+            str = str.toLowerCase();
+            return str.replace(/\s+/g, '');
         }
         
         function animate_path(p) {
