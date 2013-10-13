@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    
+    <style type="text/css">
+        #econ {
+        	position: relative;
+	        background-color: #fff;
+	        margin-top: -120px;
+        }
+        
+        .factory { 
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+        	width: 100%;
+        	height: 100%;
+        	z-index: 10;
+			  background: url(img/factory.jpg) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;
+  			}
+    </style>
+  </head>
+  <body>
+  <div class="factory">
+  	<button id="play">play()</button>
+  	<button id="pause">pause</button>
+  	<button id="mute">mute</button>
+  </div>
+  
+    <div id="video-wrapper">
+        <iframe id="video" src="http://player.vimeo.com/video/13768695?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
+        <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
+    </div>
+
+<div id="econ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+            
+                <h3>h3. Lorem ipsum dolor sit</h3> 
+                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                <button id="play1">play1()</button>
+            <iframe id="video1" src="http://player.vimeo.com/video/76086055?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video1" width="400" height="225" frameborder="0"></iframe>
+                
+            </div>
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+</div><!-- /#econ -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+    <script src="js/libs/froogaloop2.min.js"></script>
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	
+		//video 1
+        var $iframe = $('#video')[0];
+        var $player = $f($iframe);
+        
+        //video 2
+        var $iframe1 = $('#video1')[0];
+        var $player1 = $f($iframe1);
+        	    
+	    $("#video-wrapper").fitVids();
+
+        $player.addEvent('ready', function() {
+            //console.log('player ready');
+            //$player.api('setVolume', 0);
+            //$player1.api('play');
+            //$player1.api('seekTo', 3);
+            //$player1.api('pause');
+        });
+        
+        $( "#play" ).on( "click", function() {
+		  $player.api('play');
+		  $( ".factory" ).css( "background-image", "none" );
+		});
+		
+		$( "#pause" ).on( "click", function() {
+		  $player.api('pause');
+		});
+		
+		$( "#mute" ).on( "click", function() {
+		  $player.api('setVolume', 0);
+		});
+		
+		$( "#play1" ).on( "click", function() {
+		  $player1.api('play');
+		});
+		
+		
+		
+    });
+	</script>
+	
+  </body>
+</html>
