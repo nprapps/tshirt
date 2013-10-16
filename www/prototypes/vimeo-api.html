@@ -90,10 +90,19 @@
 	  		z-index: 100;
   			}
   			
+  			#hide-econ {
+  			position: fixed;
+	  		top: 0;
+	  		right: 0;
+	  		z-index: 100;
+	  		display: none;
+  			}
+  			
     </style>
   </head>
   <body>
-  <button id="show-econ">econ</button>
+  <button id="show-econ">econo</button>
+  <button id="hide-econ">close</button>
   
   <div class="factory">
   	<button id="play">play()</button>
@@ -183,6 +192,14 @@
 		
 		$( "#show-econ" ).on( "click", function() {
 		  $("#econ").addClass("animated fadeInUp econ-in" );
+		  $("#show-econ").css("display","none");
+		  $("#hide-econ").css("display","block");
+		});
+		
+		$( "#hide-econ" ).on( "click", function() {
+		  $("#econ").addClass("animated fadeOutDown" );
+		  $("#hide-econ").css("display","none");
+		  $("#show-econ").css("display","block");
 		});
 		
 		
