@@ -14,7 +14,7 @@ import os
 NAMES
 """
 # Project name used for display
-PROJECT_NAME = 'tshirt'
+PROJECT_NAME = 'Planet Money Makes A T-Shirt'
 
 # Project name in urls
 # Use dashes, not underscores!
@@ -82,7 +82,7 @@ COPY_GOOGLE_DOC_KEY = '0AlXMOHKxzQVRdHZuX1UycXplRlBfLVB0UVNldHJYZmc'
 """
 SHARING
 """
-PROJECT_DESCRIPTION = 'An opinionated project template for (mostly) server-less apps.'
+PROJECT_DESCRIPTION = 'Planet Money followed a t-shirt from seed to shirt.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 TWITTER = {
@@ -109,7 +109,7 @@ GOOGLE = {
 
 NPR_DFP = {
     'STORY_ID': '203618536',
-    'TARGET': 'News_NPR_News_Investigations',
+    'TARGET': 'News_Business_Your_Money',
     'ENVIRONMENT': 'NPRTEST',
     'TESTSERVER': 'true'
 }

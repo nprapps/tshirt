@@ -1,46 +1,17 @@
 {% extends '_base.html' %}
 
-{% block header_content %}
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ COPY.content.header_title }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum }}</h2>
-            </div>
-        </div>
-    </div>
-</header>
+{% block extra_css %}{% endblock extra_css %}
+
+{% block extra_head_js %}{% endblock extra_head_js %}
+
+{% block extra_head %}{% endblock extra_head %}
+
+
+{% block outer_content %}
+<h1>Hello, World!</h1>
 {% endblock %}
 
 
-{% block content %}
-<h1>{{ PROJECT_NAME }}</h1>
-<div id="story-meta">
-    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
-    <p class="dateblock">
-        <span class="date">{{ COPY.attribution.pubdate }}</span>
-        <span class="time"> {{ COPY.attribution.pubtime }}</span>
-    </p>
-</div>
+{% block extra_foot_js %}{% endblock extra_foot_js %}
 
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-    {% endfor %}
-</dl>
-
-<h2>JST example</h2>
-<p id="template-example"></p>
-{% endblock %}
-
-
-{% block wide_content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2>{{ COPY.content.footer_title }}</h2>
-        <p>{{ COPY.content.lorem_ipsum }}</p>
-    </div>
-</div>
-{% endblock %}
+{% block extra_foot %}{% endblock extra_foot %}
