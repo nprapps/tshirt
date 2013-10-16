@@ -1,4 +1,4 @@
-.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:30s;-moz-animation-duration:30s;-ms-animation-duration:30s;-o-animation-duration:30s;animation-duration:30s;}.animated.hinge{-webkit-animation-duration:30s;-moz-animation-duration:30s;-ms-animation-duration:30s;-o-animation-duration:30s;animation-duration:30s;}@-webkit-keyframes flash {
+.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:5s;-moz-animation-duration:5s;-ms-animation-duration:5s;-o-animation-duration:5s;animation-duration:5s;}.animated.hinge{-webkit-animation-duration:5s;-moz-animation-duration:5s;-ms-animation-duration:5s;-o-animation-duration:5s;animation-duration:5s;}@-webkit-keyframes flash {
 	0%, 50%, 100% {opacity: 1;}	25%, 75% {opacity: 0;}
 }
 
