@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'norwester';
+    src: url('norwester.eot');
+    src: url('norwester.eot?#iefix') format('embedded-opentype'),
+         url('norwester.woff') format('woff'),
+         url('norwester.ttf') format('truetype'),
+         url('norwester.svg#norwesterregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
