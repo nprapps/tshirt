@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>tshirt</title>
+    <title>Planet Money Makes A T-Shirt</title>
 
-    <meta name="description" content="An opinionated project template for (mostly) server-less apps.">
+    <meta name="description" content="Planet Money followed a t-shirt from seed to shirt.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -15,17 +15,11 @@
 
     <!-- CSS -->
     
+
+
+
     
     <link rel="stylesheet" type="text/css" href="../css/app.min.css" />
-
-    <!-- AD CODE -->
-    <script>
-        NPR = {};
-        NPR.PageInfo = {};
-        NPR.PageInfo.getUrlParameter = function (param) {
-            return false;
-        };
-    </script>
 
     <!-- JS -->
     
@@ -35,70 +29,9 @@
     
     
     
-    
-    <script type="text/javascript" src="../js/app-header.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
 
-    <script>
-        googletag.cmd.push(function() {
-            try {
-                
-                if (DFP.shouldRenderForDevice('desktop')) {
-                    googletag.defineSlot("/6735/n6735.NPRTEST/News_NPR_News_Investigations", [[300,250],[300,600]], 'ad-desktop').addService(googletag.pubads());
-                }                    
-                if (DFP.shouldRenderForDevice('88')) {
-                    googletag.defineSlot("/6735/n6735.NPRTEST/News_NPR_News_Investigations", [88,31], 'ad-88').addService(googletag.pubads());
-                }                    
-           
-                googletag.pubads().setTargeting('storyId', '203618536');
-                googletag.pubads().setTargeting('testserver', 'true');
-                
-                // device detection to send to ad server
-                var deviceString = '';
-                var ua = navigator.userAgent.toLowerCase();
-                if (ua.indexOf("android") > -1) {
-                    googletag.pubads().setTargeting('device', 'android');
-                }
-                else if (ua.match(/(iPad|iPhone|iPod)/i)) {
-                    googletag.pubads().setTargeting('device', 'ios');
-                }
-                
-                
-                
-                if (typeof DFP.queryParameters.sc === 'string' && DFP.queryParameters.sc.length > 0) {
-                    scValue = DFP.queryParameters.sc;
-                }
-                else if (typeof document.referrer === 'string' && document.referrer.search('facebook.com') > -1) {
-                    scValue = 'fb';
-                }
-                else if (typeof DFP.queryParameters.ft === 'string') {
-                    scValue = DFP.queryParameters.ft;
-                }
-                googletag.pubads().setTargeting('sc', scValue);
-                
-                
-                var utm_source = typeof DFP.queryParameters.utm_source === 'string' && DFP.queryParameters.utm_source.length > 0?DFP.queryParameters.utm_source:'';
-                var utm_medium = typeof DFP.queryParameters.utm_medium === 'string' && DFP.queryParameters.utm_medium.length > 0?DFP.queryParameters.utm_medium:'';
-                googletag.pubads().setTargeting('utm_source', utm_source);
-                googletag.pubads().setTargeting('utm_medium', utm_medium);
-                
-                var orient = '';
-                if (NPR.Devices.isOnPhone() || NPR.Devices.isOnTablet()) {
-                    if (window.orientation == 0 || window.orientation == 180) {
-                        orient = 'portrait';
-                    } else if (window.orientation == 90 || window.orientation == -90) {
-                        orient = 'landscape';
-                    }
-                }
-                googletag.pubads().setTargeting('orient', orient);                        
-                        
-                googletag.pubads().enableSingleRequest();
-                googletag.pubads().collapseEmptyDivs();
-                googletag.enableServices();
-            } catch(e) {
-                NPR.messaging.exception(e, 'Define Google Publisher Tags', NPR.messaging.constants.SPONSORSHIP_ERROR);
-            }              
-        }); 
-    </script>
+    <script type="text/javascript" src="../js/app-header.min.js"></script>
 
     
     <meta name="twitter:card" content="summary">
@@ -106,10 +39,10 @@
     <meta name="twitter:image" content="" />
 
     
-    <meta property="og:title" content="tshirt" />
+    <meta property="og:title" content="Planet Money Makes A T-Shirt" />
     <meta property="og:url" content="http://apps.npr.org/tshirt/" />
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="An opinionated project template for (mostly) server-less apps." />
+    <meta property="og:description" content="Planet Money followed a t-shirt from seed to shirt." />
     <meta property="og:image" content="" />
     <meta property="og:site_name" content="NPR.org" />
     <meta property="fb:app_id" content="138837436154588" />
@@ -118,158 +51,98 @@
     <meta name="thumbnail" content="" />
 
     
-    
+<script>
+    WebFont.load({
+         custom: {
+             families: [
+                 'Gotham SSm:n4,n7'
+             ],
+             urls: [
+                 'http://s.npr.org/templates/css/fonts/GothamSSm.css'
+             ]
+         },
+         timeout: 10000
+     });
+</script>
+
 </head>
 <body>
     <a class="sr-only" href="#content">Skip To Content</a>
 
-    
-    <nav role="navigation">
-        <ul class="site-links">
-            <li class="npr"><a href="http://npr.org"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR" /></a></li>
-            <li class="news"><a href="http://www.npr.org/sections/news/">News</a></li>
-            <li class="arts"><a href="http://www.npr.org/sections/arts/">Arts &amp; Life</a></li>
-            <li class="music"><a href="http://www.npr.org/music/">Music</a></li>
-            <li class="listen"><a href="http://www.npr.org/listen/">Listen</a></li>
-        </ul>
-        <ul class="social-links">
-            <li class="twitter"><a rel="external" href="http://twitter.com/share?text=tshirt&amp;url=http%3A%2F%2Fapps.npr.org%2Ftshirt%2F" alt="Share on Twitter" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Twitter In Navbar', 'tshirt']);">Share This Page On Twitter</a></li>
-            <li class="facebook"><a rel="external" href="https://www.facebook.com/dialog/feed?app_id=138837436154588&amp;link=http%3A%2F%2Fapps.npr.org%2Ftshirt%2F&amp;name=tshirt&amp;picture=&amp;redirect_uri=http%3A%2F%2Fapps.npr.org%2Ftshirt%2F" alt="Share on Facebook" target="_blank" onclick="_gaq.push(['_trackEvent', 'Social', 'Click Facebook In Navbar', 'tshirt']);">Like This Page On Facebook</a></li>
-        </ul>
-        <ul class="site-links-2">
-            <li class="stations"><a href="http://www.npr.org/templates/stations/stations/">Stations</a></li>
-            <li class="donate"><a href="http://www.npr.org/stations/donate/index.php">Donate</a></li>
-            <li class="shop"><a href="http://shop.npr.org">Shop</a></li>
-        </ul>
-    </nav>
 
     
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Across-The-Top Header</h1>
-                <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h2>
-            </div>
+
+
+<div class="titlecard-outer-wrapper">
+    <div class="titlecard-wrapper">
+        <div class="titlecard">
+        			
+        			<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1>Humans</h1>
+								<button id="play">play()</button>
+								<button id="pause">pause</button>
+								<button id="mute">mute</button>
+								</div><!-- /.col --> 
+				        </div><!-- /.row -->  
+				    </div><!-- /.container -->				
+        </div><!-- /.titlecard --> 
+        
+        <div class="text-below">
+        	<button id="text-mover">Text Below</button>
         </div>
+        
+        <div id="video-wrapper">
+        	<iframe id="video" src="http://player.vimeo.com/video/77175715?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video" width="400" height="225" frameborder="0"></iframe>
+        <!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
+		</div><!-- /#video-wrapper --> 
+        
+        
     </div>
-</header>
+</div><!-- /.filmstrip-outer-wrapper --> 
 
 
-    <section id="content">
+
+
+ <div id="explainer">     
         <div class="container">
-            <div class="row">
-                <div id="main-content" class="col-md-8">
-                    
-<h1>tshirt</h1>
-<div id="story-meta">
-    <p class="byline">by <span>Name Here</span></p>
-    <p class="dateblock">
-        <span class="date">January 22, 2013</span>
-        <span class="time"> 3:37 AM</span>
-    </p>
-</div>
-
-<h2>Example COPY list</h2>
-<dl>
-    
-    <dt>jabberwocky</dt><dd>Invented or meaningless language; nonsense.</dd>
-    
-    <dt>Antioch</dt><dd>Land of the Holy Hand Grenade.</dd>
-    
-    <dt>swallow</dt><dd>What kind?</dd>
-    
-</dl>
-
-<h2>JST example</h2>
-<p id="template-example"></p>
-
-                </div>
-                <div id="bigbox" class="col-md-4">
-                    
-                    <div class="adwrapper">
-                        <div class="sponsor300">
-                            <script type="text/javascript">
-                            <!--
-                            if (DFP.shouldRenderForDevice('desktop')) {
-                                googletag.cmd.push(function() { googletag.display('ad-desktop'); });
-                            }
-                            // -->
-                            </script>
-                        </div>
-                        <p class="left">NPR thanks our sponsors</p>
-                        <p class="right"><a href="http://www.npr.org/about/place/corpsupport/">Become an NPR sponsor</a></p>
-                    </div>
-                </div>
-            </div>
+        	<div class="row">
+            	<div class="col-md-10">
             
-<div class="row">
-    <div class="col-md-12">
-        <h2>This content goes to 12</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-</div>
+                <h3>h3. Lorem ipsum dolor sit</h3> 
+                <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                <button id="play1">play1()</button>
+            <iframe id="video1" src="http://player.vimeo.com/video/76086055?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=1;player_id=video1" width="400" height="225" frameborder="0"></iframe>
+                
+            </div><!-- /.col --> 
+        </div><!-- /.row -->  
+    </div><!-- /.container -->
+  </div><!-- /#explainer -->
+  
+  
 
-        </div>
-    </section>
 
-    <footer>
-        <div class="primary">
-            <ul>
-                <li><a href="http://www.npr.org" data-action="Click Logo"><img src="http://media.npr.org/chrome/news/nprlogo_138x46.gif" alt="NPR Logo"></a></li>
-                <li class="news"><a href="http://www.npr.org/sections/news/">News</a></li>
-                <li class="artslife"><a href="http://www.npr.org/sections/arts/">Arts &amp; Life</a></li>
-                <li class="music"><a href="http://www.npr.org/music/">Music</a></li>
-                <li class="programs"><a href="http://www.npr.org/programs/">Programs</a></li>
-                <li class="listen"><a href="http://www.npr.org/listen/">Listen</a></li>
-                <li class="about"><a href="http://www.npr.org/about/">About</a></li>
-            </ul>
-        </div>
-        <div class="secondary">
-            <p>&copy;2013 NPR</p>
-            <ul>
-                <li id="footerContact"><a href="http://help.npr.org/npr/includes/customer/npr/custforms/contactus.aspx">Contact</a></li>
-                <li><a href="http://www.npr.org/about/termsofuse.html">Terms of Use</a></li>
-                <li><a href="http://www.npr.org/about/privacypolicy.html">Privacy</a></li>
-                <li><a href="http://thin.npr.org/">Text-Only</a></li>
-            </ul>
-        </div>
-    </footer>
-
-    
-    <div id="adhesion">
-        <script type="text/javascript">
-        <!--
-        if (DFP.shouldRenderForDevice('mobile')) {
-            var ord = window.ord || Math.floor(Math.random() * 1e16);
-            
-            // use the smaller size for phone, the larger size for tablet
-            var sizes = '640x100';
-            if (Modernizr.mq('only screen and (min-width: 768px)')) {
-                sizes = '2048x180';
-            }
-            
-            var targets = ';';
-            targets += 'storyId=203618536;';
-            targets += 'testserver=true;';
-            
-            document.write('<scr' + 'ipt type="text/javascript" src="http://ad.doubleclick.net/N6735/adj/n6735.nprmobile/News_NPR_News_Investigations' + targets + 'sz=' + sizes + ';ord=' + ord + '?"><\/script>');
-        }
-        // -->
-        </script>
-    </div>
-
-    
 
     
     
     
     
+<script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
+<script src="js/jquery.smooth-scroll.js"></script>
+<script src="js/lib/responsive-carousel.js"></script>
+<script src="js/lib/responsive-carousel.touch.js"></script>
+<script src="js/lib/responsive-carousel.drag.js"></script>
+<script src="js/lib/responsive-carousel.autoinit.js"></script>
+
     
     
     <script type="text/javascript" src="../js/app-footer.min.js"></script>
 
-    
     
 
     <!-- GOOGLE ANALYTICS -->

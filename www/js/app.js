@@ -1,14 +1,14 @@
 $(document).ready(function() {
-	
-	//titlecard sizer
+    var $w = $(window);
+    var $carousel = $('.carousel');
 	var $scrollcontent = $('#explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
-    var $w = $(window);
     
     var aspect_width = 16;
     var aspect_height = 10;
+    var chapters = [ 'intro', 'plants', 'robots', 'humans', 'boats', 'you' ];
     var window_width;
     var window_height;
     
@@ -41,50 +41,57 @@ $(document).ready(function() {
         h_offset = (window_height - h) / 2;
         
         // size the divs accordingly
+        $carousel.width(window_width + 'px').height(window_height + 'px');
         $titlecard_wrapper.width(w + 'px').height(h + 'px');
         $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
         $titlecard_outer_wrapper.height(window_height + 'px');
         $scrollcontent.css('marginTop', window_height + 'px');
     }
     
-    $(window).on('resize', on_resize);
-    on_resize();
-	
-	//video 1
-	var $iframe = $('#video')[0];
-	var $player = $f($iframe);
-	
-	//video 2
-	var $iframe1 = $('#video1')[0];
-	var $player1 = $f($iframe1);
-	
-	$("#video-wrapper").fitVids();
-	
-	$player.addEvent('ready', function() {
-		//console.log('player ready');
-		//$player.api('setVolume', 0);
-		//$player1.api('play');
-		//$player1.api('seekTo', 3);
-		//$player1.api('pause');
-	});
-	
-	$( "#play" ).on( "click", function() {
-		$player.api('play');
-		$("#video-wrapper").addClass("animated fadeIn backer" );
-		//$("#explain").addClass("revealed" );
-	});
-	
-	$( "#pause" ).on( "click", function() {
-		$player.api('pause');
-	});
-	
-	$( "#mute" ).on( "click", function() {
-		$player.api('setVolume', 0);
-	});
-	
-	$( "#play1" ).on( "click", function() {
-		$player1.api('play');
-	});
+    function setup_videos() {
+        for (var i = 0; i < chapters.length; i++) {
+            var $chapter = $('#' + chapters[i]);
+            var $iframe = $('#video-' + chapters[i])[0];
+            var $player = $f($iframe);
+
+            $player.addEvent('ready', function() {
+                console.log('player ready');
+                //$player.api('setVolume', 0);
+                //$player1.api('play');
+                //$player1.api('seekTo', 3);
+                //$player1.api('pause');
+            });
+            
+            $chapter.find('.btn-play').on('click', function() {
+                var this_chapter = $(this).parents('.chapter').attr('id');
+                var $this_iframe = $('#video-' + this_chapter)[0];
+                var $this_player = $f($this_iframe);
+
+                $this_player.api('play');
+                $('.video-wrapper').addClass('animated fadeIn backer');
+                //$("#explain").addClass("revealed" );
+                console.log($(this));
+            });
+    
+            $chapter.find('.btn-pause').on( 'click', function() {
+                var this_chapter = $(this).parents('.chapter').attr('id');
+                var $this_iframe = $('#video-' + this_chapter)[0];
+                var $this_player = $f($this_iframe);
+
+                $this_player.api('pause');
+            });
+    
+            $chapter.find('.btn-mute').on( 'click', function() {
+                var this_chapter = $(this).parents('.chapter').attr('id');
+                var $this_iframe = $('#video-' + this_chapter)[0];
+                var $this_player = $f($this_iframe);
+
+                $this_player.api('setVolume', 0);
+            });
+
+            $chapter.find('.video-wrapper').fitVids();
+        }
+    }
 	
 	$('#text-mover').click(function() {
 		$.smoothScroll({
@@ -93,5 +100,17 @@ $(document).ready(function() {
 		});
 		return false;
 	});
+	
+
+	/* 
+	 * Setup functions 
+	 */
+    function setup() {
+        setup_videos();
+
+        $(window).on('resize', on_resize);
+        on_resize();
+    }
+    setup();
 
 });
