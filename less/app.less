@@ -11,11 +11,10 @@
 
 // General styles
 
-#explainer {
+.explainer {
     z-index: 2;
     position: relative;
     background-color: #fff;
-    display: none;
 }
 	
 .revealed {
@@ -74,7 +73,9 @@
 	width: 100%;
 }
 
-.btn-kontext {
+
+// Sideways nav buttons
+.btn-sideways {
     position: absolute;
     top: 50%;
     background-color: #fff;
@@ -83,6 +84,12 @@
     text-align: center;
     cursor: pointer;
     line-height: 44px;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;      
 }
 #btn-back {
     left: 0;

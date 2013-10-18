@@ -2,7 +2,7 @@ $(document).ready(function() {
     var $w = $(window);
     var $btn_back = $('#btn-back');
     var $btn_next = $('#btn-next');
-	var $scrollcontent = $('#explainer');
+	var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
@@ -11,7 +11,6 @@ $(document).ready(function() {
     var aspect_width = 16;
     var aspect_height = 10;
     var chapters = [ 'intro', 'plants', 'robots', 'humans', 'boats', 'you' ];
-    var current_chapter = 0;
     var window_width;
     var window_height;
     
@@ -66,7 +65,6 @@ $(document).ready(function() {
             //$player.api('pause');
         });
         
-        console.log($btn_play);
         $btn_play.on('click', function() {
             console.log('clicked!');
             var this_chapter = $(this).parents('.chapter').attr('id');
@@ -99,10 +97,15 @@ $(document).ready(function() {
     }
     
     /* 
-     * Kontext 
+     * Kontext sideways navigation
      */
+     
     var touchX = 0;
     var touchConsumed = false;
+
+    k.changed.add(function(layer, index) {
+        // do something when the layer changes
+    });
 
     document.addEventListener( 'keyup', function( event ) {
         if( event.keyCode === 37 ) k.prev();
@@ -129,6 +132,17 @@ $(document).ready(function() {
         }
     }, false );
 
+	// sideways nav buttons
+	$btn_next.on('click', function() {
+	    k.next();
+	    console.log(k.getIndex() + ' of ' + k.getTotal());
+	});
+
+	$btn_back.on('click', function() {
+	    k.prev();
+	    console.log(k.getIndex() + ' of ' + k.getTotal());
+	});
+
 
 	$('#text-mover').click(function() {
 		$.smoothScroll({
@@ -138,17 +152,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$btn_next.on('click', function() {
-	    console.log('next!');
-	    k.next();
-	});
-
-	$btn_back.on('click', function() {
-	    console.log('back!');
-	    k.prev();
-	});
 	
-
 	/* 
 	 * Setup functions 
 	 */
