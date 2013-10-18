@@ -1,10 +1,10 @@
 $(document).ready(function() {
     var $w = $(window);
-    var $carousel = $('.carousel');
 	var $scrollcontent = $('#explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
+    var k = kontext(document.querySelector('.kontext'));
     
     var aspect_width = 16;
     var aspect_height = 10;
@@ -41,7 +41,6 @@ $(document).ready(function() {
         h_offset = (window_height - h) / 2;
         
         // size the divs accordingly
-        $carousel.width(window_width + 'px').height(window_height + 'px');
         $titlecard_wrapper.width(w + 'px').height(h + 'px');
         $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
         $titlecard_outer_wrapper.height(window_height + 'px');
@@ -55,22 +54,23 @@ $(document).ready(function() {
             var $player = $f($iframe);
 
             $player.addEvent('ready', function() {
-                console.log('player ready');
+                //console.log('player ready');
                 //$player.api('setVolume', 0);
-                //$player1.api('play');
-                //$player1.api('seekTo', 3);
-                //$player1.api('pause');
+                //$player.api('play');
+                //$player.api('seekTo', 3);
+                //$player.api('pause');
             });
             
             $chapter.find('.btn-play').on('click', function() {
+                console.log('clicked!');
                 var this_chapter = $(this).parents('.chapter').attr('id');
                 var $this_iframe = $('#video-' + this_chapter)[0];
                 var $this_player = $f($this_iframe);
 
                 $this_player.api('play');
-                $('.video-wrapper').addClass('animated fadeIn backer');
+                $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
                 //$("#explain").addClass("revealed" );
-                console.log($(this));
+                console.log(this_chapter);
             });
     
             $chapter.find('.btn-pause').on( 'click', function() {
@@ -88,11 +88,42 @@ $(document).ready(function() {
 
                 $this_player.api('setVolume', 0);
             });
-
-            $chapter.find('.video-wrapper').fitVids();
         }
+        $('.video-wrapper').fitVids();
     }
-	
+    
+    /* 
+     * Kontext 
+     */
+    var touchX = 0;
+    var touchConsumed = false;
+
+    document.addEventListener( 'keyup', function( event ) {
+        if( event.keyCode === 37 ) k.prev();
+        if( event.keyCode === 39 ) k.next();
+    }, false );
+
+    document.addEventListener( 'touchstart', function( event ) {
+        touchConsumed = false;
+        lastX = event.touches[0].clientX;
+    }, false );
+
+    document.addEventListener( 'touchmove', function( event ) {
+        event.preventDefault();
+
+        if( !touchConsumed ) {
+            if( event.touches[0].clientX > lastX + 10 ) {
+                k.prev();
+                touchConsumed = true;
+            }
+            else if( event.touches[0].clientX < lastX - 10 ) {
+                k.next();
+                touchConsumed = true;
+            }
+        }
+    }, false );
+
+
 	$('#text-mover').click(function() {
 		$.smoothScroll({
 			speed: 1500,
