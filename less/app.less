@@ -10,9 +10,6 @@
 
 
 // General styles
-.titlecard {
-//	display: none;
-}
 .text-below {
 	display: none;
 }
@@ -85,7 +82,10 @@
 #btn-back { left: 0; }
 #btn-next { right: 0; }
 
-.backer {display: block;}
+.backer,
+nav .nav-item-wrapper.backer {
+    display: block;
+}
 
 /*
 .explainer {
@@ -113,6 +113,56 @@
 	text-align: right;
 }
 */
+
+
+// Chapter navigation
+nav {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: #000;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+    
+    &.animated {
+        background: #000;
+    }
+    
+    .nav-wrapper {
+        padding: 0 22px;
+    }
+    .nav-item-wrapper {
+        display: none;
+    }
+    
+    h3 {
+        font-size: 14px;
+        float: right;
+        margin: 0;
+        line-height: 44px;
+    }
+    
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        
+        &#nav-secondary {
+            float: left;
+            
+            > li {
+                display: inline-block;
+                margin-right: 12px;
+            }
+        }
+        &#nav-primary {
+            clear: both;
+        }
+    }
+    &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+}
+
 
 // Media queries
 @media (max-width: 992px) {

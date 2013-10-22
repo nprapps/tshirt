@@ -4,6 +4,9 @@ $(document).ready(function() {
     var $btn_next = $('#btn-next');
     var $layers = $('.layer');
 	var $layer_media = $('.layer-media');
+	var $nav = $('nav');
+	var $nav_btn = $nav.find('h3');
+	var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
 	var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
@@ -176,6 +179,16 @@ $(document).ready(function() {
 			}
         }
 	}
+	
+	
+	/*
+	 * Chapter navigation
+	 */
+	$nav_btn.on('click', function() {
+//	    $nav.find('.nav-item-wrapper').toggle();
+        $nav.find('.nav-item-wrapper').toggleClass('backer');
+        $nav.toggleClass('animated slideInUp');
+	});
 
 
 	$('#text-mover').click(function() {
