@@ -79,6 +79,7 @@ $(document).ready(function() {
 				$this_player.api('play');
 	//            $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
+				$('#' + this_chapter).find('.video-wrapper').show();
 				//$("#explain").addClass("revealed" );
 				console.log(this_chapter);
 			});
@@ -173,6 +174,9 @@ $(document).ready(function() {
 //				console.log($this_player);
 			}
         }
+        
+        // hide videos
+        $('.video-wrapper').hide();
 	}
 
 
@@ -194,6 +198,7 @@ $(document).ready(function() {
 			setup_video(chapters[i]);
         }
         $('.video-wrapper').fitVids();
+        $('.video-wrapper').hide();
 
         $(window).on('resize', on_resize);
         on_resize();
