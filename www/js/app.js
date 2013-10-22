@@ -8,6 +8,7 @@ $(document).ready(function() {
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
+    var $video_wrapper = $('.video-wrapper');
     var k = kontext(document.querySelector('.kontext'));
     
     var aspect_width = 16;
@@ -78,8 +79,8 @@ $(document).ready(function() {
 
 				$this_player.api('play');
 	//            $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
-				$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
-				$('#' + this_chapter).find('.video-wrapper').show();
+				//$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
+				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				//$("#explain").addClass("revealed" );
 				console.log(this_chapter);
 			});
@@ -160,7 +161,7 @@ $(document).ready(function() {
 	
 	function reset_layers() {
 	    // reset titlecards
-	    $titlecard.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 		
 		// stop video; set it back to the beginning
         for (var i = 0; i < chapters.length; i++) {
@@ -176,7 +177,7 @@ $(document).ready(function() {
         }
         
         // hide videos
-        $('.video-wrapper').hide();
+        //$('.video-wrapper').hide();
 	}
 
 
@@ -198,7 +199,7 @@ $(document).ready(function() {
 			setup_video(chapters[i]);
         }
         $('.video-wrapper').fitVids();
-        $('.video-wrapper').hide();
+        //$('.video-wrapper').hide();
 
         $(window).on('resize', on_resize);
         on_resize();

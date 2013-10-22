@@ -19,23 +19,21 @@
 
 .layer-media {
 	width: 100%;
-	background-color: #121212;
-	position: relative;
-}
-
-.titlecard {
-    background: url('@{img-root}/walk-title.jpg');
+	background: url('@{img-root}/walk-title.jpg');
     -webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
     background-size: cover;
     background-position: 50% 50%;
+	position: relative;
+}
+
+.titlecard {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
 	text-align: center;
 
     h1 {
@@ -50,13 +48,18 @@
 }
 
 .video-wrapper {
-//	position: absolute;
-//	top: 0;
-//	left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 	z-index: 1;
 	background-color: #000;
 	height: 100%;
 	width: 100%;
+	display: none;
+}
+
+.video-wrapper iframe {
+	margin-top: 20px;
 }
 
 
@@ -81,6 +84,7 @@
 #btn-back { left: 0; }
 #btn-next { right: 0; }
 
+.backer {display: block;}
 
 /*
 .explainer {
@@ -94,7 +98,7 @@
 	
 }
 
-.backer {z-index: 20;}
+
 	
 .text-below {
     display: none;
