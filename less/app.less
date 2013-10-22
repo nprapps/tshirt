@@ -2,6 +2,11 @@
 @import "less/lib/font-awesome/font-awesome";
 @import "less/kontext";
 
+.kontext {
+	height: 100%;
+	width: 100%;
+}
+
 //css3 animations
 @import "less/lib/animate";
 
@@ -10,31 +15,22 @@
 
 
 // General styles
-
-.explainer {
-    z-index: 2;
-    position: relative;
-    background-color: #fff;
+.titlecard {
+	display: none;
 }
-	
-.revealed {
-	
+.text-below {
+	display: none;
 }
-
+/*
 .titlecard-outer-wrapper {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /*margin-bottom: 33px;*/
+    //margin-bottom: 33px;
     position: fixed;
     top: 0;
     background-color: #000;
 }
-
-/*.titlecard-wrapper {
-    width: 720px;
-    height: 480px;
-}*/
 
 .titlecard {
     display: none;
@@ -63,16 +59,14 @@
 }
 	
 .video-wrapper {
-    /*
-	position: absolute;
-	top: 0;
-	left: 0;
-	*/
+//	position: absolute;
+//	top: 0;
+//	left: 0;
 	background-color: #000;
 	height: 100%;
 	width: 100%;
 }
-
+*/
 
 // Sideways nav buttons
 .btn-sideways {
@@ -85,9 +79,9 @@
     cursor: pointer;
     line-height: 44px;
 
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     -o-user-select: none;
     user-select: none;      
 }
@@ -97,7 +91,18 @@
 #btn-next {
     right: 0;
 }
+
+/*
+.explainer {
+    display: none;
+    z-index: 2;
+    position: relative;
+    background-color: #fff;
+}
 	
+.revealed {
+	
+}
 
 .backer {z-index: 20;}
 	
@@ -112,6 +117,7 @@
 	width: 100%;
 	text-align: right;
 }
+*/
 
 // Media queries
 @media (max-width: 992px) {

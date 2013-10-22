@@ -136,11 +136,13 @@ $(document).ready(function() {
 	$btn_next.on('click', function() {
 	    k.next();
 	    console.log(k.getIndex() + ' of ' + k.getTotal());
+	    // TODO: STOP ALL VIDEO PLAYING, SET BACK TO BEGINNING?
 	});
 
 	$btn_back.on('click', function() {
 	    k.prev();
 	    console.log(k.getIndex() + ' of ' + k.getTotal());
+	    // TODO: STOP ALL VIDEO PLAYING, SET BACK TO BEGINNING?
 	});
 
 
@@ -163,8 +165,8 @@ $(document).ready(function() {
         }
         $('.video-wrapper').fitVids();
 
-        $(window).on('resize', on_resize);
-        on_resize();
+//        $(window).on('resize', on_resize);
+//        on_resize();
     }
     setup();
 
