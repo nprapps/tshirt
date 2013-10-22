@@ -213,7 +213,7 @@ $(document).ready(function() {
 	 * Setup functions 
 	 */
     function setup() {
-        // setup chapter layers
+        // setup chapter layers and navigation
         for (var i = 0; i < chapters.length; i++) {
 			setup_chapters(chapters[i]);
             setup_chapter_nav(chapters[i], i);
