@@ -13,7 +13,7 @@ $(document).ready(function() {
     
     var aspect_width = 16;
     var aspect_height = 10;
-    var chapters = [ 'title', 'plants', 'robots', 'humans', 'boats', 'you' ];
+    var chapters = [ 'title', 'plants', 'robots', 'humans', 'boats', 'you', 'about' ];
     var window_width;
     var window_height;
     
@@ -46,18 +46,18 @@ $(document).ready(function() {
         h_offset = (window_height - h) / 2;
         
         // size the divs accordingly
-        $layer_media.height(window_height + 'px');
+//        $layer_media.height(window_height + 'px');
 //        $titlecard_wrapper.width(w + 'px').height(h + 'px');
 //        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
 //        $titlecard_outer_wrapper.height(window_height + 'px');
 //        $scrollcontent.css('marginTop', window_height + 'px');
     }
     
-    function setup_video(chapter) {
+    function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
 		var $btn_play = $chapter.find('.btn-play');
 
-    	if (chapter != 'title') {
+    	if (chapter != 'title' && chapter != 'about') {
 			var $iframe = $('#video-' + chapter)[0];
 			var $player = $f($iframe);
 			var $btn_pause = $chapter.find('.btn-pause');
@@ -78,8 +78,6 @@ $(document).ready(function() {
 				var $this_player = $f($this_iframe);
 
 				$this_player.api('play');
-	//            $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
-				//$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				//$("#explain").addClass("revealed" );
 				console.log(this_chapter);
@@ -102,11 +100,13 @@ $(document).ready(function() {
 
 				$this_player.api('setVolume', 0);
 			});
-		} else {
+		} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
 				k.show(1);
 				$('#plants').find('.btn-play').trigger('click');
 			});
+		} else { // about
+		    // do something else?
 		}
     }
     
@@ -175,9 +175,6 @@ $(document).ready(function() {
 //				console.log($this_player);
 			}
         }
-        
-        // hide videos
-        //$('.video-wrapper').hide();
 	}
 
 
@@ -194,12 +191,11 @@ $(document).ready(function() {
 	 * Setup functions 
 	 */
     function setup() {
-        // setup videos
+        // setup chapter layers
         for (var i = 0; i < chapters.length; i++) {
-			setup_video(chapters[i]);
+			setup_chapters(chapters[i]);
         }
-        $('.video-wrapper').fitVids();
-        //$('.video-wrapper').hide();
+        $video_wrapper.fitVids();
 
         $(window).on('resize', on_resize);
         on_resize();
