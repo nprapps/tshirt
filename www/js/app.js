@@ -102,7 +102,7 @@ $(document).ready(function() {
 			});
 		} else {
 			$btn_play.on('click', function() {
-				$btn_next.trigger('click');
+				k.show(1);
 				$('#plants').find('.btn-play').trigger('click');
 			});
 		}
@@ -170,7 +170,7 @@ $(document).ready(function() {
 				$this_player.api('seekTo', 0);
 				$this_player.api('pause');
 //				$this_player.api('unload'); <- TODO: should we be using this instead of seekTo/pause? not working for me.
-				console.log($this_player);
+//				console.log($this_player);
 			}
         }
 	}
