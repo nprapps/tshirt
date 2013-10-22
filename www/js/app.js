@@ -184,20 +184,29 @@ $(document).ready(function() {
 	/*
 	 * Chapter navigation
 	 */
+	function setup_chapter_nav(chapter, id) {
+        $('#nav-' + chapter).on('click', function() {
+            k.show(id);
+            $nav_btn.trigger('click');
+        });
+	}
+
 	$nav_btn.on('click', function() {
-//	    $nav.find('.nav-item-wrapper').toggle();
-        $nav.find('.nav-item-wrapper').toggleClass('backer');
+        $nav_item_wrapper.toggleClass('backer');
         $nav.toggleClass('animated slideInUp');
 	});
-
-
-	$('#text-mover').click(function() {
+	
+	
+	/*
+	 * Explainer text
+	 */
+	/* $('#text-mover').click(function() {
 		$.smoothScroll({
 			speed: 1500,
 			scrollTarget: '#explainer'
 		});
 		return false;
-	});
+	}); */
 	
 	
 	/* 
@@ -207,8 +216,10 @@ $(document).ready(function() {
         // setup chapter layers
         for (var i = 0; i < chapters.length; i++) {
 			setup_chapters(chapters[i]);
+            setup_chapter_nav(chapters[i], i);
         }
         $video_wrapper.fitVids();
+        
 
         $(window).on('resize', on_resize);
         on_resize();
