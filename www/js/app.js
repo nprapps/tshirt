@@ -2,6 +2,8 @@ $(document).ready(function() {
     var $w = $(window);
     var $btn_back = $('#btn-back');
     var $btn_next = $('#btn-next');
+    var $layers = $('.layer');
+	var $layer_media = $('.layer-media');
 	var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
@@ -10,7 +12,7 @@ $(document).ready(function() {
     
     var aspect_width = 16;
     var aspect_height = 10;
-    var chapters = [ 'intro', 'plants', 'robots', 'humans', 'boats', 'you' ];
+    var chapters = [ 'title', 'plants', 'robots', 'humans', 'boats', 'you' ];
     var window_width;
     var window_height;
     
@@ -43,57 +45,67 @@ $(document).ready(function() {
         h_offset = (window_height - h) / 2;
         
         // size the divs accordingly
-        $titlecard_wrapper.width(w + 'px').height(h + 'px');
-        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
-        $titlecard_outer_wrapper.height(window_height + 'px');
-        $scrollcontent.css('marginTop', window_height + 'px');
+        $layer_media.height(window_height + 'px');
+//        $titlecard_wrapper.width(w + 'px').height(h + 'px');
+//        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
+//        $titlecard_outer_wrapper.height(window_height + 'px');
+//        $scrollcontent.css('marginTop', window_height + 'px');
     }
     
     function setup_video(chapter) {
-        var $chapter = $('#' + chapter);
-        var $iframe = $('#video-' + chapter)[0];
-        var $player = $f($iframe);
-        var $btn_play = $chapter.find('.btn-play');
-        var $btn_pause = $chapter.find('.btn-pause');
-        var $btn_mute = $chapter.find('.btn-mute');
+		var $chapter = $('#' + chapter);
+		var $btn_play = $chapter.find('.btn-play');
 
-        $player.addEvent('ready', function() {
-            //console.log('player ready');
-            //$player.api('setVolume', 0);
-            //$player.api('play');
-            //$player.api('seekTo', 3);
-            //$player.api('pause');
-        });
-        
-        $btn_play.on('click', function() {
-            console.log('clicked!');
-            var this_chapter = $(this).parents('.chapter').attr('id');
-            var $this_iframe = $('#video-' + this_chapter)[0];
-            var $this_player = $f($this_iframe);
+    	if (chapter != 'title') {
+			var $iframe = $('#video-' + chapter)[0];
+			var $player = $f($iframe);
+			var $btn_pause = $chapter.find('.btn-pause');
+			var $btn_mute = $chapter.find('.btn-mute');
 
-            $this_player.api('play');
-            $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
-            //$("#explain").addClass("revealed" );
-            console.log(this_chapter);
-        });
+			$player.addEvent('ready', function() {
+				//console.log('player ready');
+				//$player.api('setVolume', 0);
+				//$player.api('play');
+				//$player.api('seekTo', 3);
+				//$player.api('pause');
+			});
+		
+			$btn_play.on('click', function() {
+				console.log('clicked!');
+				var this_chapter = $(this).parents('.layer').attr('id');
+				var $this_iframe = $('#video-' + this_chapter)[0];
+				var $this_player = $f($this_iframe);
 
-        $btn_pause.on('click', function() {
-            console.log('clicked!');
-            var this_chapter = $(this).parents('.chapter').attr('id');
-            var $this_iframe = $('#video-' + this_chapter)[0];
-            var $this_player = $f($this_iframe);
+				$this_player.api('play');
+	//            $('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+				$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
+				//$("#explain").addClass("revealed" );
+				console.log(this_chapter);
+			});
 
-            $this_player.api('pause');
-        });
+			$btn_pause.on('click', function() {
+				console.log('clicked!');
+				var this_chapter = $(this).parents('.layer').attr('id');
+				var $this_iframe = $('#video-' + this_chapter)[0];
+				var $this_player = $f($this_iframe);
 
-        $btn_mute.on('click', function() {
-            console.log('clicked!');
-            var this_chapter = $(this).parents('.chapter').attr('id');
-            var $this_iframe = $('#video-' + this_chapter)[0];
-            var $this_player = $f($this_iframe);
+				$this_player.api('pause');
+			});
 
-            $this_player.api('setVolume', 0);
-        });
+			$btn_mute.on('click', function() {
+				console.log('clicked!');
+				var this_chapter = $(this).parents('.layer').attr('id');
+				var $this_iframe = $('#video-' + this_chapter)[0];
+				var $this_player = $f($this_iframe);
+
+				$this_player.api('setVolume', 0);
+			});
+		} else {
+			$btn_play.on('click', function() {
+				$btn_next.trigger('click');
+				$('#plants').find('.btn-play').trigger('click');
+			});
+		}
     }
     
     /* 
@@ -135,15 +147,33 @@ $(document).ready(function() {
 	// sideways nav buttons
 	$btn_next.on('click', function() {
 	    k.next();
-	    console.log(k.getIndex() + ' of ' + k.getTotal());
-	    // TODO: STOP ALL VIDEO PLAYING, SET BACK TO BEGINNING?
+	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
+	    reset_layers();
 	});
 
 	$btn_back.on('click', function() {
 	    k.prev();
-	    console.log(k.getIndex() + ' of ' + k.getTotal());
-	    // TODO: STOP ALL VIDEO PLAYING, SET BACK TO BEGINNING?
+	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
+	    reset_layers();
 	});
+	
+	function reset_layers() {
+	    // reset titlecards
+	    $titlecard.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+		
+		// stop video; set it back to the beginning
+        for (var i = 0; i < chapters.length; i++) {
+        	if (chapters[i] != 'title') {
+				var this_chapter = chapters[i];
+				var $this_iframe = $('#video-' + this_chapter)[0];
+				var $this_player = $f($this_iframe);
+				$this_player.api('seekTo', 0);
+				$this_player.api('pause');
+//				$this_player.api('unload'); <- TODO: should we be using this instead of seekTo/pause? not working for me.
+				console.log($this_player);
+			}
+        }
+	}
 
 
 	$('#text-mover').click(function() {
@@ -161,12 +191,12 @@ $(document).ready(function() {
     function setup() {
         // setup videos
         for (var i = 0; i < chapters.length; i++) {
-            setup_video(chapters[i]);
+			setup_video(chapters[i]);
         }
         $('.video-wrapper').fitVids();
 
-//        $(window).on('resize', on_resize);
-//        on_resize();
+        $(window).on('resize', on_resize);
+        on_resize();
     }
     setup();
 

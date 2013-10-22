@@ -2,11 +2,6 @@
 @import "less/lib/font-awesome/font-awesome";
 @import "less/kontext";
 
-.kontext {
-	height: 100%;
-	width: 100%;
-}
-
 //css3 animations
 @import "less/lib/animate";
 
@@ -16,35 +11,31 @@
 
 // General styles
 .titlecard {
-	display: none;
+//	display: none;
 }
 .text-below {
 	display: none;
 }
-/*
-.titlecard-outer-wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    //margin-bottom: 33px;
-    position: fixed;
-    top: 0;
-    background-color: #000;
+
+.layer-media {
+	width: 100%;
+	background-color: #121212;
+	position: relative;
 }
 
 .titlecard {
-    display: none;
-	position: absolute;
-	top:0;
-	right: 0;
-    width: 100%;
-    height: 100%;
     background: url('@{img-root}/walk-title.jpg');
     -webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
-	z-index: 2;
+    background-size: cover;
+    background-position: 50% 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 	text-align: center;
 
     h1 {
@@ -57,16 +48,18 @@
         margin-top: 100px;
     }
 }
-	
+
 .video-wrapper {
 //	position: absolute;
 //	top: 0;
 //	left: 0;
+	z-index: 1;
 	background-color: #000;
 	height: 100%;
 	width: 100%;
 }
-*/
+
+
 
 // Sideways nav buttons
 .btn-sideways {
@@ -85,12 +78,9 @@
     -o-user-select: none;
     user-select: none;      
 }
-#btn-back {
-    left: 0;
-}
-#btn-next {
-    right: 0;
-}
+#btn-back { left: 0; }
+#btn-next { right: 0; }
+
 
 /*
 .explainer {
