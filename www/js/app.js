@@ -55,6 +55,10 @@ $(document).ready(function() {
 //        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
 //        $titlecard_outer_wrapper.height(window_height + 'px');
 //        $scrollcontent.css('marginTop', window_height + 'px');
+
+        // fine-tune when the chapter nav affixes to the top
+        $nav.attr('data-offset-top', (window_height - $nav.height()));
+//        data-offset-top="700"
     }
     
     function setup_chapters(chapter) {
