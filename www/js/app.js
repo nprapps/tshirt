@@ -192,8 +192,13 @@ $(document).ready(function() {
 	}
 
 	$nav_btn.on('click', function() {
-        $nav_item_wrapper.toggleClass('backer');
-        $nav.toggleClass('animated slideInUp');
+	    if ($nav.hasClass('slideInUp')) {
+	        $nav.removeClass('slideInUp').addClass('animated slideOutDown');
+	        $nav_item_wrapper.removeClass('backer');
+	    } else {
+            $nav.removeClass('slideOutDown').addClass('animated slideInUp backer');
+	        $nav_item_wrapper.addClass('backer');
+	    }
 	});
 	
 	

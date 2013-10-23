@@ -128,6 +128,7 @@ nav {
     background: #000;
     background: rgba(0,0,0,.8);
     color: #fff;
+    overflow: hidden;
     
     &.animated {
         background: #000;
@@ -195,6 +196,108 @@ nav {
         }
     }
     &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+}
+
+
+// Animations
+@-webkit-keyframes slideInUp {
+	0% {
+	    height: 44px;
+		/* NOTE: this value is the height of the panel when only the "chapters" btn
+		   we'll need to update it later */
+	}
+
+	100% {
+	    height: 108px;
+		/* NOTE: this value is the height of the panel when everything is visible
+		   we'll need to update it later */
+	}
+}
+@-moz-keyframes slideInUp {
+	0% {
+	    height: 44px;
+	}
+	100% {
+	    height: 108px;
+	}
+}
+@-o-keyframes slideInUp {
+	0% {
+	    height: 44px;
+	}
+	100% {
+	    height: 108px;
+	}
+}
+@keyframes slideInUp {
+	0% {
+	    height: 44px;
+	}
+	100% {
+	    height: 108px;
+	}
+}
+.slideInUp {
+	-webkit-animation-name: slideInUp;
+	-moz-animation-name: slideInUp;
+	-o-animation-name: slideInUp;
+	animation-name: slideInUp;
+	
+	-webkit-animation-duration: .5s;
+	-moz-animation-duration: .5s;
+	-ms-animation-duration: .5s;
+	-o-animation-duration: .5s;
+	animation-duration: .5s;
+}
+
+@-webkit-keyframes slideOutDown {
+	0% {
+	    height: 108px;
+		/* NOTE: this value is the height of the panel when only the "chapters" btn
+		   we'll need to update it later */
+	}
+
+	100% {
+	    height: 44px;
+		/* NOTE: this value is the height of the panel when everything is visible
+		   we'll need to update it later */
+	}
+}
+@-moz-keyframes slideOutDown {
+	0% {
+	    height: 108px;
+	}
+	100% {
+	    height: 44px;
+	}
+}
+@-o-keyframes slideOutDown {
+	0% {
+	    height: 108px;
+	}
+	100% {
+	    height: 44px;
+	}
+}
+@keyframes slideOutDown {
+	0% {
+	    height: 108px;
+	}
+	100% {
+	    height: 44px;
+	}
+}
+.slideOutDown {
+	-webkit-animation-name: slideOutDown;
+	-moz-animation-name: slideOutDown;
+	-o-animation-name: slideOutDown;
+	animation-name: slideOutDown;
+	
+	-webkit-animation-duration: .5s;
+	-moz-animation-duration: .5s;
+	-ms-animation-duration: .5s;
+	-o-animation-duration: .5s;
+	animation-duration: .5s;
 }
 
 
