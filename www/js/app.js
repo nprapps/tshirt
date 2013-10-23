@@ -16,7 +16,7 @@ $(document).ready(function() {
     
     var aspect_width = 16;
     var aspect_height = 10;
-    var chapters = [ 'title', 'plants', 'robots', 'humans', 'boats', 'you', 'about' ];
+    var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
     var window_width;
     var window_height;
     
