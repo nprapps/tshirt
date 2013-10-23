@@ -8,6 +8,8 @@ $(document).ready(function() {
 	var $nav = $('nav');
 	var $nav_btn = $nav.find('h3.btn-chapter');
 	var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
+	var $nav_chapter_title = $('#nav-chapter-title');
+	var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
 	var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
@@ -245,13 +247,14 @@ $(document).ready(function() {
 	 * Setup functions 
 	 */
     function setup() {
+        $b.addClass('chapter-' + chapters[0]);
+
         // setup chapter layers and navigation
         for (var i = 0; i < chapters.length; i++) {
 			setup_chapters(chapters[i]);
             setup_chapter_nav(chapters[i], i);
         }
         $video_wrapper.fitVids();
-        $b.addClass('chapter-' + chapters[0]);
 
         $(window).on('resize', on_resize);
         on_resize();

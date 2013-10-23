@@ -91,32 +91,8 @@ nav .nav-item-wrapper.backer {
     display: block;
 }
 
-/*
-.explainer {
-    display: none;
-    z-index: 2;
-    position: relative;
-    background-color: #fff;
-}
-	
-.revealed {
-	
-}
 
-
-	
-.text-below {
-    display: none;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	z-index: 10;
-	padding: 20px 30px;
-	background-color:rgba(0,0,0,0.7);
-	width: 100%;
-	text-align: right;
-}
-*/
+// Explainer text
 
 
 // Chapter navigation
@@ -141,10 +117,16 @@ nav {
         margin: 0;
         line-height: 44px;
         
-        &.chapter-title { 
+        &#nav-chapter-title { 
             float: left;
             font-weight: bold;
             display: none;
+        }
+
+        &#nav-chapter-title-prompt { 
+            float: left;
+            font-weight: bold;
+            display: block;
         }
 
         &:hover {
@@ -199,13 +181,33 @@ nav {
         bottom: auto;
         top: 0;
         
-        h3.chapter-title {
+        h3#nav-chapter-title-prompt {
+            display: none;
+        }
+        
+        h3#nav-chapter-title {
             display: block;
             // TODO: animate this in?
         }
     }
+    
+    &.slideInUp {
+        h3#nav-chapter-title,
+        h3#nav-chapter-title-prompt {
+            display: none;
+        }
+    }
 
     &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+}
+
+
+// Title screen only
+.chapter-title {
+    nav h3#nav-chapter-title,
+    nav h3#nav-chapter-title-prompt {
+        display: none;
+    }
 }
 
 
