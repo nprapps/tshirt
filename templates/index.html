@@ -34,8 +34,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Planet Money Makes A T-Shirt</h1>
-							<button class="btn-play">Begin</button>
+							<h1>{{ COPY.content.project_title }}</h1>
+							<h2>{{ COPY.content.project_subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.title_play_button_label }}</button>
 						</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -51,8 +52,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Plants</h1>
-							<button class="btn-play">play()</button>
+							<h1>{{ COPY.plants.fullname }}</h1>
+							<h2>{{ COPY.plants.subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.chapter_play_button_label }}</button>
 							<button class="btn-pause">pause</button>
 							<button class="btn-mute">mute</button>
 						</div><!-- /.col --> 
@@ -103,8 +105,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Robots</h1>
-							<button class="btn-play">play()</button>
+							<h1>{{ COPY.robots.fullname }}</h1>
+							<h2>{{ COPY.robots.subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.chapter_play_button_label }}</button>
 							<button class="btn-pause">pause</button>
 							<button class="btn-mute">mute</button>
 							</div><!-- /.col --> 
@@ -155,8 +158,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Humans</h1>
-							<button class="btn-play">play()</button>
+							<h1>{{ COPY.humans.fullname }}</h1>
+							<h2>{{ COPY.humans.subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.chapter_play_button_label }}</button>
 							<button class="btn-pause">pause</button>
 							<button class="btn-mute">mute</button>
 							</div><!-- /.col --> 
@@ -252,8 +256,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Ships</h1>
-							<button class="btn-play">play()</button>
+							<h1>{{ COPY.ships.fullname }}</h1>
+							<h2>{{ COPY.ships.subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.chapter_play_button_label }}</button>
 							<button class="btn-pause">pause</button>
 							<button class="btn-mute">mute</button>
 							</div><!-- /.col --> 
@@ -334,8 +339,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>You</h1>
-							<button class="btn-play">play()</button>
+							<h1>{{ COPY.you.fullname }}</h1>
+							<h2>{{ COPY.you.subtitle }}</h2>
+							<button class="btn-play">{{ COPY.content.chapter_play_button_label }}</button>
 							<button class="btn-pause">pause</button>
 							<button class="btn-mute">mute</button>
 							</div><!-- /.col --> 
@@ -369,7 +375,7 @@
             <div class="row">
                 <div class="col-md-10">
 
-                <h3>How We Did This</h3> 
+                <h3>{{ COPY.content.about_title }}</h3>
                 <p>amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -389,18 +395,18 @@
         <h3 id="nav-chapter-title">Chapter Title</h3>
         <h3 id="nav-chapter-title-prompt">Chapter Title Prompt</h3>
 
-        <h3 class="btn-chapter">Chapters</h3>
+        <h3 class="btn-chapter">{{ COPY.content.nav_chapter_button_label }}</h3>
         <div class="nav-item-wrapper">
             <ul id="nav-secondary">
-                <li id="nav-title">Home</li>
-                <li id="nav-about">How We Did This</li>
+                <li id="nav-title">{{ COPY.content.nav_home_button_label }}</li>
+                <li id="nav-about">{{ COPY.content.about_title }}</li>
             </ul>
             <ul id="nav-primary">
-                <li id="nav-plants">Plants</li>
-                <li id="nav-robots">Robots</li>
-                <li id="nav-humans">Humans</li>
-                <li id="nav-ships">Ships</li>
-                <li id="nav-you">You</li>
+                <li id="nav-plants">{{ COPY.plants.fullname }}</li>
+                <li id="nav-robots">{{ COPY.robots.fullname }}</li>
+                <li id="nav-humans">{{ COPY.humans.fullname }}</li>
+                <li id="nav-ships">{{ COPY.ships.fullname }}</li>
+                <li id="nav-you">{{ COPY.you.fullname }}</li>
             </ul>
         </div>
     </div>

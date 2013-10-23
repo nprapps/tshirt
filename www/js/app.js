@@ -211,9 +211,20 @@ $(document).ready(function() {
 	    
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
-	        var chapter_class = 'chapter-' + chapters[i];
+	        var chapter_name = chapters[i];
+	        var chapter_class = 'chapter-' + chapter_name;
+
 	        if (i == id) {
                 $b.addClass(chapter_class);
+
+                if (chapter_name != 'title' && chapter_name != 'about') {
+                    $nav_chapter_title.text(COPY[chapter_name]['fullname']);
+                    $nav_chapter_title_prompt.text(COPY[chapter_name]['nav_prompt']);
+                } else {
+                    $nav_chapter_title.text('');
+                    $nav_chapter_title_prompt.text('');
+                }
+
             } else {
                 $b.removeClass(chapter_class);
             }
@@ -237,6 +248,12 @@ $(document).ready(function() {
 	/*
 	 * Explainer text
 	 */
+	$nav_chapter_title_prompt.on('click', function() {
+        $.smoothScroll({
+			offset: -44,
+            scrollTarget: '.explainer'
+        });
+	});
 	/* $('#text-mover').click(function() {
 		$.smoothScroll({
 			speed: 1500,
