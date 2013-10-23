@@ -130,23 +130,22 @@ nav {
     color: #fff;
     overflow: hidden;
     
-    &.animated {
-        background: #000;
-    }
-    
-    .nav-wrapper {
-        padding: 0 22px 22px 22px;
-    }
+    &.animated { background: #000; }
 
-    .nav-item-wrapper {
-        display: none;
-    }
+    .nav-wrapper { padding: 0 22px 22px 22px; }
+    .nav-item-wrapper { display: none; }
     
     h3 {
         font-size: 14px;
         float: right;
         margin: 0;
         line-height: 44px;
+        
+        &.chapter-title { 
+            float: left;
+            font-weight: bold;
+            display: none;
+        }
 
         &:hover {
             cursor: pointer;
@@ -195,6 +194,12 @@ nav {
             &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
         }
     }
+    
+    &.affix {
+        bottom: auto;
+        top: 0;
+    }
+
     &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
 }
 
@@ -214,28 +219,16 @@ nav {
 	}
 }
 @-moz-keyframes slideInUp {
-	0% {
-	    height: 44px;
-	}
-	100% {
-	    height: 108px;
-	}
+	0%   { height: 44px; }
+	100% { height: 108px; }
 }
 @-o-keyframes slideInUp {
-	0% {
-	    height: 44px;
-	}
-	100% {
-	    height: 108px;
-	}
+	0%   { height: 44px; }
+	100% { height: 108px; }
 }
 @keyframes slideInUp {
-	0% {
-	    height: 44px;
-	}
-	100% {
-	    height: 108px;
-	}
+	0%   { height: 44px; }
+	100% { height: 108px; }
 }
 .slideInUp {
 	-webkit-animation-name: slideInUp;
@@ -264,28 +257,16 @@ nav {
 	}
 }
 @-moz-keyframes slideOutDown {
-	0% {
-	    height: 108px;
-	}
-	100% {
-	    height: 44px;
-	}
+	0%   { height: 108px; }
+	100% { height: 44px; }
 }
 @-o-keyframes slideOutDown {
-	0% {
-	    height: 108px;
-	}
-	100% {
-	    height: 44px;
-	}
+	0%   { height: 108px; }
+	100% { height: 44px; }
 }
 @keyframes slideOutDown {
-	0% {
-	    height: 108px;
-	}
-	100% {
-	    height: 44px;
-	}
+	0%   { height: 108px; }
+	100% { height: 44px; }
 }
 .slideOutDown {
 	-webkit-animation-name: slideOutDown;

@@ -1,11 +1,12 @@
 $(document).ready(function() {
+    var $b = $('body');
     var $w = $(window);
     var $btn_back = $('#btn-back');
     var $btn_next = $('#btn-next');
     var $layers = $('.layer');
 	var $layer_media = $('.layer-media');
 	var $nav = $('nav');
-	var $nav_btn = $nav.find('h3');
+	var $nav_btn = $nav.find('h3.btn-chapter');
 	var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
 	var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
@@ -82,8 +83,6 @@ $(document).ready(function() {
 
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
-				//$("#explain").addClass("revealed" );
-				console.log(this_chapter);
 			});
 
 			$btn_pause.on('click', function() {
@@ -105,7 +104,7 @@ $(document).ready(function() {
 			});
 		} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
-				k.show(1);
+			    goto_chapter(1);
 				$('#plants').find('.btn-play').trigger('click');
 			});
 		} else { // about
@@ -186,9 +185,24 @@ $(document).ready(function() {
 	 */
 	function setup_chapter_nav(chapter, id) {
         $('#nav-' + chapter).on('click', function() {
-            k.show(id);
+            goto_chapter(id);
             $nav_btn.trigger('click');
         });
+	}
+	
+	function goto_chapter(id) {
+	    // goto that chapter
+	    k.show(id);
+	    
+	    // add a class to the body tag indicating what chapter we're in
+	    for (var i = 0; i < chapters.length; i++) {
+	        var chapter_class = 'chapter-' + chapters[i];
+	        if (i == id) {
+                $b.addClass(chapter_class);
+            } else {
+                $b.removeClass(chapter_class);
+            }
+	    }
 	}
 
 	$nav_btn.on('click', function() {
@@ -224,7 +238,7 @@ $(document).ready(function() {
             setup_chapter_nav(chapters[i], i);
         }
         $video_wrapper.fitVids();
-        
+        $b.addClass('chapter-' + chapters[0]);
 
         $(window).on('resize', on_resize);
         on_resize();
