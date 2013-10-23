@@ -76,6 +76,9 @@ $(document).ready(function() {
 				//$player.api('play');
 				//$player.api('seekTo', 3);
 				//$player.api('pause');
+				$player.addEvent('finish', function() {
+			    	console.log('finished');
+				});
 			});
 		
 			$btn_play.on('click', function() {
