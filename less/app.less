@@ -221,28 +221,9 @@ nav {
 
 
 // Animations
-@-webkit-keyframes slideInUp {
-	0% { height: 44px; }
-    /* NOTE: this value is the height of the panel when only the "chapters" btn
-       we'll need to update it later */
-
-	100% { height: 108px; }
-    /* NOTE: this value is the height of the panel when everything is visible
-       we'll need to update it later */
-}
-@-moz-keyframes slideInUp {
-	0%   { height: 44px; }
-	100% { height: 108px; }
-}
-@-o-keyframes slideInUp {
-	0%   { height: 44px; }
-	100% { height: 108px; }
-}
-@keyframes slideInUp {
-	0%   { height: 44px; }
-	100% { height: 108px; }
-}
 .slideInUp {
+    /* keyframes for this are defined in app.js */
+
 	-webkit-animation-name: slideInUp;
 	-moz-animation-name: slideInUp;
 	-o-animation-name: slideInUp;
@@ -255,28 +236,9 @@ nav {
 	animation-duration: .5s;
 }
 
-@-webkit-keyframes slideOutDown {
-	0% { height: 108px; }
-    /* NOTE: this value is the height of the panel when only the "chapters" btn
-       we'll need to update it later */
-
-	100% { height: 44px; }
-		/* NOTE: this value is the height of the panel when everything is visible
-		   we'll need to update it later */
-}
-@-moz-keyframes slideOutDown {
-	0%   { height: 108px; }
-	100% { height: 44px; }
-}
-@-o-keyframes slideOutDown {
-	0%   { height: 108px; }
-	100% { height: 44px; }
-}
-@keyframes slideOutDown {
-	0%   { height: 108px; }
-	100% { height: 44px; }
-}
 .slideOutDown {
+    /* keyframes for this are defined in app.js */
+
 	-webkit-animation-name: slideOutDown;
 	-moz-animation-name: slideOutDown;
 	-o-animation-name: slideOutDown;

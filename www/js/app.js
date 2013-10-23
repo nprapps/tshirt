@@ -4,13 +4,13 @@ $(document).ready(function() {
     var $btn_back = $('#btn-back');
     var $btn_next = $('#btn-next');
     var $layers = $('.layer');
-	var $layer_media = $('.layer-media');
-	var $nav = $('nav');
-	var $nav_btn = $nav.find('h3.btn-chapter');
-	var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
-	var $nav_chapter_title = $('#nav-chapter-title');
-	var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
-	var $scrollcontent = $('.explainer');
+    var $layer_media = $('.layer-media');
+    var $nav = $('nav');
+    var $nav_btn = $nav.find('h3.btn-chapter');
+    var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
+    var $nav_chapter_title = $('#nav-chapter-title');
+    var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
+    var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
@@ -20,6 +20,8 @@ $(document).ready(function() {
     var aspect_width = 16;
     var aspect_height = 10;
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
+    var nav_height = 44;
+    var nav_height_open = 108;
     var window_width;
     var window_height;
     
@@ -259,6 +261,31 @@ $(document).ready(function() {
             scrollTarget: scroll_target
         });
 	});
+
+
+    /*
+     * Setup CSS animations
+     */
+    function setup_css_animations() {
+        var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
+        var keyframes = '';
+        
+        for (var i = 0; i < prefixes.length; i++) {
+            keyframes += '@' + prefixes[i] + 'keyframes slideOutDown {';
+            keyframes += '0% { height: ' + nav_height_open + 'px; }';
+            keyframes += '100% { height: ' + nav_height + 'px; }';
+            keyframes += '}';
+
+            keyframes += '@' + prefixes[i] + 'keyframes slideInUp {';
+            keyframes += '0% { height: ' + nav_height + 'px; }';
+            keyframes += '100% { height: ' + nav_height_open + 'px; }';
+            keyframes += '}';
+        }
+        
+        var s = document.createElement('style');
+        s.innerHTML = keyframes;
+        $('head').append(s);
+    }
 	
 	
 	/* 
@@ -273,6 +300,9 @@ $(document).ready(function() {
             setup_chapter_nav(chapters[i], i);
         }
         $video_wrapper.fitVids();
+        
+        // css animations
+        setup_css_animations();
 
         $(window).on('resize', on_resize);
         on_resize();
