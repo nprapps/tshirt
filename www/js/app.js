@@ -58,7 +58,6 @@ $(document).ready(function() {
 
         // fine-tune when the chapter nav affixes to the top
         $nav.attr('data-offset-top', (window_height - $nav.height()));
-//        data-offset-top="700"
     }
     
     function setup_chapters(chapter) {
@@ -189,8 +188,16 @@ $(document).ready(function() {
 	 */
 	function setup_chapter_nav(chapter, id) {
         $('#nav-' + chapter).on('click', function() {
+            // jump to the chapter
             goto_chapter(id);
+
+            // close the chapter nav
             $nav_btn.trigger('click');
+
+            // jump to the top of the page
+            $.smoothScroll({
+                scrollTarget: '.kontext'
+            });
         });
 	}
 	
