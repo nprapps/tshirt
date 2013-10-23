@@ -249,18 +249,16 @@ $(document).ready(function() {
 	 * Explainer text
 	 */
 	$nav_chapter_title_prompt.on('click', function() {
+	    // the offset accounts for the height of the nav at the top of the screen
+	    // (minus 1 to ensure the affix nav engages)
+	    var scroll_offset = -($nav.height() - 1);
+	    var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
+
         $.smoothScroll({
-			offset: -44,
-            scrollTarget: '.explainer'
+			offset: scroll_offset,
+            scrollTarget: scroll_target
         });
 	});
-	/* $('#text-mover').click(function() {
-		$.smoothScroll({
-			speed: 1500,
-			scrollTarget: '#explainer'
-		});
-		return false;
-	}); */
 	
 	
 	/* 
