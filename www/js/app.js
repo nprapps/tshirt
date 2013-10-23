@@ -172,7 +172,7 @@ $(document).ready(function() {
 				var this_chapter = chapters[i];
 				var $this_iframe = $('#video-' + this_chapter)[0];
 				var $this_player = $f($this_iframe);
-				$this_player.api('seekTo', 0);
+				//$this_player.api('seekTo', 0);
 				$this_player.api('pause');
 //				$this_player.api('unload'); <- TODO: should we be using this instead of seekTo/pause? not working for me.
 //				console.log($this_player);
