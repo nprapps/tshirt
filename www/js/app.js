@@ -234,7 +234,7 @@ $(document).ready(function() {
 	$nav_chapter_title_prompt.on('click', function() {
 	    // the offset accounts for the height of the nav at the top of the screen
 	    // (minus 1 to ensure the affix nav engages)
-	    var scroll_offset = -($nav.height() - 1);
+	    var scroll_offset = -(nav_height - 1);
 	    var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
 
         $.smoothScroll({
