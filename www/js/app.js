@@ -69,7 +69,7 @@ $(document).ready(function() {
         
         // redraw graphics (if they exist yet)
         if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
-            d3.select('#cotton-exports-d3').select('svg').remove();
+            d3.select('#cotton-exports-d3').selectAll('svg').remove();
             draw_cotton_exports_graph();
         }
     }
@@ -298,7 +298,6 @@ $(document).ready(function() {
             d3_cotton_exports_data.forEach(function(d) {
                 d.year = d3.time.format("%Y").parse(d.year);
             });
-            console.log(d3_cotton_exports_data);
             draw_cotton_exports_graph();
         });
     }
@@ -315,8 +314,7 @@ $(document).ready(function() {
     }
     
     function draw_cotton_exports_graph() {
-        console.log("drawing graph");
-        var margin = {top: 0, right: 100, bottom: 25, left: 50};
+        var margin = {top: 0, right: 15, bottom: 25, left: 50};
         var width = $d3_cotton_exports.width() - margin.left - margin.right;
         var height = 350 - margin.top - margin.bottom;
         var x, y;
@@ -350,6 +348,63 @@ $(document).ready(function() {
 //            .interpolate("basis")
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
+
+        var legend_offset_x = 0;
+        var legend = d3.select('#cotton-exports-d3').append('svg')
+                .attr('class', 'key')
+                .attr('width', width)
+                .attr('height', 15)
+            .selectAll('g')
+                .data(color.domain().slice())
+            .enter().append('g')
+                .attr('transform', function(d, i) {
+                    var this_offset = legend_offset_x;
+                    var avg_char_width = 10;
+                    var this_width = 0;
+                    
+                    // i am totally cheating here.
+                    // but i can't figure out how to dynamically determine these widths
+                    switch(i) {
+                        case 0: // us
+                            this_width = 23;
+                            break;
+                        case 1: // India
+                            this_width = 27;
+                            break;
+                        case 2: // Australia
+                            this_width = 48;
+                            break;
+                        case 3: // brazil
+                            this_width = 31;
+                            break;
+                        case 4: // uzbekistan
+                            this_width = 61;
+                            break;
+                        case 5: // burkina faso
+                            this_width = 72;
+                            break;
+                    }
+                    
+                    this_width += (15 + 6 + 18);
+                    console.log(this_width);
+
+                    legend_offset_x += this_width; // for next time
+                    
+//                    return 'translate(' + i * 120 + ', 0)'; 
+                    return 'translate(' + this_offset + ', 0)'; 
+                })
+                .attr('class', function(d, i) { return 'key-item key-' + i; });
+        // TODO: reconfigure the legend layout when it's a narrow layout
+
+        legend.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .style("fill", color);
+
+        legend.append("text")
+            .attr("x", 24)
+            .attr("y", 12)
+            .text(function(d) { return d; });
 
         var svg = d3.select('#cotton-exports-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
@@ -409,13 +464,6 @@ $(document).ready(function() {
             .attr("class", "line")
             .attr("d", function(d) { return line(d.values); })
             .style("stroke", function(d) { return color(d.country); });
-
-        country.append("text")
-            .datum(function(d) { return {country: d.country, value: d.values[d.values.length - 1]}; })
-            .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.exports) + ")"; })
-            .attr("x", 3)
-            .attr("dy", ".35em")
-            .text(function(d) { return d.country; });
     }
 
 
