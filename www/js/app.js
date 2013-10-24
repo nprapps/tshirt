@@ -25,6 +25,10 @@ $(document).ready(function() {
     var window_width;
     var window_height;
     
+    var $d3_cotton_exports = $('#cotton-exports-d3');
+    var d3_cotton_exports_data;
+
+
     function on_resize() {
         var w;
         var h;
@@ -62,6 +66,12 @@ $(document).ready(function() {
 
         // fine-tune when the chapter nav affixes to the top
         $nav.attr('data-offset-top', (window_height - $nav.height()));
+        
+        // redraw graphics (if they exist yet)
+        if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
+            d3.select('#cotton-exports-d3').select('svg').remove();
+            draw_cotton_exports_graph();
+        }
     }
     
     function setup_chapters(chapter) {
@@ -277,8 +287,138 @@ $(document).ready(function() {
         s.innerHTML = keyframes;
         $('head').append(s);
     }
-	
-	
+    
+    
+    /*
+     * D3 Charts
+     */
+    function load_graphics() {
+        d3.tsv("data/cotton-exports.tsv", function(error, data) {
+            d3_cotton_exports_data = data;
+            d3_cotton_exports_data.forEach(function(d) {
+                d.year = d3.time.format("%Y").parse(d.year);
+            });
+            console.log(d3_cotton_exports_data);
+            draw_cotton_exports_graph();
+        });
+    }
+    
+    function d3_tickformat_units(d) {
+        var units = [ '', ' thousand', ' million', ' billion', ' trillion'];
+        var i = 0;
+        while (d >= 1000) {
+            i++;
+            d = d / 1000;
+        }
+        d = d + units[i];
+        return d;
+    }
+    
+    function draw_cotton_exports_graph() {
+        console.log("drawing graph");
+        var margin = {top: 0, right: 100, bottom: 25, left: 50};
+        var width = $d3_cotton_exports.width() - margin.left - margin.right;
+        var height = 350 - margin.top - margin.bottom;
+        var x, y;
+        
+        // remove placeholder image if it exists
+        $d3_cotton_exports.find('img').remove();
+        
+        x = d3.time.scale()
+            .range([0, width]);
+
+        y = d3.scale.linear()
+            .range([height, 0]);
+
+        var color = d3.scale.category10()
+            .domain(d3.keys(d3_cotton_exports_data[0]).filter(function(key) { return key !== "year"; }));
+        // more: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+            
+        var x_axis_grid = function() { return xAxis; }
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
+        
+        var y_axis_grid = function() { return yAxis; }
+        
+        var line = d3.svg.line()
+            .interpolate("basis")
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(d.imports); });
+
+        var svg = d3.select('#cotton-exports-d3').append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            
+        var countries = color.domain().map(function(country) {
+            return {
+                country: country,
+                values: d3_cotton_exports_data.map(function(d) {
+                    return {
+                        year: d.year, 
+                        imports: +d[country]
+                    };
+                })
+            };
+        });
+
+        x.domain(d3.extent(d3_cotton_exports_data, function(d) { return d.year; }));
+
+        y.domain([
+            d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.imports; }); }),
+            d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.imports; }); })
+        ]);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        svg.append("g")
+            .attr("class", "x grid")
+            .attr("transform", "translate(0," + height + ")")
+            .call(x_axis_grid()
+                .tickSize(-height, 0, 0)
+                .tickFormat("")
+            );
+
+        svg.append("g")
+            .attr("class", "y grid")
+            .call(y_axis_grid()
+                .tickSize(-width, 0, 0)
+                .tickFormat("")
+            );
+
+        var country = svg.selectAll(".country")
+            .data(countries)
+            .enter().append("g")
+            .attr("class", "country");
+
+        country.append("path")
+            .attr("class", "line")
+            .attr("d", function(d) { return line(d.values); })
+            .style("stroke", function(d) { return color(d.country); });
+
+        country.append("text")
+            .datum(function(d) { return {country: d.country, value: d.values[d.values.length - 1]}; })
+            .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.imports) + ")"; })
+            .attr("x", 3)
+            .attr("dy", ".35em")
+            .text(function(d) { return d.country; });
+    }
+
+
 	/* 
 	 * Setup functions 
 	 */
@@ -294,6 +434,8 @@ $(document).ready(function() {
         
         // css animations
         setup_css_animations();
+        
+        load_graphics();
 
         $(window).on('resize', on_resize);
         on_resize();

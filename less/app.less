@@ -10,9 +10,7 @@
 
 
 // General styles
-
-//force scrollbar
-html {overflow-y: scroll;}
+html { overflow-y: scroll; } //force scrollbar
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
@@ -39,7 +37,6 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	text-align: center;
 
     h1 {
-        
         font-size: 90px;
         color: #fff;
         text-transform: uppercase;
@@ -227,6 +224,42 @@ nav .nav-item-wrapper.backer {
             color: #666;
             margin: -1.5em 0 1.5em 0;
             font-size: 12px;
+        }
+        
+        &.d3-chart {
+            .axis {
+                font-size: 12px;
+                color: #666;
+
+                path,
+                line {
+                    fill: none;
+                    stroke: #666;
+                    shape-rendering: crispEdges;
+                }
+                
+                &.y path { display: none; }
+                &.y .tick line { display: none; }
+            }
+            .grid {
+                path { display: none; }
+                .tick {
+                    stroke: #ccc;
+                    stroke-dasharray: 1px 3px;
+                    stroke-width: 1px;
+                    shape-rendering: crispEdges;
+                }
+            }
+            .line {
+                fill: none;
+                stroke: #333;
+                stroke-width: 3px;
+            }
+            .country text {
+                font-weight: normal;
+                font-size: 12px;
+                color: #333;
+            }
         }
         
         &.cotton-rating {
