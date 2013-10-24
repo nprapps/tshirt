@@ -347,9 +347,9 @@ $(document).ready(function() {
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-            .interpolate("basis")
+//            .interpolate("basis")
             .x(function(d) { return x(d.year); })
-            .y(function(d) { return y(d.imports); });
+            .y(function(d) { return y(d.exports); });
 
         var svg = d3.select('#cotton-exports-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
@@ -363,7 +363,7 @@ $(document).ready(function() {
                 values: d3_cotton_exports_data.map(function(d) {
                     return {
                         year: d.year, 
-                        imports: +d[country]
+                        exports: +d[country]
                     };
                 })
             };
@@ -372,8 +372,8 @@ $(document).ready(function() {
         x.domain(d3.extent(d3_cotton_exports_data, function(d) { return d.year; }));
 
         y.domain([
-            d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.imports; }); }),
-            d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.imports; }); })
+            d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.exports; }); }),
+            d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.exports; }); })
         ]);
 
         svg.append("g")
@@ -412,7 +412,7 @@ $(document).ready(function() {
 
         country.append("text")
             .datum(function(d) { return {country: d.country, value: d.values[d.values.length - 1]}; })
-            .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.imports) + ")"; })
+            .attr("transform", function(d) { return "translate(" + x(d.value.year) + "," + y(d.value.exports) + ")"; })
             .attr("x", 3)
             .attr("dy", ".35em")
             .text(function(d) { return d.country; });
