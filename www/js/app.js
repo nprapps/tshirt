@@ -71,8 +71,6 @@ $(document).ready(function() {
     	if (chapter != 'title' && chapter != 'about') {
 			var $iframe = $('#video-' + chapter)[0];
 			var $player = $f($iframe);
-			var $btn_pause = $chapter.find('.btn-pause');
-			var $btn_mute = $chapter.find('.btn-mute');
 
 			$player.addEvent('ready', function() {
 				//console.log('player ready');
@@ -95,23 +93,6 @@ $(document).ready(function() {
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 			});
 
-			$btn_pause.on('click', function() {
-				console.log('clicked!');
-				var this_chapter = $(this).parents('.layer').attr('id');
-				var $this_iframe = $('#video-' + this_chapter)[0];
-				var $this_player = $f($this_iframe);
-
-				$this_player.api('pause');
-			});
-
-			$btn_mute.on('click', function() {
-				console.log('clicked!');
-				var this_chapter = $(this).parents('.layer').attr('id');
-				var $this_iframe = $('#video-' + this_chapter)[0];
-				var $this_player = $f($this_iframe);
-
-				$this_player.api('setVolume', 0);
-			});
 		} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
 			    goto_chapter(1);
@@ -198,7 +179,7 @@ $(document).ready(function() {
             goto_chapter(id);
 
             // close the chapter nav
-            $nav_btn.trigger('click');
+            //$nav_btn.trigger('click');
 
             // jump to the top of the page
             $.smoothScroll({

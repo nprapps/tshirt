@@ -1,5 +1,5 @@
 @import "less/lib/bootstrap/bootstrap";
-@import "less/lib/font-awesome/font-awesome";
+//@import "less/lib/font-awesome/font-awesome";
 @import "less/kontext";
 
 //css3 animations
@@ -13,6 +13,10 @@
 
 //force scrollbar
 html {overflow-y: scroll;}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: "Gotham SSm", helvetica, arial, sans-serif;
+}
 
 .layer-media {
 	width: 100%;
@@ -35,7 +39,7 @@ html {overflow-y: scroll;}
 	text-align: center;
 
     h1 {
-        font-family: "Gotham SSm", helvetica, arial, sans-serif;
+        
         font-size: 90px;
         color: #fff;
         text-transform: uppercase;
@@ -45,7 +49,7 @@ html {overflow-y: scroll;}
     }
 
     h2 {
-        font: normal 26px "Gotham SSm", helvetica, arial, sans-serif;
+        font-size: 26px;
         text-transform: uppercase;
         margin-bottom: 33px;
         color: #fff;
@@ -122,6 +126,7 @@ nav {
     
     .nav-wrapper { padding: 0 22px 22px 22px; }
     .nav-item-wrapper { display: none; }
+    
     
     h3 {
         font-size: 14px;
@@ -208,6 +213,23 @@ nav {
     }
 
     &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+}
+
+.btn-chapter {
+  position: relative;
+  padding-right: 23px;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  position: absolute;
+  top: 16px;
+  right: 0;
+  background: transparent url('@{img-root}/hamburger.png') no-repeat;
+  width: 14px;
+  height: 12px;
+  display: block;
 }
 
 

@@ -55,8 +55,6 @@
 							<h1>{{ COPY.plants.fullname }}</h1>
 							<h2>{{ COPY.plants.subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
-							<button class="btn-pause">pause</button>
-							<button class="btn-mute">mute</button>
 						</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -108,8 +106,6 @@
 							<h1>{{ COPY.robots.fullname }}</h1>
 							<h2>{{ COPY.robots.subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
-							<button class="btn-pause">pause</button>
-							<button class="btn-mute">mute</button>
 							</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -161,8 +157,8 @@
 							<h1>{{ COPY.humans.fullname }}</h1>
 							<h2>{{ COPY.humans.subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
-							<button class="btn-pause">pause</button>
-							<button class="btn-mute">mute</button>
+							
+							
 							</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -259,8 +255,8 @@
 							<h1>{{ COPY.ships.fullname }}</h1>
 							<h2>{{ COPY.ships.subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
-							<button class="btn-pause">pause</button>
-							<button class="btn-mute">mute</button>
+							
+							
 							</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -342,8 +338,8 @@
 							<h1>{{ COPY.you.fullname }}</h1>
 							<h2>{{ COPY.you.subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
-							<button class="btn-pause">pause</button>
-							<button class="btn-mute">mute</button>
+							
+							
 							</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->				
@@ -384,9 +380,6 @@
             </div><!-- /.row -->  
         </div><!-- /.container -->
     </section>
-    
-    <div id="btn-back" class="btn-sideways">BACK</div>
-    <div id="btn-next" class="btn-sideways">NEXT</div>
 </div>
 
 <nav role="navigation" data-spy="affix" data-offset-top="700">
@@ -395,10 +388,10 @@
         <h3 id="nav-chapter-title">Chapter Title</h3>
         <h3 id="nav-chapter-title-prompt">Chapter Title Prompt</h3>
 
-        <h3 class="btn-chapter">{{ COPY.content.nav_chapter_button_label }}</h3>
+        <h3 class="btn-chapter">{{ COPY.content.nav_chapter_button_label }} <i class="hamburger"></i></h3>
         <div class="nav-item-wrapper">
             <ul id="nav-secondary">
-                <li id="nav-title">{{ COPY.content.nav_home_button_label }}</li>
+                <li id="nav-title">{{ COPY.content.nav_home_button_label }} </li>
                 <li id="nav-about">{{ COPY.content.about_title }}</li>
             </ul>
             <ul id="nav-primary">
