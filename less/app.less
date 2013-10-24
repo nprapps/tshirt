@@ -173,6 +173,7 @@ nav {
         float: right;
         margin: 0;
         line-height: 44px;
+        text-transform: uppercase;
         
         &#nav-chapter-title { 
             float: left;
@@ -183,13 +184,18 @@ nav {
 
         &#nav-chapter-title-prompt { 
             float: left;
-            font-weight: bold;
             display: block;
+            background: transparent url('@{img-root}/down-square.png')  0 10px no-repeat;
+            padding-left: 32px;
+            font-size: 22px;
+			text-transform: none;
+			font-weight: 100;
+			opacity: 0.7;
         }
 
         &:hover {
             cursor: pointer;
-            opacity: 0.7;
+            opacity: 0.5;
         }
     }
     
@@ -220,16 +226,30 @@ nav {
             > li {
                 display: table-cell;
                 width: 20%;
-                text-align: center;
-                padding: 11px;
                 background-color: #333;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				background-position: 50% 50%;
+				text-align: center;
+                padding-top: 100px;
                 border-left: 2px solid #000;
+                height: 100px;
+                
                 
                 &:first-child { border-left: none; }
                 &:hover {
                     cursor: pointer;
                     opacity: 0.7;
                 }
+				
+				p {
+					text-transform: uppercase;
+					background-color:rgba(0,0,0,0.5);
+					margin: 0;
+					padding: 10px 0;
+				}
             }
             &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
         }
@@ -259,7 +279,26 @@ nav {
   position: relative;
   padding-right: 23px;
   overflow: hidden;
-  text-transform: uppercase;
+}
+
+#nav-plants {
+	background: url('@{img-root}/plants-thumb.jpg');
+}
+
+#nav-robots {
+	background: url('@{img-root}/robots-thumb.jpg');
+}
+
+#nav-humans {
+	background: url('@{img-root}/humans-thumb.jpg');
+}
+
+#nav-ships {
+	background: url('@{img-root}/ship-thumb.jpg');
+}
+
+#nav-you {
+	background: url('@{img-root}/you-thumb.jpg');
 }
 
 .hamburger {
@@ -272,11 +311,39 @@ nav {
   display: block;
 }
 
+#nav-title, #nav-about {
+  position: relative;
+  padding-left: 23px;
+  overflow: hidden;
+  text-transform: uppercase;
+}
+
+.home {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  background: transparent url('@{img-root}/home.png') no-repeat;
+  width: 15px;
+  height: 16px;
+  display: block;
+}
+
+.about {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  background: transparent url('@{img-root}/tshirt.png') no-repeat;
+  width: 18px;
+  height: 19px;
+  display: block;
+}
+
 
 // Title screen only
 .chapter-title {
     nav h3#nav-chapter-title,
-    nav h3#nav-chapter-title-prompt {
+    nav h3#nav-chapter-title-prompt,
+    #nav-title {
         display: none;
     }
 }
