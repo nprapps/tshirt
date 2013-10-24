@@ -20,8 +20,8 @@ $(document).ready(function() {
     var aspect_width = 16;
     var aspect_height = 10;
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
-    var nav_height = 44;
-    var nav_height_open = 208;
+    var nav_height = 74;
+    var nav_height_open = 228;
     var window_width;
     var window_height;
     
