@@ -144,13 +144,18 @@ nav {
 
         &#nav-chapter-title-prompt { 
             float: left;
-            font-weight: bold;
             display: block;
+            background: transparent url('@{img-root}/down-square.png')  0 10px no-repeat;
+            padding-left: 32px;
+            font-size: 22px;
+			text-transform: none;
+			font-weight: 100;
+			opacity: 0.7;
         }
 
         &:hover {
             cursor: pointer;
-            opacity: 0.7;
+            opacity: 0.5;
         }
     }
     
@@ -297,7 +302,8 @@ nav {
 // Title screen only
 .chapter-title {
     nav h3#nav-chapter-title,
-    nav h3#nav-chapter-title-prompt {
+    nav h3#nav-chapter-title-prompt,
+    #nav-title {
         display: none;
     }
 }
