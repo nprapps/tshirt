@@ -217,13 +217,21 @@ $(document).ready(function() {
 	    reset_layers();
 	}
 
+	function close_nav() {
+        $nav.removeClass('slideInUp').addClass('animated slideOutDown');
+        $nav_item_wrapper.removeClass('backer');
+	}
+	
+	function open_nav() {
+        $nav.removeClass('slideOutDown').addClass('animated slideInUp backer');
+        $nav_item_wrapper.addClass('backer');
+	}
+	
 	$nav_btn.on('click', function() {
 	    if ($nav.hasClass('slideInUp')) {
-	        $nav.removeClass('slideInUp').addClass('animated slideOutDown');
-	        $nav_item_wrapper.removeClass('backer');
+	        close_nav();
 	    } else {
-            $nav.removeClass('slideOutDown').addClass('animated slideInUp backer');
-	        $nav_item_wrapper.addClass('backer');
+            open_nav();
 	    }
 	});
 	
@@ -287,6 +295,8 @@ $(document).ready(function() {
 
         $(window).on('resize', on_resize);
         on_resize();
+        
+        goto_chapter(1);
     }
     setup();
 
