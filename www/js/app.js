@@ -79,7 +79,9 @@ $(document).ready(function() {
 				//$player.api('seekTo', 3);
 				//$player.api('pause');
 				$player.addEvent('finish', function() {
-			    	console.log('finished');
+					console.log('finished');
+					var this_chapter = $(this).parents('.layer').attr('id');
+			    	$('#' + this_chapter).find('.video-question').addClass('animated fadeIn backer');
 				});
 			});
 		

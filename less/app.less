@@ -82,7 +82,66 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	margin-top: 20px;
 }
 
+//question that appears at the end of video
+.video-question {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  -webkit-transform: translate(-50%, -30%);
+  -moz-transform: translate(-50%, -30%);
+  -ms-transform: translate(-50%, -30%);
+  -o-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
+  width: 70%;
+  height: 30%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 5%;
+  border: 3px solid #111;
+  display: none;
+}
 
+
+
+.video-question h3 {
+	position: relative;
+	text-transform: uppercase;
+	border-bottom: 1px solid #fff;
+	font-size: 36px;
+	margin: 0;
+	padding-bottom: 20px;
+	font-weight: bold;
+}
+
+.video-question .arrow-right {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+}
+
+.video-question p {
+	font-size: 25px;
+	padding-top: 20px;
+}
+
+.video-question .arrow-down {
+	text-align: center;
+	background: transparent url("http://localhost:8000/less/../img/arrow.png") no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+	margin: 15px 50% 0 50%;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
 
 // Sideways nav buttons
 .btn-sideways {

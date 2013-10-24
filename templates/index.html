@@ -64,6 +64,11 @@
 				<iframe id="video-plants" src="http://player.vimeo.com/video/77175715?title=0&amp;byline=0&amp;portrait=0&amp;api=1&amp;loop=0;player_id=video-plants" width="400" height="225" frameborder="0"></iframe>
 			<!-- IMPORTANT: include the "player_id" param with the ID of your iframe. So: player_id=video -->
 			</div><!-- /.video-wrapper --> 
+			
+			<div class="video-question">
+        		<h3>Next Chapter: {{ COPY.robots.fullname }} <i class="arrow-right"></i></h3>
+				<p>{{ COPY.robots.video_prompt }} <i class="arrow-down"></i></p>
+			</div>
 
         </div><!-- /.layer-media --> 
         
@@ -143,6 +148,7 @@
         <div class="next-chapter">
             <h3>Next Chapter: {{ COPY.robots.fullname }}</h3>
         </div>
+        
     </section>
 
     <section id="robots" class="layer">
