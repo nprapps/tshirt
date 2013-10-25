@@ -15,11 +15,12 @@ $(document).ready(function() {
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
     var $video_wrapper = $('.video-wrapper');
+    var $title_video = $('.title-video');
     var $video_question = $('.video-question');
     var k = kontext(document.querySelector('.kontext'));
     
     var aspect_width = 16;
-    var aspect_height = 10;
+    var aspect_height = 9;
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 228;
@@ -64,6 +65,9 @@ $(document).ready(function() {
 //        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
 //        $titlecard_outer_wrapper.height(window_height + 'px');
 //        $scrollcontent.css('marginTop', window_height + 'px');
+
+		$title_video.width(w + 'px').height(h + 'px');
+		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
 
         // fine-tune when the chapter nav affixes to the top
         $nav.attr('data-offset-top', (window_height - $nav.height()));
