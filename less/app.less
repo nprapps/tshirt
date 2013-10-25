@@ -29,8 +29,6 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	overflow: hidden;
 }
 
-.title-video {}
-
 .titlecard {
     position: absolute;
     top: 0;
@@ -131,7 +129,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .video-question .arrow-down {
 	text-align: center;
-	background: transparent url("http://localhost:8000/less/../img/arrow.png") no-repeat;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
 	width: 18px;
 	height: 16px;
 	display: block;
@@ -149,6 +147,26 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .btn-next-chapter:hover, .btn-explainer-prompt:hover {
 	opacity: .8;
+}
+
+.next-chapter {
+	background-color: #000;
+	padding: 30px 0;
+}
+
+.next-chapter .container {
+	text-align: center;
+	color: #fff;
+}
+
+.next-chapter .arrow-right {
+	position: absolute;
+	top: 25px;
+	right: 0;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
 }
 
 // Sideways nav buttons
