@@ -10,11 +10,11 @@ $(document).ready(function() {
     var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
     var $nav_chapter_title = $('#nav-chapter-title');
     var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
-    var $scrollcontent = $('.explainer');
     var $titlecard = $('.titlecard');
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
     var $video_wrapper = $('.video-wrapper');
+    var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
     var $video_question = $('.video-question');
     var k = kontext(document.querySelector('.kontext'));
@@ -38,7 +38,11 @@ $(document).ready(function() {
         var h_optimal;
         var w_offset = 0;
         var h_offset = 0;
-
+        var w_video;
+        var h_video;
+        var w_video_optimal;
+        var h_video_optimal;
+        
         window_width = $w.width();
         window_height = $w.height();
         
@@ -59,15 +63,30 @@ $(document).ready(function() {
         w_offset = (window_width - w) / 2;
         h_offset = (window_height - h) / 2;
         
+        // size the chapter video
+        // must be fully visible onscreen -- no negative margins
+        w_video_optimal = ((window_height - nav_height) * aspect_width) / aspect_height;
+        h_video_optimal = (window_width * aspect_height) / aspect_width;
+
+        if (w_video_optimal >= window_width) {
+            w_video = window_width;
+            h_video = h_video_optimal;
+        } else {
+            w_video = w_video_optimal;
+            h_video = window_height;
+        }
+        
         // size the divs accordingly
 //        $layer_media.height(window_height + 'px');
 //        $titlecard_wrapper.width(w + 'px').height(h + 'px');
 //        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
 //        $titlecard_outer_wrapper.height(window_height + 'px');
-//        $scrollcontent.css('marginTop', window_height + 'px');
 
 		$title_video.width(w + 'px').height(h + 'px');
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
+
+		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
+//		$video_inner_wrapper.css('bottom', nav_height + 'px');
 
         // fine-tune when the chapter nav affixes to the top
         $nav.attr('data-offset-top', (window_height - $nav.height()));
