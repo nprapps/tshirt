@@ -100,8 +100,6 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   z-index: 5;
 }
 
-
-
 .video-question h3 {
 	position: relative;
 	text-transform: uppercase;
@@ -110,6 +108,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	margin: 0;
 	padding-bottom: 20px;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .video-question .arrow-right {
@@ -139,6 +138,14 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
+}
+
+.btn-next-chapter, .btn-explainer-prompt {
+	cursor: pointer;
+}  
+
+.btn-next-chapter:hover, .btn-explainer-prompt:hover {
+	opacity: .8;
 }
 
 // Sideways nav buttons
