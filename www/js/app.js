@@ -223,6 +223,14 @@ $(document).ready(function() {
         });
 	}
 	
+	function setup_video_question(chapter, id) {
+	    if (chapter != 'title' && chapter != 'about') {
+	        $('#' + chapter).find('.btn-next-chapter').on('click', function() {
+	            goto_chapter((id + 1));
+	        });
+	    }
+	}
+	
 	function goto_chapter(id) {
 	    // goto that chapter
 	    k.show(id);
@@ -463,6 +471,7 @@ $(document).ready(function() {
         for (var i = 0; i < chapters.length; i++) {
 			setup_chapters(chapters[i]);
             setup_chapter_nav(chapters[i], i);
+            setup_video_question(chapters[i], i);
         }
         $video_wrapper.fitVids();
         
