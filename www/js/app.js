@@ -15,6 +15,7 @@ $(document).ready(function() {
     var $titlecard_wrapper = $('.titlecard-wrapper')
     var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
     var $video_wrapper = $('.video-wrapper');
+    var $video_question = $('.video-question');
     var k = kontext(document.querySelector('.kontext'));
     
     var aspect_width = 16;
@@ -77,6 +78,8 @@ $(document).ready(function() {
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
 		var $btn_play = $chapter.find('.btn-play');
+		var $btn_next = $chapter.find('.btn-next-chapter');
+		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'title' && chapter != 'about') {
 			var $iframe = $('#video-' + chapter)[0];
@@ -88,12 +91,22 @@ $(document).ready(function() {
 				//$player.api('play');
 				//$player.api('seekTo', 3);
 				//$player.api('pause');
+				
+				//show question at the end of a video
 				$player.addEvent('finish', function() {
 					console.log('finished');
-					var this_chapter = $(this).parents('.layer').attr('id');
-			    	$('#' + this_chapter).find('.video-question').addClass('animated fadeIn backer');
+			    	$('section.show').find('.video-question').addClass('animated fadeIn backer');
+				});
+				
+				$player.addEvent('play', function() {
+					// reset questions
+					$video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 				});
 			});
+			
+			
+			
+			
 		
 			$btn_play.on('click', function() {
 				console.log('clicked!');
@@ -103,6 +116,13 @@ $(document).ready(function() {
 
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+			});
+			
+			
+			//
+			$btn_explain.on('click', function() {
+				console.log('clicked!');
+				goto_explainer();
 			});
 
 		} else if (chapter == 'title') {
@@ -167,6 +187,8 @@ $(document).ready(function() {
 	function reset_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+	    // reset questions
+	    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 		
 		// stop video; set it back to the beginning
         for (var i = 0; i < chapters.length; i++) {
@@ -251,8 +273,9 @@ $(document).ready(function() {
 	/*
 	 * Explainer text
 	 */
-	$nav_chapter_title_prompt.on('click', function() {
-	    // the offset accounts for the height of the nav at the top of the screen
+	 
+	 function goto_explainer() {
+		 // the offset accounts for the height of the nav at the top of the screen
 	    // (minus 1 to ensure the affix nav engages)
 	    var scroll_offset = -(nav_height - 1);
 	    var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
@@ -261,6 +284,11 @@ $(document).ready(function() {
 			offset: scroll_offset,
             scrollTarget: scroll_target
         });
+		 
+	 }
+	 
+	$nav_chapter_title_prompt.on('click', function() {
+	    goto_explainer();
 	});
 
 
