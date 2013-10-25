@@ -70,6 +70,7 @@ $(document).ready(function() {
         // redraw graphics (if they exist yet)
         if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
             d3.select('#cotton-exports-d3').selectAll('svg').remove();
+            d3.select('#cotton-exports-d3').selectAll('.key').remove();
             draw_cotton_exports_graph();
         }
     }
@@ -348,63 +349,20 @@ $(document).ready(function() {
 //            .interpolate("basis")
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
-
-        var legend_offset_x = 0;
-        var legend = d3.select('#cotton-exports-d3').append('svg')
+        
+        var legend = d3.select('#cotton-exports-d3').append('ul')
                 .attr('class', 'key')
-                .attr('width', width)
-                .attr('height', 15)
             .selectAll('g')
                 .data(color.domain().slice())
-            .enter().append('g')
-                .attr('transform', function(d, i) {
-                    var this_offset = legend_offset_x;
-                    var avg_char_width = 10;
-                    var this_width = 0;
-                    
-                    // i am totally cheating here.
-                    // but i can't figure out how to dynamically determine these widths
-                    switch(i) {
-                        case 0: // us
-                            this_width = 23;
-                            break;
-                        case 1: // India
-                            this_width = 27;
-                            break;
-                        case 2: // Australia
-                            this_width = 48;
-                            break;
-                        case 3: // brazil
-                            this_width = 31;
-                            break;
-                        case 4: // uzbekistan
-                            this_width = 61;
-                            break;
-                        case 5: // burkina faso
-                            this_width = 72;
-                            break;
-                    }
-                    
-                    this_width += (15 + 6 + 18);
-                    console.log(this_width);
-
-                    legend_offset_x += this_width; // for next time
-                    
-//                    return 'translate(' + i * 120 + ', 0)'; 
-                    return 'translate(' + this_offset + ', 0)'; 
-                })
+            .enter().append('li')
                 .attr('class', function(d, i) { return 'key-item key-' + i; });
-        // TODO: reconfigure the legend layout when it's a narrow layout
 
-        legend.append("rect")
-            .attr("width", 15)
-            .attr("height", 15)
-            .style("fill", color);
+        legend.append('b')
+            .style('background-color', color);
 
-        legend.append("text")
-            .attr("x", 24)
-            .attr("y", 12)
+        legend.append('label')
             .text(function(d) { return d; });
+
 
         var svg = d3.select('#cotton-exports-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
