@@ -503,7 +503,7 @@ $(document).ready(function() {
         $(window).on('resize', on_resize);
         on_resize();
         
-//        goto_chapter(1);
+        goto_chapter(1);
     }
     setup();
 
