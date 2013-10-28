@@ -85,8 +85,14 @@ $(document).ready(function() {
         }
 		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 
-        // fine-tune when the chapter nav affixes to the top
-        $nav.attr('data-offset-top', (window_height - $nav.height()));
+        // Kill top-anchored nav for small displays
+        if (window_width < 768){
+                $nav.removeAttr('data-spy').removeClass('affix');
+        } else {
+                $nav.attr('data-spy', 'affix');
+                // fine-tune when the chapter nav affixes to the top
+                $nav.attr('data-offset-top', (window_height - $nav.height()));
+        }
         
         // redraw graphics (if they exist yet)
         if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
