@@ -93,7 +93,7 @@ $(document).ready(function() {
 		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 
         // Kill top-anchored nav for small displays
-        if (window_width < 992){
+        if (window_width < screen_small){
                 $nav.removeAttr('data-spy').removeClass('affix');
         } else {
                 $nav.attr('data-spy', 'affix');
@@ -171,13 +171,13 @@ $(document).ready(function() {
     
     /* 
      * Kontext sideways navigation
-     */
+    
      
     var touchX = 0;
     var touchConsumed = false;
 
     k.changed.add(function(layer, index) {
-        // do something when the layer changes
+        //do something when the layer changes
     });
 
     document.addEventListener( 'keyup', function( event ) {
@@ -217,6 +217,7 @@ $(document).ready(function() {
 	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
 	    reset_layers();
 	});
+	 */
 	
 	function reset_layers() {
 	    // reset titlecards
@@ -247,7 +248,7 @@ $(document).ready(function() {
             goto_chapter(id);
 
             // close the chapter nav
-            //$nav_btn.trigger('click');
+            $nav_btn.trigger('click');
 
             // jump to the top of the page
             $.smoothScroll({

@@ -37,11 +37,19 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	-o-animation-name: slideInUp;
 	animation-name: slideInUp;
 	
-	-webkit-animation-duration: .5s;
-	-moz-animation-duration: .5s;
-	-ms-animation-duration: .5s;
-	-o-animation-duration: .5s;
-	animation-duration: .5s;
+	-webkit-animation-duration: .1s;
+	-moz-animation-duration: .1s;
+	-ms-animation-duration: .1s;
+	-o-animation-duration: .1s;
+	animation-duration: .1s;
+	
+	@media @screen-medium { 
+		-webkit-animation-duration: .5s;
+		-moz-animation-duration: .5s;
+		-ms-animation-duration: .5s;
+		-o-animation-duration: .5s;
+		animation-duration: .5s;
+	}
 }
 
 .slideOutDown {
@@ -52,11 +60,20 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	-o-animation-name: slideOutDown;
 	animation-name: slideOutDown;
 	
-	-webkit-animation-duration: .5s;
-	-moz-animation-duration: .5s;
-	-ms-animation-duration: .5s;
-	-o-animation-duration: .5s;
-	animation-duration: .5s;
+	-webkit-animation-duration: .1s;
+	-moz-animation-duration: .1s;
+	-ms-animation-duration: .1s;
+	-o-animation-duration: .1s;
+	animation-duration: .1s;
+	
+	@media @screen-medium { 
+		-webkit-animation-duration: .5s;
+		-moz-animation-duration: .5s;
+		-ms-animation-duration: .5s;
+		-o-animation-duration: .5s;
+		animation-duration: .5s;
+	}
+	
 }
 
 //navigation
@@ -79,7 +96,10 @@ nav {
 	color: #fff;
 	display: block;
 	
-	.nav-wrapper { padding: 0 22px 22px 22px; }
+	.nav-wrapper { 
+		padding: 0 5px 5px 5px; 
+		@media @screen-medium { padding: 0 22px 22px 22px; }
+		}
 	.nav-item-wrapper { display: none; }
 	
 	h3 {
@@ -138,7 +158,6 @@ nav {
 	        clear: both;
 	        
         	> li {
-	            border-bottom: 1px solid #ddd;
 	            &:hover {
 	                cursor: pointer;
 	                opacity: 0.7;
@@ -165,7 +184,6 @@ nav {
 					text-align: center;
 		            padding-top: 100px;
 		            border-left: 2px solid #000;
-		            border-bottom: none;
 		            height: 100px;
 		            
 		            
@@ -215,7 +233,8 @@ nav {
 .hamburger {
   position: absolute;
   top: 30px;
-  right: 0;
+  right: 5px;
+  @media @screen-medium {right: 0;}
   background: transparent url('@{img-root}/hamburger.png') no-repeat;
   width: 14px;
   height: 12px;
