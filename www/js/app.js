@@ -24,11 +24,18 @@ $(document).ready(function() {
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 228;
+    var medium_nav_height = 74;
+    var medium_nav_height_open = 258;
     var window_width;
     var window_height;
     
     var $d3_cotton_exports = $('#cotton-exports-d3');
     var d3_cotton_exports_data;
+    
+    //breakpoints
+    var screen_small = 768;
+    var screen_medium = 992;
+    var screen_large = 1200;
 
 
     function on_resize() {
@@ -86,7 +93,7 @@ $(document).ready(function() {
 		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 
         // Kill top-anchored nav for small displays
-        if (window_width < 768){
+        if (window_width < 992){
                 $nav.removeAttr('data-spy').removeClass('affix');
         } else {
                 $nav.attr('data-spy', 'affix');
@@ -334,17 +341,30 @@ $(document).ready(function() {
         var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
         var keyframes = '';
         
-        for (var i = 0; i < prefixes.length; i++) {
+        var this_nav_height;
+        var this_nav_height_open;
+        
+        if (window_width < 992){
+        	this_nav_height = nav_height;
+        	this_nav_height_open = medium_nav_height_open;
+        } else {
+        	this_nav_height = nav_height;
+        	this_nav_height_open = nav_height_open;
+        }
+        
+        console.log("window: " + window_width);
+        
+    	for (var i = 0; i < prefixes.length; i++) {
             keyframes += '@' + prefixes[i] + 'keyframes slideOutDown {';
-            keyframes += '0% { height: ' + nav_height_open + 'px; }';
-            keyframes += '100% { height: ' + nav_height + 'px; }';
+            keyframes += '0% { height: ' + this_nav_height_open + 'px; }';
+            keyframes += '100% { height: ' + this_nav_height + 'px; }';
             keyframes += '}';
 
             keyframes += '@' + prefixes[i] + 'keyframes slideInUp {';
-            keyframes += '0% { height: ' + nav_height + 'px; }';
-            keyframes += '100% { height: ' + nav_height_open + 'px; }';
+            keyframes += '0% { height: ' + this_nav_height + 'px; }';
+            keyframes += '100% { height: ' + this_nav_height_open + 'px; }';
             keyframes += '}';
-        }
+		}
         
         var s = document.createElement('style');
         s.innerHTML = keyframes;
@@ -491,6 +511,9 @@ $(document).ready(function() {
 	 * Setup functions 
 	 */
     function setup() {
+        window_width = $w.width();
+        window_height = $w.height();
+
         $b.addClass('chapter-' + chapters[0]);
 
         // setup chapter layers and navigation
