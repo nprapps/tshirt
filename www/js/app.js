@@ -133,11 +133,7 @@ $(document).ready(function() {
 					$video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 				});
 			});
-			
-			
-			
-			
-		
+
 			$btn_play.on('click', function() {
 				console.log('clicked!');
 				var this_chapter = $(this).parents('.layer').attr('id');
@@ -150,11 +146,8 @@ $(document).ready(function() {
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 			});
 			
-			
-			//
 			$btn_explain.on('click', function() {
-				console.log('clicked!');
-				goto_explainer();
+				scroll_to_explainer();
 			});
 
 		} else if (chapter == 'title') {
@@ -246,12 +239,10 @@ $(document).ready(function() {
             goto_chapter(id);
 
             // close the chapter nav
-            $nav_btn.trigger('click');
+            close_nav();
 
             // jump to the top of the page
-            $.smoothScroll({
-                scrollTarget: '.kontext'
-            });
+            scroll_to_top();
         });
 	}
 	
@@ -322,22 +313,33 @@ $(document).ready(function() {
 	 * Explainer text
 	 */
 	 
-	 function goto_explainer() {
-		 // the offset accounts for the height of the nav at the top of the screen
-	    // (minus 1 to ensure the affix nav engages)
-	    var scroll_offset = -(nav_height - 1);
-	    var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
+    function scroll_to_explainer() {
+        // the offset accounts for the height of the nav at the top of the screen
+        // (minus 1 to ensure the affix nav engages)
+        var scroll_offset = -(nav_height - 1);
+        var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
 
         $.smoothScroll({
-			offset: scroll_offset,
+            offset: scroll_offset,
             scrollTarget: scroll_target
         });
-		 
-	 }
+    }
+
+    function scroll_to_top() {
+        var scroll_target = '#' + chapters[k.getIndex()];
+
+        $.smoothScroll({
+            scrollTarget: scroll_target
+        });
+    }
 	 
-	$nav_chapter_title_prompt.on('click', function() {
-	    goto_explainer();
-	});
+    $nav_chapter_title_prompt.on('click', function() {
+        scroll_to_explainer();
+    });
+
+    $nav_chapter_title.on('click', function() {
+        scroll_to_top();
+    });
 
 
     /*
@@ -357,8 +359,6 @@ $(document).ready(function() {
         	this_nav_height = nav_height;
         	this_nav_height_open = nav_height_open;
         }
-        
-        console.log("window: " + window_width);
         
     	for (var i = 0; i < prefixes.length; i++) {
             keyframes += '@' + prefixes[i] + 'keyframes slideOutDown {';
@@ -434,7 +434,6 @@ $(document).ready(function() {
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-//            .interpolate("basis")
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
         
@@ -477,39 +476,39 @@ $(document).ready(function() {
             d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.exports; }); })
         ]);
 
-        svg.append("g")
-            .attr("class", "x axis")
-            .attr("transform", "translate(0," + height + ")")
+        svg.append('g')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0,' + height + ')')
             .call(xAxis);
 
-        svg.append("g")
-            .attr("class", "y axis")
+        svg.append('g')
+            .attr('class', 'y axis')
             .call(yAxis);
 
-        svg.append("g")
-            .attr("class", "x grid")
-            .attr("transform", "translate(0," + height + ")")
+        svg.append('g')
+            .attr('class', 'x grid')
+            .attr('transform', 'translate(0,' + height + ')')
             .call(x_axis_grid()
                 .tickSize(-height, 0, 0)
-                .tickFormat("")
+                .tickFormat('')
             );
 
-        svg.append("g")
-            .attr("class", "y grid")
+        svg.append('g')
+            .attr('class', 'y grid')
             .call(y_axis_grid()
                 .tickSize(-width, 0, 0)
-                .tickFormat("")
+                .tickFormat('')
             );
 
-        var country = svg.selectAll(".country")
+        var country = svg.selectAll('.country')
             .data(countries)
-            .enter().append("g")
-            .attr("class", "country");
+            .enter().append('g')
+            .attr('class', 'country');
 
-        country.append("path")
-            .attr("class", "line")
-            .attr("d", function(d) { return line(d.values); })
-            .style("stroke", function(d) { return color(d.country); });
+        country.append('path')
+            .attr('class', 'line')
+            .attr('d', function(d) { return line(d.values); })
+            .style('stroke', function(d) { return color(d.country); });
     }
     
     function reset_cotton_exports_graph() {
