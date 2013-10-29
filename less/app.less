@@ -83,6 +83,10 @@ nav .nav-item-wrapper.backer,
     display: block;
 }
 
+.video-wrapper.backer {
+	margin-left: 0;
+}
+
 nav {
 	position: absolute;
 	top: 0;
@@ -97,7 +101,7 @@ nav {
 	background: rgba(0,0,0,.8);
 	color: #fff;
 	display: block;
-	z-index: 4;
+	z-index: 100;
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
@@ -517,6 +521,7 @@ nav {
 		}
 		
 		// Title screen only
+		
 		.chapter-title {
 		    nav h3#nav-chapter-title,
 		    nav h3#nav-chapter-title-prompt,
@@ -532,11 +537,12 @@ nav {
 			position: absolute;
 			top: 0;
 			left: 0;
-			z-index: 1;
+			z-index: 9;
 			background-color: #000;
 			height: 100%;
 			width: 100%;
-			display: none;
+			margin-left: -20000px;
+			//display: none;
 			
 			.video-inner-wrapper {
 			    position: absolute;
