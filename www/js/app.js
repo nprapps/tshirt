@@ -24,8 +24,8 @@ $(document).ready(function() {
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 228;
-    var medium_nav_height = 74;
-    var medium_nav_height_open = 258;
+    var medium_nav_height = 44;
+    var medium_nav_height_open = 228;
     var window_width;
     var window_height;
     
@@ -346,7 +346,7 @@ $(document).ready(function() {
         var this_nav_height_open;
         
         if (window_width < 992){
-        	this_nav_height = nav_height;
+        	this_nav_height = medium_nav_height;
         	this_nav_height_open = medium_nav_height_open;
         } else {
         	this_nav_height = nav_height;

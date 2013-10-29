@@ -103,12 +103,13 @@ nav {
 	.nav-item-wrapper { display: none; }
 	
 	h3 {
-	    font-size: 14px;
+	    font-size: 12px;
 	    float: right;
 	    margin: 0;
-	    line-height: 74px;
+	    line-height: 34px;
 	    text-transform: uppercase;
 	    opacity: 0.7;
+	    @media @screen-medium { opacity: 1; font-size: 14px; line-height: 74px; }
 	    
 	    &#nav-chapter-title { 
 	        float: left;
@@ -226,15 +227,16 @@ nav {
 
 .btn-chapter {
 		  position: relative;
-		  padding-right: 23px;
+		  padding-right: 30px;
+		  @media @screen-medium {padding-right: 23px;}
 		  overflow: hidden;
 }
 		
 .hamburger {
   position: absolute;
-  top: 30px;
+  top: 10px;
   right: 5px;
-  @media @screen-medium {right: 0;}
+  @media @screen-medium {top: 30px; right: 0;}
   background: transparent url('@{img-root}/hamburger.png') no-repeat;
   width: 14px;
   height: 12px;
