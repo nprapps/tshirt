@@ -102,11 +102,7 @@ $(document).ready(function() {
         }
         
         // redraw graphics (if they exist yet)
-        if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
-            d3.select('#cotton-exports-d3').selectAll('svg').remove();
-            d3.select('#cotton-exports-d3').selectAll('.key').remove();
-            draw_cotton_exports_graph();
-        }
+        reset_cotton_exports_graph();
     }
     
     function setup_chapters(chapter) {
@@ -147,6 +143,8 @@ $(document).ready(function() {
 				var this_chapter = $(this).parents('.layer').attr('id');
 				var $this_iframe = $('#video-' + this_chapter)[0];
 				var $this_player = $f($this_iframe);
+				
+				console.log(this_chapter);
 
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
@@ -209,17 +207,17 @@ $(document).ready(function() {
 	$btn_next.on('click', function() {
 	    k.next();
 	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
-	    reset_layers();
+	    reset_video_layers();
 	});
 
 	$btn_back.on('click', function() {
 	    k.prev();
 	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
-	    reset_layers();
+	    reset_video_layers();
 	});
 	 */
 	
-	function reset_layers() {
+	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 	    // reset questions
@@ -290,8 +288,15 @@ $(document).ready(function() {
             }
 	    }
 	    
+	    // load graphics for this particular chapter
+	    switch(id) {
+	        case 1: // plants
+	            reset_cotton_exports_graph();
+	            break;
+	    }
+	    
 	    // reset the layers, stop any video that's playing
-	    reset_layers();
+	    reset_video_layers();
 	}
 
 	function close_nav() {
@@ -506,6 +511,14 @@ $(document).ready(function() {
             .attr("d", function(d) { return line(d.values); })
             .style("stroke", function(d) { return color(d.country); });
     }
+    
+    function reset_cotton_exports_graph() {
+        if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
+            d3.select('#cotton-exports-d3').selectAll('svg').remove();
+            d3.select('#cotton-exports-d3').selectAll('.key').remove();
+            draw_cotton_exports_graph();
+        }
+    }
 
 
 	/* 
@@ -533,7 +546,7 @@ $(document).ready(function() {
         $(window).on('resize', on_resize);
         on_resize();
         
-        goto_chapter(1);
+//        goto_chapter(1);
     }
     setup();
 

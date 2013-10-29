@@ -493,6 +493,7 @@
 
 
 {% block extra_foot_js %}
+{{ JS.push('js/lib/jquery.fitvids.js') }}
 {{ JS.push('js/lib/jquery.smooth-scroll.js') }}
 {{ JS.push('js/lib/kontext.js') }}
 {% endblock extra_foot_js %}
@@ -500,5 +501,4 @@
 {% block extra_foot %}
 <script src="js/lib/d3.v3.min.js"></script>
 <script src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fitvids/1.0.1/jquery.fitvids.min.js"></script>
 {% endblock extra_foot %}
