@@ -146,6 +146,8 @@ $(document).ready(function() {
 
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+				
+				close_nav();
 			});
 			
 			$btn_explain.on('click', function() {
@@ -156,6 +158,7 @@ $(document).ready(function() {
 			$btn_play.on('click', function() {
 			    hasher.setHash(chapters[1]);
 				$('#plants').find('.btn-play').trigger('click');
+				close_nav();
 			});
 		} else { // about
 		    // do something else?
@@ -283,8 +286,10 @@ $(document).ready(function() {
 	}
 
 	function close_nav() {
-        $nav.removeClass('slideInUp').addClass('animated slideOutDown');
-        $nav_item_wrapper.removeClass('backer');
+	    if ($nav.hasClass('slideInUp')) {
+            $nav.removeClass('slideInUp').addClass('animated slideOutDown');
+            $nav_item_wrapper.removeClass('backer');
+        }
 	}
 	
 	function open_nav() {
