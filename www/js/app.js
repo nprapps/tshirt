@@ -160,56 +160,6 @@ $(document).ready(function() {
 		}
     }
     
-    /* 
-     * Kontext sideways navigation
-    
-     
-    var touchX = 0;
-    var touchConsumed = false;
-
-    k.changed.add(function(layer, index) {
-        //do something when the layer changes
-    });
-
-    document.addEventListener( 'keyup', function( event ) {
-        if( event.keyCode === 37 ) k.prev();
-        if( event.keyCode === 39 ) k.next();
-    }, false );
-
-    document.addEventListener( 'touchstart', function( event ) {
-        touchConsumed = false;
-        lastX = event.touches[0].clientX;
-    }, false );
-
-    document.addEventListener( 'touchmove', function( event ) {
-        event.preventDefault();
-
-        if( !touchConsumed ) {
-            if( event.touches[0].clientX > lastX + 10 ) {
-                k.prev();
-                touchConsumed = true;
-            }
-            else if( event.touches[0].clientX < lastX - 10 ) {
-                k.next();
-                touchConsumed = true;
-            }
-        }
-    }, false );
-
-	// sideways nav buttons
-	$btn_next.on('click', function() {
-	    k.next();
-	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
-	    reset_video_layers();
-	});
-
-	$btn_back.on('click', function() {
-	    k.prev();
-	    console.log((k.getIndex() + 1) + ' of ' + k.getTotal());
-	    reset_video_layers();
-	});
-	 */
-	
 	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
