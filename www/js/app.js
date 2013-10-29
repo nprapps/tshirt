@@ -143,6 +143,8 @@ $(document).ready(function() {
 				var this_chapter = $(this).parents('.layer').attr('id');
 				var $this_iframe = $('#video-' + this_chapter)[0];
 				var $this_player = $f($this_iframe);
+				
+				console.log(this_chapter);
 
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
