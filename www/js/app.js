@@ -19,8 +19,10 @@ $(document).ready(function() {
     var $video_question = $('.video-question');
     var k = kontext(document.querySelector('.kontext'));
     
-    var aspect_width = 16;
-    var aspect_height = 9;
+    var video_aspect_width = 16;
+    var video_aspect_height = 9;
+    var graphic_aspect_width = 4;
+    var graphic_aspect_height = 3;
     var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 228;
@@ -54,10 +56,10 @@ $(document).ready(function() {
         window_height = $w.height();
         
         // calculate optimal width if height is constrained to window height
-        w_optimal = (window_height * aspect_width) / aspect_height;
+        w_optimal = (window_height * video_aspect_width) / video_aspect_height;
         
         // calculate optimal height if width is constrained to window width
-        h_optimal = (window_width * aspect_height) / aspect_width;
+        h_optimal = (window_width * video_aspect_height) / video_aspect_width;
         
         // decide whether to go with optimal height or width
         if (w_optimal > window_width) {
@@ -80,8 +82,8 @@ $(document).ready(function() {
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
 
         // size the chapter video: must be fully visible onscreen -- no negative margins
-        w_video_optimal = ((window_height - nav_height) * aspect_width) / aspect_height;
-        h_video_optimal = (window_width * aspect_height) / aspect_width;
+        w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
+        h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
 
         if (w_video_optimal >= window_width) {
             w_video = window_width;
@@ -302,7 +304,6 @@ $(document).ready(function() {
 	/*
 	 * Explainer text
 	 */
-	 
     function scroll_to_explainer() {
         // the offset accounts for the height of the nav at the top of the screen
         // (minus 1 to ensure the affix nav engages)
@@ -375,27 +376,18 @@ $(document).ready(function() {
         d3.tsv("data/cotton-exports.tsv", function(error, data) {
             d3_cotton_exports_data = data;
             d3_cotton_exports_data.forEach(function(d) {
-                d.year = d3.time.format("%Y").parse(d.year);
+                d.year = d3.time.format('%Y').parse(d.year);
             });
             draw_cotton_exports_graph();
         });
     }
     
-    function d3_tickformat_units(d) {
-        var units = [ '', ' thousand', ' million', ' billion', ' trillion'];
-        var i = 0;
-        while (d >= 1000) {
-            i++;
-            d = d / 1000;
-        }
-        d = d + units[i];
-        return d;
-    }
-    
     function draw_cotton_exports_graph() {
         var margin = {top: 0, right: 15, bottom: 25, left: 50};
         var width = $d3_cotton_exports.width() - margin.left - margin.right;
-        var height = 350 - margin.top - margin.bottom;
+//        var height = 350 - margin.top - margin.bottom;
+        var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
+
         var x, y;
         
         // remove placeholder image if it exists
@@ -408,12 +400,13 @@ $(document).ready(function() {
             .range([height, 0]);
 
         var color = d3.scale.category10()
-            .domain(d3.keys(d3_cotton_exports_data[0]).filter(function(key) { return key !== "year"; }));
+            .domain(d3.keys(d3_cotton_exports_data[0]).filter(function(key) { return key !== 'year'; }));
         // more: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
 
         var xAxis = d3.svg.axis()
             .scale(x)
-            .orient("bottom");
+            .orient("bottom")
+            .ticks(5);
             
         var x_axis_grid = function() { return xAxis; }
 
@@ -439,7 +432,6 @@ $(document).ready(function() {
 
         legend.append('label')
             .text(function(d) { return d; });
-
 
         var svg = d3.select('#cotton-exports-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
