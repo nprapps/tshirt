@@ -152,7 +152,7 @@ $(document).ready(function() {
 
 		} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
-			    goto_chapter(1);
+			    hasher.setHash(chapters[1]);
 				$('#plants').find('.btn-play').trigger('click');
 			});
 		} else { // about
@@ -236,7 +236,7 @@ $(document).ready(function() {
 	function setup_chapter_nav(chapter, id) {
         $('#nav-' + chapter).on('click', function() {
             // jump to the chapter
-            goto_chapter(id);
+            hasher.setHash(chapters[id]);
 
             // close the chapter nav
             close_nav();
@@ -249,38 +249,78 @@ $(document).ready(function() {
 	function setup_video_question(chapter, id) {
 	    if (chapter != 'title' && chapter != 'about') {
 	        $('#' + chapter).find('.btn-next-chapter').on('click', function() {
-	            goto_chapter((id + 1));
+	            hasher.setHash(chapters[(id + 1)]);
 	        });
 	    }
 	}
 	
-	function goto_chapter(id) {
-	    // goto that chapter
-	    k.show(id);
+	function get_chapter_id(chapter_name) {
+	    var chapter_id;
 	    
+        for (var i = 0; i < chapters.length; i++) {
+            if (chapter_name == chapters[i]) {
+                chapter_id = i;
+                break;
+            }
+        }
+        return chapter_id;
+	}
+	
+	function get_chapter_name(chapter_id) {
+	    return chapters[chapter_id];
+	}
+	
+    function goto_chapter(new_hash){
+        console.log('goto_chapter: ' + new_hash);
+
+        var new_chapter_id;
+        var new_chapter_name;
+        
+        if (new_hash.length == 0) {
+            new_chapter_id = 0;
+            new_chapter_name = 'title';
+            hasher.replaceHash('title');
+        } else {
+            // check if this is a legit hash
+            new_chapter_id = get_chapter_id(new_hash);
+            
+            if (new_chapter_id != null && new_chapter_id != undefined) {
+                new_chapter_name = new_hash;
+            } else {
+                new_chapter_id = 0;
+                new_chapter_name = 'title';
+                hasher.replaceHash('title');
+            }
+        }
+        
+        console.log(new_chapter_name);
+
+	    // goto that chapter
+	    k.show(new_chapter_id);
+	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
-	        var chapter_name = chapters[i];
-	        var chapter_class = 'chapter-' + chapter_name;
+	        var this_chapter_name = chapters[i];
+	        var this_chapter_class = 'chapter-' + this_chapter_name;
 
-	        if (i == id) {
-                $b.addClass(chapter_class);
+	        if (i == new_chapter_id) {
+                $b.addClass(this_chapter_class);
 
-                if (chapter_name != 'title' && chapter_name != 'about') {
-                    $nav_chapter_title.text(COPY[chapter_name]['fullname']);
-                    $nav_chapter_title_prompt.text(COPY[chapter_name]['nav_prompt']);
+                if (this_chapter_name != 'title' && this_chapter_name != 'about') {
+                    $nav_chapter_title.text(COPY[this_chapter_name]['fullname']);
+                    $nav_chapter_title_prompt.text(COPY[this_chapter_name]['nav_prompt']);
                 } else {
                     $nav_chapter_title.text('');
                     $nav_chapter_title_prompt.text('');
                 }
 
             } else {
-                $b.removeClass(chapter_class);
+                $b.removeClass(this_chapter_class);
             }
 	    }
 	    
 	    // load graphics for this particular chapter
-	    switch(id) {
+	    switch(new_chapter_id) {
 	        case 1: // plants
 	            reset_cotton_exports_graph();
 	            break;
@@ -518,8 +558,8 @@ $(document).ready(function() {
             draw_cotton_exports_graph();
         }
     }
-
-
+    
+    
 	/* 
 	 * Setup functions 
 	 */
@@ -545,7 +585,12 @@ $(document).ready(function() {
         $(window).on('resize', on_resize);
         on_resize();
         
-//        goto_chapter(1);
+        //add hash change listener
+        hasher.changed.add(goto_chapter);
+        //add initialized listener (to grab initial value in case it is already set)
+        hasher.initialized.add(goto_chapter);
+        //initialize hasher (start listening for history changes)
+        hasher.init();
     }
     setup();
 
