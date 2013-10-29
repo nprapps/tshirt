@@ -226,8 +226,6 @@ $(document).ready(function() {
 	}
 	
     function goto_chapter(new_hash){
-        console.log('goto_chapter: ' + new_hash);
-
         var new_chapter_id;
         var new_chapter_name;
         
