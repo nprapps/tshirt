@@ -154,7 +154,7 @@ $(document).ready(function() {
 			//
 			$btn_explain.on('click', function() {
 				console.log('clicked!');
-				goto_explainer();
+				scroll_to_explainer();
 			});
 
 		} else if (chapter == 'title') {
@@ -322,22 +322,35 @@ $(document).ready(function() {
 	 * Explainer text
 	 */
 	 
-	 function goto_explainer() {
-		 // the offset accounts for the height of the nav at the top of the screen
-	    // (minus 1 to ensure the affix nav engages)
-	    var scroll_offset = -(nav_height - 1);
-	    var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
+    function scroll_to_explainer() {
+        // the offset accounts for the height of the nav at the top of the screen
+        // (minus 1 to ensure the affix nav engages)
+        var scroll_offset = -(nav_height - 1);
+        var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
 
         $.smoothScroll({
-			offset: scroll_offset,
+            offset: scroll_offset,
             scrollTarget: scroll_target
         });
-		 
-	 }
+    }
+
+    function scroll_to_video() {
+        // the offset accounts for the height of the nav at the top of the screen
+        // (minus 1 to ensure the affix nav engages)
+        var scroll_target = '#' + chapters[k.getIndex()];
+
+        $.smoothScroll({
+            scrollTarget: scroll_target
+        });
+    }
 	 
-	$nav_chapter_title_prompt.on('click', function() {
-	    goto_explainer();
-	});
+    $nav_chapter_title_prompt.on('click', function() {
+        scroll_to_explainer();
+    });
+
+    $nav_chapter_title.on('click', function() {
+        scroll_to_video();
+    });
 
 
     /*
