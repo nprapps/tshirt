@@ -99,7 +99,7 @@ $(document).ready(function() {
 	     }
         
         // Kill top-anchored nav for small displays
-        if (window_width < screen_medium){
+        if (window_width < screen_small){
                 $nav.removeAttr('data-spy').removeClass('affix');
         } else {
                 $nav.attr('data-spy', 'affix');
@@ -131,7 +131,7 @@ $(document).ready(function() {
 				//show question at the end of a video
 				$player.addEvent('finish', function() {
 					console.log('finished');
-			    	$('section.show').find('.video-question').addClass('animated fadeIn backer');
+			    	$('section.show').find('.video-question').addClass('animated fadeIn show-me');
 				});
 				
 				$player.addEvent('play', function() {
@@ -350,7 +350,7 @@ $(document).ready(function() {
         var this_nav_height;
         var this_nav_height_open;
         
-        if (window_width < 992){
+        if (window_width < screen_small){
         	this_nav_height = medium_nav_height;
         	this_nav_height_open = medium_nav_height_open;
         } else {

@@ -25,10 +25,15 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
 }
 
-section {background-color: #fff;}
+body {
+        background-color: #000;
+}
 
-//hiding desktop only features
-.titlecard, .title-video, .video-question {display: none;}
+.explainer {
+    background-color: #fff;
+}
+
+section {background-color: #fff;}
 
 // Animations
 .slideInUp {
@@ -45,7 +50,7 @@ section {background-color: #fff;}
 	-o-animation-duration: .1s;
 	animation-duration: .1s;
 	
-	@media @screen-medium { 
+	@media @screen-small-above { 
 		-webkit-animation-duration: .5s;
 		-moz-animation-duration: .5s;
 		-ms-animation-duration: .5s;
@@ -68,7 +73,7 @@ section {background-color: #fff;}
 	-o-animation-duration: .1s;
 	animation-duration: .1s;
 	
-	@media @screen-medium { 
+	@media @screen-small-above { 
 		-webkit-animation-duration: .5s;
 		-moz-animation-duration: .5s;
 		-ms-animation-duration: .5s;
@@ -92,7 +97,7 @@ nav .nav-item-wrapper.backer,
 nav {
 	position: absolute;
 	top: 0;
-	@media @screen-medium {
+	@media @screen-small-above {
 		top:auto;
 		bottom: 0;
 		overflow: hidden;
@@ -107,7 +112,7 @@ nav {
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
-		@media @screen-medium { padding: 0 22px 22px 22px; }
+		@media @screen-small-above { padding: 0 22px 22px 22px; }
 		}
 	.nav-item-wrapper { display: none; }
 	
@@ -118,7 +123,7 @@ nav {
 	    line-height: 34px;
 	    text-transform: uppercase;
 	    opacity: 0.7;
-	    @media @screen-medium { opacity: 1; font-size: 14px; line-height: 74px; }
+	    @media @screen-small-above { opacity: 1; font-size: 14px; line-height: 74px; }
 	    
 	    &#nav-chapter-title { 
 	        float: left;
@@ -136,7 +141,7 @@ nav {
 			text-transform: none;
 			font-weight: normal;
 			display: none;
-			@media @screen-medium { display: block; }
+			@media @screen-small-above { display: block; }
 	    }
 	
 	    &:hover {
@@ -178,7 +183,7 @@ nav {
 				}
 	        }
 	        
-	        @media @screen-medium {
+	        @media @screen-small-above {
 		        display: table;
 		        width: 100%;
 		        
@@ -237,15 +242,39 @@ nav {
 .btn-chapter {
 		  position: relative;
 		  padding-right: 30px;
-		  @media @screen-medium {padding-right: 23px;}
+		  @media @screen-small-above {padding-right: 23px;}
 		  overflow: hidden;
+}//nav
+
+// Chapter navigation thumbnails
+@media @screen-small-above {
+
+	.nav-plants {
+			background: url('@{img-root}/plants-thumb.jpg');
+		}
+		
+		.nav-robots {
+			background: url('@{img-root}/robots-thumb.jpg');
+		}
+		
+		.nav-humans {
+			background: url('@{img-root}/humans-thumb.jpg');
+		}
+		
+		.nav-ships {
+			background: url('@{img-root}/ship-thumb.jpg');
+		}
+		
+		.nav-you {
+			background: url('@{img-root}/you-thumb.jpg');
+		}
 }
 		
 .hamburger {
   position: absolute;
   top: 10px;
   right: 5px;
-  @media @screen-medium {top: 30px; right: 0;}
+  @media @screen-small-above {top: 30px; right: 0;}
   background: transparent url('@{img-root}/hamburger.png') no-repeat;
   width: 14px;
   height: 12px;
@@ -272,15 +301,104 @@ nav {
   display: block;
 }
 
+//question that appears at the end of video
+section .show-me {display: block;}
+
+.video-question {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  -webkit-transform: translate(-50%, -30%);
+  -moz-transform: translate(-50%, -30%);
+  -ms-transform: translate(-50%, -30%);
+  -o-transform: translate(-50%, -30%);
+  transform: translate(-50%, -30%);
+  width: 70%;
+  height: 30%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 5%;
+  border: 3px solid #111;
+  display: none;
+  z-index: 10;
+}
+
+.video-question h3 {
+	position: relative;
+	text-transform: uppercase;
+	border-bottom: 1px solid #fff;
+	font-size: 36px;
+	margin: 0;
+	padding-bottom: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.video-question .arrow-right {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+}
+
+.video-question p {
+	font-size: 25px;
+	padding-top: 20px;
+}
+
+.video-question .arrow-down {
+	text-align: center;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+	margin: 15px 50% 0 50%;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+//footer navigation 
+.btn-next-chapter, .btn-explainer-prompt {
+	cursor: pointer;
+}  
+
+.btn-next-chapter:hover, .btn-explainer-prompt:hover {
+	opacity: .8;
+}
+
+.next-chapter {
+	background-color: #000;
+	padding: 30px 0;
+}
+
+.next-chapter .container {
+	text-align: center;
+	color: #fff;
+}
+
+.next-chapter .arrow-right {
+	position: absolute;
+	top: 25px;
+	right: 0;
+	background: transparent url('@{img-root}/arrow.png') no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+}
+
+
 .nav-title, .nav-about {
   position: relative;
   padding-left: 23px;
   overflow: hidden;
   text-transform: uppercase;
 }
-
-//vimeo video
-.video-wrapper {display: block;}
 
 // Explainer text
 .explainer {
@@ -504,223 +622,101 @@ nav {
     }
 }
 
-// Media queries
-@media @screen-small {
+//hiding desktop only titlecard features
+.touch .titlecard, .touch .title-video {display: none;}
 
+.titlecard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	text-align: center;
+	display: block;
+
+    h1 {
+        font-size: 90px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+        margin-top: 100px;
+    }
+
+    h2 {
+        font-size: 26px;
+        text-transform: uppercase;
+        margin-bottom: 33px;
+        color: #fff;
+        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+        margin-top: 11px;
+    }
+    
+    .btn.btn-play {
+        border-radius: 0;
+        background-color: #fff;
+        text-transform: uppercase;
+        font: bold 18px "Gotham SSm", helvetica, arial, sans-serif;
+        padding: 0 22px;
+        line-height: 44px;
+        
+        &:hover {
+            background-color: #578d78;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
+
+// Title screen only
+
+.chapter-title {
+    nav h3#nav-chapter-title,
+    nav h3#nav-chapter-title-prompt,
+    #nav-title {
+        display: none;
+    }
+}
+
+.video-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9;
+	background-color: #000;
+	height: 100%;
+	width: 100%;
+	margin-left: -20000px;
+	
+	.video-inner-wrapper {
+	    position: absolute;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    margin: auto;
+	}
+}
+
+.touch .video-wrapper {margin-left: 0;}
+
+.layer-media {
+	width: 100%;
+    height: 100%;
+	background: #000 url('@{img-root}/walk-title.jpg');
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+	position: relative;
+	overflow: hidden;
 }
 
 
+
 @media @screen-medium {
-    body {
-        background-color: #000;
-    }
-    .explainer {
-        background-color: #fff;
-    }
-
-// Chapter navigation
-		
-		.nav-plants {
-			background: url('@{img-root}/plants-thumb.jpg');
-		}
-		
-		.nav-robots {
-			background: url('@{img-root}/robots-thumb.jpg');
-		}
-		
-		.nav-humans {
-			background: url('@{img-root}/humans-thumb.jpg');
-		}
-		
-		.nav-ships {
-			background: url('@{img-root}/ship-thumb.jpg');
-		}
-		
-		.nav-you {
-			background: url('@{img-root}/you-thumb.jpg');
-		}
-		
-		// Title screen only
-		
-		.chapter-title {
-		    nav h3#nav-chapter-title,
-		    nav h3#nav-chapter-title-prompt,
-		    #nav-title {
-		        display: none;
-		    }
-		}
-
-		//show title screen chapter video
-		.title-video {display: block;}
-
-		.video-wrapper {
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 9;
-			background-color: #000;
-			height: 100%;
-			width: 100%;
-			margin-left: -20000px;
-			//display: none;
-			
-			.video-inner-wrapper {
-			    position: absolute;
-			    top: 0;
-			    right: 0;
-			    bottom: 0;
-			    left: 0;
-			    margin: auto;
-			}
-		}
-		
-		.layer-media {
-			width: 100%;
-		    height: 100%;
-			background: #000 url('@{img-root}/walk-title.jpg');
-		    -webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-		    background-size: cover;
-		    background-position: 50% 50%;
-			position: relative;
-			overflow: hidden;
-		}
-		
-		.titlecard {
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    height: 100%;
-			text-align: center;
-			display: block;
-		
-		    h1 {
-		        font-size: 90px;
-		        color: #fff;
-		        text-transform: uppercase;
-		        font-weight: bold;
-		        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-		        margin-top: 100px;
-		    }
-		
-		    h2 {
-		        font-size: 26px;
-		        text-transform: uppercase;
-		        margin-bottom: 33px;
-		        color: #fff;
-		        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-		        margin-top: 11px;
-		    }
-		    
-		    .btn.btn-play {
-		        border-radius: 0;
-		        background-color: #fff;
-		        text-transform: uppercase;
-		        font: bold 18px "Gotham SSm", helvetica, arial, sans-serif;
-		        padding: 0 22px;
-		        line-height: 44px;
-		        
-		        &:hover {
-		            background-color: #578d78;
-		            color: #fff;
-		            cursor: pointer;
-		        }
-		    }
-		}
-		
-		#nav-chapter-title {display: block;}
-		
-		//question that appears at the end of video
-		.video-question {
-		  position: absolute;
-		  left: 50%;
-		  top: 30%;
-		  -webkit-transform: translate(-50%, -30%);
-		  -moz-transform: translate(-50%, -30%);
-		  -ms-transform: translate(-50%, -30%);
-		  -o-transform: translate(-50%, -30%);
-		  transform: translate(-50%, -30%);
-		  width: 70%;
-		  height: 30%;
-		  background: rgba(0, 0, 0, 0.8);
-		  color: #fff;
-		  text-align: center;
-		  padding: 5%;
-		  border: 3px solid #111;
-		  display: none;
-		  z-index: 5;
-		}
-		
-		.video-question h3 {
-			position: relative;
-			text-transform: uppercase;
-			border-bottom: 1px solid #fff;
-			font-size: 36px;
-			margin: 0;
-			padding-bottom: 20px;
-			font-weight: bold;
-			cursor: pointer;
-		}
-		
-		.video-question .arrow-right {
-			position: absolute;
-			top: 10px;
-			right: 0;
-			background: transparent url('@{img-root}/arrow.png') no-repeat;
-			width: 18px;
-			height: 16px;
-			display: block;
-		}
-		
-		.video-question p {
-			font-size: 25px;
-			padding-top: 20px;
-		}
-		
-		.video-question .arrow-down {
-			text-align: center;
-			background: transparent url('@{img-root}/arrow.png') no-repeat;
-			width: 18px;
-			height: 16px;
-			display: block;
-			margin: 15px 50% 0 50%;
-			-webkit-transform: rotate(90deg);
-			-moz-transform: rotate(90deg);
-			-ms-transform: rotate(90deg);
-			-o-transform: rotate(90deg);
-			transform: rotate(90deg);
-		}
-		
-		.btn-next-chapter, .btn-explainer-prompt {
-			cursor: pointer;
-		}  
-		
-		.btn-next-chapter:hover, .btn-explainer-prompt:hover {
-			opacity: .8;
-		}
-		
-		.next-chapter {
-			background-color: #000;
-			padding: 30px 0;
-		}
-		
-		.next-chapter .container {
-			text-align: center;
-			color: #fff;
-		}
-		
-		.next-chapter .arrow-right {
-			position: absolute;
-			top: 25px;
-			right: 0;
-			background: transparent url('@{img-root}/arrow.png') no-repeat;
-			width: 18px;
-			height: 16px;
-			display: block;
-		}
-
+	
 }//992
 
 @media @screen-large {
