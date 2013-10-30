@@ -189,7 +189,7 @@ $(document).ready(function() {
 	 * Chapter navigation
 	 */
 	function setup_chapter_nav(chapter, id) {
-        $('#nav-' + chapter).on('click', function() {
+        $('.nav-' + chapter).on('click', function() {
             // jump to the chapter
             hasher.setHash(chapters[id]);
 
