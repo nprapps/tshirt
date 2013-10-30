@@ -85,7 +85,7 @@ $(document).ready(function() {
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
 		
-		if (window_width < screen_small){
+		if (window_width < screen_medium){
 			$video_inner_wrapper.width('auto').height('auto');
 	     } else {
 	     	if (w_video_optimal >= window_width) {
@@ -99,7 +99,7 @@ $(document).ready(function() {
 	     }
         
         // Kill top-anchored nav for small displays
-        if (window_width < screen_small){
+        if (window_width < screen_medium){
                 $nav.removeAttr('data-spy').removeClass('affix');
         } else {
                 $nav.attr('data-spy', 'affix');
