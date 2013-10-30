@@ -114,28 +114,6 @@ $(document).ready(function() {
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'title' && chapter != 'about') {
-			var $iframe = $('#video-' + chapter)[0];
-			var $player = $f($iframe);
-
-			$player.addEvent('ready', function() {
-				//console.log('player ready');
-				//$player.api('setVolume', 0);
-				//$player.api('play');
-				//$player.api('seekTo', 3);
-				//$player.api('pause');
-				
-				//show question at the end of a video
-				$player.addEvent('finish', function() {
-					console.log('finished');
-			    	$('section.show').find('.video-question').addClass('animated fadeIn backer');
-				});
-				
-				$player.addEvent('play', function() {
-					// reset questions
-					$video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
-				});
-			});
-
 			$btn_play.on('click', function() {
 				console.log('clicked!');
 				var this_chapter = $(this).parents('.layer').attr('id');
@@ -165,12 +143,56 @@ $(document).ready(function() {
 		}
     }
     
+    function setup_video(chapter) {
+        // remove existing videos
+//        $('.video-wrapper').find('iframe').remove();
+//        $('.video-wrapper').find('.fluid-width-video-wrapper').remove();
+        $('.video-inner-wrapper').find('iframe').attr('src','').css('visibility', 'hidden');
+
+        // add new video (if this is a chapter that has video
+        if (chapter != 'title' && chapter != 'about') {
+            var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
+//            var iframe_tag = '<iframe src="' + video_path + '" id="video" width="400" height="225" frameborder="0"></iframe>';
+            
+//            $('#' + chapter).find('.video-inner-wrapper').append(iframe_tag);
+            $('#' + chapter).find('iframe').attr('src', video_path);
+
+
+            var $iframe = $('#video-' + chapter)[0];
+            var $player = $f($iframe);
+            
+            $player.addEvent('ready', function() {
+                console.log('player ready');
+                $('section.show').find('.video-inner-wrapper').find('iframe').css('visibility', 'visible');
+                //$player.api('setVolume', 0);
+                //$player.api('play');
+                //$player.api('seekTo', 3);
+                //$player.api('pause');
+                
+                //show question at the end of a video
+                $player.addEvent('finish', function() {
+                    console.log('video finished');
+                    $('section.show').find('.video-question').addClass('animated fadeIn backer');
+                });
+            
+                $player.addEvent('play', function() {
+                    // reset questions
+                    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+                });
+            });
+            $('#' + chapter).find('.video-wrapper').fitVids();
+        } else {
+            // preload the PLANTS video if you're on the title screen?
+        }
+    }
+    
 	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 	    // reset questions
 	    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 		
+		/*
 		// stop video; set it back to the beginning
         for (var i = 0; i < chapters.length; i++) {
         	if (chapters[i] != 'title' && chapters[i] != 'about') {
@@ -182,6 +204,7 @@ $(document).ready(function() {
 //				$this_player.api('unload'); //<- TODO: should we be using this instead of seekTo/pause? not working for me.
 			}
         }
+        */
 	}
 	
 	
@@ -272,9 +295,12 @@ $(document).ready(function() {
             }
 	    }
 	    
+	    // init video
+        setup_video(new_chapter_name);
+	    
 	    // load graphics for this particular chapter
-	    switch(new_chapter_id) {
-	        case 1: // plants
+	    switch(new_chapter_name) {
+	        case 'plants': // plants
 	            reset_cotton_exports_graph();
 	            break;
 	    }
@@ -520,7 +546,6 @@ $(document).ready(function() {
             setup_chapter_nav(chapters[i], i);
             setup_video_question(chapters[i], i);
         }
-        $video_wrapper.fitVids();
         
         // css animations
         setup_css_animations();
