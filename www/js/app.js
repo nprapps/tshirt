@@ -55,6 +55,8 @@ $(document).ready(function() {
         window_width = $w.width();
         window_height = $w.height();
         
+        // size the title card
+
         // calculate optimal width if height is constrained to window height
         w_optimal = (window_height * video_aspect_width) / video_aspect_height;
         
@@ -72,12 +74,6 @@ $(document).ready(function() {
         w_offset = (window_width - w) / 2;
         h_offset = (window_height - h) / 2;
         
-        // size the divs accordingly
-//        $layer_media.height(window_height + 'px');
-//        $titlecard_wrapper.width(w + 'px').height(h + 'px');
-//        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
-//        $titlecard_outer_wrapper.height(window_height + 'px');
-
 		$title_video.width(w + 'px').height(h + 'px');
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
 
@@ -92,6 +88,7 @@ $(document).ready(function() {
             w_video = w_video_optimal;
             h_video = window_height;
         }
+
 		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 
         // Kill top-anchored nav for small displays
@@ -115,15 +112,17 @@ $(document).ready(function() {
 
     	if (chapter != 'title' && chapter != 'about') {
 			$btn_play.on('click', function() {
-				console.log('clicked!');
+				console.log(chapter + ' play button clicked');
 				var this_chapter = $(this).parents('.layer').attr('id');
 				var $this_iframe = $('#video-' + this_chapter)[0];
 				var $this_player = $f($this_iframe);
 				
-				console.log(this_chapter);
-
 				$this_player.api('play');
-				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+//				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+				$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
+				$('#' + this_chapter).find('.title-video').addClass('animated fadeOut backer');
+				$('#' + this_chapter).find('.video-wrapper').css('marginLeft', 0);
+				
 				
 				close_nav();
 			});
@@ -145,18 +144,12 @@ $(document).ready(function() {
     
     function setup_video(chapter) {
         // remove existing videos
-//        $('.video-wrapper').find('iframe').remove();
-//        $('.video-wrapper').find('.fluid-width-video-wrapper').remove();
         $('.video-inner-wrapper').find('iframe').attr('src','').css('visibility', 'hidden');
 
         // add new video (if this is a chapter that has video
         if (chapter != 'title' && chapter != 'about') {
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
-//            var iframe_tag = '<iframe src="' + video_path + '" id="video" width="400" height="225" frameborder="0"></iframe>';
-            
-//            $('#' + chapter).find('.video-inner-wrapper').append(iframe_tag);
             $('#' + chapter).find('iframe').attr('src', video_path);
-
 
             var $iframe = $('#video-' + chapter)[0];
             var $player = $f($iframe);
@@ -164,10 +157,6 @@ $(document).ready(function() {
             $player.addEvent('ready', function() {
                 console.log('player ready');
                 $('section.show').find('.video-inner-wrapper').find('iframe').css('visibility', 'visible');
-                //$player.api('setVolume', 0);
-                //$player.api('play');
-                //$player.api('seekTo', 3);
-                //$player.api('pause');
                 
                 //show question at the end of a video
                 $player.addEvent('finish', function() {

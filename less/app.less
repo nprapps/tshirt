@@ -543,7 +543,9 @@ nav {
 		}
 
 		//show title screen chapter video
-		.title-video {display: block;}
+		.title-video {
+		    display: block;
+		}
 
 		.video-wrapper {
 			position: absolute;
@@ -553,7 +555,7 @@ nav {
 			background-color: #000;
 			height: 100%;
 			width: 100%;
-			display: none;
+			margin-left: -100%;
 			
 			.video-inner-wrapper {
 			    position: absolute;
@@ -562,9 +564,6 @@ nav {
 			    bottom: 0;
 			    left: 0;
 			    margin: auto;
-			}
-			.show & {
-//			    display: block;
 			}
 		}
 		
