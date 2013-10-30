@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 		$title_video.width(w + 'px').height(h + 'px');
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
-
+		
         // size the chapter video: must be fully visible onscreen -- no negative margins
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
