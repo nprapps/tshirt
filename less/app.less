@@ -698,7 +698,8 @@ section .show-me {display: block;}
 	}
 }
 
-.touch .video-wrapper {margin-left: 0;}
+
+.touch .video-wrapper, .touch .video-inner-wrapper  {margin-left: 0; position: relative;}
 
 .layer-media {
 	width: 100%;
@@ -709,9 +710,10 @@ section .show-me {display: block;}
 	-o-background-size: cover;
     background-size: cover;
     background-position: 50% 50%;
-	position: relative;
 	overflow: hidden;
 }
+
+.touch .layer-media {height: auto;}
 
 
 
