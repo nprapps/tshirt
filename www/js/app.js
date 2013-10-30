@@ -84,16 +84,20 @@ $(document).ready(function() {
         // size the chapter video: must be fully visible onscreen -- no negative margins
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
-
-        if (w_video_optimal >= window_width) {
-            w_video = window_width;
-            h_video = h_video_optimal;
-        } else {
-            w_video = w_video_optimal;
-            h_video = window_height;
-        }
-		$video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
-
+		
+		if (window_width < screen_small){
+			$video_inner_wrapper.width('auto').height('auto');
+	     } else {
+	     	if (w_video_optimal >= window_width) {
+	            w_video = window_width;
+	            h_video = h_video_optimal;
+	        } else {
+	            w_video = w_video_optimal;
+	            h_video = window_height;
+	        }
+	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
+	     }
+        
         // Kill top-anchored nav for small displays
         if (window_width < screen_small){
                 $nav.removeAttr('data-spy').removeClass('affix');
