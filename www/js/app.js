@@ -55,7 +55,7 @@ $(document).ready(function() {
         window_width = $w.width();
         window_height = $w.height();
         
-        // size the title card
+        // size the title card:
 
         // calculate optimal width if height is constrained to window height
         w_optimal = (window_height * video_aspect_width) / video_aspect_height;
@@ -118,11 +118,7 @@ $(document).ready(function() {
 				var $this_player = $f($this_iframe);
 				
 				$this_player.api('play');
-//				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
-				$('#' + this_chapter).find('.titlecard').addClass('animated fadeOut backer');
-				$('#' + this_chapter).find('.title-video').addClass('animated fadeOut backer');
-				$('#' + this_chapter).find('.video-wrapper').css('marginLeft', 0);
-				
+				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				
 				close_nav();
 			});
@@ -155,7 +151,7 @@ $(document).ready(function() {
             var $player = $f($iframe);
             
             $player.addEvent('ready', function() {
-                console.log('player ready');
+                console.log(chapter + ' player ready');
                 $('section.show').find('.video-inner-wrapper').find('iframe').css('visibility', 'visible');
                 
                 //show question at the end of a video
