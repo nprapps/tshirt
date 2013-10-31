@@ -665,8 +665,6 @@ position: relative;
     width: 100%;
     margin-left: 100%;
     
-    &.animated { margin-left: 0; }
-
     .video-inner-wrapper {
         position: absolute;
         top: 0;
@@ -675,9 +673,16 @@ position: relative;
         left: 0;
         margin: auto;
     }
+    iframe { visibility: hidden; }
+
+    &.video-loaded {
+        iframe { visibility: visible; }
+    }
     
-    iframe {
-        visibility: hidden;
+    &.video-playing {
+        margin-left: 0;
+
+        iframe { visibility: visible; }
     }
 }
 

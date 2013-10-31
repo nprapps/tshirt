@@ -138,7 +138,8 @@ $(document).ready(function() {
     
     function setup_video(chapter) {
         // remove existing videos
-        $('.video-inner-wrapper').find('iframe').attr('src','').css('visibility', 'hidden');
+        $('.video-wrapper').find('iframe').attr('src','');
+        $('.video-wrapper').removeClass('video-loaded').removeClass('video-playing');
 
         // add new video (if this is a chapter that has video
         if (chapter != 'title' && chapter != 'about') {
@@ -150,7 +151,7 @@ $(document).ready(function() {
             
             $player.addEvent('ready', function() {
                 console.log(chapter + ' player ready');
-                $('section.show').find('.video-inner-wrapper').find('iframe').css('visibility', 'visible');
+                $('section.show').find('.video-wrapper').addClass('video-loaded');
                 
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
@@ -159,6 +160,7 @@ $(document).ready(function() {
                 });
             
                 $player.addEvent('play', function() {
+                    $('section.show').find('.video-wrapper').removeClass('video-loaded').addClass('video-playing');
                 });
             });
             $('#' + chapter).find('.video-wrapper').fitVids();
