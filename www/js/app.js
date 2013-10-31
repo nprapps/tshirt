@@ -174,20 +174,6 @@ $(document).ready(function() {
 	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
-		
-		/*
-		// stop video; set it back to the beginning
-        for (var i = 0; i < chapters.length; i++) {
-        	if (chapters[i] != 'title' && chapters[i] != 'about') {
-				var this_chapter = chapters[i];
-				var $this_iframe = $('#video-' + this_chapter)[0];
-				var $this_player = $f($this_iframe);
-				//$this_player.api('seekTo', 0);
-				$this_player.api('pause');
-//				$this_player.api('unload'); //<- TODO: should we be using this instead of seekTo/pause? not working for me.
-			}
-        }
-        */
 	}
 	
 	
