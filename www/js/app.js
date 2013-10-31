@@ -14,7 +14,8 @@ $(document).ready(function() {
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
     var k = kontext(document.querySelector('.kontext'));
-    
+
+    var autoplay_video = false;
     var video_aspect_width = 16;
     var video_aspect_height = 9;
     var graphic_aspect_width = 4;
@@ -127,8 +128,8 @@ $(document).ready(function() {
 
 		} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
+			    autoplay_video = true;
 			    hasher.setHash(chapters[1]);
-				$('#plants').find('.btn-play').trigger('click');
 				close_nav();
 			});
 		} else { // about
@@ -150,8 +151,12 @@ $(document).ready(function() {
             var $player = $f($iframe);
             
             $player.addEvent('ready', function() {
-                console.log(chapter + ' player ready');
+                console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
+                if (autoplay_video) {
+                    $('section.show').find('.btn-play').trigger('click');
+                    autoplay_video = false;
+                }
                 
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
