@@ -97,11 +97,11 @@ nav .nav-item-wrapper.backer,
 nav {
 	position: absolute;
 	top: 0;
-	@media @screen-small-above {
+	/*@media @screen-small-above {
 		top:auto;
 		bottom: 0;
 		overflow: hidden;
-	}
+	}*/
 	right: 0;
 	width: 100%;
 	background: #000;
@@ -364,32 +364,58 @@ section .show-me {display: block;}
 	transform: rotate(90deg);
 }
 //footer navigation 
-.btn-next-chapter, .btn-explainer-prompt {
-	cursor: pointer;
-}  
-
-.btn-next-chapter:hover, .btn-explainer-prompt:hover {
-	opacity: .8;
+.btn-next-chapter,
+.btn-explainer-prompt {
+  cursor: pointer;
+}
+.btn-next-chapter:hover,
+.btn-explainer-prompt:hover {
+  opacity: .8;
 }
 
 .next-chapter {
-	background-color: #000;
-	padding: 30px 0;
+  background: #000000 url("@{img-root}/machines-thumb-footer.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: 50% 50%;
+  height: 280px;
+  position: relative;
+border-top: 5px solid #000;
+border-bottom: 5px solid #000;
 }
-
-.next-chapter .container {
-	text-align: center;
-	color: #fff;
+.next-chapter .btn-next-chapter {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 30px 0;
+  padding-right: 40px;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  text-align: right;
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 36px;
 }
-
 .next-chapter .arrow-right {
-	position: absolute;
-	top: 25px;
-	right: 0;
-	background: transparent url('@{img-root}/arrow.png') no-repeat;
-	width: 18px;
-	height: 16px;
-	display: block;
+  background: transparent url("@{img-root}/arrow.png") no-repeat;
+  width: 18px;
+  height: 16px;
+  display: block;
+  position: absolute;
+  top: 40px;
+  right: 10px;
+}
+.btn-next-chapter em {
+  font-style: normal;
+  font-size: 18px;
+  line-height: 8px;
+  position: relative;
+  top: -5px;
+  font-weight: normal;
 }
 
 
@@ -698,7 +724,8 @@ section .show-me {display: block;}
 	}
 }
 
-.touch .video-wrapper {margin-left: 0;}
+
+.touch .video-wrapper, .touch .video-inner-wrapper  {margin-left: 0; position: relative;}
 
 .layer-media {
 	width: 100%;
@@ -709,9 +736,10 @@ section .show-me {display: block;}
 	-o-background-size: cover;
     background-size: cover;
     background-position: 50% 50%;
-	position: relative;
 	overflow: hidden;
 }
+
+.touch .layer-media {height: auto;}
 
 
 
