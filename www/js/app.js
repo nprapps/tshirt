@@ -1,8 +1,6 @@
 $(document).ready(function() {
     var $b = $('body');
     var $w = $(window);
-    var $btn_back = $('#btn-back');
-    var $btn_next = $('#btn-next');
     var $layers = $('.layer');
     var $layer_media = $('.layer-media');
     var $nav = $('nav');
@@ -11,8 +9,6 @@ $(document).ready(function() {
     var $nav_chapter_title = $('#nav-chapter-title');
     var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
     var $titlecard = $('.titlecard');
-    var $titlecard_wrapper = $('.titlecard-wrapper')
-    var $titlecard_outer_wrapper = $('.titlecard-outer-wrapper');
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
