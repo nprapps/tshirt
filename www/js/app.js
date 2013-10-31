@@ -55,6 +55,8 @@ $(document).ready(function() {
         window_width = $w.width();
         window_height = $w.height();
         
+        // size the title card:
+
         // calculate optimal width if height is constrained to window height
         w_optimal = (window_height * video_aspect_width) / video_aspect_height;
         
@@ -72,19 +74,13 @@ $(document).ready(function() {
         w_offset = (window_width - w) / 2;
         h_offset = (window_height - h) / 2;
         
-        // size the divs accordingly
-//        $layer_media.height(window_height + 'px');
-//        $titlecard_wrapper.width(w + 'px').height(h + 'px');
-//        $titlecard_wrapper.css('margin', h_offset + 'px ' + w_offset + 'px');
-//        $titlecard_outer_wrapper.height(window_height + 'px');
-
 		$title_video.width(w + 'px').height(h + 'px');
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
 		
         // size the chapter video: must be fully visible onscreen -- no negative margins
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
-		
+
 		if (window_width < screen_medium){
 			$video_inner_wrapper.width('auto').height('auto');
 	     } else {
@@ -97,7 +93,7 @@ $(document).ready(function() {
 	        }
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 	     }
-        
+
         // Kill top-anchored nav for small displays
         if (window_width < screen_small){
                 $nav.removeAttr('data-spy').removeClass('affix');
@@ -118,36 +114,12 @@ $(document).ready(function() {
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'title' && chapter != 'about') {
-			var $iframe = $('#video-' + chapter)[0];
-			var $player = $f($iframe);
-
-			$player.addEvent('ready', function() {
-				//console.log('player ready');
-				//$player.api('setVolume', 0);
-				//$player.api('play');
-				//$player.api('seekTo', 3);
-				//$player.api('pause');
-				
-				//show question at the end of a video
-				$player.addEvent('finish', function() {
-					console.log('finished');
-			    	$('section.show').find('.video-question').addClass('animated fadeIn show-me');
-				});
-				
-				$player.addEvent('play', function() {
-					// reset questions
-					$video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
-				});
-			});
-
 			$btn_play.on('click', function() {
-				console.log('clicked!');
+				console.log(chapter + ' play button clicked');
 				var this_chapter = $(this).parents('.layer').attr('id');
 				var $this_iframe = $('#video-' + this_chapter)[0];
 				var $this_player = $f($this_iframe);
 				
-				console.log(this_chapter);
-
 				$this_player.api('play');
 				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				
@@ -169,12 +141,46 @@ $(document).ready(function() {
 		}
     }
     
+    function setup_video(chapter) {
+        // remove existing videos
+        $('.video-inner-wrapper').find('iframe').attr('src','').css('visibility', 'hidden');
+
+        // add new video (if this is a chapter that has video
+        if (chapter != 'title' && chapter != 'about') {
+            var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
+            $('#' + chapter).find('iframe').attr('src', video_path);
+
+            var $iframe = $('#video-' + chapter)[0];
+            var $player = $f($iframe);
+            
+            $player.addEvent('ready', function() {
+                console.log(chapter + ' player ready');
+                $('section.show').find('.video-inner-wrapper').find('iframe').css('visibility', 'visible');
+                
+                //show question at the end of a video
+                $player.addEvent('finish', function() {
+                    console.log('video finished');
+                    $('section.show').find('.video-question').addClass('animated fadeIn backer');
+                });
+            
+                $player.addEvent('play', function() {
+                    // reset questions
+                    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+                });
+            });
+            $('#' + chapter).find('.video-wrapper').fitVids();
+        } else {
+            // preload the PLANTS video if you're on the title screen?
+        }
+    }
+    
 	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 	    // reset questions
 	    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 		
+		/*
 		// stop video; set it back to the beginning
         for (var i = 0; i < chapters.length; i++) {
         	if (chapters[i] != 'title' && chapters[i] != 'about') {
@@ -186,6 +192,7 @@ $(document).ready(function() {
 //				$this_player.api('unload'); //<- TODO: should we be using this instead of seekTo/pause? not working for me.
 			}
         }
+        */
 	}
 	
 	
@@ -276,9 +283,12 @@ $(document).ready(function() {
             }
 	    }
 	    
+	    // init video
+        setup_video(new_chapter_name);
+	    
 	    // load graphics for this particular chapter
-	    switch(new_chapter_id) {
-	        case 1: // plants
+	    switch(new_chapter_name) {
+	        case 'plants': // plants
 	            reset_cotton_exports_graph();
 	            break;
 	    }
@@ -524,7 +534,6 @@ $(document).ready(function() {
             setup_chapter_nav(chapters[i], i);
             setup_video_question(chapters[i], i);
         }
-        $video_wrapper.fitVids();
         
         // css animations
         setup_css_animations();
