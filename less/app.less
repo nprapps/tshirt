@@ -366,46 +366,53 @@ section .show-me {display: block;}
 //footer navigation 
 
 
-.btn-next-chapter,
+.next-chapter-label,
 .btn-explainer-prompt {
   cursor: pointer;
 }
-.btn-next-chapter:hover,
+.next-chapter:hover,
 .btn-explainer-prompt:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.btn-next-chapter,
+.btn-explainer-prompt {
+  cursor: pointer;
   opacity: .8;
 }
-
-.footer-wrapper {
-background: #000000 url("@{img-root}/machines-thumb-footer-1.jpg");
+.btn-next-chapter:hover,
+.btn-explainer-prompt:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.btn-next-chapter {
+  background: #000000 url("@{img-root}/machines-thumb-footer-1.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-position: 50% 50%;
- }
-
-.next-chapter {
-  background: #000000;
-  height: 280px;
+  background-position: 50% 0%;
   position: relative;
-border-top: 5px solid #000;
-border-bottom: 5px solid #000;
-opacity: .5;
+  height: 360px;
+  border-top: 4px solid #000;
 }
-.next-chapter .btn-next-chapter {
-  color: #fff;
+.next-chapter {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0;
+}
+.next-chapter .next-chapter-label {
+  color: #fff;
   padding: 30px 0;
   padding-right: 40px;
-  background: rgba(0, 0, 0, 0.7);
-  width: 100%;
   text-align: right;
-  margin: 0;
+  margin: 0 20px 0 0;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 36px;
+position: relative;
 }
 .next-chapter .arrow-right {
   background: transparent url("@{img-root}/arrow.png") no-repeat;
@@ -416,7 +423,7 @@ opacity: .5;
   top: 40px;
   right: 10px;
 }
-.btn-next-chapter em {
+.next-chapter-label em {
   font-style: normal;
   font-size: 18px;
   line-height: 8px;
@@ -424,7 +431,6 @@ opacity: .5;
   top: -5px;
   font-weight: normal;
 }
-
 
 .nav-title, .nav-about {
   position: relative;

@@ -1,8 +1,6 @@
 $(document).ready(function() {
     var $b = $('body');
     var $w = $(window);
-    var $btn_back = $('#btn-back');
-    var $btn_next = $('#btn-next');
     var $layers = $('.layer');
     var $layer_media = $('.layer-media');
     var $nav = $('nav');
