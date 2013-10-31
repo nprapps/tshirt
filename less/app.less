@@ -686,9 +686,15 @@ position: relative;
     }
 }
 
-
-
-.touch .video-wrapper, .touch .video-inner-wrapper  {margin-left: 0; position: relative;}
+.touch {
+    .video-wrapper,
+    .video-inner-wrapper {
+        margin-top: 0;
+        position: relative;
+        
+        iframe { visibility: visible; }
+    }
+}
 
 .layer-media {
 	width: 100%;
