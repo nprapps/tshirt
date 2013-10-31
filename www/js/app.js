@@ -14,7 +14,6 @@ $(document).ready(function() {
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
-    var $video_question = $('.video-question');
     var k = kontext(document.querySelector('.kontext'));
     
     var video_aspect_width = 16;
@@ -158,12 +157,10 @@ $(document).ready(function() {
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
-                    $('section.show').find('.video-question').addClass('animated fadeIn backer');
+                    scroll_to_explainer();
                 });
             
                 $player.addEvent('play', function() {
-                    // reset questions
-                    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
                 });
             });
             $('#' + chapter).find('.video-wrapper').fitVids();
@@ -175,8 +172,6 @@ $(document).ready(function() {
 	function reset_video_layers() {
 	    // reset titlecards
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
-	    // reset questions
-	    $video_question.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 		
 		/*
 		// stop video; set it back to the beginning
@@ -208,14 +203,6 @@ $(document).ready(function() {
             // jump to the top of the page
             scroll_to_top();
         });
-	}
-	
-	function setup_video_question(chapter, id) {
-	    if (chapter != 'title' && chapter != 'about') {
-	        $('#' + chapter).find('.btn-next-chapter').on('click', function() {
-	            hasher.setHash(chapters[(id + 1)]);
-	        });
-	    }
 	}
 	
 	function get_chapter_id(chapter_name) {
@@ -530,7 +517,6 @@ $(document).ready(function() {
         for (var i = 0; i < chapters.length; i++) {
 			setup_chapters(chapters[i]);
             setup_chapter_nav(chapters[i], i);
-            setup_video_question(chapters[i], i);
         }
         
         // css animations
