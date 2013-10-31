@@ -675,16 +675,17 @@ position: relative;
     }
     iframe { visibility: hidden; }
 
-    &.video-loaded {
+    .video-loaded & {
         iframe { visibility: visible; }
     }
     
-    &.video-playing {
+    .video-playing & {
         margin-left: 0;
 
         iframe { visibility: visible; }
     }
 }
+
 
 
 .touch .video-wrapper, .touch .video-inner-wrapper  {margin-left: 0; position: relative;}
