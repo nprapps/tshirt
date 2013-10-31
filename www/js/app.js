@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var $b = $('body');
     var $w = $(window);
+    var $btn_next = $('.btn-next-chapter');
     var $layers = $('.layer');
     var $layer_media = $('.layer-media');
     var $nav = $('nav');
@@ -105,7 +106,6 @@ $(document).ready(function() {
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
 		var $btn_play = $chapter.find('.btn-play');
-		var $btn_next = $chapter.find('.btn-next-chapter');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'title' && chapter != 'about') {
@@ -178,14 +178,7 @@ $(document).ready(function() {
 	 */
 	function setup_chapter_nav(chapter, id) {
         $('.nav-' + chapter).on('click', function() {
-            // jump to the chapter
             hasher.setHash(chapters[id]);
-
-            // close the chapter nav
-            close_nav();
-
-            // jump to the top of the page
-            scroll_to_top();
         });
 	}
 	
@@ -264,6 +257,12 @@ $(document).ready(function() {
 	    
 	    // reset the layers, stop any video that's playing
 	    reset_video_layers();
+	    
+	    // scroll page to the top
+        scroll_to_top();
+        
+        // close the chapter nav
+        close_nav();
 	}
 
 	function close_nav() {
@@ -284,6 +283,12 @@ $(document).ready(function() {
 	    } else {
             open_nav();
 	    }
+	});
+	
+	$btn_next.on('click', function() {
+	    var next_chapter = $('section.show').next('section').attr('id');
+	    console.log('advancing to chapter: ' + next_chapter);
+	    hasher.setHash(next_chapter);
 	});
 	
 	
