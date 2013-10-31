@@ -97,11 +97,11 @@ nav .nav-item-wrapper.backer,
 nav {
 	position: absolute;
 	top: 0;
-	/*@media @screen-small-above {
+	@media @screen-small-above {
 		top:auto;
 		bottom: 0;
 		overflow: hidden;
-	}*/
+	}
 	right: 0;
 	width: 100%;
 	background: #000;
@@ -364,6 +364,8 @@ section .show-me {display: block;}
 	transform: rotate(90deg);
 }
 //footer navigation 
+
+
 .btn-next-chapter,
 .btn-explainer-prompt {
   cursor: pointer;
@@ -373,17 +375,22 @@ section .show-me {display: block;}
   opacity: .8;
 }
 
-.next-chapter {
-  background: #000000 url("@{img-root}/machines-thumb-footer.jpg");
+.footer-wrapper {
+background: #000000 url("@{img-root}/machines-thumb-footer-1.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-position: 50% 50%;
+ }
+
+.next-chapter {
+  background: #000000;
   height: 280px;
   position: relative;
 border-top: 5px solid #000;
 border-bottom: 5px solid #000;
+opacity: .5;
 }
 .next-chapter .btn-next-chapter {
   color: #fff;
