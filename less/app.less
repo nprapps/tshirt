@@ -420,7 +420,7 @@ position: relative;
             margin: 0;
 
             dt {
-                margin: 1.5em 0 .25em 0;
+                margin: 1.5em 0 .5em 0;
                 
                 &:first-child { margin-top: 0; }
             }
@@ -583,18 +583,58 @@ position: relative;
                     }
                 }
             }
-            .cotton-sample {
-            
-            	padding: 22px 22px 200px 22px;
-            	
-            	@media @screen-tiny-above { 
-	                background: url('@{img-root}/gr-plants-rating-bg.jpg') center bottom;
-	                background-size: cover;
-	                padding: 33px 11px 400px 11px;
+        }
+
+        &.cotton-subsidies {
+            b {
+                display: block;
+                background: url('@{img-root}/ico-subsidies.png') no-repeat;
+                height: 100px;
+                width: 100px;
+                float: left;
+                margin-top: 5px;
+
+                @media @screen-tiny { 
+                    float: right;
+                    margin-left: 22px;
                 }
-                
-                &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
             }
+            .crop-insurance b { background-position: 0 0; }
+            .prices-fall b    { background-position: 0 -100px; }
+            .cotton b         { background-position: 0 -200px; }
+
+            dt {
+                border-top: 1px dotted #eee;
+                padding-top: 1.5em; 
+                
+                &:first-child {
+                    border-top: none;
+                    padding-top: 0;
+                }
+            }
+            dd { 
+                margin-left: 122px;
+
+                @media @screen-tiny { margin-left: 0; }
+            }
+            strong {
+                display: block;
+                margin-left: 122px;
+
+                @media @screen-tiny { margin-left: 0; }
+            }
+        }
+
+        &.cotton-sample {
+            padding: 22px 22px 200px 22px;
+            
+            @media @screen-tiny-above { 
+                background: url('@{img-root}/gr-plants-rating-bg.jpg') center bottom;
+                background-size: cover;
+                padding: 33px 11px 400px 11px;
+            }
+            
+            &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
         }
     }
 }
