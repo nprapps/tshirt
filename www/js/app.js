@@ -20,7 +20,7 @@ $(document).ready(function() {
     var video_aspect_height = 9;
     var graphic_aspect_width = 4;
     var graphic_aspect_height = 3;
-    var chapters = [ 'title', 'plants', 'robots', 'humans', 'ships', 'you', 'about' ];
+    var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 228;
     var medium_nav_height = 44;

@@ -65,27 +65,27 @@
 
         <div class="btn-next-chapter">
 				<div class="next-chapter">
-					<h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.robots.fullname }} <i class="arrow-right"></i> </h3>
+					<h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.machines.fullname }} <i class="arrow-right"></i> </h3>
 				</div>
         </div><!-- /.btn-next-chapter -->
         
     </section>
 
-    <section id="robots" class="layer">
+    <section id="machines" class="layer">
 
-        {% include '_chapter_robots.html' %}
+        {% include '_chapter_machines.html' %}
 
 		<div class="btn-next-chapter">
             <div class="next-chapter">
-            <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.humans.fullname }} <i class="arrow-right"></i> </h3>
+            <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.people.fullname }} <i class="arrow-right"></i> </h3>
             </div>
 		</div><!-- /.btn-next-chapter -->
 
     </section>
 
-    <section id="humans" class="layer">
+    <section id="people" class="layer">
 
-        {% include '_chapter_humans.html' %}
+        {% include '_chapter_people.html' %}
 
         <div class="btn-next-chapter">
 			<div class="next-chapter">
@@ -129,8 +129,8 @@
             </ul>
             <ul id="nav-primary">
                 <li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
-                <li class="nav-robots"><p>{{ COPY.robots.fullname }}</p></li>
-                <li class="nav-humans"><p>{{ COPY.humans.fullname }}</p></li>
+                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
+                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
                 <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
                 <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
             </ul>
