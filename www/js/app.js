@@ -27,6 +27,7 @@ $(document).ready(function() {
     var medium_nav_height_open = 228;
     var window_width;
     var window_height;
+    var text_scrolled = false;
     
     var $d3_cotton_exports = $('#cotton-exports-d3');
     var d3_cotton_exports_data;
@@ -141,6 +142,7 @@ $(document).ready(function() {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
         $('.video-wrapper').find('iframe').attr('src','');
+        text_scrolled = false;
 
         // add new video (if this is a chapter that has video
         if (chapter != 'title' && chapter != 'about') {
@@ -158,10 +160,28 @@ $(document).ready(function() {
                     autoplay_video = false;
                 }
                 
+                // check play progress
+                $player.addEvent('playProgress', function() {
+                    // skip ahead to the explainer text at a particular cuepoint
+                    $player.api('getCurrentTime', function(time) {
+                        $player.api('getDuration', function(duration) {
+                            var current_time = time;
+                            var video_duration = duration;
+                            var cue_point = 2;
+                            
+                            if (video_duration - current_time <= cue_point && text_scrolled == false) {
+                                scroll_to_explainer();
+                                console.log(time + '/' + duration);
+                                text_scrolled = true;
+                            }
+                        });
+                    });
+                });
+                
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
-                    scroll_to_explainer();
+//                    scroll_to_explainer();
                 });
             
                 $player.addEvent('play', function() {
@@ -172,6 +192,10 @@ $(document).ready(function() {
         } else {
             // preload the PLANTS video if you're on the title screen?
         }
+    }
+    
+    function get_duration(player) {
+        return player.api('getDuration');
     }
     
 	function reset_video_layers() {
