@@ -12,6 +12,7 @@
 // Breakpoints
 @screen-mega-above: ~"screen and (min-width: 1440px)";
 @screen-large: ~"screen and (min-width: 1200px)";
+@screen-medium-above: ~"screen and (min-width: 993px)";
 @screen-medium: ~"screen and (min-width: 992px)";
 @screen-small-above: ~"screen and (min-width: 768px)";
 @screen-small: ~"screen and (max-width: 767px)";
@@ -524,31 +525,39 @@ position: relative;
         &.cotton-rating {
             ul {
                 display: block;
+                margin: 0;
+                padding: 22px;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,.5);
+
                 @media @screen-tiny-above { 
-	                margin: 0;
-	                padding: 0;
+                    padding: 0;
+	                height: auto;
 	                display: table;
-	                width: 100%;
+	                background: none;
                 }
                 
                 > li {
 					display: block;
                     width: auto;
-					margin-bottom: 1em;
-					text-align: left;
+					margin-bottom: .5em;
+					text-align: right;
+                    color: #eee;
 					
 	                @media @screen-tiny-above { 
 			            display: table-cell;
 	                    width: 20%;
 	                    vertical-align: top;
 	                    text-align: center;
-	                    color: #fff;
 					}
 
                     b {
                         display: inline-block;
 						width: 125px;
 						font-size: 14px;
+						text-align: left;
+						float: left;
                         
                         @media @screen-tiny-above { 
                         	display: block;
@@ -557,15 +566,17 @@ position: relative;
 	                        font-size: 12px;
 	                        color: #fff;
 	                        width: auto;
+	                        text-align: center;
+	                        float: none;
                         }
                     }
                     i {
                         display: inline-block;
                         font-size: 14px;
+                        font-style: normal;
                         
                         @media @screen-tiny-above { 
                         	display: block;
-	                        font-style: normal;
 	                        font-size: 26px;
 	                        color: #A8D5EF;
                         }
@@ -587,12 +598,19 @@ position: relative;
                 }
             }
             .cotton-sample {
-                padding: 22px 22px 200px 22px;
-            
+//                padding: 22px 22px 200px 22px;
+                background: url('@{img-root}/gr-plants-rating-480.jpg') center bottom;
+                background-size: cover;
+                
                 @media @screen-tiny-above { 
-                    background: url('@{img-root}/gr-plants-rating-bg.jpg') center bottom;
-                    background-size: cover;
+                    background-image: url('@{img-root}/gr-plants-rating-768.jpg');
                     padding: 33px 11px 400px 11px;
+                }
+                @media @screen-small-above { 
+                    background-image: url('@{img-root}/gr-plants-rating-992.jpg');
+                }
+                @media @screen-medium-above { 
+                    background-image: url('@{img-root}/gr-plants-rating-1200.jpg');
                 }
             
                 &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
