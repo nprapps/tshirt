@@ -554,6 +554,7 @@ position: relative;
 	                        text-transform: uppercase;
 	                        font-size: 12px;
 	                        color: #fff;
+	                        width: auto;
                         }
                     }
                     i {
@@ -583,6 +584,17 @@ position: relative;
                     }
                 }
             }
+            .cotton-sample {
+                padding: 22px 22px 200px 22px;
+            
+                @media @screen-tiny-above { 
+                    background: url('@{img-root}/gr-plants-rating-bg.jpg') center bottom;
+                    background-size: cover;
+                    padding: 33px 11px 400px 11px;
+                }
+            
+                &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+            }
         }
 
         &.cotton-subsidies {
@@ -603,6 +615,9 @@ position: relative;
             .prices-fall b    { background-position: 0 -100px; }
             .cotton b         { background-position: 0 -200px; }
 
+            dl {
+                margin-bottom: 2em;
+            }
             dt {
                 border-top: 1px dotted #eee;
                 padding-top: 1.5em; 
@@ -623,18 +638,6 @@ position: relative;
 
                 @media @screen-tiny { margin-left: 0; }
             }
-        }
-
-        &.cotton-sample {
-            padding: 22px 22px 200px 22px;
-            
-            @media @screen-tiny-above { 
-                background: url('@{img-root}/gr-plants-rating-bg.jpg') center bottom;
-                background-size: cover;
-                padding: 33px 11px 400px 11px;
-            }
-            
-            &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
         }
     }
 }
