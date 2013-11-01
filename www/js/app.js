@@ -27,6 +27,7 @@ $(document).ready(function() {
     var medium_nav_height_open = 228;
     var window_width;
     var window_height;
+    var video_advance_cuepoint = 2;
     var text_scrolled = false;
     
     var $d3_cotton_exports = $('#cotton-exports-d3');
@@ -165,11 +166,7 @@ $(document).ready(function() {
                     // skip ahead to the explainer text at a particular cuepoint
                     $player.api('getCurrentTime', function(time) {
                         $player.api('getDuration', function(duration) {
-                            var current_time = time;
-                            var video_duration = duration;
-                            var cue_point = 2;
-                            
-                            if (video_duration - current_time <= cue_point && text_scrolled == false) {
+                            if (duration - time <= video_advance_cuepoint && text_scrolled == false) {
                                 scroll_to_explainer();
                                 console.log(time + '/' + duration);
                                 text_scrolled = true;
