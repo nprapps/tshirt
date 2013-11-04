@@ -94,7 +94,7 @@ $(document).ready(function() {
 	     }
 
         // Kill top-anchored nav for small displays
-        if (window_width < screen_small){
+        if (Modernizr.touch){
             $nav.removeAttr('data-spy').removeClass('affix');
         } else {
             $nav.attr('data-spy', 'affix');
