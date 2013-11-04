@@ -83,7 +83,14 @@ section { background-color: #fff; }
 .backer,
 nav .nav-item-wrapper.backer,
 .video-wrapper.backer {
-    display: block;
+	@media @screen-small-above { 
+    	display: block;
+    }
+}
+
+//touch navigation
+.touch .backer, .touch nav .nav-item-wrapper.backer {
+	display: block;
 }
 
 .video-wrapper.backer {
@@ -92,6 +99,7 @@ nav .nav-item-wrapper.backer,
 
 
 //primary navigation
+
 nav {
 	position: absolute;
 	bottom: 0;
@@ -249,7 +257,14 @@ nav {
 		  overflow: hidden;
 }
 
-//showing touch navigation
+//touch navigation
+.touch nav {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
+//showing on small screen
 @media @screen-small { 
 	.touch nav {
 		display: block;
