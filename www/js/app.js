@@ -95,11 +95,11 @@ $(document).ready(function() {
 
         // Kill top-anchored nav for small displays
         if (window_width < screen_small){
-                $nav.removeAttr('data-spy').removeClass('affix');
+            $nav.removeAttr('data-spy').removeClass('affix');
         } else {
-                $nav.attr('data-spy', 'affix');
-                // fine-tune when the chapter nav affixes to the top
-                $nav.attr('data-offset-top', (window_height - $nav.height()));
+            $nav.attr('data-spy', 'affix');
+            // fine-tune when the chapter nav affixes to the top
+            $nav.attr('data-offset-top', (window_height - nav_height));
         }
         
         // redraw graphics (if they exist yet)
