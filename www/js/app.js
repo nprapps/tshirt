@@ -207,6 +207,7 @@ $(document).ready(function() {
 	function setup_chapter_nav(chapter, id) {
         $('.nav-' + chapter).on('click', function() {
             hasher.setHash(chapters[id]);
+            close_nav();
         });
 	}
 	
