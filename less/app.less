@@ -242,7 +242,8 @@ nav {
 	&:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
 	
 	@media @screen-small-above {
-        body.chapter-about & {
+        body.chapter-about &,
+        body.chapter-buy & {
             top: 0;
             bottom: auto;
             position: fixed;
@@ -413,7 +414,8 @@ position: relative;
     @media @screen-tiny { padding-top: 22px; }
 
 	@media @screen-small-above {
-        body.chapter-about & {
+        body.chapter-about &,
+        body.chapter-buy & {
             padding-top: 88px;
         }
     }

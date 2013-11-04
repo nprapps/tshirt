@@ -20,7 +20,7 @@ $(document).ready(function() {
     var video_aspect_height = 9;
     var graphic_aspect_width = 4;
     var graphic_aspect_height = 3;
-    var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about' ];
+    var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 228;
     var medium_nav_height = 44;
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		var $btn_play = $chapter.find('.btn-play');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
-    	if (chapter != 'title' && chapter != 'about') {
+    	if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var this_chapter = $(this).parents('.layer').attr('id');
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			    hasher.setHash(chapters[1]);
 				close_nav();
 			});
-		} else { // about
+		} else { // about or buy
 		    // do something else?
 		}
     }
@@ -146,7 +146,7 @@ $(document).ready(function() {
         text_scrolled = false;
 
         // add new video (if this is a chapter that has video
-        if (chapter != 'title' && chapter != 'about') {
+        if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             $('#' + chapter).find('iframe').attr('src', video_path);
 
@@ -260,7 +260,7 @@ $(document).ready(function() {
 	        if (i == new_chapter_id) {
                 $b.addClass(this_chapter_class);
 
-                if (this_chapter_name != 'title' && this_chapter_name != 'about') {
+                if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
                     $nav_chapter_title.text(COPY[this_chapter_name]['fullname']);
                     $nav_chapter_title_prompt.text(COPY[this_chapter_name]['nav_prompt']);
                 } else {
