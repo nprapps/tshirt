@@ -13,7 +13,7 @@
 @screen-mega-above: ~"screen and (min-width: 1440px)";
 @screen-large: ~"screen and (min-width: 1200px)";
 @screen-medium-above: ~"screen and (min-width: 993px)";
-@screen-medium: ~"screen and (min-width: 992px)";
+@screen-medium: ~"screen and (max-width: 992px)";
 @screen-small-above: ~"screen and (min-width: 768px)";
 @screen-small: ~"screen and (max-width: 767px)";
 @screen-tiny-above: ~"screen and (min-width: 481px)";
@@ -94,12 +94,7 @@ nav .nav-item-wrapper.backer,
 //primary navigation
 nav {
 	position: absolute;
-	top: 0;
-	@media @screen-small-above {
-		top:auto;
-		bottom: 0;
-		overflow: hidden;
-	}
+	bottom: 0;
 	right: 0;
 	width: 100%;
 	background: #000;
@@ -107,11 +102,13 @@ nav {
 	color: #fff;
 	display: block;
 	z-index: 100;
+	overflow: hidden;
+	@media @screen-small { display: none; }
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
 		@media @screen-small-above { padding: 0 22px 22px 22px; }
-		}
+	}
 	.nav-item-wrapper { display: none; }
 	
 	h3 {
@@ -250,6 +247,13 @@ nav {
 		  padding-right: 30px;
 		  @media @screen-small-above {padding-right: 23px;}
 		  overflow: hidden;
+}
+
+//showing touch navigation
+@media @screen-small { 
+	.touch nav {
+		display: block;
+	}
 }
 
 // Chapter navigation thumbnails
@@ -738,7 +742,7 @@ position: relative;
     background-color: #000;
     height: 100%;
     width: 100%;
-    margin-top: -100%;
+    margin-top: -10000px;
     
     .video-inner-wrapper {
         position: absolute;
@@ -811,6 +815,8 @@ position: relative;
 }
 
 
+
+
 //hiding desktop only titlecard features
 .touch {
     .titlecard {
@@ -824,6 +830,12 @@ position: relative;
     .title-video {
         display: none;
     }
+    
+    #nav-chapter-title-prompt {
+	    display: none;
+    }
+    
+    
 }
 
 .touch .layer-media {height: auto;}
