@@ -27,7 +27,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 body {
-        background-color: #000;
+    background-color: #000;
 }
 
 .explainer {
@@ -95,6 +95,8 @@ nav .nav-item-wrapper.backer,
 	margin-left: 0;
 }
 
+
+//primary navigation
 nav {
 	position: absolute;
 	top: 0;
@@ -667,9 +669,6 @@ position: relative;
     }
 }
 
-//hiding desktop only titlecard features
-.touch .titlecard, .touch .title-video {display: none;}
-
 .titlecard {
     position: absolute;
     top: 0;
@@ -803,9 +802,78 @@ position: relative;
     background-position: 50% 50%;
 }
 
+
+//hiding desktop only titlecard features
+.touch {
+    .titlecard {
+        display: none;
+    }
+    
+    .chapter-title .titlecard {
+        display: block;
+    }
+    
+    .title-video {
+        display: none;
+    }
+}
+
 .touch .layer-media {height: auto;}
+.touch .chapter-title .layer-media {height: 100%;}
+
+//index page
+
+.npr-logo {
+  width: 100px;
+  margin: 50px 0 15px 0;
+}
+
+.chapter-title .titlecard h1 {
+  font-size: 90px;
+  margin: 0 0 0 0;
+}
 
 
+//index page navigation for touch devices
+.index-nav {
+	display: none;
+}
+
+.touch .index-nav {
+	display: block;
+}
+
+.touch {
+	.btn-play,
+	.chapter-title nav {
+	  display: none;
+	}
+	.chapter-title .titlecard h1 {
+	  font-size: 48px;
+	}
+	.chapter-title .titlecard h2 {
+	  font-size: 24px;
+	  margin-bottom: 0;
+	}
+	.index-nav {
+	  color: #fff;
+	}
+	.index-nav ul {
+	  padding: 0;
+	}
+	.index-nav li {
+	  list-style-type: none;
+	  padding: 15px 5px;
+	  background-image: none !important;
+	  margin: 10px;
+	  font-size: 32px;
+	  font-weight: bold;
+	  text-align: left;
+	 /* background: rgba(0,0,0,.7);*/
+	  text-transform: uppercase;
+	  border-bottom: 1px solid #ccc;
+	}
+}
 
 @media @screen-medium {
 	
