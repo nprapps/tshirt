@@ -235,14 +235,22 @@ nav {
 	}
 	
 	&:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
+	
+	@media @screen-small-above {
+        body.chapter-about & {
+            top: 0;
+            bottom: auto;
+            position: fixed;
+        }
 	}
+}
 
 .btn-chapter {
 		  position: relative;
 		  padding-right: 30px;
 		  @media @screen-small-above {padding-right: 23px;}
 		  overflow: hidden;
-}//nav
+}
 
 // Chapter navigation thumbnails
 @media @screen-small-above {
@@ -384,7 +392,12 @@ position: relative;
 .explainer {
     padding-top: 33px;
     @media @screen-tiny { padding-top: 22px; }
-    
+
+	@media @screen-small-above {
+        body.chapter-about & {
+            padding-top: 88px;
+        }
+    }
 
     h2 {
         font-weight: 700;
