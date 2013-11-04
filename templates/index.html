@@ -34,29 +34,26 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
+						<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
 							<h1>{{ COPY.content.project_title }}</h1>
 							<h2>{{ COPY.content.project_subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.title_play_button_label }}</button>
+							<div class="index-nav">
+								<ul>
+					        		<li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
+					                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
+					                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
+					                <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
+					                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
+					                <li class="nav-about">{{ COPY.content.about_title }}</li>
+					        	</ul>
+							</div><!-- /.index-nav -->
 						</div><!-- /.col --> 
 					</div><!-- /.row -->  
 				</div><!-- /.container -->
 			</div><!-- /.titlecard --> 
 
 		</div> <!-- /.layer-media -->
-		<div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                	<ul>
-                		<li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
-						<li class="nav-robots"><p>{{ COPY.robots.fullname }}</p></li>
-						<li class="nav-humans"><p>{{ COPY.humans.fullname }}</p></li>
-						<li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
-						<li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
-                	</ul>
-                </div><!-- /.col --> 
-            </div><!-- /.row -->  
-        </div><!-- /.container -->
-		
     </section>
 
     <section id="plants" class="layer">

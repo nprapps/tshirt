@@ -13,7 +13,7 @@
 @screen-mega-above: ~"screen and (min-width: 1440px)";
 @screen-large: ~"screen and (min-width: 1200px)";
 @screen-medium-above: ~"screen and (min-width: 993px)";
-@screen-medium: ~"screen and (min-width: 992px)";
+@screen-medium: ~"screen and (max-width: 992px)";
 @screen-small-above: ~"screen and (min-width: 768px)";
 @screen-small: ~"screen and (max-width: 767px)";
 @screen-tiny-above: ~"screen and (min-width: 481px)";
@@ -29,6 +29,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 body { background-color: #000; }
 .explainer { background-color: #fff; }
 section { background-color: #fff; }
+
 
 // Animations
 .slideInUp {
@@ -82,21 +83,26 @@ section { background-color: #fff; }
 .backer,
 nav .nav-item-wrapper.backer,
 .video-wrapper.backer {
-    display: block;
+	@media @screen-small-above { 
+    	display: block;
+    }
+}
+
+//touch navigation
+.touch .backer, .touch nav .nav-item-wrapper.backer {
+	display: block;
 }
 
 .video-wrapper.backer {
 	margin-left: 0;
 }
 
+
+//primary navigation
+
 nav {
 	position: absolute;
-	top: 0;
-	@media @screen-small-above {
-		top:auto;
-		bottom: 0;
-		overflow: hidden;
-	}
+	bottom: 0;
 	right: 0;
 	width: 100%;
 	background: #000;
@@ -104,11 +110,13 @@ nav {
 	color: #fff;
 	display: block;
 	z-index: 100;
+	overflow: hidden;
+	@media @screen-small { display: none; }
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
 		@media @screen-small-above { padding: 0 22px 22px 22px; }
-		}
+	}
 	.nav-item-wrapper { display: none; }
 	
 	h3 {
@@ -247,6 +255,20 @@ nav {
 		  padding-right: 30px;
 		  @media @screen-small-above {padding-right: 23px;}
 		  overflow: hidden;
+}
+
+//touch navigation
+.touch nav {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+}
+
+//showing on small screen
+@media @screen-small { 
+	.touch nav {
+		display: block;
+	}
 }
 
 // Chapter navigation thumbnails
@@ -674,9 +696,6 @@ position: relative;
     }
 }
 
-//hiding desktop only titlecard features
-.touch .titlecard, .touch .title-video {display: none;}
-
 .titlecard {
     position: absolute;
     top: 0;
@@ -738,7 +757,7 @@ position: relative;
     background-color: #000;
     height: 100%;
     width: 100%;
-    margin-top: -100%;
+    margin-top: -10000px;
     
     .video-inner-wrapper {
         position: absolute;
@@ -810,9 +829,86 @@ position: relative;
     background-position: 50% 50%;
 }
 
+
+
+
+//hiding desktop only titlecard features
+.touch {
+    .titlecard {
+        display: none;
+    }
+    
+    .chapter-title .titlecard {
+        display: block;
+    }
+    
+    .title-video {
+        display: none;
+    }
+    
+    #nav-chapter-title-prompt {
+	    display: none;
+    }
+    
+    
+}
+
 .touch .layer-media {height: auto;}
+.touch .chapter-title .layer-media {height: 100%;}
+
+//index page
+
+.npr-logo {
+  width: 100px;
+  margin: 50px 0 15px 0;
+}
+
+.chapter-title .titlecard h1 {
+  font-size: 90px;
+  margin: 0 0 0 0;
+}
 
 
+//index page navigation for touch devices
+.index-nav {
+	display: none;
+}
+
+.touch .index-nav {
+	display: block;
+}
+
+.touch {
+	.btn-play,
+	.chapter-title nav {
+	  display: none;
+	}
+	.chapter-title .titlecard h1 {
+	  font-size: 48px;
+	}
+	.chapter-title .titlecard h2 {
+	  font-size: 24px;
+	  margin-bottom: 0;
+	}
+	.index-nav {
+	  color: #fff;
+	}
+	.index-nav ul {
+	  padding: 0;
+	}
+	.index-nav li {
+	  list-style-type: none;
+	  padding: 15px 5px;
+	  background-image: none !important;
+	  margin: 10px;
+	  font-size: 32px;
+	  font-weight: bold;
+	  text-align: left;
+	 /* background: rgba(0,0,0,.7);*/
+	  text-transform: uppercase;
+	  border-bottom: 1px solid #ccc;
+	}
+}
 
 @media @screen-medium {
 	
