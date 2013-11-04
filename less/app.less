@@ -328,6 +328,7 @@ nav {
   position: relative;
   height: 360px;
   border-top: 4px solid #000;
+  overflow: hidden;
 }
 .next-chapter {
   background: rgba(0, 0, 0, 0.5);
@@ -371,6 +372,10 @@ position: relative;
   overflow: hidden;
   text-transform: uppercase;
 }
+
+.footer-video {width: 100%; margin-top: -300px;}
+
+.touch .footer-video {display: none;}
 
 // Explainer text
 .explainer {
@@ -763,6 +768,33 @@ position: relative;
     background-size: cover;
     background-position: 50% 50%;
 	overflow: hidden;
+}
+
+.chapter-machines .layer-media {
+	background: #000 url('@{img-root}/machines-title.jpg');
+	 -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.chapter-ships .layer-media {
+	background: #000 url('@{img-root}/ships-title.jpg');
+	 -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.chapter-you .layer-media {
+	background: #000 url('@{img-root}/you-title.jpg');
+	 -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
 }
 
 .touch .layer-media {height: auto;}
