@@ -183,7 +183,7 @@ $(document).ready(function() {
                     $('section.show').removeClass('video-loaded').addClass('video-playing');
                 });
 
-                if (autoplay_video) {
+                if (autoplay_video && !is_touch) {
                     $('section.show').find('.btn-play').trigger('click');
                     autoplay_video = false;
                 }
