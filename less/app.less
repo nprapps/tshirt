@@ -518,6 +518,37 @@ position: relative;
             }
         }
         
+        table {
+            border-collapse: collapse;
+            font-size: 14px;
+            line-height: 1.4;
+            width: 100%;
+            margin-bottom: 1.5em;
+            
+            td,
+            th {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 2px solid #eee;
+                
+                &.amt { text-align: right; }
+            }
+            
+            th { 
+                border-bottom: 2px solid #ccc;
+                padding-top: 0;
+            }
+
+            tr { 
+                vertical-align: top;
+                
+                &.shadedrow td {
+                    background-color: #f7f7f7;
+                    font-weight: bold;
+                }
+            }
+        }
+        
         .credit {
             font-size: 12px;
             color: #999;
