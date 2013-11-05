@@ -19,6 +19,7 @@
 @screen-tiny-above: ~"screen and (min-width: 481px)";
 @screen-tiny: ~"screen and (max-width: 480px)";
 
+
 // General styles
 //html { overflow-y: scroll; } //force scrollbar
 
@@ -89,7 +90,8 @@ nav .nav-item-wrapper.backer,
 }
 
 //touch navigation
-.touch .backer, .touch nav .nav-item-wrapper.backer {
+.touch .backer,
+.touch nav .nav-item-wrapper.backer {
 	display: block;
 }
 
@@ -112,6 +114,7 @@ nav {
 	z-index: 100;
 	overflow: hidden;
 	@media @screen-small { display: none; }
+    .clearfix();
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
@@ -191,6 +194,7 @@ nav {
 	        @media @screen-small-above {
 		        display: table;
 		        width: 100%;
+		        .clearfix();
 		        
 		        > li {
 		            display: table-cell;
@@ -219,7 +223,6 @@ nav {
 						padding: 10px 0;
 					}
 		        }
-		        &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
 	        }
 	    }
 	}
@@ -241,10 +244,9 @@ nav {
 	    }
 	}
 	
-	&:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
-	
 	@media @screen-small-above {
-        body.chapter-about & {
+        body.chapter-about &,
+        body.chapter-buy & {
             top: 0;
             bottom: auto;
             position: fixed;
@@ -259,10 +261,10 @@ nav {
 }
 
 .btn-chapter {
-		  position: relative;
-		  padding-right: 30px;
-		  @media @screen-small-above {padding-right: 23px;}
-		  overflow: hidden;
+      position: relative;
+      padding-right: 30px;
+      @media @screen-small-above { padding-right: 23px; }
+      overflow: hidden;
 }
 
 //touch navigation
@@ -404,16 +406,21 @@ position: relative;
   font-weight: normal;
 }
 
-.nav-title, .nav-about {
+.nav-title,
+.nav-about {
   position: relative;
   padding-left: 23px;
   overflow: hidden;
   text-transform: uppercase;
 }
 
-.footer-video {width: 100%; margin-top: -300px;}
+.footer-video {
+    width: 100%;
+    margin-top: -300px;
+    
+    .touch & { display: none; }
+}
 
-.touch .footer-video {display: none;}
 
 // Explainer text
 .explainer {
@@ -421,7 +428,8 @@ position: relative;
     @media @screen-tiny { padding-top: 22px; }
 
 	@media @screen-small-above {
-        body.chapter-about & {
+        body.chapter-about &,
+        body.chapter-buy & {
             padding-top: 88px;
         }
     }
@@ -445,14 +453,30 @@ position: relative;
         text-transform: uppercase;
         color: #121212;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 1.5;
     }
-    p {
+    p,
+    dl {
         margin: 0 0 1.5em 0;
         font-size: 20px;
         line-height: 1.5;
         color: #444;
+    }
+    
+    dt {
+        margin-top: 1.5em;
+        &:first-child { margin-top: 0; }
+    }
+    
+    .credits {
+        p { font-size: 14px; }
+    }
+    
+    .date {
+        color: #999;
+        font-size: 80%;
+        white-space: nowrap;
     }
     
     .graphic {
@@ -466,10 +490,12 @@ position: relative;
 
             dt {
                 margin: 1.5em 0 .5em 0;
+                font-size: 16px;
                 
                 &:first-child { margin-top: 0; }
             }
             dd {
+                font-size: 16px;
             }
         }
         
@@ -494,7 +520,7 @@ position: relative;
             font-weight: normal;
             color: #666;
             margin: -1.5em 0 1.5em 0;
-            font-size: 12px;
+            font-size: 14px;
         }
         
         &.d3-chart {
@@ -640,9 +666,9 @@ position: relative;
                 }
             }
             .cotton-sample {
-//                padding: 22px 22px 200px 22px;
                 background: url('@{img-root}/gr-plants-rating-480.jpg') center bottom;
                 background-size: cover;
+                .clearfix();
                 
                 @media @screen-tiny-above { 
                     background-image: url('@{img-root}/gr-plants-rating-768.jpg');
@@ -655,7 +681,6 @@ position: relative;
                     background-image: url('@{img-root}/gr-plants-rating-1200.jpg');
                 }
             
-                &:after { content: ' '; display: table; width: 100%; overflow: hidden; clear: both; }
             }
         }
 
@@ -702,6 +727,18 @@ position: relative;
             }
         }
     }
+
+    .table-of-contents {
+        font-size: 14px;
+
+        a { font-weight: bold; }
+        dt {
+            margin-bottom: 1em;
+            text-transform: uppercase;
+            color: #4F5057;
+        }
+        li { margin-bottom: 1em; }
+    }
 }
 
 .titlecard {
@@ -714,21 +751,33 @@ position: relative;
 	display: block;
 
     h1 {
-        font-size: 130px;
+        font-size: 90px;
         color: #fff;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-        margin: 100px 0 44px 0;
+        margin: 100px 0 11px 0;
+
+        body.chapter-title & {
+            margin-bottom: 22px;
+        }
     }
 
     h2 {
-        font-size: 26px;
-        text-transform: uppercase;
+        font-size: 28px;
+        line-height: 1.4;
         margin-bottom: 33px;
         color: #fff;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
         margin-top: 11px;
+        max-width: 500px;
+        margin: 0 auto 44px auto;
+        
+        body.chapter-title & {
+            font-size: 26px;
+            text-transform: uppercase;
+            max-width: none;
+        }
     }
     
     .btn.btn-play {
@@ -747,8 +796,8 @@ position: relative;
     }
 }
 
-// Title screen only
 
+// Title screen only
 .chapter-title {
     nav h3#nav-chapter-title,
     nav h3#nav-chapter-title-prompt,
@@ -808,36 +857,17 @@ position: relative;
     background-size: cover;
     background-position: 50% 50%;
 	overflow: hidden;
+	
+	.chapter-machines & {
+        background-image: url('@{img-root}/machines-title.jpg');
+	}
+	.chapter-ships & {
+        background-image: url('@{img-root}/ships-title.jpg');
+	}
+	.chapter-you & {
+        background-image: url('@{img-root}/you-title.jpg');
+	}
 }
-
-.chapter-machines .layer-media {
-	background: #000 url('@{img-root}/machines-title.jpg');
-	 -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    background-size: cover;
-    background-position: 50% 50%;
-}
-
-.chapter-ships .layer-media {
-	background: #000 url('@{img-root}/ships-title.jpg');
-	 -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    background-size: cover;
-    background-position: 50% 50%;
-}
-
-.chapter-you .layer-media {
-	background: #000 url('@{img-root}/you-title.jpg');
-	 -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    background-size: cover;
-    background-position: 50% 50%;
-}
-
-
 
 
 //hiding desktop only titlecard features

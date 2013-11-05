@@ -20,7 +20,7 @@ $(document).ready(function() {
     var video_aspect_height = 9;
     var graphic_aspect_width = 4;
     var graphic_aspect_height = 3;
-    var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about' ];
+    var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 228;
     var medium_nav_height = 44;
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		var $btn_play = $chapter.find('.btn-play');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
-    	if (chapter != 'title' && chapter != 'about') {
+    	if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var this_chapter = $(this).parents('.layer').attr('id');
@@ -134,7 +134,7 @@ $(document).ready(function() {
 			    hasher.setHash(chapters[1]);
 				close_nav();
 			});
-		} else { // about
+		} else { // about or buy
 		    // do something else?
 		}
     }
@@ -146,21 +146,19 @@ $(document).ready(function() {
         text_scrolled = false;
 
         // add new video (if this is a chapter that has video
-        if (chapter != 'title' && chapter != 'about') {
+        if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             $('#' + chapter).find('iframe').attr('src', video_path);
 
             var $iframe = $('#video-' + chapter)[0];
             var $player = $f($iframe);
             
+            var player_ready = false;
+            
             $player.addEvent('ready', function() {
                 console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
-                if (autoplay_video) {
-                    $('section.show').find('.btn-play').trigger('click');
-                    autoplay_video = false;
-                }
-                
+            
                 // check play progress
                 $player.addEvent('playProgress', function() {
                     // skip ahead to the explainer text at a particular cuepoint
@@ -174,25 +172,23 @@ $(document).ready(function() {
                         });
                     });
                 });
-                
+            
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
-//                    scroll_to_explainer();
                 });
-            
+        
                 $player.addEvent('play', function() {
                     $('section.show').removeClass('video-loaded').addClass('video-playing');
                 });
+
+                if (autoplay_video) {
+                    $('section.show').find('.btn-play').trigger('click');
+                    autoplay_video = false;
+                }
             });
             $('#' + chapter).find('.video-wrapper').fitVids();
-        } else {
-            // preload the PLANTS video if you're on the title screen?
         }
-    }
-    
-    function get_duration(player) {
-        return player.api('getDuration');
     }
     
 	function reset_video_layers() {
@@ -207,6 +203,7 @@ $(document).ready(function() {
 	function setup_chapter_nav(chapter, id) {
         $('.nav-' + chapter).on('click', function() {
             hasher.setHash(chapters[id]);
+            close_nav();
         });
 	}
 	
@@ -247,7 +244,7 @@ $(document).ready(function() {
             }
         }
         
-        console.log(new_chapter_name);
+        console.log('new chapter: ' + new_chapter_name);
 
 	    // goto that chapter
 	    k.show(new_chapter_id);
@@ -260,7 +257,7 @@ $(document).ready(function() {
 	        if (i == new_chapter_id) {
                 $b.addClass(this_chapter_class);
 
-                if (this_chapter_name != 'title' && this_chapter_name != 'about') {
+                if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
                     $nav_chapter_title.text(COPY[this_chapter_name]['fullname']);
                     $nav_chapter_title_prompt.text(COPY[this_chapter_name]['nav_prompt']);
                 } else {
@@ -315,6 +312,7 @@ $(document).ready(function() {
 	
 	$btn_next.on('click', function() {
 	    var next_chapter = $('section.show').next('section').attr('id');
+	    autoplay_video = true;
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
 	});
@@ -343,13 +341,8 @@ $(document).ready(function() {
         });
     }
 	 
-    $nav_chapter_title_prompt.on('click', function() {
-        scroll_to_explainer();
-    });
-
-    $nav_chapter_title.on('click', function() {
-        scroll_to_top();
-    });
+    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
+    $nav_chapter_title.on('click', scroll_to_top);
 
 
     /*
