@@ -118,7 +118,9 @@ nav {
 	
 	.nav-wrapper { 
 		padding: 0 5px 5px 5px; 
-		@media @screen-small-above { padding: 0 22px 22px 22px; }
+		.touch &{
+			@media @screen-small-above { padding: 0 22px 22px 22px; }
+		}
 	}
 	.nav-item-wrapper { display: none; }
 	
@@ -247,6 +249,12 @@ nav {
         body.chapter-buy & {
             top: 0;
             bottom: auto;
+            position: fixed;
+        }
+        
+        .touch body.chapter-about & {
+            top: auto;
+            bottom: 0;
             position: fixed;
         }
 	}
