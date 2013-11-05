@@ -869,16 +869,6 @@ position: relative;
     }
 }
 
-.touch {
-    .video-wrapper,
-    .video-inner-wrapper {
-        margin-top: 0;
-        position: relative;
-        
-        iframe { visibility: visible; }
-    }
-}
-
 .layer-media {
 	width: 100%;
     height: 100%;
@@ -902,10 +892,20 @@ position: relative;
 }
 
 
-//hiding desktop only titlecard features
+//hiding desktop only features
 .touch {
+	.video-wrapper,
+    .video-inner-wrapper {
+        margin-top: 0;
+        position: relative;
+        
+        iframe { visibility: visible; }
+    }
+    
     .titlecard {
-        display: none;
+        height: auto;
+        z-index: 10;
+        
     }
     
     .chapter-title .titlecard {
@@ -920,11 +920,10 @@ position: relative;
 	    display: none;
     }
     
+    .layer-media {height: auto;}
     
+    .chapter-title .layer-media {height: 100%;}
 }
-
-.touch .layer-media {height: auto;}
-.touch .chapter-title .layer-media {height: 100%;}
 
 //index page
 
