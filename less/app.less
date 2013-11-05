@@ -783,12 +783,14 @@ position: relative;
 	display: block;
 
     h1 {
-        font-size: 90px;
         color: #fff;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-        margin: 100px 0 11px 0;
+        @media @screen-tiny-above {
+	        font-size: 90px;
+	        margin: 100px 0 11px 0;
+        }
 
         body.chapter-title & {
             margin-bottom: 22px;
@@ -796,14 +798,16 @@ position: relative;
     }
 
     h2 {
-        font-size: 28px;
-        line-height: 1.4;
-        margin-bottom: 33px;
+    	font-size: 13px;
         color: #fff;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-        margin-top: 11px;
         max-width: 500px;
         margin: 0 auto 44px auto;
+        @media @screen-tiny-above {
+	        font-size: 28px;
+			line-height: 1.4;
+			margin-bottom: 33px;
+        }
         
         body.chapter-title & {
             font-size: 26px;
@@ -892,7 +896,7 @@ position: relative;
 }
 
 
-//hiding desktop only features
+//removing title card image and showing vimeo video instead for touch devices
 .touch {
 	.video-wrapper,
     .video-inner-wrapper {
@@ -923,9 +927,11 @@ position: relative;
     .layer-media {height: auto;}
     
     .chapter-title .layer-media {height: 100%;}
+    
+    .video-playing .titlecard {display: none;}
 }
 
-//index page
+//home page
 
 .npr-logo {
   width: 100px;
@@ -938,7 +944,7 @@ position: relative;
 }
 
 
-//index page navigation for touch devices
+//home page navigation for touch devices
 .index-nav {
 	display: none;
 }
