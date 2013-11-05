@@ -25,7 +25,7 @@ $(document).ready(function() {
     var nav_height = 74;
     var nav_height_open = 228;
     var small_nav_height = 44;
-    var small_nav_height_open = 228;
+    var small_nav_height_open = 328;
     var window_width;
     var window_height;
     var video_advance_cuepoint = 2;

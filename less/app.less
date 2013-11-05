@@ -164,12 +164,17 @@ nav {
 	    list-style-type: none;
 	    
 	    &#nav-secondary {
+	        padding-top: 30px;
+	        @media @screen-small-above {padding-top: 0;}
 	        float: left;
 	        
 	        > li {
-	            display: inline-block;
-	            margin-right: 12px;
-	            line-height: 74px;
+	            @media @screen-small-above {
+	            	padding-top: 0;
+		            display: inline-block;
+		            margin-right: 12px;
+		            line-height: 74px;
+		        }
 	
 	            &:hover {
 	                cursor: pointer;
@@ -324,6 +329,7 @@ nav {
   width: 15px;
   height: 16px;
   display: block;
+  @media @screen-small {display: none;}
 }
 
 .about {
@@ -334,6 +340,7 @@ nav {
   width: 18px;
   height: 19px;
   display: block;
+  @media @screen-small {display: none;}
 }
 
 //footer navigation 
@@ -408,10 +415,13 @@ position: relative;
 
 .nav-title,
 .nav-about {
-  position: relative;
-  padding-left: 23px;
-  overflow: hidden;
-  text-transform: uppercase;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	@media @screen-small-above {
+	  position: relative;
+	  padding-left: 23px;
+	  overflow: hidden;
+    }
 }
 
 .footer-video {
@@ -962,7 +972,7 @@ position: relative;
     .video-playing .titlecard {display: none;}
     
     .explainer {padding-top: 0;}
-    .explainer h2 {margin: 0;}
+    .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
     
     
 }
