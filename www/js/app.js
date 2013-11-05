@@ -153,14 +153,12 @@ $(document).ready(function() {
             var $iframe = $('#video-' + chapter)[0];
             var $player = $f($iframe);
             
+            var player_ready = false;
+            
             $player.addEvent('ready', function() {
                 console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
-                if (autoplay_video) {
-                    $('section.show').find('.btn-play').trigger('click');
-                    autoplay_video = false;
-                }
-                
+            
                 // check play progress
                 $player.addEvent('playProgress', function() {
                     // skip ahead to the explainer text at a particular cuepoint
@@ -174,25 +172,23 @@ $(document).ready(function() {
                         });
                     });
                 });
-                
+            
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
-//                    scroll_to_explainer();
                 });
-            
+        
                 $player.addEvent('play', function() {
                     $('section.show').removeClass('video-loaded').addClass('video-playing');
                 });
+
+                if (autoplay_video) {
+                    $('section.show').find('.btn-play').trigger('click');
+                    autoplay_video = false;
+                }
             });
             $('#' + chapter).find('.video-wrapper').fitVids();
-        } else {
-            // preload the PLANTS video if you're on the title screen?
         }
-    }
-    
-    function get_duration(player) {
-        return player.api('getDuration');
     }
     
 	function reset_video_layers() {
@@ -248,7 +244,7 @@ $(document).ready(function() {
             }
         }
         
-        console.log(new_chapter_name);
+        console.log('new chapter: ' + new_chapter_name);
 
 	    // goto that chapter
 	    k.show(new_chapter_id);
@@ -316,6 +312,7 @@ $(document).ready(function() {
 	
 	$btn_next.on('click', function() {
 	    var next_chapter = $('section.show').next('section').attr('id');
+	    autoplay_video = true;
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
 	});
@@ -344,13 +341,8 @@ $(document).ready(function() {
         });
     }
 	 
-    $nav_chapter_title_prompt.on('click', function() {
-        scroll_to_explainer();
-    });
-
-    $nav_chapter_title.on('click', function() {
-        scroll_to_top();
-    });
+    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
+    $nav_chapter_title.on('click', scroll_to_top);
 
 
     /*
