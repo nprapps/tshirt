@@ -737,19 +737,17 @@ position: relative;
             margin: 0 auto;
             display: block;
         }
-        .photo1,
-        .photo2 {
-            display: none;
-        }
         .caption {
             display: block;
             margin-top: 11px;
             color: #787878;
         }
-        @media @screen-medium-above { 
+        body.chapter-about & {
             .photo1,
             .photo2 {
-                display: block;
+                display: none;
+
+                @media @screen-medium-above { display: block; }
             }
         }
     }
