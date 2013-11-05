@@ -727,6 +727,30 @@ position: relative;
             }
         }
     }
+    
+    .photo-row {
+        margin-bottom: 2em;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        .caption {
+            display: block;
+            margin-top: 11px;
+            color: #787878;
+        }
+        body.chapter-about & {
+            .photo1,
+            .photo2 {
+                display: none;
+
+                @media @screen-medium-above { display: block; }
+            }
+        }
+    }
 
     .table-of-contents {
         font-size: 14px;
