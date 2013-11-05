@@ -727,6 +727,32 @@ position: relative;
             }
         }
     }
+    
+    .photo-row {
+        margin-bottom: 2em;
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+        .photo1,
+        .photo2 {
+            display: none;
+        }
+        .caption {
+            display: block;
+            margin-top: 11px;
+            color: #787878;
+        }
+        @media @screen-medium-above { 
+            .photo1,
+            .photo2 {
+                display: block;
+            }
+        }
+    }
 
     .table-of-contents {
         font-size: 14px;
