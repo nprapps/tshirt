@@ -14,6 +14,7 @@ $(document).ready(function() {
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
     var k = kontext(document.querySelector('.kontext'));
+    var is_touch = Modernizr.touch;
 
     var autoplay_video = false;
     var video_aspect_width = 16;
@@ -93,8 +94,8 @@ $(document).ready(function() {
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 	     }
 
-        // Kill top-anchored nav for small displays
-        if (Modernizr.touch){
+        // Kill top-anchored nav for touch devices
+        if (is_touch){
             $nav.removeAttr('data-spy').removeClass('affix');
         } else {
             $nav.attr('data-spy', 'affix');
