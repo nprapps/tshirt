@@ -30,7 +30,8 @@ $(document).ready(function() {
     
     // status vars
     var autoplay_video = false;
-    var current_chapter = chapters[0];
+    var current_chapter_id = 0;
+    var current_chapter = chapters[current_chapter_id];
     var is_touch = Modernizr.touch;
     var text_scrolled = false;
     var window_width;
@@ -249,9 +250,12 @@ $(document).ready(function() {
         
         console.log('new chapter: ' + new_chapter_name);
 
+	    // set global vars
+	    current_chapter = new_chapter_name;
+	    current_chapter_id = new_chapter_id;
+
 	    // goto that chapter
 	    k.show(new_chapter_id);
-	    current_chapter = new_chapter_name;
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
@@ -325,7 +329,7 @@ $(document).ready(function() {
         // the offset accounts for the height of the nav at the top of the screen
         // (minus 1 to ensure the affix nav engages)
         var scroll_offset = -(nav_height - 1);
-        var scroll_target = '#' + chapters[k.getIndex()] + ' .explainer';
+        var scroll_target = '#' + current_chapter + ' .explainer';
 
         $.smoothScroll({
             offset: scroll_offset,
@@ -334,7 +338,7 @@ $(document).ready(function() {
     }
 
     function scroll_to_top() {
-        var scroll_target = '#' + chapters[k.getIndex()];
+        var scroll_target = '#' + current_chapter;
 
         $.smoothScroll({
             scrollTarget: scroll_target
@@ -599,6 +603,9 @@ $(document).ready(function() {
     }
     
     function draw_charts() {
+        // only draw charts for:
+        // 1) the current chapter 
+        // 2) if the data has actually loaded
 	    switch(current_chapter) {
 	        case 'plants':
 	            if (d3_cotton_exports_data != undefined) {
