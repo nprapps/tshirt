@@ -111,15 +111,8 @@ $(document).ready(function() {
             $nav.attr('data-offset-top', (window_height - nav_height));
         }
         
-        // redraw graphics (if they exist yet)
-        switch(current_chapter) {
-            case 'plants':
-                draw_cotton_exports_graph();
-                break;
-            case 'people':
-                draw_apparel_wages_graph();
-                break;
-        }
+        // redraw the charts
+        draw_charts();
     }
     
     function setup_chapters(chapter) {
@@ -207,12 +200,6 @@ $(document).ready(function() {
         }
     }
     
-	function reset_video_layers() {
-	    // reset titlecards
-	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
-	}
-	
-	
 	/*
 	 * Chapter navigation
 	 */
@@ -291,17 +278,10 @@ $(document).ready(function() {
         setup_video(new_chapter_name);
 	    
 	    // load graphics for this particular chapter
-	    switch(new_chapter_name) {
-	        case 'plants':
-	            draw_cotton_exports_graph();
-	            break;
-	        case 'people':
-	            draw_apparel_wages_graph();
-	            break;
-	    }
+	    draw_charts();
 	    
 	    // reset the layers, stop any video that's playing
-	    reset_video_layers();
+	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 	    
 	    // scroll page to the top
         scroll_to_top();
@@ -429,7 +409,7 @@ $(document).ready(function() {
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
         // clear out existing graphics
-        reset_graphics();
+        reset_charts();
 
         // remove placeholder image if it exists
         $d3_cotton_exports.find('img').remove();
@@ -543,7 +523,7 @@ $(document).ready(function() {
         var height = ((bar_height + bar_gap) * num_bars);
         
         // clear out existing graphics
-        reset_graphics();
+        reset_charts();
 
         // remove placeholder table if it exists
         $d3_apparel_wages.find('table').remove();
@@ -618,7 +598,22 @@ $(document).ready(function() {
                 .text(function(d) { return d.country });
     }
     
-    function reset_graphics() {
+    function draw_charts() {
+	    switch(current_chapter) {
+	        case 'plants':
+	            if (d3_cotton_exports_data != undefined) {
+                    draw_cotton_exports_graph();
+                }
+	            break;
+	        case 'people':
+	            if (d3_apparel_wages_data != undefined) {
+                    draw_apparel_wages_graph();
+                }
+	            break;
+	    }
+    }
+    
+    function reset_charts() {
         if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
             d3.select('#cotton-exports-d3').selectAll('svg').remove();
             d3.select('#cotton-exports-d3').selectAll('.key').remove();
