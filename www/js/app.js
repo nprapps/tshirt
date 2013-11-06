@@ -19,8 +19,8 @@ $(document).ready(function() {
     var autoplay_video = false;
     var video_aspect_width = 16;
     var video_aspect_height = 9;
-    var graphic_aspect_width = 4;
-    var graphic_aspect_height = 3;
+    var graphic_aspect_width = 9;
+    var graphic_aspect_height = 6;
     var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 228;
@@ -402,9 +402,6 @@ $(document).ready(function() {
 
         d3.tsv("data/apparel-wages.tsv", function(error, data) {
             d3_apparel_wages_data = data;
-            d3_cotton_exports_data.forEach(function(d) {
-                d.min_wage = parseInt(d.min_wage);
-            });
             draw_apparel_wages_graph();
         });
     }
@@ -412,18 +409,15 @@ $(document).ready(function() {
     function draw_cotton_exports_graph() {
         var margin = {top: 0, right: 15, bottom: 25, left: 50};
         var width = $d3_cotton_exports.width() - margin.left - margin.right;
-//        var height = 350 - margin.top - margin.bottom;
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
-        var x, y;
-        
         // remove placeholder image if it exists
         $d3_cotton_exports.find('img').remove();
         
-        x = d3.time.scale()
+        var x = d3.time.scale()
             .range([0, width]);
 
-        y = d3.scale.linear()
+        var y = d3.scale.linear()
             .range([height, 0]);
 
         var color = d3.scale.category10()
