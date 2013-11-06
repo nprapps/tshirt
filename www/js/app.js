@@ -32,7 +32,9 @@ $(document).ready(function() {
     var text_scrolled = false;
     
     var $d3_cotton_exports = $('#cotton-exports-d3');
+    var $d3_apparel_wages = $('#apparel-wages-d3');
     var d3_cotton_exports_data;
+    var d3_apparel_wages_data;
     
     //breakpoints
     var screen_small = 768;
@@ -285,7 +287,7 @@ $(document).ready(function() {
 	    reset_video_layers();
 	    
 	    // scroll page to the top
-        scroll_to_top();
+//        scroll_to_top();
         
         // close the chapter nav
         close_nav();
@@ -392,6 +394,14 @@ $(document).ready(function() {
                 d.year = d3.time.format('%Y').parse(d.year);
             });
             draw_cotton_exports_graph();
+        });
+
+        d3.tsv("data/apparel-wages.tsv", function(error, data) {
+            d3_apparel_wages_data = data;
+            d3_cotton_exports_data.forEach(function(d) {
+                d.min_wage = parseInt(d.min_wage);
+            });
+            draw_apparel_wages_graph();
         });
     }
     
@@ -514,7 +524,73 @@ $(document).ready(function() {
         }
     }
     
+    function draw_apparel_wages_graph() {
+        var bar_height = 25;
+        var bar_gap = 10;
+        var num_bars = d3_apparel_wages_data.length;
+        var margin = {top: 0, right: 50, bottom: 25, left: 100};
+        var width = $d3_apparel_wages.width() - margin.left - margin.right;
+        var height = ((bar_height + bar_gap) * num_bars);
+        
+        // remove placeholder table if it exists
+        $d3_apparel_wages.find('table').remove();
+        
+        var x = d3.scale.linear()
+            .domain([0, d3.max(d3_apparel_wages_data, function(d) { return parseInt(d.min_wage); })])
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .range([height, 0]);
+        
+        var svg = d3.select('#apparel-wages-d3').append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        svg.append('g')
+            .attr('class', 'wage-bars')
+            .selectAll('rect')
+                .data(d3_apparel_wages_data)
+            .enter().append('rect')
+                .attr("y", function(d, i) { return i * (bar_height + bar_gap); })
+                .attr("width", function(d){ return x(d.min_wage); })
+                .attr("height", bar_height);
+        
+        svg.append('g')
+            .attr('class', 'wage-amts')
+            .selectAll('text')
+                .data(d3_apparel_wages_data)
+            .enter().append('text')
+                .attr('x', function(d) { return x(parseInt(d.min_wage)) })
+                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
+                .attr('dx', 6)
+                .attr('dy', 17)
+                .attr('text-anchor', 'start')
+                .text(function(d) { return '$' + d.min_wage });
+        
+        svg.append('g')
+            .attr('class', 'wage-countries')
+            .selectAll('text')
+                .data(d3_apparel_wages_data)
+            .enter().append('text')
+                .attr('x', 0)
+                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
+                .attr('dx', -6)
+                .attr('dy', 17)
+                .attr('text-anchor', 'end')
+                .text(function(d) { return d.country });
+    }
+
+    function reset_apparel_wages_graph() {
+        if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
+            d3.select('#apparel-wages-d3').selectAll('svg').remove();
+            d3.select('#apparel-wages-d3').selectAll('.key').remove();
+            draw_apparel_wages_graph();
+        }
+    }
     
+
 	/* 
 	 * Setup functions 
 	 */
