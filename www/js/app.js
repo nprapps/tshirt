@@ -23,7 +23,7 @@ $(document).ready(function() {
     var graphic_aspect_height = 6;
     var chapters = [ 'title', 'plants', 'machines', 'people', 'ships', 'you', 'about', 'buy' ];
     var nav_height = 74;
-    var nav_height_open = 228;
+    var nav_height_open = 248;
     var small_nav_height = 44;
     var small_nav_height_open = 328;
     var window_width;
@@ -96,14 +96,14 @@ $(document).ready(function() {
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 	     }
 
-        // Kill top-anchored nav for touch devices
-        if (is_touch){
+		 /* if (is_touch){
             $nav.removeAttr('data-spy').removeClass('affix');
         } else {
             $nav.attr('data-spy', 'affix');
-            // fine-tune when the chapter nav affixes to the top
+            
             $nav.attr('data-offset-top', (window_height - nav_height));
         }
+        */
         
         // redraw graphics (if they exist yet)
         reset_cotton_exports_graph();
