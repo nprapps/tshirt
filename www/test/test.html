@@ -133,13 +133,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-
                         <h2>Why The U.S. Leads The World In Cotton Exports</h2>
                         <p>You can grow cotton anywhere there's access to sun and water. You can grow it in places where land and labor are cheap. You can grow it in places that are close to the countries &mdash; Colombia, Indonesia, Bangladesh &mdash; where the Planet Money T-shirt was made. Yet most of the cotton in the Planet Money T-shirts was grown in the U.S.</p>
                         <p>As it turns out, this is pretty common. In fact, the U.S. exports more cotton than any country in the world.</p>
                         <div class="graphic cotton-exports d3-chart">
                             <h4>Top Global Cotton Exporters, 2000-2012</h4>
-                            <h5 class="units">Cotton exported, in thousands of metric tons</h5>
+                            <h5>Cotton exported, in thousands of metric tons</h5>
                         
                             <div id="cotton-exports-d3">
                                 <img class="chart" src="img/gr-plants-exports.gif" alt="graph showing cotton exports over time from major cotton-producing countries" />
@@ -273,7 +272,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
 
-                        <h3>Robots text</h3> 
+                        <h2>Robots text</h2> 
                         <p>We chased our bales of Mississippi cotton through the streets of Jakarta and out into the Indonesian countryside, where rice fields have been turned into Honda plants and satellite farms.</p>
                         <p>It's a busy, crowded place &mdash; until you walk into the Indorama yarn factory. The building is a big as a football field, and there's almost no one there.  Just row after row of shiny machines</p>
                         <p>Spinning cotton into yarn (it looks like thread, but it's called yarn) is one of the oldest technologies there is. Yarn spinning machines were a key part of the industrial revolution, 200 years ago in England. You can even spin yarn by hand, at home, if you have some cotton and a bunch of free time.</p>
@@ -281,7 +280,7 @@
 
                         <div class="graphic yarn-spinning">
                             <h4>Phases Of Yarn Spinning</h4>
-                            <h5 class="units">NPR's Robert Smith collected yarn samples at each stage of the spinning process during his visit to the Indorama spinning plant in Purwakarta, Indonesia.</h5>
+                            <h5>NPR's Robert Smith collected yarn samples at each stage of the spinning process during his visit to the Indorama spinning plant in Purwakarta, Indonesia.</h5>
                             <div class="row photo-row yarn-spinning-photos">
                                 <div class="col-xs-6">
                                     <img src="img/machines-cotton-phase-1.jpg" alt="" />
@@ -369,11 +368,61 @@
                         <h3>Humans text</h3> 
                         <p>The global garment industry is flocking to Bangladesh for a simple reason: It's the cheapest place in the world to make a T-shirt. The Bangladeshi workers who made the Planet Money men's T-shirt make $80 a month. Many workers in Bangladesh make even less: The country's minimum wage is far lower: only $39 a month.</p>
 
-                        <div class="graphic apparel-wages">
+                        <div class="graphic apparel-wages d3-chart">
                             <h4>Apparel Wages</h4>
-                            <p>[ Graphic ]</p>
+                            <h5>Monthly minimum wages in the garment industry in top apparel-exporting countries, in US dollars (as of Aug. 1, 2013)</h5>
+
+                            <div id="apparel-wages-d3">
+                                <table>
+                                    <tr>
+                                        <th>Country</th>
+                                        <th class="amt">Monthly wage</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Hong Kong</td>
+                                        <td class="amt">$800</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Turkey</td>
+                                        <td class="amt">538</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Malaysia</td>
+                                        <td class="amt">247</td>
+                                    </tr>
+                                    <tr>
+                                        <td>China</td>
+                                        <td class="amt">138</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mexico</td>
+                                        <td class="amt">125</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Indonesia</td>
+                                        <td class="amt">84</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cambodia</td>
+                                        <td class="amt">80</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vietnam</td>
+                                        <td class="amt">78</td>
+                                    </tr>
+                                    <tr>
+                                        <td>India</td>
+                                        <td class="amt">71</td>
+                                    </tr>
+                                    <tr class="shadedrow">
+                                        <td>Bangladesh</td>
+                                        <td class="amt">39</td>
+                                    </tr>
+                                </table>
+                            </div>
+
                             <p class="credit">
-                                Source: ???
+                                Source: International Labour Organization
                             </p>
                         </div>
                         
@@ -381,15 +430,6 @@
                         <p>The disaster at Rana Plaza, when a factory collapsed  and killed TK workers last TK, led to huge protests around the country and increased global pressure on Bangladesh to improve working conditions. Any day now, the government is expected to announce a new, higher minimum wage.</p>
                         <p>The main garment workers union is asking for $105 a month &mdash; still low by global standards, but roughly triple the current minimum. Factory owners say that if the minimum wage goes up to $105 a month, buyers from the developed world will pull up stakes and find a cheaper place to make T-shirts.</p>
                         <p>For the last twenty years, global T-shirt companies have chased cheap labor from country to country.  As wages rose in one place buyers moved to the next, cheaper country. The price of T-shirts in the developed world fell.</p>
-
-                        <div class="graphic apparel-manufacturing">
-                            <h4>The T-Shirt Phase</h4>
-                            <p>[ Graphic ]</p>
-                            <p class="credit">
-                                Source: ???
-                            </p>
-                        </div>
-                        
                         <p>But that era may be coming to an end, according to Marion Smith, TK at Jockey, the company we partnered with to make our T-shirt. Wages in China have doubled in the past TK years, and are likely to continue rising. Other low-wage countries are too small or don't have the infrastructure in place to become the next tailor shop to the world.</p>
                         <p>After Bangladesh, Smith says, there's no obvious next place to go. "We're getting down to the end of it," Smith told us. "Bangladesh is going to go up, and who's cheaper than Bangladesh?"</p>
                         <p>Pay for workers like Jasmine makes a up just a tiny fraction of the finished cost of a T-shirt. That means that, if the global garment industry stays put in Bangladesh,  prices for T-shirts may rise a little in the U.S. &mdash; and wages for workers like Jasmine may go up a lot.</p>
@@ -563,7 +603,6 @@
                                 <dd>
                                     <ul class="list-unstyled">
                                         <li><a href="http://stage-apps.npr.org/tshirt/#/plants">The surprising birthplace of our shirt. And why it was born&nbsp;there.</a> <span class="date">(Nov. 18, 2013)</span></li>
-                                        <li><a href="http://www.npr.org/blogs/money/2013/05/03/180912847/episode-224-the-cotton-wars">Episode 224: The Cotton Wars</a> <span class="date">(May 3, 2013)</span></li>
                                     </ul>
                                 </dd>
                             <dt>Machines</dt>
@@ -576,9 +615,6 @@
                                 <dd>
                                     <ul class="list-unstyled">
                                         <li><a href="http://stage-apps.npr.org/tshirt#/people">The lives of the workers who make our&nbsp;shirts.</a> <span class="date">(Nov. 18, 2013)</span></li>
-                                        <li><a href="http://www.npr.org/blogs/money/2013/09/12/221789922/t-shirt-photos-a-factory-a-t-shirt-and-a-drug-sniffing-dog">T-Shirt Photos: A Factory, A T-Shirt, And A Drug-Sniffing Dog</a> <span class="date">(Sept. 12, 2013)</span></li>
-                                        <li><a href="http://www.npr.org/blogs/money/2013/09/06/219681588/episode-484-inside-the-t-shirt-factory">Episode 484: Inside The T-Shirt Factory</a> <span class="date">(Sept. 6, 2013)</span></li>
-                                        <li><a href="http://www.npr.org/blogs/money/2013/05/14/184019151/episode-458-bangladeshs-t-shirt-economy">Episode 458: Bangladesh's T-Shirt Economy</a> <span class="date">(May 14, 2013)</span></li>
                                     </ul>
                                 </dd>
                             <dt>Ships</dt>

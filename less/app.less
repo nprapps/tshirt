@@ -625,10 +625,21 @@ position: relative;
                 stroke: #333;
                 stroke-width: 3px;
             }
-            .country text {
+            .bars rect { fill: #8BC0BF; }
+            .country text,
+            .amounts text {
                 font-weight: normal;
                 font-size: 12px;
-                color: #333;
+                fill: #333;
+            }
+            #apparel-wages-d3 {
+                .amounts text.bangladesh,
+                .country text.bangladesh { 
+                    font-weight: bold;
+                }
+                .bars rect.bangladesh { 
+                    fill: #11605E;
+                }
             }
         }
         

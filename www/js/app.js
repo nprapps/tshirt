@@ -532,7 +532,7 @@ $(document).ready(function() {
         var bar_height = 25;
         var bar_gap = 10;
         var num_bars = d3_apparel_wages_data.length;
-        var margin = {top: 0, right: 50, bottom: 25, left: 100};
+        var margin = {top: 0, right: 50, bottom: 25, left: 80};
         var width = $d3_apparel_wages.width() - margin.left - margin.right;
         var height = ((bar_height + bar_gap) * num_bars);
         
@@ -546,6 +546,13 @@ $(document).ready(function() {
         var y = d3.scale.linear()
             .range([height, 0]);
         
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .ticks(5);
+            
+        var x_axis_grid = function() { return xAxis; }
+
         var svg = d3.select('#apparel-wages-d3').append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
@@ -553,16 +560,30 @@ $(document).ready(function() {
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         
         svg.append('g')
-            .attr('class', 'wage-bars')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(xAxis);
+
+        svg.append('g')
+            .attr('class', 'x grid')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(x_axis_grid()
+                .tickSize(-height, 0, 0)
+                .tickFormat('')
+            );
+
+        svg.append('g')
+            .attr('class', 'bars')
             .selectAll('rect')
                 .data(d3_apparel_wages_data)
             .enter().append('rect')
                 .attr("y", function(d, i) { return i * (bar_height + bar_gap); })
                 .attr("width", function(d){ return x(d.min_wage); })
-                .attr("height", bar_height);
+                .attr("height", bar_height)
+                .attr('class', function(d) { return d.country.toLowerCase() });
         
         svg.append('g')
-            .attr('class', 'wage-amts')
+            .attr('class', 'amounts')
             .selectAll('text')
                 .data(d3_apparel_wages_data)
             .enter().append('text')
@@ -571,10 +592,11 @@ $(document).ready(function() {
                 .attr('dx', 6)
                 .attr('dy', 17)
                 .attr('text-anchor', 'start')
+                .attr('class', function(d) { return d.country.toLowerCase() })
                 .text(function(d) { return '$' + d.min_wage });
         
         svg.append('g')
-            .attr('class', 'wage-countries')
+            .attr('class', 'country')
             .selectAll('text')
                 .data(d3_apparel_wages_data)
             .enter().append('text')
@@ -583,6 +605,7 @@ $(document).ready(function() {
                 .attr('dx', -6)
                 .attr('dy', 17)
                 .attr('text-anchor', 'end')
+                .attr('class', function(d) { return d.country.toLowerCase() })
                 .text(function(d) { return d.country });
     }
 
