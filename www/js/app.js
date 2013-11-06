@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // cached objects
     var $b = $('body');
     var $w = $(window);
     var $btn_next = $('.btn-next-chapter');
@@ -14,9 +15,8 @@ $(document).ready(function() {
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
     var k = kontext(document.querySelector('.kontext'));
-    var is_touch = Modernizr.touch;
 
-    var autoplay_video = false;
+    // static vars
     var video_aspect_width = 16;
     var video_aspect_height = 9;
     var graphic_aspect_width = 9;
@@ -26,11 +26,17 @@ $(document).ready(function() {
     var nav_height_open = 228;
     var small_nav_height = 44;
     var small_nav_height_open = 328;
+    var video_advance_cuepoint = 2;
+    
+    // status vars
+    var autoplay_video = false;
+    var current_chapter = chapters[0];
+    var is_touch = Modernizr.touch;
+    var text_scrolled = false;
     var window_width;
     var window_height;
-    var video_advance_cuepoint = 2;
-    var text_scrolled = false;
-    
+
+    // data vars
     var $d3_cotton_exports = $('#cotton-exports-d3');
     var $d3_apparel_wages = $('#apparel-wages-d3');
     var d3_cotton_exports_data;
@@ -106,8 +112,14 @@ $(document).ready(function() {
         }
         
         // redraw graphics (if they exist yet)
-        reset_cotton_exports_graph();
-        reset_apparel_wages_graph();
+        switch(current_chapter) {
+            case 'plants':
+                draw_cotton_exports_graph();
+                break;
+            case 'people':
+                draw_apparel_wages_graph();
+                break;
+        }
     }
     
     function setup_chapters(chapter) {
@@ -252,6 +264,7 @@ $(document).ready(function() {
 
 	    // goto that chapter
 	    k.show(new_chapter_id);
+	    current_chapter = new_chapter_name;
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
@@ -280,10 +293,10 @@ $(document).ready(function() {
 	    // load graphics for this particular chapter
 	    switch(new_chapter_name) {
 	        case 'plants':
-	            reset_cotton_exports_graph();
+	            draw_cotton_exports_graph();
 	            break;
 	        case 'people':
-	            reset_apparel_wages_graph();
+	            draw_apparel_wages_graph();
 	            break;
 	    }
 	    
@@ -397,12 +410,16 @@ $(document).ready(function() {
             d3_cotton_exports_data.forEach(function(d) {
                 d.year = d3.time.format('%Y').parse(d.year);
             });
-            draw_cotton_exports_graph();
+            if (current_chapter == 'plants') {
+                draw_cotton_exports_graph();
+            }
         });
 
         d3.tsv("data/apparel-wages.tsv", function(error, data) {
             d3_apparel_wages_data = data;
-            draw_apparel_wages_graph();
+            if (current_chapter == 'people') {
+                draw_apparel_wages_graph();
+            }
         });
     }
     
@@ -411,9 +428,12 @@ $(document).ready(function() {
         var width = $d3_cotton_exports.width() - margin.left - margin.right;
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
+        // clear out existing graphics
+        reset_graphics();
+
         // remove placeholder image if it exists
         $d3_cotton_exports.find('img').remove();
-        
+
         var x = d3.time.scale()
             .range([0, width]);
 
@@ -514,14 +534,6 @@ $(document).ready(function() {
             .style('stroke', function(d) { return color(d.country); });
     }
     
-    function reset_cotton_exports_graph() {
-        if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
-            d3.select('#cotton-exports-d3').selectAll('svg').remove();
-            d3.select('#cotton-exports-d3').selectAll('.key').remove();
-            draw_cotton_exports_graph();
-        }
-    }
-    
     function draw_apparel_wages_graph() {
         var bar_height = 25;
         var bar_gap = 10;
@@ -530,6 +542,9 @@ $(document).ready(function() {
         var width = $d3_apparel_wages.width() - margin.left - margin.right;
         var height = ((bar_height + bar_gap) * num_bars);
         
+        // clear out existing graphics
+        reset_graphics();
+
         // remove placeholder table if it exists
         $d3_apparel_wages.find('table').remove();
         
@@ -602,14 +617,18 @@ $(document).ready(function() {
                 .attr('class', function(d) { return d.country.toLowerCase() })
                 .text(function(d) { return d.country });
     }
+    
+    function reset_graphics() {
+        if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
+            d3.select('#cotton-exports-d3').selectAll('svg').remove();
+            d3.select('#cotton-exports-d3').selectAll('.key').remove();
+        }
 
-    function reset_apparel_wages_graph() {
         if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
             d3.select('#apparel-wages-d3').selectAll('svg').remove();
-            draw_apparel_wages_graph();
         }
     }
-    
+
 
 	/* 
 	 * Setup functions 
