@@ -107,6 +107,7 @@ $(document).ready(function() {
         
         // redraw graphics (if they exist yet)
         reset_cotton_exports_graph();
+        reset_apparel_wages_graph();
     }
     
     function setup_chapters(chapter) {
@@ -278,8 +279,11 @@ $(document).ready(function() {
 	    
 	    // load graphics for this particular chapter
 	    switch(new_chapter_name) {
-	        case 'plants': // plants
+	        case 'plants':
 	            reset_cotton_exports_graph();
+	            break;
+	        case 'people':
+	            reset_apparel_wages_graph();
 	            break;
 	    }
 	    
@@ -287,7 +291,7 @@ $(document).ready(function() {
 	    reset_video_layers();
 	    
 	    // scroll page to the top
-//        scroll_to_top();
+        scroll_to_top();
         
         // close the chapter nav
         close_nav();
@@ -585,7 +589,6 @@ $(document).ready(function() {
     function reset_apparel_wages_graph() {
         if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
             d3.select('#apparel-wages-d3').selectAll('svg').remove();
-            d3.select('#apparel-wages-d3').selectAll('.key').remove();
             draw_apparel_wages_graph();
         }
     }
