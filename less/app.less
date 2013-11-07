@@ -517,6 +517,14 @@ position: relative;
             line-height: 1.4;
         }
         
+        h6 {
+            font-size: 14px;
+            line-height: 1.4;
+            font-weight: bold;
+            color: #333;
+            margin: 0 0 1.5em 0;
+        }
+        
         img {
             display: block;
             margin-bottom: 1em;
@@ -783,6 +791,24 @@ position: relative;
                 margin-left: 122px;
 
                 @media @screen-tiny { margin-left: 0; }
+            }
+        }
+        
+        &.cotton-yields {
+            .totals {
+                h6 {
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #ccc;
+                    margin-bottom: 1em;
+                    padding-left: 11px;
+                    padding-right: 11px;
+                }
+                p {
+                    font-size: 18px;
+                    line-height: 1.6;
+                    padding-left: 11px;
+                    padding-right: 11px;
+                }
             }
         }
     }
