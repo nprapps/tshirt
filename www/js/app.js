@@ -154,9 +154,19 @@ $(document).ready(function() {
         $layers.removeClass('video-loaded').removeClass('video-playing');
         $('.video-wrapper').find('iframe').attr('src','');
         text_scrolled = false;
+        
+        //toggle next chapter nav and explainer prompt
+        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
+			console.log('explain');
+			$( '#nav-chapter-title-prompt' ).toggleClass( "waypoint-hide" );
+			$( '#nav-chapter-title' ).toggleClass( "waypoint-show" );
+		}, { offset: 500 }
+		);
+            
 
         // add new video (if this is a chapter that has video
         if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+        	
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             $('#' + chapter).find('iframe').attr('src', video_path);
 
@@ -183,7 +193,7 @@ $(document).ready(function() {
                     });
                 });
                 
-            
+                
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
@@ -231,6 +241,7 @@ $(document).ready(function() {
     function goto_chapter(new_hash){
         var new_chapter_id;
         var new_chapter_name;
+        
         
         if (new_hash.length == 0) {
             new_chapter_id = 0;
@@ -293,17 +304,8 @@ $(document).ready(function() {
 	    // reset the layers, stop any video that's playing
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
 	    
-	    $('#plants .explainer').waypoint(function(direction) {
-			console.log('explain');
-			$( '#nav-chapter-title-prompt' ).toggleClass( "waypoint-hide" );
-			$( '#nav-chapter-title' ).toggleClass( "waypoint-show" );
-		}, { offset: 350 }
-		
-		);
 	    
-	    $('#plants .btn-play').waypoint(function(direction) {
-			console.log('top');
-		});
+	    
 		
 	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
 	    
