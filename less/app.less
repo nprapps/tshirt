@@ -795,19 +795,43 @@ position: relative;
         }
         
         &.cotton-yields {
+            table {
+//                tr:nth-child(2) td { padding-top: 18px; }
+                th {
+                    vertical-align: middle;
+                    line-height: 20px;
+                    font-size: 14px;
+                    color: #17807E;
+                    text-transform: uppercase;
+                }
+                tr th:first-child,
+                tr td:first-child {
+                    padding-left: 0;
+                }
+                tr th:nth-child(2),
+                tr td:nth-child(2) {
+                    padding-right: 0;
+                }
+            }
             .totals {
                 h6 {
                     padding-bottom: 10px;
                     border-bottom: 2px solid #ccc;
-                    margin-bottom: 1em;
-                    padding-left: 11px;
-                    padding-right: 11px;
+                    margin-bottom: 8px;
+                    line-height: 20px;
+                    color: #17807E;
+                    font-size: 14px;
+                    text-transform: uppercase;
                 }
                 p {
-                    font-size: 18px;
+                    font-size: 14px;
                     line-height: 1.6;
-                    padding-left: 11px;
-                    padding-right: 11px;
+                    margin-bottom: 1em;
+                }
+                img {
+                    display: block;
+                    max-width: 100%;
+                    height: auto;
                 }
             }
         }
