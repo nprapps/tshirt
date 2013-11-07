@@ -182,6 +182,7 @@ $(document).ready(function() {
                         });
                     });
                 });
+                
             
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
@@ -266,7 +267,12 @@ $(document).ready(function() {
                 $b.addClass(this_chapter_class);
 
                 if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
-                    $nav_chapter_title.text(COPY[this_chapter_name]['fullname']);
+                    if (this_chapter_name == 'you'){ $nav_chapter_title.text(''); }
+                    else {
+	                    $nav_chapter_title.text(COPY[chapters[(new_chapter_id + 1)]]['fullname']);
+                    }
+                    
+                    
                     $nav_chapter_title_prompt.text(COPY[this_chapter_name]['nav_prompt']);
                 } else {
                     $nav_chapter_title.text('');
@@ -286,6 +292,21 @@ $(document).ready(function() {
 	    
 	    // reset the layers, stop any video that's playing
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+	    
+	    $('#plants .explainer').waypoint(function(direction) {
+			console.log('explain');
+			$( '#nav-chapter-title-prompt' ).toggleClass( "wl-hide" );
+			$( '#nav-chapter-title' ).toggleClass( "wl-show" );
+		}, { offset: 50 }
+		
+		);
+	    
+	    $('#plants .btn-play').waypoint(function(direction) {
+			console.log('top');
+		});
+		
+	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
+	    
 	    
 	    // scroll page to the top
         scroll_to_top();
@@ -314,25 +335,24 @@ $(document).ready(function() {
 	    }
 	});
 	
-	$btn_next.on('click', function() {
-	    var next_chapter = $('section.show').next('section').attr('id');
+	function go_to_next_chapter() {
+        var next_chapter = chapters[( current_chapter_id + 1)];
 	    autoplay_video = true;
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
-	});
+    }
 	
+	$btn_next.on('click', go_to_next_chapter);
+	
+	$nav_chapter_title.on('click', go_to_next_chapter);
 	
 	/*
 	 * Explainer text
 	 */
     function scroll_to_explainer() {
-        // the offset accounts for the height of the nav at the top of the screen
-        // (minus 1 to ensure the affix nav engages)
-        var scroll_offset = -(nav_height - 1);
         var scroll_target = '#' + current_chapter + ' .explainer';
 
         $.smoothScroll({
-            offset: scroll_offset,
             scrollTarget: scroll_target
         });
     }
@@ -344,9 +364,12 @@ $(document).ready(function() {
             scrollTarget: scroll_target
         });
     }
+    
+    
+    
 	 
     $nav_chapter_title_prompt.on('click', scroll_to_explainer);
-    $nav_chapter_title.on('click', scroll_to_top);
+    
 
 
     /*
@@ -630,8 +653,7 @@ $(document).ready(function() {
             d3.select('#apparel-wages-d3').selectAll('svg').remove();
         }
     }
-
-
+	
 	/* 
 	 * Setup functions 
 	 */

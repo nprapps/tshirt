@@ -31,6 +31,9 @@ body { background-color: #000; }
 .explainer { background-color: #fff; }
 section { background-color: #fff; }
 
+.wl-hide {display: none !important;}
+.wl-show {display: block !important;}
+
 
 // Animations
 .slideInUp {
@@ -95,11 +98,6 @@ nav .nav-item-wrapper.backer,
 	display: block;
 }
 
-.video-wrapper.backer {
-	margin-left: 0;
-}
-
-
 //primary navigation
 
 nav {
@@ -108,7 +106,7 @@ nav {
 	right: 0;
 	width: 100%;
 	background: #000;
-	background: rgba(0,0,0,.4);
+	background: rgba(0,0,0,.8);
 	color: #fff;
 	display: block;
 	z-index: 100;
@@ -944,7 +942,6 @@ position: relative;
     }
 }
 
-
 // Title screen only
 .chapter-title {
     nav h3#nav-chapter-title,
@@ -963,6 +960,7 @@ position: relative;
     height: 100%;
     width: 100%;
     margin-top: -10000px;
+    overflow: hidden;
     
     .video-inner-wrapper {
         position: absolute;
@@ -1006,6 +1004,11 @@ position: relative;
 	.chapter-machines & {
         background-image: url('@{img-root}/machines-title.jpg');
 	}
+	
+	.chapter-people & {
+        background-image: url('@{img-root}/walk-title.jpg');
+	}
+	
 	.chapter-ships & {
         background-image: url('@{img-root}/ships-title.jpg');
 	}
