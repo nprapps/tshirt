@@ -269,7 +269,7 @@ $(document).ready(function() {
                 if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
                     if (this_chapter_name == 'you'){ $nav_chapter_title.text(''); }
                     else {
-	                    $nav_chapter_title.text(COPY[chapters[(new_chapter_id + 1)]]['fullname']);
+	                    $nav_chapter_title.html('<strong>next chapter<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname']);
                     }
                     
                     
@@ -295,9 +295,9 @@ $(document).ready(function() {
 	    
 	    $('#plants .explainer').waypoint(function(direction) {
 			console.log('explain');
-			$( '#nav-chapter-title-prompt' ).toggleClass( "wl-hide" );
-			$( '#nav-chapter-title' ).toggleClass( "wl-show" );
-		}, { offset: 50 }
+			$( '#nav-chapter-title-prompt' ).toggleClass( "waypoint-hide" );
+			$( '#nav-chapter-title' ).toggleClass( "waypoint-show" );
+		}, { offset: 350 }
 		
 		);
 	    

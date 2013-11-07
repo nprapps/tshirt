@@ -1,6 +1,6 @@
 @import "less/lib/bootstrap/bootstrap";
 //@import "less/lib/font-awesome/font-awesome";
-@import "less/kontext";
+//@import "less/kontext";
 
 //css3 animations
 @import "less/lib/animate";
@@ -31,9 +31,21 @@ body { background-color: #000; }
 .explainer { background-color: #fff; }
 section { background-color: #fff; }
 
-.wl-hide {display: none !important;}
-.wl-show {display: block !important;}
+//wrapper
+.layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    display: none;
 
+    &.show { 
+        visibility: visible;
+        display: block;
+    }
+}
 
 // Animations
 .slideInUp {
@@ -136,6 +148,9 @@ nav {
 	        font-weight: bold;
 	        text-transform: uppercase;
 	        display: none;
+	        @media @screen-small-above { 
+				&.waypoint-show {display: block;}
+			}
 	    }
 		
 	    &#nav-chapter-title-prompt { 
@@ -147,7 +162,10 @@ nav {
 			text-transform: none;
 			font-weight: normal;
 			display: none;
-			@media @screen-small-above { display: block; }
+			@media @screen-small-above { 
+				display: block;
+				&.waypoint-hide {display: none;}
+			}
 	    }
 	
 	    &:hover {
@@ -229,9 +247,7 @@ nav {
 	        }
 	    }
 	}
-	
-	&.animated { background: #000; }
-	
+		
 	&.affix {
 	    bottom: auto;
 	    top: 0;
