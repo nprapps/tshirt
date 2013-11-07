@@ -149,10 +149,27 @@ $(document).ready(function() {
 		}
     }
     
+    function replace_iframe(video, url) {
+        /* feature detection: http://stackoverflow.com/questions/700499/change-iframe-source-in-ie-using-javascript */
+        console.log('replacing iframe: ' + video + ' | ' + url);
+
+        var this_video = document.getElementById(video);
+
+        if (this_video != null) {
+            if (this_video.src) {
+                this_video.src = url;
+            } else if (this_video.contentWindow != null && this_video.contentWindow.location != null) {
+                this_video.contentWindow.location = url;
+            } else {
+                this_video.setAttribute('src', url);
+            }
+        }
+    }
+    
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
-        $('.video-wrapper').find('iframe').attr('src','');
+        $('.video-wrapper').find('iframe').attr('src',''); // <<--- TODO TODO TODO
         text_scrolled = false;
         
         //toggle next chapter nav and explainer prompt
@@ -168,7 +185,7 @@ $(document).ready(function() {
         if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
         	
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
-            $('#' + chapter).find('iframe').attr('src', video_path);
+            replace_iframe('video-' + chapter, video_path);
 
             var $iframe = $('#video-' + chapter)[0];
             var $player = $f($iframe);
