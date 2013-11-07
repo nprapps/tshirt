@@ -158,10 +158,13 @@ $(document).ready(function() {
         if (this_video != null) {
             if (this_video.src) {
                 this_video.src = url;
+                console.log('this_video.src: ' + this_video.src);
             } else if (this_video.contentWindow != null && this_video.contentWindow.location != null) {
                 this_video.contentWindow.location = url;
+                console.log('this_video.contentWindow.location: ' + this_video.contentWindow.location);
             } else {
                 this_video.setAttribute('src', url);
+                console.log('this_video.setAttribute: ' + url);
             }
         }
     }
@@ -169,7 +172,7 @@ $(document).ready(function() {
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
-        $('.video-wrapper').find('iframe').attr('src',''); // <<--- TODO TODO TODO
+//        $('.video-wrapper').find('iframe').attr('src',''); // <<--- TODO TODO TODO
         text_scrolled = false;
 
         // add new video (if this is a chapter that has video
