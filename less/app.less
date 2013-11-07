@@ -95,11 +95,6 @@ nav .nav-item-wrapper.backer,
 	display: block;
 }
 
-.video-wrapper.backer {
-	margin-left: 0;
-}
-
-
 //primary navigation
 
 nav {
@@ -939,6 +934,7 @@ position: relative;
     height: 100%;
     width: 100%;
     margin-top: -10000px;
+    overflow: hidden;
     
     .video-inner-wrapper {
         position: absolute;
@@ -982,6 +978,11 @@ position: relative;
 	.chapter-machines & {
         background-image: url('@{img-root}/machines-title.jpg');
 	}
+	
+	.chapter-people & {
+        background-image: url('@{img-root}/walk-title.jpg');
+	}
+	
 	.chapter-ships & {
         background-image: url('@{img-root}/ships-title.jpg');
 	}
