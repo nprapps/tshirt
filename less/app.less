@@ -520,6 +520,7 @@ position: relative;
             }
             dd {
                 font-size: 16px;
+                line-height: 1.5;
             }
         }
         
@@ -809,20 +810,75 @@ position: relative;
         }
         
         &.cotton-yields {
+            table {
+                th {
+                    vertical-align: middle;
+                    line-height: 20px;
+                    font-size: 14px;
+                    color: #17807E;
+                    text-transform: uppercase;
+                }
+                tr th:first-child,
+                tr td:first-child {
+                    padding-left: 0;
+                }
+                tr th:nth-child(2),
+                tr td:nth-child(2) {
+                    padding-right: 0;
+                }
+            }
             .totals {
                 h6 {
                     padding-bottom: 10px;
                     border-bottom: 2px solid #ccc;
-                    margin-bottom: 1em;
-                    padding-left: 11px;
-                    padding-right: 11px;
+                    margin-bottom: 8px;
+                    line-height: 20px;
+                    color: #17807E;
+                    font-size: 14px;
+                    text-transform: uppercase;
                 }
                 p {
-                    font-size: 18px;
+                    font-size: 14px;
                     line-height: 1.6;
-                    padding-left: 11px;
-                    padding-right: 11px;
+                    margin-bottom: 1em;
                 }
+                img {
+                    display: block;
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+        }
+        &.yarn-types {
+            .row {
+                b {
+                    background-size: cover;
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                    display: block;
+                    height: 150px;
+                    border-radius: 10px;
+                }
+                &.denim b { background-image: url('@{img-root}/yarn-denim-480.jpg'); }
+                &.hanes b { background-image: url('@{img-root}/yarn-hanes-480.jpg'); }
+                &.jockey b { background-image: url('@{img-root}/yarn-jockey-480.jpg'); }
+                &.sock b { background-image: url('@{img-root}/yarn-sock-480.jpg'); }
+                &.woven b { background-image: url('@{img-root}/yarn-woven-480.jpg'); }
+                
+                @media @screen-small {
+                    .col-sm-4 { margin-bottom: 1em; }
+                }
+            }
+            h6 { 
+                margin-bottom: .5em;
+                color: #444;
+                font-size: 16px;
+            }
+            p { 
+                font-size: 16px;
+                line-height: 1.5;
+                margin: 0;
+                color: #444;
             }
         }
     }
