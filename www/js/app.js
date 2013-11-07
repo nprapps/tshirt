@@ -182,6 +182,7 @@ $(document).ready(function() {
                         });
                     });
                 });
+                
             
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
@@ -286,6 +287,19 @@ $(document).ready(function() {
 	    
 	    // reset the layers, stop any video that's playing
 	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+	    
+	    $('#plants .explainer').waypoint(function(direction) {
+			console.log('explain');
+		}, { offset: 350 }
+		
+		);
+	    
+	    $('.chapter-plants').waypoint(function(direction) {
+			//show the prompt when you scroll back up
+		});
+		
+	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
+	    
 	    
 	    // scroll page to the top
         scroll_to_top();
@@ -630,8 +644,7 @@ $(document).ready(function() {
             d3.select('#apparel-wages-d3').selectAll('svg').remove();
         }
     }
-
-
+	
 	/* 
 	 * Setup functions 
 	 */
