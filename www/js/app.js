@@ -128,7 +128,9 @@ $(document).ready(function() {
 				var $this_player = $f($this_iframe);
 				
 				$this_player.api('play');
-				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+				if (!is_touch) {
+    				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+    			}
 				
 				close_nav();
 			});
@@ -323,7 +325,9 @@ $(document).ready(function() {
 	    draw_charts();
 	    
 	    // reset the layers, stop any video that's playing
-	    $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+	    if (!is_touch) {
+            $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
+        }
 	    
 	    
 	    
