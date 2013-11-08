@@ -90,7 +90,7 @@ $(document).ready(function() {
         // size the title card
 		if (window_width < screen_medium){
 			$video_inner_wrapper.width('auto').height('auto');
-			$layer_media.height('auto');
+			//$layer_media.height('auto');
 	     } else {
 	     	if (w_video_optimal >= window_width) {
 	            w_video = window_width;
