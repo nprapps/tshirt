@@ -954,9 +954,23 @@ position: relative;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-        @media @screen-tiny-above {
+        @media @screen-small-above {
+	        font-size: 70px;
+	        margin: 50px 0 0 0;
+        }
+        
+        @media @screen-medium-above {
 	        font-size: 90px;
-	        margin: 100px 0 11px 0;
+	        margin: 110px 0 0 0;
+        }
+        
+        @media @screen-large {
+	        font-size: 120px;
+	        margin: 150px 0 0 0;
+        }
+        
+        @media @screen-mega-above {
+	        font-size: 140px;
         }
 
         #title & {
@@ -989,6 +1003,11 @@ position: relative;
 			margin-bottom: 33px;
         }
         
+        @media @screen-medium-above {
+	        font-size: 48px;
+	        max-width: 700px;
+        }
+
         #title & {
 			@media @screen-small-above { 
 				margin: 10px auto 10px auto;
