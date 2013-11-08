@@ -1,5 +1,6 @@
 @import "less/lib/bootstrap/bootstrap";
 //@import "less/lib/font-awesome/font-awesome";
+//@import "less/kontext";
 
 //css3 animations
 @import "less/lib/animate";
@@ -32,10 +33,18 @@ section { background-color: #fff; }
 
 //wrapper
 .layer {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    visibility: hidden;
     display: none;
-    
-    &.show { display: block; }
+
+    &.show { 
+        visibility: visible;
+        display: block;
+    }
 }
 
 // Animations
@@ -832,7 +841,7 @@ position: relative;
                     background-position: 50% 50%;
                     background-repeat: no-repeat;
                     display: block;
-                    height: 125px;
+                    height: 150px;
                     border-radius: 10px;
                 }
                 &.denim b { background-image: url('@{img-root}/yarn-denim-480.jpg'); }
@@ -994,7 +1003,7 @@ position: relative;
         left: 0;
         margin: auto;
     }
-    iframe { visibility: hidden; }
+    iframe { }
 
     .video-loaded & {
         iframe { visibility: hidden; }
@@ -1017,7 +1026,6 @@ position: relative;
     background-size: cover;
     background-position: 50% 50%;
 	overflow: hidden;
-	position: relative;
 	
 	.chapter-title & {
 		.touch & {
