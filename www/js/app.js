@@ -14,7 +14,6 @@ $(document).ready(function() {
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
     var $title_video = $('.title-video');
-    var k = kontext(document.querySelector('.kontext'));
 
     // static vars
     var video_aspect_width = 16;
@@ -64,8 +63,6 @@ $(document).ready(function() {
         window_width = $w.width();
         window_height = $w.height();
         
-        // size the title card:
-
         // calculate optimal width if height is constrained to window height
         w_optimal = (window_height * video_aspect_width) / video_aspect_height;
         
@@ -90,8 +87,10 @@ $(document).ready(function() {
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
 
+        // size the title card
 		if (window_width < screen_medium){
 			$video_inner_wrapper.width('auto').height('auto');
+			$layer_media.height('auto');
 	     } else {
 	     	if (w_video_optimal >= window_width) {
 	            w_video = window_width;
@@ -101,6 +100,7 @@ $(document).ready(function() {
 	            h_video = window_height;
 	        }
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
+			$layer_media.height(window_height);
 	     }
 
 		 /* if (is_touch){
@@ -287,7 +287,8 @@ $(document).ready(function() {
 	    current_chapter_id = new_chapter_id;
 
 	    // goto that chapter
-	    k.show(new_chapter_id);
+	    $('.layer').removeClass('show');
+	    $('#' + new_chapter_name).addClass('show');
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {

@@ -1,6 +1,5 @@
 @import "less/lib/bootstrap/bootstrap";
 //@import "less/lib/font-awesome/font-awesome";
-//@import "less/kontext";
 
 //css3 animations
 @import "less/lib/animate";
@@ -33,18 +32,10 @@ section { background-color: #fff; }
 
 //wrapper
 .layer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    visibility: hidden;
+    position: relative;
     display: none;
-
-    &.show { 
-        visibility: visible;
-        display: block;
-    }
+    
+    &.show { display: block; }
 }
 
 // Animations
@@ -1026,6 +1017,7 @@ position: relative;
     background-size: cover;
     background-position: 50% 50%;
 	overflow: hidden;
+	position: relative;
 	
 	.chapter-title & {
 		.touch & {
