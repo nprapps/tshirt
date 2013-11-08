@@ -1,6 +1,4 @@
 @import "less/lib/bootstrap/bootstrap";
-//@import "less/lib/font-awesome/font-awesome";
-//@import "less/kontext";
 
 //css3 animations
 @import "less/lib/animate";
@@ -936,6 +934,8 @@ position: relative;
     }
 }
 
+
+//titlecard
 .title-video {
 	opacity: .5;
 }
@@ -959,27 +959,41 @@ position: relative;
 	        margin: 100px 0 11px 0;
         }
 
-        body.chapter-title & {
-            margin-bottom: 22px;
+        #title & {
+            font-size: 28px;
+            margin: 0;
+			@media @screen-small-above { 
+			  font-size: 90px;
+			}
+			
         }
     }
 
     h2 {
-    	font-size: 13px;
+    	font-size: 16px;
         color: #fff;
         text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
         max-width: 500px;
-        margin: 0 auto 44px auto;
+        margin: 5px auto;
+        
         @media @screen-tiny-above {
+        	margin: 0 auto 44px auto;
 	        font-size: 28px;
 			line-height: 1.4;
 			margin-bottom: 33px;
         }
         
-        body.chapter-title & {
-            font-size: 28px;
-            text-transform: none;
-            max-width: 700px;
+        #title & {
+			@media @screen-small-above { 
+				margin-top: 10px;
+			  	font-size: 28px;
+	            text-transform: none;
+	            max-width: 700px;
+	            font-size: 22px;
+			}
+		
+		
+		
         }
     }
     
@@ -1051,13 +1065,6 @@ position: relative;
     background-position: 50% 50%;
 	overflow: hidden;
 	
-	.chapter-title & {
-		.touch & {
-	        background-image: url('@{img-root}/home-title.jpg');
-	        background-position: 60% 70%;
-        }
-	}
-	
 	.chapter-machines & {
         background-image: url('@{img-root}/machines-title.jpg');
 	}
@@ -1072,6 +1079,19 @@ position: relative;
 	.chapter-you & {
         background-image: url('@{img-root}/you-title.jpg');
 	}
+}
+
+.touch .chapter-title .layer-media, .touch #title {
+	width: 100%;
+    height: 100%;
+	background-color: #000;
+	background-image: url('@{img-root}/home-title.jpg');
+	background-position: 60% 70%;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+	overflow: hidden;
 }
 
 
@@ -1113,20 +1133,17 @@ position: relative;
     .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
     
     
-}
+}//touch
 
 //home page
-
 .npr-logo {
-  width: 100px;
-  margin: 50px 0 15px 0;
+	width: 70px;
+	margin: 10px 0;
+	@media @screen-small-above { 
+	    width: 100px;
+		margin: 50px 0 15px 0;
+	}
 }
-
-.chapter-title .titlecard h1 {
-  font-size: 90px;
-  margin: 0 0 0 0;
-}
-
 
 //home page navigation for touch devices
 .index-nav {
@@ -1142,32 +1159,60 @@ position: relative;
 	.chapter-title nav {
 	  display: none;
 	}
-	.chapter-title .titlecard h1 {
-	  font-size: 48px;
-	}
-	.chapter-title .titlecard h2 {
-	  font-size: 24px;
-	  margin-bottom: 0;
-	}
+	
 	.index-nav {
-	  color: #fff;
+		color: #fff;
+		text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+		
+		h3 {
+			margin: 10px 0 0 0;
+			font-size: 22px;
+	        color: #fff;
+	        text-transform: uppercase;
+	        font-weight: bold;
+	        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+	        @media @screen-tiny-above {
+		        font-size: 30px;
+		        margin: 10px 0 11px 0;
+	        }
+	
+	        #title & {
+	            font-size: 28px;
+	            margin: 0;
+				@media @screen-small-above { 
+				  font-size: 90px;
+				}
+				
+	        }
+	    }
+		
+		ul {
+		  padding: 0;
+		  margin: 10px 0 0 0;
+		}
+		  
+		li {
+		font-size: 12px;
+		margin: 0 3px 10px 0px;
+		padding: 10px 10px 0 10px;
+		line-height: 1;
+		border: 1px solid #555;
+		display: inline-block;
+		background-color: rgba(0,0,0,0.5);
+		list-style-type: none;
+		background-image: none !important;
+		font-weight: bold;
+		text-transform: uppercase;
+			@media @screen-tiny-above {
+				text-align: left;
+				margin: 10px;
+				font-size: 32px;
+				padding: 15px 5px;
+			}
+		}
+	  
 	}
-	.index-nav ul {
-	  padding: 0;
-	}
-	.index-nav li {
-	  list-style-type: none;
-	  padding: 15px 5px;
-	  background-image: none !important;
-	  margin: 10px;
-	  font-size: 32px;
-	  font-weight: bold;
-	  text-align: left;
-	 /* background: rgba(0,0,0,.7);*/
-	  text-transform: uppercase;
-	  border-bottom: 1px solid #ccc;
-	}
-}
+}// more touch
 
 @media @screen-medium {
 	
