@@ -961,9 +961,15 @@ position: relative;
 
         #title & {
             font-size: 28px;
-            margin: 0;
-			@media @screen-small-above { 
-			  font-size: 90px;
+            margin: 0 auto;
+            
+            @media @screen-small-above { 
+			  font-size: 60px;
+			}
+            
+			@media @screen-medium-above { 
+			  font-size: 70px;
+			  max-width: 700px;
 			}
 			
         }
@@ -976,23 +982,24 @@ position: relative;
         max-width: 500px;
         margin: 5px auto;
         
-        @media @screen-tiny-above {
+        @media @screen-small-above {
         	margin: 0 auto 44px auto;
 	        font-size: 28px;
-			line-height: 1.4;
+			line-height: 1.2;
 			margin-bottom: 33px;
         }
         
         #title & {
 			@media @screen-small-above { 
-				margin-top: 10px;
-			  	font-size: 28px;
+				margin: 10px auto 10px auto;
+			  	font-size: 32px;
 	            text-transform: none;
 	            max-width: 700px;
-	            font-size: 22px;
 			}
 		
-		
+			@media @screen-medium-above { 
+	            font-size: 32px;
+			}
 		
         }
     }
@@ -1171,18 +1178,8 @@ position: relative;
 	        text-transform: uppercase;
 	        font-weight: bold;
 	        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-	        @media @screen-tiny-above {
-		        font-size: 30px;
-		        margin: 10px 0 11px 0;
-	        }
-	
-	        #title & {
-	            font-size: 28px;
-	            margin: 0;
-				@media @screen-small-above { 
-				  font-size: 90px;
-				}
-				
+	        @media @screen-small-above {
+		        font-size: 40px;
 	        }
 	    }
 		
@@ -1203,11 +1200,11 @@ position: relative;
 		background-image: none !important;
 		font-weight: bold;
 		text-transform: uppercase;
-			@media @screen-tiny-above {
+			
+			@media @screen-small-above {
 				text-align: left;
-				margin: 10px;
+				margin: 0 10px 10px 0px;
 				font-size: 32px;
-				padding: 15px 5px;
 			}
 		}
 	  
