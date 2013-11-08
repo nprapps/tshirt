@@ -69,12 +69,16 @@
 
 
     
+<!--[if lte IE 9]>
+<p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
 <div class="kontext">
 
     <section id="title" class="layer">
     	<div class="layer-media">
     	
-    		<video class="title-video" poster="img/home-title.jpg" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
+    		<video class="title-video" poster="img/home-title.jpg" preload="metadata" loop="loop" muted="muted">
                 <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131106_pmvid_home1.mp4" type="video/mp4">
                 <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131106_pmvid_home1.webm" type="video/webm">
             </video>
@@ -88,13 +92,14 @@
 							<h2>We went along on our T-shirt's global journey. And once you do that, you realize there’s nothing ordinary about a simple T-shirt.</h2>
 							<button class="btn btn-play">Begin</button>
 							<div class="index-nav">
+								<h3>Chapters</h3>
 								<ul>
 					        		<li class="nav-plants"><p>Plants</p></li>
 					                <li class="nav-machines"><p>Machines</p></li>
 					                <li class="nav-people"><p>People</p></li>
 					                <li class="nav-ships"><p>Ships</p></li>
 					                <li class="nav-you"><p>You</p></li>
-					                <li class="nav-about">How We Did This</li>
+					                <li class="nav-about"><p>How We Did This</p></li>
 					        	</ul>
 							</div><!-- /.index-nav -->
 						</div><!-- /.col --> 
@@ -219,8 +224,9 @@
                                 </div>
                                 <div class="col-sm-4 totals">
                                     <h6>Harvest</h6>
-                                    <p>In 2013, the farm will produce 12,000 bales of cotton &mdash; <strong>the equivalent of 8.68 million T-shirts</strong>.</p>
+                                    <p>In 2013, the farm will produce 12,000 bales of cotton &mdash; the equivalent of <strong>8.7 million T-shirts</strong>.</p>
                                     <p><img src="img/cotton-tech-shirt.gif" alt="" />
+                                    <p class="key"><i></i> = 100,000 shirts</p>
                                 </div>
                             </div>
                             <p class="footnote">
@@ -592,19 +598,17 @@
                         <p>The Planet Money men's T-shirt traveled around the world on its way to you. The cotton was grown in the U.S., spun into yarn in Indonesia, and sewn into shirts Bangladesh. Then a ship took the shirts back to the U.S., bound for a printing factory in Brooklyn.</p>
                         <p>All this travel was made possible by one simple innovation: the shipping container.</p>
 
-                        <div class="graphic yarn-types">
+                        <div class="graphic shipping-container">
                             <h4>The Shipping Container</h4>
-                            <p>[ Graphic: PHOTO/GIF OF A SHIPPING CONTAINER, SHOWING STANDARD SIZE? ]</p>
-                            <p class="credit">
-                                Source: ???
-                            </p>
+                            <p>[ PHOTO/GIF OF A SHIPPING CONTAINER (OUR SHIPPING CONTAINER?) ]</p>
+                            <p>[ Graphic: HOW MANY SHIRTS / HOW MANY BOXES FIT IN A CONTAINER? ]</p>
                         </div>
                         
                         <p>Big metal boxes might not seem like an innovation. But without the humble container, the global economy wouldn't be nearly as global as it is &mdash; and the Planet Money T-shirt wouldn't have been made the way it was.</p>
                         <p>Before containers, it was common for a single ship to be loaded with hundreds of thousands of different things &mdash; bananas, fish meal, steel pipes &mdash; all randomly stuffed into sacks and boxes. Workers had to pack each bag and box into the ship individually.</p>
                         <p>Even with 50 or 100 people working, it could take weeks to unload and reload a single ship.</p>
 
-                        <div class="graphic yarn-types">
+                        <div class="graphic shipping-cotton">
                             <h4>From The Archives</h4>
                             <p>[ Historical video of cotton being rolled into a ship? ]</p>
                             <p class="credit">
@@ -619,6 +623,95 @@
                         <p>Standardized containers took off around the world, and by 1966 Malcolm Mclean &mdash; the guy who dreamed of putting trucks on boats to avoid traffic &mdash; had put together a fleet of container ships.</p>
                         <p>The age of containers had begun, and it greatly reduced the cost of shipping.  A global distribution system emerged around standardized boxes that could be easily moved from ships, to, trains to trucks.</p>
 
+                        <div class="graphic shipping-costs">
+                            <h4>What Our Men's Shirt Cost</h4>
+                            <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+                            <table>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Country</th>
+                                    <th class="amt">Cost</th>
+                                    <th class="amt">Share</th>
+                                </tr>
+                                <tr>
+                                    <td>Cotton</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$0.60</td>
+                                    <td class="amt">5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Yarn spinning</td>
+                                    <td>Indonesia</td>
+                                    <td class="amt">$0.40</td>
+                                    <td class="amt">3%</td>
+                                </tr>
+                                <tr>
+                                    <td>Knitting, dyeing, cutting and sewing</td>
+                                    <td>Bangladesh</td>
+                                    <td class="amt">$1.00</td>
+                                    <td class="amt">8%</td>
+                                </tr>
+                                <tr class="shadedrow">
+                                    <td>Shipping</td>
+                                    <td>n/a</td>
+                                    <td class="amt">$0.10</td>
+                                    <td class="amt">1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Tariff</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$0.32</td>
+                                    <td class="amt">3%</td>
+                                </tr>
+                                <tr>
+                                    <td>Jockey fees</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$3.18</td>
+                                    <td class="amt">25%</td>
+                                </tr>
+                                <tr>
+                                    <td>Printing</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$0.90</td>
+                                    <td class="amt">7%</td>
+                                </tr>
+                                <tr>
+                                    <td>Order fulfillment</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$1.79</td>
+                                    <td class="amt">14%</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping and handling (average)</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$2.26</td>
+                                    <td class="amt">18%</td>
+                                </tr>
+                                <tr>
+                                    <td>Kickstarter fees</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$1.21</td>
+                                    <td class="amt">9%</td>
+                                </tr>
+                                <tr>
+                                    <td>Amazon Payments fees</td>
+                                    <td>U.S.</td>
+                                    <td class="amt">$1.04</td>
+                                    <td class="amt">8%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td></td>
+                                    <td class="amt"><strong>$12.79</strong></td>
+                                    <td class="amt"><strong>100%</strong></td>
+                                </tr>
+                            </table>
+                            
+                            <p class="credit">
+                                Source: Jockey, NPR analysis
+                            </p>
+                        </div>
+                        
                     </div><!-- /.col --> 
                 </div><!-- /.row -->  
             </div><!-- /.container -->
