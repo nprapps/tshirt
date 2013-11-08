@@ -124,12 +124,11 @@ $(document).ready(function() {
     	if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
-				var this_chapter = $(this).parents('.layer').attr('id');
-				var $this_iframe = $('#video-' + this_chapter)[0];
+				var $this_iframe = $('#video-' + current_chapter)[0];
 				var $this_player = $f($this_iframe);
 				
 				$this_player.api('play');
-				$('#' + this_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
+				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
 				
 				close_nav();
 			});
@@ -172,7 +171,9 @@ $(document).ready(function() {
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
-//        $('.video-wrapper').find('iframe').attr('src',''); // <<--- TODO TODO TODO
+        for (var i = 0; i < chapters.length; i++) {
+            replace_iframe('video-' + chapters[i], '');
+        }
         text_scrolled = false;
         
         //toggle next chapter nav and explainer prompt
@@ -204,7 +205,7 @@ $(document).ready(function() {
                     // skip ahead to the explainer text at a particular cuepoint
                     $player.api('getCurrentTime', function(time) {
                         $player.api('getDuration', function(duration) {
-                            if (duration - time <= video_advance_cuepoint && text_scrolled == false) {
+                            if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false ) {
                                 scroll_to_explainer();
                                 console.log(time + '/' + duration);
                                 text_scrolled = true;
@@ -262,11 +263,10 @@ $(document).ready(function() {
         var new_chapter_id;
         var new_chapter_name;
         
-        
         if (new_hash.length == 0) {
             new_chapter_id = 0;
-            new_chapter_name = 'title';
-            hasher.replaceHash('title');
+            new_chapter_name = chapters[new_chapter_id];
+            hasher.replaceHash(chapters[new_chapter_id]);
         } else {
             // check if this is a legit hash
             new_chapter_id = get_chapter_id(new_hash);
@@ -275,8 +275,8 @@ $(document).ready(function() {
                 new_chapter_name = new_hash;
             } else {
                 new_chapter_id = 0;
-                new_chapter_name = 'title';
-                hasher.replaceHash('title');
+                new_chapter_name = chapters[new_chapter_id];
+                hasher.replaceHash(chapters[new_chapter_id]);
             }
         }
         
@@ -287,7 +287,7 @@ $(document).ready(function() {
 	    current_chapter_id = new_chapter_id;
 
 	    // goto that chapter
-	    $('.layer').removeClass('show');
+	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
 	        
 	    // add a class to the body tag indicating what chapter we're in
@@ -380,6 +380,8 @@ $(document).ready(function() {
         });
     }
 
+    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
+
     function scroll_to_top() {
         var scroll_target = '#' + current_chapter;
 
@@ -387,12 +389,6 @@ $(document).ready(function() {
             scrollTarget: scroll_target
         });
     }
-    
-    
-    
-	 
-    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
-    
 
 
     /*
