@@ -116,12 +116,40 @@ $(document).ready(function() {
         draw_charts();
     }
     
+    function waypoint_explainer() {
+	//toggle next chapter nav and explainer prompt
+        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
+	        if (direction == 'down') {
+			   console.log(current_chapter + ' waypoint down');
+				$( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
+				$( '#nav-chapter-title' ).addClass( "waypoint-show" );
+			} else {
+				$( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
+				$( '#nav-chapter-title' ).removeClass( "waypoint-show" );
+			}
+		}, { offset: 500 }
+		);
+    }
+    
+    /*
+    function goodbye_waypoint() {
+    	console.log('goodbye');
+	    $('#' + current_chapter + ' .explainer').waypoint('disable');
+    }
+    
+    function hello_waypoint() {
+    	console.log('hello');
+	    $('#' + current_chapter + ' .explainer').waypoint('enable');
+    }
+    */
+    
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
 		var $btn_play = $chapter.find('.btn-play');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+			
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
@@ -131,10 +159,10 @@ $(document).ready(function() {
 				if (!is_touch) {
     				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
     			}
-				
 				close_nav();
 			});
 			
+						
 			$btn_explain.on('click', function() {
 				scroll_to_explainer();
 			});
@@ -144,6 +172,7 @@ $(document).ready(function() {
 			    autoplay_video = true;
 			    hasher.setHash(chapters[1]);
 				close_nav();
+				waypoint_explainer();
 			});
 		} else { // about or buy
 		    // do something else?
@@ -173,23 +202,17 @@ $(document).ready(function() {
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
+        
+        
         for (var i = 0; i < chapters.length; i++) {
             replace_iframe('video-' + chapters[i], '');
+            
         }
         text_scrolled = false;
         
-        //toggle next chapter nav and explainer prompt
-        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
-			console.log('explain');
-			$( '#nav-chapter-title-prompt' ).toggleClass( "waypoint-hide" );
-			$( '#nav-chapter-title' ).toggleClass( "waypoint-show" );
-		}, { offset: 500 }
-		);
-            
-
-        // add new video (if this is a chapter that has video
         if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
         	
+        	// add new video (if this is a chapter that has video
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             replace_iframe('video-' + chapter, video_path);
 
@@ -242,7 +265,8 @@ $(document).ready(function() {
         $('.nav-' + chapter).on('click', function() {
             hasher.setHash(chapters[id]);
             close_nav();
-        });
+			scroll_to_top();
+			});
 	}
 	
 	function get_chapter_id(chapter_name) {
@@ -291,6 +315,9 @@ $(document).ready(function() {
 	    // goto that chapter
 	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
+	    $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
+	    
+	    
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
@@ -328,9 +355,6 @@ $(document).ready(function() {
 	    if (!is_touch) {
             $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
         }
-	    
-	    
-	    
 		
 	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
 	    
@@ -363,6 +387,7 @@ $(document).ready(function() {
 	});
 	
 	function go_to_next_chapter() {
+		
         var next_chapter = chapters[( current_chapter_id + 1)];
 	    autoplay_video = true;
 	    console.log('advancing to chapter: ' + next_chapter);
@@ -390,7 +415,10 @@ $(document).ready(function() {
         var scroll_target = '#' + current_chapter;
 
         $.smoothScroll({
-            scrollTarget: scroll_target
+            scrollTarget: scroll_target,
+            afterScroll: function() {
+				console.log('after scroll');
+			}
         });
     }
 
@@ -694,6 +722,7 @@ $(document).ready(function() {
         
         // css animations
         setup_css_animations();
+
         
         load_graphics();
 
@@ -706,6 +735,9 @@ $(document).ready(function() {
         hasher.initialized.add(goto_chapter);
         //initialize hasher (start listening for history changes)
         hasher.init();
+        
+        //initialize waypoint
+        waypoint_explainer();
     }
     setup();
 
