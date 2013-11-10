@@ -116,19 +116,21 @@ $(document).ready(function() {
         draw_charts();
     }
     
-    function waypoint_explainer() {
+    function waypoint_explainer(chapter) {
 	//toggle next chapter nav and explainer prompt
-        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
-	        if (direction == 'down') {
-			   console.log(current_chapter + ' waypoint down');
-				$( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
-				$( '#nav-chapter-title' ).addClass( "waypoint-show" );
-			} else {
-				$( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
-				$( '#nav-chapter-title' ).removeClass( "waypoint-show" );
-			}
-		}, { offset: 500 }
-		);
+		if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+	        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
+		        if (direction == 'down') {
+				   console.log(current_chapter + ' waypoint down');
+					$( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
+					$( '#nav-chapter-title' ).addClass( "waypoint-show" );
+				} else {
+					$( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
+					$( '#nav-chapter-title' ).removeClass( "waypoint-show" );
+				}
+			}, { offset: 500 }
+			);
+		}
     }
     
     /*
@@ -140,8 +142,7 @@ $(document).ready(function() {
     function hello_waypoint() {
     	console.log('hello');
 	    $('#' + current_chapter + ' .explainer').waypoint('enable');
-    }
-    */
+    }*/
     
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
@@ -172,7 +173,6 @@ $(document).ready(function() {
 			    autoplay_video = true;
 			    hasher.setHash(chapters[1]);
 				close_nav();
-				waypoint_explainer();
 			});
 		} else { // about or buy
 		    // do something else?
