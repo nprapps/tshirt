@@ -25,7 +25,7 @@ $(document).ready(function() {
     var nav_height_open = 248;
     var small_nav_height = 44;
     var small_nav_height_open = 328;
-    var video_advance_cuepoint = 4;
+    var video_advance_cuepoint = 5;
     
     // status vars
     var autoplay_video = false;
@@ -405,6 +405,7 @@ $(document).ready(function() {
         var scroll_target = '#' + current_chapter + ' .explainer';
 
         $.smoothScroll({
+        	speed: 2400,
             scrollTarget: scroll_target
         });
     }
@@ -415,6 +416,7 @@ $(document).ready(function() {
         var scroll_target = '#' + current_chapter;
 
         $.smoothScroll({
+        	speed: 10,
             scrollTarget: scroll_target,
             afterScroll: function() {
 				console.log('after scroll');
