@@ -226,23 +226,27 @@ $(document).ready(function() {
                 $('section.show').addClass('video-loaded');
             
                 // check play progress
-                $player.addEvent('playProgress', function() {
-                    // skip ahead to the explainer text at a particular cuepoint
-                    $player.api('getCurrentTime', function(time) {
-                        $player.api('getDuration', function(duration) {
-                            if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false ) {
-                                scroll_to_explainer();
-                                console.log(time + '/' + duration);
-                                text_scrolled = true;
-                            }
+                if (chapter != 'title') {
+                    $player.addEvent('playProgress', function() {
+                        // skip ahead to the explainer text at a particular cuepoint
+                        $player.api('getCurrentTime', function(time) {
+                            $player.api('getDuration', function(duration) {
+                                if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false ) {
+                                    scroll_to_explainer();
+                                    console.log(time + '/' + duration);
+                                    text_scrolled = true;
+                                }
+                            });
                         });
                     });
-                });
-                
+                }
                 
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
+                    if (chapter == 'title') {
+                        hasher.setHash(chapters[1]);
+                    }
                 });
         
                 $player.addEvent('play', function() {
@@ -286,6 +290,7 @@ $(document).ready(function() {
 	}
 	
     function goto_chapter(new_hash){
+        console.log('goto_chapter');
         var new_chapter_id;
         var new_chapter_name;
         
