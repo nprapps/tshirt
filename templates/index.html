@@ -48,7 +48,7 @@
 					        		<li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
 					                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
 					                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-					                <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
+					                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
 					                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
 					                <li class="nav-about"><p>{{ COPY.content.about_title }}</p></li>
 					        	</ul>
@@ -102,15 +102,15 @@
 
         <div class="btn-next-chapter">
 			<div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.ships.fullname }} <i class="arrow-right"></i> </h3>
+                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.boxes.fullname }} <i class="arrow-right"></i> </h3>
 			</div>
         </div><!-- /.btn-next-chapter -->
 
     </section>
 
-    <section id="ships" class="layer">
+    <section id="boxes" class="layer">
 
-        {% include '_chapter_ships.html' %}
+        {% include '_chapter_boxes.html' %}
 
 		<div class="btn-next-chapter">
             <div class="next-chapter">
@@ -149,7 +149,7 @@
                 <li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
                 <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
                 <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-                <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
+                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
                 <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
             </ul>
         </div>
