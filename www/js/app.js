@@ -13,7 +13,7 @@ $(document).ready(function() {
     var $titlecard = $('.titlecard');
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
-    var $title_video = $('.title-video');
+    var $title_video;
 
     // static vars
     var video_aspect_width = 16;
@@ -32,6 +32,7 @@ $(document).ready(function() {
     var current_chapter_id = 0;
     var current_chapter = chapters[current_chapter_id];
     var is_touch = Modernizr.touch;
+    var supports_html5_video = Modernizr.video;
     var text_scrolled = false;
     var window_width;
     var window_height;
@@ -179,24 +180,34 @@ $(document).ready(function() {
 		} else { // about or buy
 		    // do something else?
 		}
+		
+		// append titlecard videos, where applicable
+        if (COPY[chapter] != undefined) {
+            if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
+                var video_tag = '';
+        
+                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted" loop>';
+                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
+                video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
+                video_tag += '</video>';
+            
+                $chapter.find('.layer-media').prepend(video_tag);
+                $chapter.find('.title-video').get(0).pause();
+            }
+        }
     }
     
     function replace_iframe(video, url) {
         /* feature detection: http://stackoverflow.com/questions/700499/change-iframe-source-in-ie-using-javascript */
-        console.log('replacing iframe: ' + video + ' | ' + url);
-
         var this_video = document.getElementById(video);
 
         if (this_video != null) {
             if (this_video.src) {
                 this_video.src = url;
-                console.log('this_video.src: ' + this_video.src);
             } else if (this_video.contentWindow != null && this_video.contentWindow.location != null) {
                 this_video.contentWindow.location = url;
-                console.log('this_video.contentWindow.location: ' + this_video.contentWindow.location);
             } else {
                 this_video.setAttribute('src', url);
-                console.log('this_video.setAttribute: ' + url);
             }
         }
     }
@@ -204,16 +215,14 @@ $(document).ready(function() {
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
-        
-        
         for (var i = 0; i < chapters.length; i++) {
             replace_iframe('video-' + chapters[i], '');
             
         }
+
         text_scrolled = false;
         
         if (chapter != 'about' && chapter != 'buy') {
-        	
         	// add new video (if this is a chapter that has video
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             replace_iframe('video-' + chapter, video_path);
@@ -272,7 +281,7 @@ $(document).ready(function() {
             hasher.setHash(chapters[id]);
             close_nav();
 			scroll_to_top();
-			});
+        });
 	}
 	
 	function get_chapter_id(chapter_name) {
@@ -292,7 +301,6 @@ $(document).ready(function() {
 	}
 	
     function goto_chapter(new_hash){
-        console.log('goto_chapter');
         var new_chapter_id;
         var new_chapter_name;
         
@@ -323,8 +331,6 @@ $(document).ready(function() {
 	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
 	    $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
-	    
-	    
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
@@ -362,9 +368,20 @@ $(document).ready(function() {
 	    if (!is_touch) {
             $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
         }
-		
+        
+        // stop titlecard videos for all chapters but this one
+        $('.title-video').each(function(k, v) {
+            var this_title_chapter = $('.title-video:eq(' + k + ')').parents('section').attr('id');
+            
+            if (this_title_chapter == new_chapter_name) {
+                v.play();
+                console.log(this_title_chapter);
+            } else {
+                v.pause();
+            }
+        });
+
 	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
-	    
 	    
 	    // scroll page to the top
         scroll_to_top();
@@ -393,18 +410,18 @@ $(document).ready(function() {
 	    }
 	});
 	
-	function go_to_next_chapter() {
-		
+	function goto_next_chapter() {
         var next_chapter = chapters[( current_chapter_id + 1)];
 	    autoplay_video = true;
+
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
     }
 	
-	$btn_next.on('click', go_to_next_chapter);
+	$btn_next.on('click', goto_next_chapter);
+	$nav_chapter_title.on('click', goto_next_chapter);
 	
-	$nav_chapter_title.on('click', go_to_next_chapter);
-	
+
 	/*
 	 * Explainer text
 	 */
@@ -728,6 +745,7 @@ $(document).ready(function() {
 			setup_chapters(chapters[i]);
             setup_chapter_nav(chapters[i], i);
         }
+        $title_video = $('.title-video');
         
         // css animations
         setup_css_animations();
