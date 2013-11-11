@@ -405,7 +405,7 @@ $(document).ready(function() {
         var scroll_target = '#' + current_chapter + ' .explainer';
 
         $.smoothScroll({
-        	speed: 2400,
+        	speed: 1900,
             scrollTarget: scroll_target
         });
     }

@@ -73,12 +73,12 @@
 <p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div class="kontext">
+<div id="top" class="kontext">
 
-    <section id="title" class="layer">
+    <section id="title" class="layer animated fadeIn">
     	<div class="layer-media">
     	
-    		<video class="title-video" poster="img/home-title.jpg" preload="metadata" loop="loop" muted="muted">
+    		<video class="title-video" poster="img/home-title.jpg" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
                 <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131106_pmvid_home1.mp4" type="video/mp4">
                 <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131106_pmvid_home1.webm" type="video/webm">
             </video>
@@ -89,7 +89,7 @@
 						<div class="col-md-12">
 						<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
 							<h1>Planet Money Makes A T-Shirt</h1>
-							<h2>We went along on our T-shirt's global journey. And once you do that, you realize there’s nothing ordinary about a simple T-shirt.</h2>
+							<h2>We went along on our T-shirt’s global journey. And once you do that, you realize there’s nothing ordinary about a simple T-shirt.</h2>
 							<button class="btn btn-play">Begin</button>
 							<div class="index-nav">
 								<h3>Chapters</h3>
@@ -97,7 +97,7 @@
 					        		<li class="nav-plants"><p>Plants</p></li>
 					                <li class="nav-machines"><p>Machines</p></li>
 					                <li class="nav-people"><p>People</p></li>
-					                <li class="nav-ships"><p>Ships</p></li>
+					                <li class="nav-ships"><p>Shipping</p></li>
 					                <li class="nav-you"><p>You</p></li>
 					                <li class="nav-about"><p>How We Did This</p></li>
 					        	</ul>
@@ -108,6 +108,7 @@
 			</div><!-- /.titlecard --> 
 
 		</div> <!-- /.layer-media -->
+		<div class="explainer"></div>
     </section>
 
     <section id="plants" class="layer">
@@ -115,8 +116,8 @@
             	<div class="layer-media">
     	
             <video class="title-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
-                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.mp4" type="video/mp4">
-                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.webm" type="video/webm">
+                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131110_pmvid_plantloop1.mp4" type="video/mp4">
+                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131110_pmvid_plantloop1.webm" type="video/webm">
             </video>
 
 			<div class="titlecard">
@@ -301,10 +302,10 @@
         </div> <!-- /. explainer -->
 
         <div class="btn-next-chapter">
-            <video class="footer-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
+            <!--<video class="footer-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
                 <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.mp4" type="video/mp4">
                 <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.webm" type="video/webm">
-            </video>
+            </video> -->
             <div class="next-chapter">
                 <h3 class="next-chapter-label"><em>Next Chapter</em> Machines <i class="arrow-right"></i> </h3>
             </div>
@@ -315,6 +316,11 @@
     <section id="machines" class="layer">
 
             	<div class="layer-media">
+    	
+    		<video class="title-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131107_pmvid_machines2.mp4" type="video/mp4">
+                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131107_pmvid_machines2.webm" type="video/webm">
+            </video>
 
 			<div class="titlecard">
 				<div class="container">
@@ -454,6 +460,10 @@
     <section id="people" class="layer">
 
             	<div class="layer-media">
+    		<video class="title-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131110_pmvid_peopleloop.mp4" type="video/mp4">
+                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131110_pmvid_peopleloop.webm" type="video/webm">
+            </video>
 
 			<div class="titlecard">
 				<div class="container">
@@ -559,7 +569,7 @@
 
         <div class="btn-next-chapter">
 			<div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> Ships <i class="arrow-right"></i> </h3>
+                <h3 class="next-chapter-label"><em>Next Chapter</em> Shipping <i class="arrow-right"></i> </h3>
 			</div>
         </div><!-- /.btn-next-chapter -->
 
@@ -568,12 +578,16 @@
     <section id="ships" class="layer">
 
             	<div class="layer-media">
-
+			<video class="title-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
+                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131110_pmvid_shiploop.mp4" type="video/mp4">
+                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131110_pmvid_shiploop.webm" type="video/webm">
+            </video>
+            
 			<div class="titlecard">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>Ships</h1>
+							<h1>Shipping</h1>
 							<h2>The unsung innovation at the heart of our global&nbsp;economy.</h2>
 							<button class="btn btn-play">Play</button>
                         </div><!-- /.col --> 
@@ -822,7 +836,7 @@
                                         <li><a href="http://stage-apps.npr.org/tshirt#/people">The lives of the workers who make our&nbsp;shirts.</a> <span class="date">(Nov. 18, 2013)</span></li>
                                     </ul>
                                 </dd>
-                            <dt>Ships</dt>
+                            <dt>Shipping</dt>
                                 <dd>
                                     <ul class="list-unstyled">
                                         <li><a href="http://stage-apps.npr.org/tshirt#/ships">The unsung innovation at the heart of our global&nbsp;economy.</a> <span class="date">(Nov. 18, 2013)</span></li>
@@ -884,7 +898,7 @@
                 <li class="nav-plants"><p>Plants</p></li>
                 <li class="nav-machines"><p>Machines</p></li>
                 <li class="nav-people"><p>People</p></li>
-                <li class="nav-ships"><p>Ships</p></li>
+                <li class="nav-ships"><p>Shipping</p></li>
                 <li class="nav-you"><p>You</p></li>
             </ul>
         </div>
