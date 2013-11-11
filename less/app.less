@@ -109,6 +109,8 @@ nav .nav-item-wrapper.backer,
 
 //primary navigation
 
+ 
+
 nav {
 	position: fixed;
 	bottom: 0;
@@ -121,6 +123,16 @@ nav {
 	z-index: 100;
 	overflow: hidden;
 	@media @screen-small { display: none; }
+	
+	&.nav-reveal {
+		background-image: url('@{img-root}/people-loop2.gif');
+		background-position: 60% 70%;
+	    -webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+	    background-size: cover;
+	}
+
     .clearfix();
 	
 	.nav-wrapper { 
@@ -147,6 +159,9 @@ nav {
 	        display: none;
 	        @media @screen-small-above { 
 				&.waypoint-show {display: block;}
+				background: transparent url("@{img-root}/arrow.png") no-repeat;
+				background-position: center right;
+				padding-right: 25px;
 			}
 	    }
 		
