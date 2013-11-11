@@ -3,6 +3,8 @@ $(document).ready(function() {
     var $b = $('body');
     var $w = $(window);
     var $btn_next = $('.btn-next-chapter');
+    var $filmstrip_cotton = $('#boxes').find('.filmstrip-wrapper');
+    var $filmstrip_cotton_wrapper = $('#boxes').find('.filmstrip-outer-wrapper');
     var $layers = $('.layer');
     var $layer_media = $('.layer-media');
     var $nav = $('nav');
@@ -20,6 +22,8 @@ $(document).ready(function() {
     var video_aspect_height = 9;
     var graphic_aspect_width = 9;
     var graphic_aspect_height = 6;
+    var filmstrip_cotton_aspect_width = 720;
+    var filmstrip_cotton_aspect_height = 528;
     var chapters = [ 'title', 'plants', 'machines', 'people', 'boxes', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 248;
@@ -103,6 +107,9 @@ $(document).ready(function() {
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 			$layer_media.height(window_height);
 	     }
+	     
+	     // resize the cotton filmstrip
+	     size_filmstrip();
 
 		 /* if (is_touch){
             $nav.removeAttr('data-spy').removeClass('affix');
@@ -380,6 +387,13 @@ $(document).ready(function() {
                 v.pause();
             }
         });
+        
+        // make sure the filmstrips are the right size
+        switch(new_chapter_name) {
+            case 'boxes':
+                size_filmstrip()
+                break;
+        }
 
 	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
 	    
@@ -455,6 +469,7 @@ $(document).ready(function() {
     function setup_css_animations() {
         var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
         var keyframes = '';
+        var filmstrip_steps = 25;
         
         var this_nav_height;
         var this_nav_height_open;
@@ -477,11 +492,28 @@ $(document).ready(function() {
             keyframes += '0% { height: ' + this_nav_height + 'px; }';
             keyframes += '100% { height: ' + this_nav_height_open + 'px; }';
             keyframes += '}';
+            
+            var filmstrip = '';
+            for (var f = 0; f < filmstrip_steps; f++) {
+                var current_pct = f * (100/filmstrip_steps);
+                filmstrip += current_pct + '% {background-position:0 -' + (f * 100) + '%;' + prefixes[i] + 'animation-timing-function:steps(1);}';
+            }
+            keyframes += '@' + prefixes[i] + 'keyframes filmstrip {' + filmstrip + '}';
 		}
         
         var s = document.createElement('style');
         s.innerHTML = keyframes;
         $('head').append(s);
+    }
+    
+    
+    /* 
+     * Filmstrip(s) 
+     */
+    function size_filmstrip() {
+        var filmstrip_cotton_width = $filmstrip_cotton_wrapper.width();
+        var filmstrip_cotton_height = Math.ceil((filmstrip_cotton_width * filmstrip_cotton_aspect_height) / filmstrip_cotton_aspect_width);
+        $filmstrip_cotton.width(filmstrip_cotton_width + 'px').height(filmstrip_cotton_height + 'px');
     }
     
     

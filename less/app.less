@@ -909,6 +909,36 @@ position: relative;
                 color: #444;
             }
         }
+        
+        &.shipping-cotton {
+            position: relative;
+        }
+        
+        .filmstrip-outer-wrapper {
+            width: 100%;
+            margin-bottom: 1em;
+
+            .filmstrip-wrapper {
+                width: 720px;
+                height: 528px;
+            }
+
+            .filmstrip {
+                width: 100%;
+                height: 100%;
+                background: url('@{img-root}/filmstrip-cotton-archive.jpg');
+                background-size: 100% 2500%;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                backface-visibility: hidden;
+
+                &.animated {
+                    -webkit-animation: filmstrip 4s infinite;
+                    -moz-animation: filmstrip 4s infinite;
+                    animation: filmstrip 4s infinite;
+                }
+            }
+        }
     }
     
     .photo-row {
