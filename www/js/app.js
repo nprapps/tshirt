@@ -149,7 +149,7 @@ $(document).ready(function() {
 		var $btn_play = $chapter.find('.btn-play');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
-    	if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+    	if (chapter != 'about' && chapter != 'buy') {
 			
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
@@ -168,12 +168,12 @@ $(document).ready(function() {
 				scroll_to_explainer();
 			});
 
-		} else if (chapter == 'title') {
+		/*} else if (chapter == 'title') {
 			$btn_play.on('click', function() {
 			    autoplay_video = true;
 			    hasher.setHash(chapters[1]);
 				close_nav();
-			});
+			});*/
 		} else { // about or buy
 		    // do something else?
 		}
@@ -210,7 +210,7 @@ $(document).ready(function() {
         }
         text_scrolled = false;
         
-        if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+        if (chapter != 'about' && chapter != 'buy') {
         	
         	// add new video (if this is a chapter that has video
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
