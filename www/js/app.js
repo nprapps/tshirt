@@ -117,20 +117,22 @@ $(document).ready(function() {
     }
     
     function waypoint_explainer(chapter) {
-	//toggle next chapter nav and explainer prompt
-		if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
-	        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
-		        if (direction == 'down') {
-				   console.log(current_chapter + ' waypoint down');
-					$( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
-					$( '#nav-chapter-title' ).addClass( "waypoint-show" );
-				} else {
-					$( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
-					$( '#nav-chapter-title' ).removeClass( "waypoint-show" );
-				}
-			}, { offset: 500 }
-			);
-		}
+        //toggle next chapter nav and explainer prompt
+                if (chapter != 'title' && chapter != 'about' && chapter != 'buy') {
+                $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
+                        if (direction == 'down') {
+                                   console.log(current_chapter + ' waypoint down');
+                                        $( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
+                                        $( '#nav-chapter-title' ).addClass( "waypoint-show" );
+                                        $( '#chapter-nav' ).addClass( "nav-reveal" );
+                                } else {
+                                        $( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
+                                        $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
+                                        $( '#chapter-nav' ).removeClass( "nav-reveal" );
+                                }
+                        }, { offset: 600 }
+                        );
+                }
     }
     
     /*
