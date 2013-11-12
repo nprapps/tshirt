@@ -34,18 +34,13 @@
     <section id="title" class="layer animated fadeIn">
     	<div class="layer-media">
     	
-    		<video class="title-video" poster="img/home-title.jpg" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
-                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131106_pmvid_home1.mp4" type="video/mp4">
-                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131106_pmvid_home1.webm" type="video/webm">
-            </video>
-			
 			<div class="titlecard">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
 						<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
-							<h1>{{ COPY.content.project_title }}</h1>
-							<h2>{{ COPY.content.project_subtitle }}</h2>
+							<h1>{{ COPY.title.fullname }}</h1>
+							<h2>{{ COPY.title.chapter_subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.title_play_button_label }}</button>
 							<div class="index-nav">
 								<h3>Chapters</h3>
@@ -53,7 +48,7 @@
 					        		<li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
 					                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
 					                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-					                <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
+					                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
 					                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
 					                <li class="nav-about"><p>{{ COPY.content.about_title }}</p></li>
 					        	</ul>
@@ -107,15 +102,15 @@
 
         <div class="btn-next-chapter">
 			<div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.ships.fullname }} <i class="arrow-right"></i> </h3>
+                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.boxes.fullname }} <i class="arrow-right"></i> </h3>
 			</div>
         </div><!-- /.btn-next-chapter -->
 
     </section>
 
-    <section id="ships" class="layer">
+    <section id="boxes" class="layer">
 
-        {% include '_chapter_ships.html' %}
+        {% include '_chapter_boxes.html' %}
 
 		<div class="btn-next-chapter">
             <div class="next-chapter">
@@ -148,13 +143,13 @@
             <ul id="nav-secondary">
                 <li class="nav-title"><i class="home"></i> {{ COPY.content.nav_home_button_label }} </li>
                 <li class="nav-about"><i class="about"></i> {{ COPY.content.about_title }}</li>
-                <li class="nav-about"><i class="about"></i> Buy a T-shirt</li>
+                <li class="nav-buy"><i class="buy"></i> Buy a T-shirt</li>
             </ul>
             <ul id="nav-primary">
                 <li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
                 <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
                 <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-                <li class="nav-ships"><p>{{ COPY.ships.fullname }}</p></li>
+                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
                 <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
             </ul>
         </div>

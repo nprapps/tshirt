@@ -107,8 +107,8 @@ nav .nav-item-wrapper.backer,
 	display: block;
 }
 
-//primary navigation
 
+//primary navigation
 nav {
 	position: fixed;
 	bottom: 0;
@@ -121,6 +121,16 @@ nav {
 	z-index: 100;
 	overflow: hidden;
 	@media @screen-small { display: none; }
+	
+	&.nav-reveal {
+		background-image: url('@{img-root}/people-loop2.gif');
+		background-position: 60% 70%;
+	    -webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+	    background-size: cover;
+	}
+
     .clearfix();
 	
 	.nav-wrapper { 
@@ -147,6 +157,9 @@ nav {
 	        display: none;
 	        @media @screen-small-above { 
 				&.waypoint-show {display: block;}
+				background: transparent url("@{img-root}/arrow.png") no-repeat;
+				background-position: center right;
+				padding-right: 25px;
 			}
 	    }
 		
@@ -302,7 +315,7 @@ nav {
 			background: url('@{img-root}/humans-thumb.jpg');
 		}
 		
-		.nav-ships {
+		.nav-boxes {
 			background: url('@{img-root}/ship-thumb.jpg');
 		}
 		
@@ -327,6 +340,17 @@ nav {
   top: 27px;
   left: 0;
   background: transparent url('@{img-root}/tshirt.png') no-repeat;
+  width: 18px;
+  height: 19px;
+  display: block;
+  @media @screen-small {display: none;}
+}
+
+.buy {
+  position: absolute;
+  top: 27px;
+  left: 0;
+  background: transparent url('@{img-root}/buy.png') no-repeat;
   width: 18px;
   height: 19px;
   display: block;
@@ -404,7 +428,8 @@ position: relative;
 }
 
 .nav-title,
-.nav-about {
+.nav-about,
+.nav-buy {
 	text-transform: uppercase;
 	margin-bottom: 10px;
 	@media @screen-small-above {
@@ -426,12 +451,12 @@ position: relative;
 .explainer {
 	background-color: #fff;
     padding-top: 33px;
-    @media @screen-tiny { padding-top: 22px; }
 
+    @media @screen-tiny { padding-top: 22px; }
 	@media @screen-small-above {
         body.chapter-about &,
         body.chapter-buy & {
-            padding-top: 88px;
+            padding-bottom: 88px;
         }
     }
 
@@ -850,6 +875,36 @@ position: relative;
                 }
             }
         }
+        
+        &.shipping-container {
+            h6 {
+                .clearfix();
+                text-align: center;
+
+                @media @screen-tiny-above {
+                    margin-left: 72px;
+                    text-align: left;
+                }
+                
+                strong { color: #17807E; }
+                b {
+                    width: 50px;
+                    height: 50px;
+                    display: block;
+                    background-image: url('@{img-root}/ico-boxes.png');
+                    background-repeat: no-repeat;
+                    margin: 0 auto 5px auto;
+                    
+                    @media @screen-tiny-above {
+                        float: left;
+                        margin: 2px 0 0 -72px;
+                    }
+                }
+                &.boxes b { background-position: 0 -100px; }
+                &.shirts b { background-position: 0 0; }
+            }
+        }
+
         &.yarn-types {
             .row {
                 b {
@@ -880,6 +935,35 @@ position: relative;
                 line-height: 1.5;
                 margin: 0;
                 color: #444;
+            }
+        }
+        
+        .filmstrip-outer-wrapper {
+            width: 100%;
+            margin-bottom: 1em;
+
+            .filmstrip-wrapper {
+                width: 720px;
+                height: 528px;
+            }
+
+            .filmstrip {
+                width: 100%;
+                height: 100%;
+                background-size: 100% 2500%;
+                background-image: url('@{img-root}/filmstrip-cotton-archive-480.jpg');
+                @media @screen-small-above { 
+                    background-image: url('@{img-root}/filmstrip-cotton-archive.jpg');
+                }
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                backface-visibility: hidden;
+
+                &.animated {
+                    -webkit-animation: filmstrip 4s infinite;
+                    -moz-animation: filmstrip 4s infinite;
+                    animation: filmstrip 4s infinite;
+                }
             }
         }
     }
@@ -1084,14 +1168,17 @@ position: relative;
 	/*
 	.chapter-people & {
         background-image: url('@{img-root}/walk-title.jpg');
-	}
-	
-	.chapter-ships & {
-        background-image: url('@{img-root}/ships-title.jpg');
 	}*/
+	
+	.chapter-boxes & {
+        background-image: url('@{img-root}/ships-title.jpg');
+	}
 	.chapter-you & {
         background-image: url('@{img-root}/you-title.jpg');
 	}
+	/*.chapter-buy & {
+        background-image: url('@{img-root}/you-title.jpg');
+	}*/
 }
 
 .touch .chapter-title .layer-media, .touch #title {
@@ -1105,6 +1192,93 @@ position: relative;
 	-o-background-size: cover;
     background-size: cover;
 	overflow: hidden;
+}
+
+//buy a t-shirt
+
+.chapter-buy {
+	background: url('@{img-root}/you-title.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    
+    .layer {background: transparent;}
+    
+    #chapter-nav.nav-reveal {background-image: none;}
+}
+
+#buy {
+	
+    .layer-media, .titlecard {background: transparent;}
+
+	.shirt-preview {
+		display: inline-block;
+		width: 150px;
+		margin-top: 30px;
+		@media @screen-medium-above { 
+    	display: block;
+    	width: 100%;
+		}
+	}
+
+	.container{
+	background-color: transparent;
+	margin-top: 60px;
+	padding-bottom: 100px;
+	text-align: left;
+	border: 2px solid #444;
+	background-color: #fff;
+	}
+	
+	h2 {
+		font-size: 36px;
+		margin: 40px 0 0 0;
+		color: #000;
+		text-transform: uppercase;
+		text-shadow: none;
+		font-weight: bold;
+	}
+	
+	h3 {margin-top: 5px;}
+	
+	p {
+		margin: 10px 0 20px 0;
+		em {color: red;}
+	
+	}
+	
+	.form-group h3 {
+		
+		font-weight: bold;
+		border-top: 2px solid #555;
+		padding-top: 20px;
+	}
+	
+	.select-shirt h3 {border: none;}
+	
+	
+	form {
+	margin: 10px 0;
+	text-align: left;
+	}
+	
+	input, select {
+		margin-bottom: 20px;
+	}
+	
+	.station-results {
+	border-top: 1px solid #ddd;
+	
+	}
+	
+	.station .radio {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+		}
+	
+	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
+	
 }
 
 

@@ -1,15 +1,11 @@
     	<div class="layer-media">
-			<video class="title-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
-                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/11/20131110_pmvid_shiploop.mp4" type="video/mp4">
-                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/11/20131110_pmvid_shiploop.webm" type="video/webm">
-            </video>
-            
+			
 			<div class="titlecard">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<h1>{{ COPY.ships.fullname }}</h1>
-							<h2>{{ COPY.ships.chapter_subtitle }}</h2>
+							<h1>{{ COPY.boxes.fullname }}</h1>
+							<h2>{{ COPY.boxes.chapter_subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.chapter_play_button_label }}</button>
                         </div><!-- /.col --> 
 					</div><!-- /.row -->  
@@ -18,7 +14,7 @@
 	
 			<div class="video-wrapper">
 			    <div class="video-inner-wrapper">
-			        <iframe src="" id="video-ships" width="400" height="225" frameborder="0"></iframe>
+			        <iframe src="" id="video-boxes" width="400" height="225" frameborder="0"></iframe>
 			    </div>
 			</div><!-- /.video-wrapper --> 
 			
@@ -35,8 +31,21 @@
 
                         <div class="graphic shipping-container">
                             <h4>The Shipping Container</h4>
+                            <h5>Lorem Ipsum Dolor Sit Amet</h5>
                             <p>[ PHOTO/GIF OF A SHIPPING CONTAINER (OUR SHIPPING CONTAINER?) ]</p>
-                            <p>[ Graphic: HOW MANY SHIRTS / HOW MANY BOXES FIT IN A CONTAINER? ]</p>
+                            
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h6 class="shirts"><b></b>There are <strong>78 Planet Money men's medium shirts</strong> in one box...</h6>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h6 class="boxes"><b></b>...and about <strong>1,000 boxes</strong> in one standard shipping container.</h6>
+                                </div>
+                            </div>
+                            
+                            <p class="credit">
+                                Sources: Jockey, <a href="http://www.seaboardmarine.com/SML/fleet/index.aspx?index=1">Seaboard Marine</a>, NPR analysis
+                            </p>
                         </div>
                         
                         <p>Big metal boxes might not seem like an innovation. But without the humble container, the global economy wouldn't be nearly as global as it is &mdash; and the Planet Money T-shirt wouldn't have been made the way it was.</p>
@@ -44,10 +53,15 @@
                         <p>Even with 50 or 100 people working, it could take weeks to unload and reload a single ship.</p>
 
                         <div class="graphic shipping-cotton">
-                            <h4>From The Archives</h4>
-                            <p>[ Historical video of cotton being rolled into a ship? ]</p>
+                            <h4>Cotton Shipping, The Old Way</h4>
+                            <h5>Workers in 1937 roll bales of cotton onto a steamboat on the Mississippi River.</h5>
+                            <div class="filmstrip-outer-wrapper">
+                                <div class="filmstrip-wrapper">
+                                    <div class="filmstrip animated"></div>
+                                </div>
+                            </div>
                             <p class="credit">
-                                Source: ???
+                                Source: U.S. Department of Agriculture (<a href="https://archive.org/details/CEP165">via archive.org</a>)
                             </p>
                         </div>
                         
@@ -87,7 +101,7 @@
                                     <td class="amt">8%</td>
                                 </tr>
                                 <tr class="shadedrow">
-                                    <td>Shipping</td>
+                                    <td>Shipping*</td>
                                     <td>n/a</td>
                                     <td class="amt">$0.10</td>
                                     <td class="amt">1%</td>
@@ -142,6 +156,9 @@
                                 </tr>
                             </table>
                             
+                            <p class="footnote">
+                                Note: The men's shirts cost approximately $0.10 to ship to the United States from Bangladesh. The women's shirts cost about $0.07 to ship to the United States from Colombia.
+                            </p>
                             <p class="credit">
                                 Source: Jockey, NPR analysis
                             </p>
