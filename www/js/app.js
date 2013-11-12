@@ -93,7 +93,7 @@ $(document).ready(function() {
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
 
         // size the title card
-		if (window_width < screen_medium){
+		if (window_width < screen_medium || is_touch){
 			$video_inner_wrapper.width('auto').height('auto');
 			//$layer_media.height('auto');
 	     } else {
