@@ -1147,7 +1147,7 @@ position: relative;
         background-image: url('@{img-root}/you-title.jpg');
 	}
 	.chapter-buy & {
-        background-image: url('@{img-root}/buy-background.jpg');
+        background-image: url('@{img-root}/you-title.jpg');
 	}
 }
 
@@ -1166,26 +1166,55 @@ position: relative;
 
 .chapter-buy {
 
+	.shirt-preview {
+		display: inline-block;
+		width: 150px;
+		margin-top: 30px;
+		@media @screen-medium-above { 
+    	display: block;
+    	width: 100%;
+		}
+		
+		
+	}
+
 	.container{
-	background-color: rgba(255,255,255,0.9);
-	margin-top: 20px;
+	background-color: rgba(255,255,255,1);
+	margin-top: 60px;
+	padding-bottom: 100px;
+	text-align: left;
+	border: 2px solid #444;
 	
 	}
 	
 	h2 {
-		margin-top: 40px;
+		font-size: 36px;
+		margin: 40px 0 0 0;
 		color: #000;
 		text-transform: uppercase;
 		text-shadow: none;
-		text-align: left;
+		font-weight: bold;
+	}
+	
+	h3 {margin-top: 5px;}
+	
+	.form-group h3 {
+		
+		font-weight: bold;
+		border-top: 1px solid #ccc;
+		padding: 20px 0;
 	}
 	
 	form {
-	margin: 50px 0;
+	margin: 10px 0;
 	text-align: left;
 	}
 	
-	.explainer {height: 0; margin: 0; padding: 0;}
+	input, select {
+		margin-bottom: 20px;
+	}
+	
+	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 	
 }
 
