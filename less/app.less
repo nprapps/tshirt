@@ -24,6 +24,13 @@
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
 }
+a { color: #17807E; }
+a:hover, a:focus { 
+    color: #17807E;
+    opacity: 0.7;
+    text-decoration: none;
+}
+
 
 body { background-color: #000; }
 section { background-color: #fff; }
@@ -998,7 +1005,82 @@ position: relative;
             div:nth-child(2) { margin-bottom: 1.5em; }
         }
     }
+    
+    .related {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 4px;
 
+        @media @screen-small-above {
+            &.left {
+                padding-right: 22px;
+                float: left;
+            }
+            &.right {
+                padding-left: 22px;
+                float: right;
+            }
+        }
+        
+        @media @screen-large {
+            &.left { margin-left: -15%; }
+            &.right { margin-right: -15%; }
+        }
+        
+        p { 
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 1em 0;
+            .clearfix();
+            
+            @media @screen-small-above {
+                border-top: none;
+                padding-top: 0;
+            }
+
+            span {  
+                margin-left: 50%;
+                display: block;
+                font-size: 14px;
+                line-height: 1.6;
+                font-weight: bold;
+
+                @media @screen-tiny-above {
+                    margin-left: 25%;
+                    font-size: 16px;
+                }
+                @media @screen-small-above {
+                    margin-left: 0;
+                    font-size: 16px;
+                }
+            }
+            em {
+                display: block;
+                font-style: normal;
+                color: #999;
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            float: left;
+            width: 50%;
+            margin-right: 22px;
+            
+            @media @screen-tiny-above {
+                width: 25%;
+            }
+            @media @screen-small-above {
+                width: auto;
+                float: none;
+                margin: 0 0 11px 0;
+            }
+        }
+    }
+    
     .table-of-contents {
         font-size: 14px;
 
