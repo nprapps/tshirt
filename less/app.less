@@ -875,6 +875,36 @@ position: relative;
                 }
             }
         }
+        
+        &.shipping-container {
+            h6 {
+                .clearfix();
+                text-align: center;
+
+                @media @screen-tiny-above {
+                    margin-left: 72px;
+                    text-align: left;
+                }
+                
+                strong { color: #17807E; }
+                b {
+                    width: 50px;
+                    height: 50px;
+                    display: block;
+                    background-image: url('@{img-root}/ico-boxes.png');
+                    background-repeat: no-repeat;
+                    margin: 0 auto 5px auto;
+                    
+                    @media @screen-tiny-above {
+                        float: left;
+                        margin: 2px 0 0 -72px;
+                    }
+                }
+                &.boxes b { background-position: 0 -100px; }
+                &.shirts b { background-position: 0 0; }
+            }
+        }
+
         &.yarn-types {
             .row {
                 b {
