@@ -2,41 +2,110 @@
     	
 			<div class="titlecard">
 				 <div class="container">
+				 
+				 	<div class="row">
+				 		<div class="col-md-7">
+				 		<h2>{{ COPY.content.buy_title }}</h2>
+	                        <h3>Support your favorite station by buying a Planet Money T-shirt. <em>Note: only one shirt per order.</em></h3>
+				 		</div><!--/col--> 
+				 	</div><!--/row--> 
+				 	
 	                <div class="row">
-	                    <div class="col-md-7 col-md-offset-4">
-	
-	                        <h2>{{ COPY.content.buy_title }}</h2>
+	                
+	                	<div class="col-md-5  col-md-push-7"><img src="img/tshirt-sample.jpg" class="img-responsive shirt-preview" /><img src="img/tshirt-sample.jpg" class="img-responsive shirt-preview" /></div>
+	                		                
+	                    <div class="col-md-7 col-md-pull-5">
 	                        
 	                        <form role="form">
 	                        
 	                        <div class="row">
-	                        <div class="col-md-4">
-	                        
-							  <div class="form-group">
-							    <label for="shirtSize">Select a size</label>
-							    
-							    
-							    <select class="form-control">
-								  <option>1</option>
-								  <option>2</option>
-								  <option>3</option>
-								  <option>4</option>
-								  <option>5</option>
-								</select>
-							  </div>
-	                        </div>
+		                        <div class="col-md-12">
+
+								  <div class="form-group">
+								    <h3>1. Select a shirt</h3>
+								   
+								    <select class="form-control">
+								    <!--<option selected="selected" value="">Select a shirt</option>-->
+									  <option>Men's Small</option>
+									  <option>Men's Medium</option>
+									  <option>Men's Large</option>
+									  <option>Women's Small</option>
+									  <option>Women's Medium</option>
+									  <option>Women's Large</option>
+									</select>
+									
+								  </div><!--/form-group-->
+								  
+								  <div class="form-group">
+									  <h3>2. Shipping Information</h3>
+									  <p><em>All fields are required</em></p>
+									  
+									  <label for="name">Full Name</label>
+									  <input id="name" type="text" class="form-control">
+									  <label for="name">Email</label>
+									  <input id="email" type="text" class="form-control">
+									  <label for="name">Address</label>
+									  <input type="text" class="form-control">
+									  <label for="name">City</label>
+									  <input type="text" class="form-control">
+									  <label for="name">State</label>
+									  <select class="form-control">
+										  <option selected="selected" value="">--</option>
+										  <option>2</option>
+										  <option>3</option>
+										  <option>4</option>
+										  <option>5</option>
+									</select>
+									<label for="name">Zip</label>
+									  <input type="text" class="form-control">
+									  <label for="name">Country</label>
+									   <option selected="selected" value="">--</option>
+									  <select class="form-control">
+										  <option selected="selected" value="">--</option>
+										  <option>2</option>
+										  <option>3</option>
+										  <option>4</option>
+										  <option>5</option>
+									</select>
+									  
+								  </div>
+								  
+		                        </div><!--/col-->
 	                        </div><!--/row-->
-							  
-							  
-							  <div class="checkbox">
-							    <label>
-							      <input type="checkbox"> Check me out
-							    </label>
-							  </div>
-							  <button type="submit" class="btn btn-default">Submit</button>
+	                        
+	                        <div class="row">
+	                        	<div class="form-group">
+	                        	
+	                        	 <div class="col-md-12">
+	                        		<h3>3. Find your favorite station</h3>
+	                        	 </div>
+
+								 	<div class="col-md-8">
+									 	<input type="text" class="form-control" placeholder="enter zip">
+			                        </div><!--/col-->
+			                       
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-default">Find</button>
+			                        </div><!--/col-->
+		                        </div><!--/form group-->
+		                        
+		                        
+		                        
+	                        </div><!--/row-->
+	                        
+	                        <div class="row">
+	                        
+	                        <div class="col-md-12"><h3>design of station results TBD</h3></div>
+	                        
+	                        </div><!--/row-->
+	                        
+	                        <button type="submit" class="btn btn-default">Continue to billing</button>
+
 							</form>
 	                    
 	                    </div><!-- /.col --> 
+	                    
+	                    
 	                </div><!-- /.row -->  
 	            </div><!-- /.container -->				
 			</div><!-- /.titlecard --> 
