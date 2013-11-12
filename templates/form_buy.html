@@ -1,0 +1,97 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<form id="t-shirt-form" action="{{ form_url }}" method="post">
+  <label>Gender
+  <select id="gender" required>
+    <option>F</option>
+    <option>M</option>
+  </select>
+  </label>
+
+  <label>Size
+  <select id="size" required>
+    <option>XS</option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+    <option>XXL</option>
+  </select>
+  </label>
+
+<hr/>
+
+  <label>Name
+    <input id="name" type="text" required placeholder="Betsy Ross" value="Betsy Ross"></input>
+  </label>
+
+  <label>Address
+    <input id="address" type="text" required placeholder="1111 North Capitol Street" value="1111 North Capitol Street"></input>
+  </label>
+
+  <label>City
+    <input id="city" type="text" required placeholder="Washington" value="Washington"></input>
+  </label>
+
+  <label>State
+    <input id="state" type="text" required placeholder="DC" value="DC"></input>
+  </label>
+
+  <label>Zip Code
+    <input id="zip" type="text" required placeholder="20001" value="20001"></input>
+  </label>
+
+
+  <input type="hidden" name="x_login" value="{{ x_login }}"></input>
+  <input type="hidden" name="x_amount" value="{{ x_amount }}"></input>
+  <input type="hidden" name="x_fp_sequence" value="{{ x_fp_sequence }}"></input>
+  <input type="hidden" name="x_fp_timestamp" value="{{ x_fp_timestamp }}"></input>
+  <input type="hidden" name="x_fp_hash" value="{{ x_fp_hash }}"></input>
+  <input type="hidden" name="x_show_form" value="PAYMENT_FORM"></input>
+  <input type="hidden" name="x_type" value="AUTH_CAPTURE"></input>
+  <input type="hidden" name="x_test_request" value="TRUE"></input>
+  <input type="hidden" id="x_description" name="x_description" value=""></input>
+</form>
+
+<hr/>
+
+<button class="t-shirt-submit">Go</button>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+<script type="text/javascript">
+  var $x_description;
+
+  $(function(){
+
+    $x_description = $('#x_description');
+
+    $('button.t-shirt-submit').on('click', function(){
+      var fields = [ 'address', 'city', 'state', 'zip', 'size', 'gender'];
+      var x_description = {};
+      var submit = true;
+      _.each(fields, function(element, index, list){
+        if ($('#' + element).val() == undefined || element == '') {
+          submit = false;
+        }
+        x_description[element] = $('#' + element).val();
+      });
+      $x_description.val(JSON.stringify(x_description));
+      if (submit == true){
+        // alert($x_description.val());
+        $('form#t-shirt-form').submit();
+      } else {
+        alert('Fill out the whole form, please.');
+      }
+    });
+
+  });
+</script>
+
+</body>
+</html>
