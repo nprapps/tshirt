@@ -24,9 +24,9 @@
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
 }
-a { color: #17807E; }
+a { color: #51A09E; }
 a:hover, a:focus { 
-    color: #17807E;
+    color: #51A09E;
     opacity: 0.7;
     text-decoration: none;
 }
@@ -598,12 +598,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
             font-size: 12px;
             color: #999;
             margin-bottom: 0;
+
+            a { font-weight: bold; }
         }
         
         .footnote {
             font-size: 12px;
             color: #999;
             margin-bottom: 11px;
+
+            a { font-weight: bold; }
         }
         
         &.d3-chart {
@@ -912,6 +916,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
                 }
                 &.boxes b { background-position: 0 -100px; }
                 &.shirts b { background-position: 0 0; }
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
             }
         }
 
