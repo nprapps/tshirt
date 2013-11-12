@@ -1,12 +1,11 @@
         <div class="layer-media">
-    	
 			<div class="titlecard">
 				 <div class="container">
 				 
 				 	<div class="row">
-				 		<div class="col-md-7">
+				 		<div class="col-md-9">
 				 		<h2>{{ COPY.content.buy_title }}</h2>
-	                        <h3>Support your favorite station by buying a Planet Money T-shirt. <em>Note: only one shirt per order.</em></h3>
+	                        <h3>Support public media by buying a Planet Money T-shirt. <em>Note: only one shirt per order.</em></h3>
 				 		</div><!--/col--> 
 				 	</div><!--/row--> 
 				 	
@@ -21,17 +20,17 @@
 	                        <div class="row">
 		                        <div class="col-md-12">
 
-								  <div class="form-group">
+								  <div class="select-shirt form-group">
 								    <h3>1. Select a shirt</h3>
 								   
 								    <select class="form-control">
-								    <!--<option selected="selected" value="">Select a shirt</option>-->
-									  <option>Men's Small</option>
-									  <option>Men's Medium</option>
-									  <option>Men's Large</option>
-									  <option>Women's Small</option>
-									  <option>Women's Medium</option>
-									  <option>Women's Large</option>
+										<option selected="selected" value="">--</option>
+										<option>Men's Small</option>
+										<option>Men's Medium</option>
+										<option>Men's Large</option>
+										<option>Women's Small</option>
+										<option>Women's Medium</option>
+										<option>Women's Large</option>
 									</select>
 									
 								  </div><!--/form-group-->
@@ -59,7 +58,6 @@
 									<label for="name">Zip</label>
 									  <input type="text" class="form-control">
 									  <label for="name">Country</label>
-									   <option selected="selected" value="">--</option>
 									  <select class="form-control">
 										  <option selected="selected" value="">--</option>
 										  <option>2</option>
@@ -67,51 +65,66 @@
 										  <option>4</option>
 										  <option>5</option>
 									</select>
-									  
-								  </div>
-								  
+								  </div><!--/form-group-->
 		                        </div><!--/col-->
 	                        </div><!--/row-->
 	                        
-	                        <div class="row">
-	                        	<div class="form-group">
-	                        	
-	                        	 <div class="col-md-12">
-	                        		<h3>3. Find your favorite station</h3>
-	                        	 </div>
-
-								 	<div class="col-md-8">
+	                        <div class="form-group">
+		                        <div class="row">
+									<div class="col-md-12">
+										<h3>3. Find your favorite station</h3>
+									</div>
+									
+									<div class="col-md-8">
 									 	<input type="text" class="form-control" placeholder="enter zip">
-			                        </div><!--/col-->
-			                       
+									</div><!--/col-->
+									
 									<div class="col-md-4">
 										<button type="submit" class="btn btn-default">Find</button>
-			                        </div><!--/col-->
-		                        </div><!--/form group-->
+									</div><!--/col-->
+		                        </div><!--/row-->
+		                     </div><!--/form group-->
+		                     <div class="form-group station-results">
+		                     
+		                        <div class="station row">
+		                        	<div class="col-md-12">
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+										    Colorado Public Radio- KCFR FM 90.1
+										  </label>
+										</div>
+									</div><!--/col-->
+		                        </div><!-- /station row --> 
 		                        
+		                        <div class="station row">
+		                        	<div class="col-md-12">
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+										    KUNC- KUNC FM 91.5
+										  </label>
+										</div>
+									</div><!--/col-->
+		                        </div><!-- /station row -->
 		                        
+		                        <div class="station row">
+		                        	<div class="col-md-12">
+										<div class="radio">
+										  <label>
+										    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+										    KRCC- KRCC FM 91.5
+										  </label>
+										</div>
+									</div><!--/col-->
+		                        </div><!-- /station row -->
 		                        
-	                        </div><!--/row-->
-	                        
-	                        <div class="row">
-	                        
-	                        <div class="col-md-12"><h3>design of station results TBD</h3></div>
-	                        
-	                        </div><!--/row-->
-	                        
-	                        <button type="submit" class="btn btn-default">Continue to billing</button>
-
+		                     </div><!--/form group-->
+							 <button type="submit" class="btn btn-default">Continue to billing</button>
 							</form>
-	                    
 	                    </div><!-- /.col --> 
-	                    
-	                    
 	                </div><!-- /.row -->  
 	            </div><!-- /.container -->				
 			</div><!-- /.titlecard --> 
-	
-			
-			
         </div><!-- /.layer-media --> 
-        
         <div class="explainer"></div><!-- /.explainer -->
