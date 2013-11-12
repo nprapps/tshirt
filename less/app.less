@@ -1146,9 +1146,9 @@ position: relative;
 	.chapter-you & {
         background-image: url('@{img-root}/you-title.jpg');
 	}
-	.chapter-buy & {
+	/*.chapter-buy & {
         background-image: url('@{img-root}/you-title.jpg');
-	}
+	}*/
 }
 
 .touch .chapter-title .layer-media, .touch #title {
@@ -1164,7 +1164,23 @@ position: relative;
 	overflow: hidden;
 }
 
+//buy a t-shirt
+
 .chapter-buy {
+	background: url('@{img-root}/you-title.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    
+    .layer {background: transparent;}
+    
+    #chapter-nav.nav-reveal {background-image: none;}
+}
+
+#buy {
+	
+    .layer-media, .titlecard {background: transparent;}
 
 	.shirt-preview {
 		display: inline-block;
@@ -1174,17 +1190,15 @@ position: relative;
     	display: block;
     	width: 100%;
 		}
-		
-		
 	}
 
 	.container{
-	background-color: rgba(255,255,255,1);
+	background-color: transparent;
 	margin-top: 60px;
 	padding-bottom: 100px;
 	text-align: left;
 	border: 2px solid #444;
-	
+	background-color: #fff;
 	}
 	
 	h2 {
@@ -1198,12 +1212,21 @@ position: relative;
 	
 	h3 {margin-top: 5px;}
 	
+	p {
+		margin: 10px 0 20px 0;
+		em {color: red;}
+	
+	}
+	
 	.form-group h3 {
 		
 		font-weight: bold;
-		border-top: 1px solid #ccc;
-		padding: 20px 0;
+		border-top: 2px solid #555;
+		padding-top: 20px;
 	}
+	
+	.select-shirt h3 {border: none;}
+	
 	
 	form {
 	margin: 10px 0;
@@ -1213,6 +1236,16 @@ position: relative;
 	input, select {
 		margin-bottom: 20px;
 	}
+	
+	.station-results {
+	border-top: 1px solid #ddd;
+	
+	}
+	
+	.station .radio {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+		}
 	
 	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 	

@@ -106,6 +106,7 @@ $(document).ready(function() {
 	        }
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 			$layer_media.height(window_height);
+			$('#buy').find('.layer-media').height('auto');
 	     }
 	     
 	     // resize the cotton filmstrip
