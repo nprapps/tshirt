@@ -265,6 +265,8 @@ $(document).ready(function() {
                     if (chapter == 'title') {
                         hasher.setHash(chapters[1]);
                     }
+                    // reset so that the autoscroll will work if the video is played again
+                    text_scrolled = false;
                 });
         
                 $player.addEvent('play', function() {
