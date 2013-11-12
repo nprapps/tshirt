@@ -122,14 +122,14 @@ nav {
 	overflow: hidden;
 	@media @screen-small { display: none; }
 	
-	&.nav-reveal {
+	/*&.nav-reveal {
 		background-image: url('@{img-root}/people-loop2.gif');
 		background-position: 60% 70%;
 	    -webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 	    background-size: cover;
-	}
+	}*/
 
     .clearfix();
 	
@@ -372,7 +372,7 @@ nav {
 .btn-next-chapter,
 .btn-explainer-prompt {
   cursor: pointer;
-  opacity: .8;
+  //opacity: .8;
 }
 .btn-next-chapter:hover,
 .btn-explainer-prompt:hover {
@@ -390,6 +390,8 @@ nav {
   height: 360px;
   border-top: 4px solid #000;
   overflow: hidden;
+  position: relative;
+  z-index: 200;
 }
 .next-chapter {
   background: rgba(0, 0, 0, 0.5);
@@ -1279,6 +1281,10 @@ position: relative;
 	
 	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 	
+}
+
+.chapter-title {
+	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 }
 
 
