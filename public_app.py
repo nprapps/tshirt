@@ -11,7 +11,7 @@ import time
 import urllib
 
 import envoy
-from flask import Flask, render_template, Markup, abort
+from flask import Flask, render_template, Markup, abort, jsonify
 
 import app_config
 import copytext
@@ -30,7 +30,7 @@ app.logger.setLevel(logging.INFO)
 def stations_json(zip_code):
     r = requests.get("http://api.npr.org/stations?zip=%s&apiKey=%s&format=json" % (
         zip_code, os.environ.get('NPR_API_KEY', None)))
-    return r.content
+    return jsonify(json.loads(r.content))
 
 
 @app.route('/%s/form/buy/' % app_config.PROJECT_SLUG, methods=['GET'])
@@ -41,6 +41,7 @@ def form_buy():
     https://firstdata.zendesk.com/entries/407522-First-Data-Global-Gateway-e4-Hosted-Payment-Pages-Integration-Manual
     """
     context = make_context()
+    context['test_js'] = ''
 
     # Decide on the form URL to use.
     context['form_url'] = "https://demo.globalgatewaye4.firstdata.com/payment"
@@ -71,6 +72,16 @@ def form_buy():
     context['x_fp_hash'] = hmac.new(os.environ.get('gge4_transaction_key', None), hash_string).hexdigest()
 
     # Return the form.
+    from flask import request
+
+    if request.args.get('test', None):
+        context['test_js'] = """
+            <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="../../js/templates.js"></script>
+        """
+        return render_template('_form.html', **context)
+
     return render_template('form_buy.html', **context)
 
 
@@ -91,6 +102,14 @@ def form_thanks():
         data = dict(request.args)
 
     context['data'] = data
+
+    if request.args.get('test', None):
+        context['test_js'] = """
+            <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="../../js/templates.js"></script>
+        """
+        return render_template('_thanks.html', **context)
 
     return render_template('form_thanks.html', **context)
 
