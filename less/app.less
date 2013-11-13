@@ -6,6 +6,7 @@
 // Global variables
 @img-root: "../img";
 @nav-height-desktop: 74px;
+@nav-height-small: 44px;
 
 
 // Breakpoints
@@ -129,6 +130,13 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
+	height: @nav-height-small;
+	border-top: 2px solid #000;
+	@media @screen-small-above { 
+		border-top: none;
+		height: @nav-height-desktop; 
+	}
+	
 	
 	&.nav-reveal {
 		top:0;
@@ -144,9 +152,10 @@ nav {
 		}
 	}
 	.nav-upper-wrapper {
-        position: relative;
-        height: @nav-height-desktop;
-        overflow: hidden;
+		position: relative;
+		height: @nav-height-small;
+        @media @screen-small-above {height: @nav-height-desktop;}
+        overflow: hidden;	
 	}
 	.nav-item-wrapper { 
 	    display: none;
@@ -213,7 +222,7 @@ nav {
 	    list-style-type: none;
 	    
 	    &#nav-secondary {
-	        padding-top: 30px;
+	        padding-top: 0;
 	        float: left;
 
 	        @media @screen-small-above {
@@ -225,6 +234,7 @@ nav {
 	        }
 	        
 	        > li {
+	        	@media @screen-small {padding: 3px 0;}
 	            @media @screen-small-above {
 	            	padding-top: 0;
 		            display: inline-block;
@@ -242,6 +252,7 @@ nav {
 	        clear: both;
 	        
         	> li {
+        		@media @screen-small {padding: 3px 0;}
 	            &:hover {
 	                cursor: pointer;
 	                opacity: 0.7;
@@ -298,13 +309,15 @@ nav {
 
 .btn-chapter {
     position: absolute;
-    top: 0;
-    left: 20px;
+    top: 4px;
+    left: 0;
     overflow: hidden;
     padding-left: 25px;
 
     @media @screen-small-above { 
+    	left: 20px;
         padding-left: 0;
+        top: 0;
         left: 0;
         line-height: @nav-height-desktop;
     }
@@ -437,14 +450,17 @@ nav {
   background-size: cover;
   background-position: 50% 0%;
   position: relative;
-  height: 360px;
+  height: 120px;
+  opacity: .7;
+  @media @screen-small-above {height: 360px;}
   border-top: 4px solid #000;
   overflow: hidden;
   position: relative;
   z-index: 200;
+  opacity: 1;
 }
 .next-chapter {
-  background: rgba(0, 0, 0, 0.5);
+  @media @screen-small-above {background: rgba(0, 0, 0, 0.5);}
   width: 100%;
   position: absolute;
   top: 0;
@@ -452,14 +468,15 @@ nav {
 }
 .next-chapter .next-chapter-label {
   color: #fff;
+  text-shadow: 3px 3px 2px #333;
   padding: 30px 0;
   padding-right: 40px;
   text-align: right;
-  margin: 0 20px 0 0;
+  margin: 10px 20px 0 0;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 36px;
-position: relative;
+  position: relative;
 }
 .next-chapter .arrow-right {
   background: transparent url("@{img-root}/arrow.png") no-repeat;
@@ -515,32 +532,44 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
     h2 {
         font-weight: 700;
-        margin-bottom: 1em;
-        line-height: 1.5;
         color: #121212;
+        padding-bottom: 10px;
         @media @screen-tiny { font-size: 22px; }
+        @media @screen-small-above {
+	        margin-bottom: 1em;
+			line-height: 1.5;
+		}
     }
     h3 {
-        margin: 2.6em 0 1em 0;
-        line-height: 1.5;
         color: #121212;
         font-weight: bold;
         text-transform: uppercase;
+        padding-bottom: 10px;
+        @media @screen-small-above { 
+	        margin: 2.6em 0 1em 0;
+	        line-height: 1.5;
+        }
     }
     h4 {
-        margin: 0 0 1.5em;
         text-transform: uppercase;
         color: #121212;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 1.5;
+        padding-bottom: 20px;
+        @media @screen-small-above { 
+	        font-weight: 700;
+	        font-size: 16px;
+	        line-height: 1.5;
+	        margin: 0 0 1.5em;
+        }
     }
     p,
     dl {
-        margin: 0 0 1.5em 0;
-        font-size: 20px;
-        line-height: 1.5;
-        color: #444;
+    	color: #444;
+    	margin-bottom: 15px;
+    	@media @screen-small-above { 
+	        margin: 0 0 1.5em 0;
+	        font-size: 20px;
+	        line-height: 1.5;
+        }
     }
     
     dt {
