@@ -350,7 +350,7 @@ $(document).ready(function() {
                 if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
                     if (this_chapter_name == 'you'){ $nav_chapter_title.text(''); }
                     else {
-	                    $nav_chapter_title.html('<strong>next chapter<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname']);
+	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
                     $nav_chapter_title_prompt.html(COPY[this_chapter_name]['nav_prompt'] + '<i class="ico-down-arrow"></i>');
                 } else {
