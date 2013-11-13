@@ -93,7 +93,7 @@ $(document).ready(function() {
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
 
         // size the title card
-		if (window_width < screen_medium){
+		if (window_width < screen_medium || is_touch){
 			$video_inner_wrapper.width('auto').height('auto');
 			//$layer_media.height('auto');
 	     } else {
@@ -131,7 +131,7 @@ $(document).ready(function() {
                            console.log(current_chapter + ' waypoint down');
                                 $( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
                                 $( '#nav-chapter-title' ).addClass( "waypoint-show" );
-                                $( '#chapter-nav' ).addClass( "nav-reveal" );
+                                $( '#chapter-nav' ).addClass( "nav-reveal animated fadeInDown" );
                         } else {
                                 $( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
                                 $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
@@ -443,7 +443,7 @@ $(document).ready(function() {
         var scroll_target = '#' + current_chapter + ' .explainer';
 
         $.smoothScroll({
-        	speed: 1900,
+        	speed: 2100,
             scrollTarget: scroll_target
         });
     }
@@ -796,7 +796,10 @@ $(document).ready(function() {
         hasher.init();
         
         //initialize waypoint
-        waypoint_explainer();
+        if (!is_touch){
+            waypoint_explainer();
+        }
+        
     }
     setup();
 

@@ -24,6 +24,13 @@
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
 }
+a { color: #51A09E; }
+a:hover, a:focus { 
+    color: #51A09E;
+    opacity: 0.7;
+    text-decoration: none;
+}
+
 
 body { background-color: #000; }
 section { background-color: #fff; }
@@ -108,6 +115,8 @@ nav .nav-item-wrapper.backer,
 }
 
 
+
+
 //primary navigation
 nav {
 	position: fixed;
@@ -120,15 +129,11 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
-	@media @screen-small { display: none; }
+	//@media @screen-small { display: none; }
 	
 	&.nav-reveal {
-		background-image: url('@{img-root}/people-loop2.gif');
-		background-position: 60% 70%;
-	    -webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-	    background-size: cover;
+		top:0;
+		bottom: auto;
 	}
 
     .clearfix();
@@ -286,20 +291,6 @@ nav {
   display: block;
 }
 
-//touch navigation
-.touch nav {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-}
-
-//showing on small screen
-@media @screen-small { 
-	.touch nav {
-		display: block;
-	}
-}
-
 // Chapter navigation thumbnails
 @media @screen-small-above {
 
@@ -372,7 +363,7 @@ nav {
 .btn-next-chapter,
 .btn-explainer-prompt {
   cursor: pointer;
-  opacity: .8;
+  //opacity: .8;
 }
 .btn-next-chapter:hover,
 .btn-explainer-prompt:hover {
@@ -390,6 +381,8 @@ nav {
   height: 360px;
   border-top: 4px solid #000;
   overflow: hidden;
+  position: relative;
+  z-index: 200;
 }
 .next-chapter {
   background: rgba(0, 0, 0, 0.5);
@@ -438,6 +431,7 @@ position: relative;
 	  overflow: hidden;
     }
 }
+body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
 .footer-video {
     width: 100%;
@@ -588,12 +582,16 @@ position: relative;
             font-size: 12px;
             color: #999;
             margin-bottom: 0;
+
+            a { font-weight: bold; }
         }
         
         .footnote {
             font-size: 12px;
             color: #999;
             margin-bottom: 11px;
+
+            a { font-weight: bold; }
         }
         
         &.d3-chart {
@@ -903,6 +901,11 @@ position: relative;
                 &.boxes b { background-position: 0 -100px; }
                 &.shirts b { background-position: 0 0; }
             }
+            img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
         }
 
         &.yarn-types {
@@ -998,7 +1001,82 @@ position: relative;
             div:nth-child(2) { margin-bottom: 1.5em; }
         }
     }
+    
+    .related {
+        padding-left: 0;
+        padding-right: 0;
+        margin-top: 4px;
 
+        @media @screen-small-above {
+            &.left {
+                padding-right: 22px;
+                float: left;
+            }
+            &.right {
+                padding-left: 22px;
+                float: right;
+            }
+        }
+        
+        @media @screen-large {
+            &.left { margin-left: -15%; }
+            &.right { margin-right: -15%; }
+        }
+        
+        p { 
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 1em 0;
+            .clearfix();
+            
+            @media @screen-small-above {
+                border-top: none;
+                padding-top: 0;
+            }
+
+            span {  
+                margin-left: 50%;
+                display: block;
+                font-size: 14px;
+                line-height: 1.6;
+                font-weight: bold;
+
+                @media @screen-tiny-above {
+                    margin-left: 25%;
+                    font-size: 16px;
+                }
+                @media @screen-small-above {
+                    margin-left: 0;
+                    font-size: 16px;
+                }
+            }
+            em {
+                display: block;
+                font-style: normal;
+                color: #999;
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            float: left;
+            width: 50%;
+            margin-right: 22px;
+            
+            @media @screen-tiny-above {
+                width: 25%;
+            }
+            @media @screen-small-above {
+                width: auto;
+                float: none;
+                margin: 0 0 11px 0;
+            }
+        }
+    }
+    
     .table-of-contents {
         font-size: 14px;
 
@@ -1168,30 +1246,18 @@ position: relative;
 	/*
 	.chapter-people & {
         background-image: url('@{img-root}/walk-title.jpg');
-	}*/
-	
+	}
 	.chapter-boxes & {
         background-image: url('@{img-root}/ships-title.jpg');
 	}
+	*/
+	
 	.chapter-you & {
         background-image: url('@{img-root}/you-title.jpg');
 	}
 	/*.chapter-buy & {
         background-image: url('@{img-root}/you-title.jpg');
 	}*/
-}
-
-.touch .chapter-title .layer-media, .touch #title {
-	width: 100%;
-    height: 100%;
-	background-color: #000;
-	background-image: url('@{img-root}/home-title.jpg');
-	background-position: 60% 70%;
-    -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    background-size: cover;
-	overflow: hidden;
 }
 
 //buy a t-shirt
@@ -1281,6 +1347,10 @@ position: relative;
 	
 }
 
+.chapter-title {
+	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
+}
+
 
 //touch specific styles
 .touch {
@@ -1302,7 +1372,7 @@ position: relative;
         display: block;
     }
     
-    .title-video {
+    .title-video{
         display: none;
     }
     
@@ -1341,10 +1411,52 @@ position: relative;
 	display: block;
 }
 
+/*
+.touch .chapter-title .layer-media, .touch #title {
+	width: 100%;
+    height: 100%;
+	background-color: #000;
+	background-image: url('@{img-root}/home-title.jpg');
+	background-position: 60% 70%;
+    -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover;
+	overflow: hidden;
+}*/
+
 .touch {
-	.btn-play,
-	.chapter-title nav {
+	.btn-play {
 	  display: none;
+	}
+	
+	.chapter-title {
+		#chapter-nav {display: none;}
+	}
+	
+	#title {
+		.layer-media {overflow: scroll;}
+		
+		.titlecard {
+			height: 70px;
+			overflow: hidden;
+		}
+		.video-wrapper {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding-top: 70px;
+		}
+		
+		.explainer {
+			visibility: visible;
+			height: auto;
+			z-index: 10000;
+			position: relative;
+			bottom: 0;
+		}
+		
+		
 	}
 	
 	.index-nav {
