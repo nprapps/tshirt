@@ -145,6 +145,7 @@ nav {
 	
 	h3 {
 	    font-size: 12px;
+	    float: right;
 	    margin: 0;
 	    line-height: 34px;
 	    text-transform: uppercase;
@@ -152,11 +153,10 @@ nav {
 	    @media @screen-small-above { opacity: 1; font-size: 14px; line-height: 74px; }
 	    
 	    &#nav-chapter-title { 
+	        float: left;
 	        font-weight: bold;
 	        text-transform: uppercase;
 	        display: none;
-	        text-align: right;
-
 	        @media @screen-small-above { 
 				&.waypoint-show {display: block;}
 				background: transparent url("@{img-root}/arrow.png") no-repeat;
@@ -166,12 +166,14 @@ nav {
 	    }
 		
 	    &#nav-chapter-title-prompt { 
+	        float: left;
 	        display: block;
+	        background: transparent url('@{img-root}/down-square.png')  0 24px no-repeat;
+	        padding-left: 32px;
 	        font-size: 22px;
 			text-transform: none;
 			font-weight: normal;
 			display: none;
-
 			@media @screen-small-above { 
 				display: block;
 				&.waypoint-hide {display: none;}
@@ -268,38 +270,23 @@ nav {
 
 .btn-chapter {
       position: relative;
-      padding-left: 25px;
+      padding-right: 30px;
       @media @screen-small-above { padding-right: 23px; }
       overflow: hidden;
 }
 
 .hamburger {
-    background: transparent url('@{img-root}/hamburger.png') no-repeat;
-    display: block;
-    width: 14px;
-    height: 12px;
-    position: absolute;
-    top: 10px;
-    left: 0;
-    @media @screen-small-above {
-        top: 30px;
-        right: 0;
-    }
-
-    .slideInUp & { background-image: url('@{img-root}/close.png'); }
-    .slideOutDown & { background-image: url('@{img-root}/hamburger.png'); }
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  @media @screen-small-above {top: 30px; right: 0;}
+  background: transparent url('@{img-root}/hamburger.png') no-repeat;
+  .slideInUp & { background-image: url('@{img-root}/close.png'); }
+  .slideOutDown & { background-image: url('@{img-root}/hamburger.png'); }
+  width: 14px;
+  height: 12px;
+  display: block;
 }
-
-.ico-down-arrow {
-    display: inline-block;
-    background: transparent url('@{img-root}/down-square.png') no-repeat center center;
-    width: 23px;
-    height: 22px;
-    margin-left: 11px;
-    vertical-align: text-top;
-}
-
-
 
 // Chapter navigation thumbnails
 @media @screen-small-above {
@@ -469,7 +456,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         margin-bottom: 1em;
         line-height: 1.5;
         color: #121212;
-        text-transform: capitalize;
         @media @screen-tiny { font-size: 22px; }
     }
     h3 {
@@ -1461,7 +1447,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
-			padding-top: 150px;
+			padding-top: 120px;
 			
 			.video-inner-wrapper {
 				width: 90% !important;
@@ -1479,12 +1465,15 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			position: absolute;
 			top: 0;
 			left: 0;
-			height: 150px;
+			height: 120px;
 			width: 100%;
+			z-index: 10;
+			color: #fff;
+			text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
 			
 			img {
 				width: 40px;
-				margin: 5px auto 0 auto;
+				margin: 10px auto 0 auto;
 				display: block;
 				text-align: center;
 				}
@@ -1537,14 +1526,14 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		}
 		  
 		li {
-		font-size: 12px;
-		margin: 0 0 10px 0;
-		padding: 10px 10px 0 10px;
+		font-size: 16px;
+		margin: 0 0 15px 0;
+		padding: 10px 5px 3px 5px;
 		line-height: 1;
-		border: 1px solid #555;
 		text-align: center;
-		
-		background-color: rgba(0,0,0,0.5);
+		color: #efefef;
+		text-shadow: none;
+		background-color: rgba(65,65,65,0.5);
 		list-style-type: none;
 		background-image: none !important;
 		font-weight: bold;
