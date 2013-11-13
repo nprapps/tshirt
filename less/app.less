@@ -115,8 +115,6 @@ nav .nav-item-wrapper.backer,
 }
 
 
-
-
 //primary navigation
 nav {
 	position: fixed;
@@ -129,7 +127,6 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
-	//@media @screen-small { display: none; }
 	
 	&.nav-reveal {
 		top:0;
@@ -1437,23 +1434,65 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	#title {
 		.layer-media {overflow: scroll;}
 		
-		.titlecard {
-			height: 70px;
-			overflow: hidden;
+		.titlecard  {
+			display: none;
+			
 		}
 		.video-wrapper {
-			position: absolute;
-			top: 0;
-			left: 0;
-			padding-top: 70px;
+			overflow: scroll;
+			background-color: #000;
+			background-image: url('@{img-root}/mobile-titlecard.jpg');
+			background-position: 60% 70%;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			padding-top: 150px;
+			
+			.video-inner-wrapper {
+				width: 90% !important;
+				border: 2px solid #333;
+				
+			}
+			
 		}
 		
 		.explainer {
-			visibility: visible;
-			height: auto;
-			z-index: 10000;
-			position: relative;
-			bottom: 0;
+			display: none;
+		}
+		
+		.touch-title {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 150px;
+			width: 100%;
+			
+			img {
+				width: 40px;
+				margin: 5px auto 0 auto;
+				display: block;
+				text-align: center;
+				}
+			
+			h2 {
+				text-transform: uppercase;
+				font-size: 22px;
+				font-weight: bold;
+				text-align: center;
+				margin: 5px 0 0 0;
+				padding: 0 40px;
+			}
+			h3 {
+				text-transform: uppercase;
+				font-size: 12px;
+				font-weight: bold;
+				text-transform: none;
+				font-weight: normal;
+				margin: 5px 0 0 0;
+				padding: 0 60px;
+				text-align: center;
+			}
 		}
 		
 		
@@ -1462,11 +1501,14 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	.index-nav {
 		color: #fff;
 		text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+		width: 90%;
+		margin: 0 auto;
 		
-		h3 {
+		h4 {
 			margin: 10px 0 0 0;
-			font-size: 22px;
+			font-size: 18px;
 	        color: #fff;
+	        text-align: center;
 	        text-transform: uppercase;
 	        font-weight: bold;
 	        text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
@@ -1482,11 +1524,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		  
 		li {
 		font-size: 12px;
-		margin: 0 3px 10px 0px;
+		margin: 0 0 10px 0;
 		padding: 10px 10px 0 10px;
 		line-height: 1;
 		border: 1px solid #555;
-		display: inline-block;
+		text-align: center;
+		
 		background-color: rgba(0,0,0,0.5);
 		list-style-type: none;
 		background-image: none !important;
