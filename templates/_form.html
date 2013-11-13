@@ -27,35 +27,34 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                       <h3>2. Shipping Information</h3>
                                       <p><em>All fields are required</em></p>
 
-                                      <label for="name">Full Name</label>
-                                      <input id="name" type="text" class="form-control">
-                                      <label for="name">Email</label>
-                                      <input id="email" type="text" class="form-control">
+                                      <label for="first_name">First Name</label>
+                                      <input id="first_name" type="text" class="form-control" name="x_first_name">
+                                      <label for="last_name">Last Name</label>
+                                      <input id="last_name" type="text" class="form-control" name="x_last_name">
+                                      <label for="email">Email</label>
+                                      <input id="email" type="text" class="form-control" name="x_email">
                                       <label for="address">Address</label>
-                                      <input id="address" type="text" class="form-control">
-                                      <label for="name">City</label>
-                                      <input id="city" type="text" class="form-control">
-                                      <label for="name">State</label>
-                                      <select id="state" class="form-control">
-                                          <option selected="selected" value="">--</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                      </select>
+                                      <input id="address" type="text" class="form-control" name="x_address">
+                                      <label for="city">City</label>
+                                      <input id="city" type="text" class="form-control" name="x_city">
+                                      <label for="state">State</label>
+                                      <input id="state" type="text" class="form-control" name="x_state">
                                       <label for="name">Zip</label>
-                                      <input id="zip" type="text" class="form-control">
+                                      <input id="zip" type="text" class="form-control" name="x_zip">
                                       <label id="country" for="name">Country</label>
-                                      <select class="form-control">
-                                          <option selected="selected" value="">--</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                      </select>
+                                      <input id="country" type="text" class="form-control" name="x_country">
                                   </div><!--/form-group-->
                                 </div><!--/col-->
                             </div><!--/row-->
+
+                                <input type="hidden" id="x_ship_to_first_name" name="x_ship_to_first_name" value=""></input>
+                                <input type="hidden" id="x_ship_to_last_name" name="x_ship_to_last_name" value=""></input>
+                                <input type="hidden" id="x_ship_to_address" name="x_ship_to_address" value=""></input>
+                                <input type="hidden" id="x_ship_to_city" name="x_ship_to_city" value=""></input>
+                                <input type="hidden" id="x_ship_to_state" name="x_ship_to_state" value=""></input>
+                                <input type="hidden" id="x_ship_to_zip" name="x_ship_to_zip" value=""></input>
+                                <input type="hidden" id="x_ship_to_country" name="x_ship_to_country" value=""></input>
+
                                 <input type="hidden" name="x_login" value="{{ x_login }}"></input>
                                 <input type="hidden" name="x_amount" value="{{ x_amount }}"></input>
                                 <input type="hidden" name="x_fp_sequence" value="{{ x_fp_sequence }}"></input>

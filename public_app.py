@@ -103,6 +103,9 @@ def form_thanks():
 
     context['data'] = data
 
+    with open('data/orders.json', 'ab') as writefile:
+        writefile.write(json.dumps(data))
+
     if request.args.get('test', None):
         context['test_js'] = """
             <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
