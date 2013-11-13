@@ -24,8 +24,8 @@ $(function(){
 
     $('button.t-shirt-submit').on('click', function(){
 
-        var fields = [ 'address', 'city', 'state', 'zip', 'shirt', 'country', 'name'];
-
+        var fields = [ 'address', 'city', 'state', 'zip', 'shirt', 'country', 'first_name', 'last_name'];
+        var duplicate_fields = ['address', 'city', 'state', 'zip', 'country', 'first_name', 'last_name'];
         var x_description = {};
 
         var submit = true;
@@ -40,6 +40,10 @@ $(function(){
             }
 
             x_description[element] = $('#' + element).val();
+        });
+
+        _.each(duplicate_fields, function(element, index, list){
+          $('#ship_to_' + element).val($('#' + element).val());
         });
 
         var station = $("div.station-results input:checked").val();
