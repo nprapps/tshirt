@@ -136,16 +136,17 @@
 </div>
 
 <nav id="chapter-nav" role="navigation">
-    <div class="nav-wrapper container">
-        <div class="row">
-            <div class="col-md-2">
-                <h3 class="btn-chapter"><i class="hamburger"></i> {{ COPY.content.nav_chapter_button_label }}</h3>
-            </div>
-            <div class="col-md-8 explainer-prompt">
-                <h3 id="nav-chapter-title-prompt"></h3>
-            </div>
-            <div class="col-md-10 next-chapter-prompt">
-                <h3 id="nav-chapter-title"></h3>
+    <div class="nav-wrapper">
+        <div class="nav-upper-wrapper">
+            <h3 class="btn-chapter"><i class="ico-hamburger"></i> {{ COPY.content.nav_chapter_button_label }}</h3>
+            <h3 id="nav-chapter-title"></h3>
+
+            <div class="container explainer-prompt">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-2">
+                        <h3 id="nav-chapter-title-prompt"></h3>
+                    </div>
+                </div>
             </div>
         </div>
 

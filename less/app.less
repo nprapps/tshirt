@@ -5,6 +5,7 @@
 
 // Global variables
 @img-root: "../img";
+@nav-height-desktop: 74px;
 
 
 // Breakpoints
@@ -140,11 +141,19 @@ nav {
 	
 	.nav-wrapper { 
 		padding: 0 20px 5px 20px; 
-		.touch &{
+		.touch & {
 			@media @screen-small-above { padding: 0 22px 22px 22px; }
 		}
 	}
-	.nav-item-wrapper { display: none; }
+	.nav-upper-wrapper {
+        position: relative;
+        height: @nav-height-desktop;
+        overflow: hidden;
+	}
+	.nav-item-wrapper { 
+	    display: none;
+	    position: relative;
+	}
 	
 	h3 {
 	    font-size: 12px;
@@ -152,7 +161,12 @@ nav {
 	    line-height: 34px;
 	    text-transform: uppercase;
 	    opacity: 0.7;
-	    @media @screen-small-above { opacity: 1; font-size: 14px; line-height: 74px; }
+
+	    @media @screen-small-above { 
+	        opacity: 1; 
+	        font-size: 14px; 
+	        line-height: @nav-height-desktop;
+	    }
 	    
 	    &#nav-chapter-title { 
 	        font-weight: bold;
@@ -170,7 +184,7 @@ nav {
 		
 	    &#nav-chapter-title-prompt { 
 	        display: block;
-	        font-size: 22px;
+	        font-size: 20px;
 			text-transform: none;
 			font-weight: normal;
 			display: none;
@@ -194,15 +208,22 @@ nav {
 	    
 	    &#nav-secondary {
 	        padding-top: 30px;
-	        @media @screen-small-above {padding-top: 0;}
 	        float: left;
+
+	        @media @screen-small-above {
+	            padding-top: 0;
+	            float: right;
+	            position: absolute;
+	            top: -@nav-height-desktop;
+	            right: 0px;
+	        }
 	        
 	        > li {
 	            @media @screen-small-above {
 	            	padding-top: 0;
 		            display: inline-block;
 		            margin-right: 12px;
-		            line-height: 74px;
+		            line-height: @nav-height-desktop;
 		        }
 	
 	            &:hover {
@@ -270,23 +291,35 @@ nav {
 }
 
 .btn-chapter {
-      position: relative;
-      padding-left: 25px;
-      @media @screen-small-above { padding-right: 23px; }
-      overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    overflow: hidden;
+    padding-left: 25px;
+
+    @media @screen-small-above { 
+        padding-left: 0;
+        left: 0;
+        line-height: @nav-height-desktop;
+    }
 }
 
-.hamburger {
-    background: transparent url('@{img-root}/hamburger.png') no-repeat;
+.ico-hamburger {
+    background: transparent url('@{img-root}/hamburger.png') no-repeat center center;
     display: block;
     width: 14px;
     height: 12px;
     position: absolute;
     top: 10px;
     left: 0;
+
     @media @screen-small-above {
-        top: 30px;
-        right: 0;
+        display: inline-block;
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-right: 11px;
+        vertical-align: center;
     }
 
     .slideInUp & { background-image: url('@{img-root}/close.png'); }
