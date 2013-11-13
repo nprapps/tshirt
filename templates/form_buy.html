@@ -1,97 +1,66 @@
-<html>
+{% extends '_form_base.html' %}
 
-<head>
-</head>
+{% block extra_css %}
+{% endblock extra_css %}
 
-<body>
+{% block extra_head_js %}
+{% endblock extra_head_js %}
 
-<form id="t-shirt-form" action="{{ form_url }}" method="post">
-  <label>Gender
-  <select id="gender" required>
-    <option>F</option>
-    <option>M</option>
-  </select>
-  </label>
-
-  <label>Size
-  <select id="size" required>
-    <option>XS</option>
-    <option>S</option>
-    <option>M</option>
-    <option>L</option>
-    <option>XL</option>
-    <option>XXL</option>
-  </select>
-  </label>
-
-<hr/>
-
-  <label>Name
-    <input id="name" type="text" required placeholder="Betsy Ross" value="Betsy Ross"></input>
-  </label>
-
-  <label>Address
-    <input id="address" type="text" required placeholder="1111 North Capitol Street" value="1111 North Capitol Street"></input>
-  </label>
-
-  <label>City
-    <input id="city" type="text" required placeholder="Washington" value="Washington"></input>
-  </label>
-
-  <label>State
-    <input id="state" type="text" required placeholder="DC" value="DC"></input>
-  </label>
-
-  <label>Zip Code
-    <input id="zip" type="text" required placeholder="20001" value="20001"></input>
-  </label>
-
-
-  <input type="hidden" name="x_login" value="{{ x_login }}"></input>
-  <input type="hidden" name="x_amount" value="{{ x_amount }}"></input>
-  <input type="hidden" name="x_fp_sequence" value="{{ x_fp_sequence }}"></input>
-  <input type="hidden" name="x_fp_timestamp" value="{{ x_fp_timestamp }}"></input>
-  <input type="hidden" name="x_fp_hash" value="{{ x_fp_hash }}"></input>
-  <input type="hidden" name="x_show_form" value="PAYMENT_FORM"></input>
-  <input type="hidden" name="x_type" value="AUTH_CAPTURE"></input>
-  <input type="hidden" name="x_test_request" value="TRUE"></input>
-  <input type="hidden" id="x_description" name="x_description" value=""></input>
-</form>
-
-<hr/>
-
-<button class="t-shirt-submit">Go</button>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-<script type="text/javascript">
-  var $x_description;
-
-  $(function(){
-
-    $x_description = $('#x_description');
-
-    $('button.t-shirt-submit').on('click', function(){
-      var fields = [ 'address', 'city', 'state', 'zip', 'size', 'gender'];
-      var x_description = {};
-      var submit = true;
-      _.each(fields, function(element, index, list){
-        if ($('#' + element).val() == undefined || element == '') {
-          submit = false;
-        }
-        x_description[element] = $('#' + element).val();
-      });
-      $x_description.val(JSON.stringify(x_description));
-      if (submit == true){
-        // alert($x_description.val());
-        $('form#t-shirt-form').submit();
-      } else {
-        alert('Fill out the whole form, please.');
-      }
-    });
-
-  });
+{% block extra_head %}
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
+<script>
+    WebFont.load({
+         custom: {
+             families: [
+                 'Gotham SSm:n4,n7'
+             ],
+             urls: [
+                 'http://s.npr.org/templates/css/fonts/GothamSSm.css'
+             ]
+         },
+         timeout: 10000
+     });
 </script>
+{% endblock extra_head %}
 
-</body>
-</html>
+
+{% block outer_content %}
+<!--[if lte IE 9]>
+<p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div id="top" class="kontext">
+
+    <section id="buy" class="layer">
+        {% include '_chapter_buy.html' %}
+    </section>
+</div>
+
+<nav id="chapter-nav" role="navigation">
+    <div class="nav-wrapper">
+        <h3 id="nav-chapter-title"></h3>
+        <h3 id="nav-chapter-title-prompt"></h3>
+
+        <h3 class="btn-chapter">{{ COPY.content.nav_chapter_button_label }} <i class="hamburger"></i></h3>
+        <div class="nav-item-wrapper">
+            <ul id="nav-secondary">
+                <li class="nav-title"><i class="home"></i> {{ COPY.content.nav_home_button_label }} </li>
+                <li class="nav-about"><i class="about"></i> {{ COPY.content.about_title }}</li>
+                <li class="nav-buy"><i class="buy"></i> Buy a T-shirt</li>
+            </ul>
+            <ul id="nav-primary">
+                <li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
+                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
+                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
+                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
+                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+
+{% block extra_foot_js %}
+{% endblock extra_foot_js %}
