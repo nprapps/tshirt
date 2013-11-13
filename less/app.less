@@ -10,6 +10,7 @@
 
 // Breakpoints
 @screen-mega-above: ~"screen and (min-width: 1440px)";
+@screen-large-above: ~"screen and (min-width: 1201px)";
 @screen-large: ~"screen and (min-width: 1200px)";
 @screen-medium-above: ~"screen and (min-width: 993px)";
 @screen-medium: ~"screen and (max-width: 992px)";
@@ -185,14 +186,21 @@ nav {
 		
 	    &#nav-chapter-title-prompt { 
 	        display: block;
-	        font-size: 20px;
+	        font-size: 16px;
 			text-transform: none;
 			font-weight: normal;
 			display: none;
 
 			@media @screen-small-above { 
 				display: block;
+
 				&.waypoint-hide {display: none;}
+			}
+			@media @screen-medium {
+			    text-align: right;
+		    }
+			@media @screen-medium-above {
+                font-size: 18px;
 			}
 	    }
 	
