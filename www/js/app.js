@@ -796,7 +796,10 @@ $(document).ready(function() {
         hasher.init();
         
         //initialize waypoint
-        waypoint_explainer();
+        if (!is_touch){
+            waypoint_explainer();
+        }
+        
     }
     setup();
 

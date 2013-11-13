@@ -115,6 +115,8 @@ nav .nav-item-wrapper.backer,
 }
 
 
+
+
 //primary navigation
 nav {
 	position: fixed;
@@ -127,7 +129,7 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
-	@media @screen-small { display: none; }
+	//@media @screen-small { display: none; }
 	
 	&.nav-reveal {
 		top:0;
@@ -287,20 +289,6 @@ nav {
   width: 14px;
   height: 12px;
   display: block;
-}
-
-//touch navigation
-.touch nav {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-}
-
-//showing on small screen
-@media @screen-small { 
-	.touch nav {
-		display: block;
-	}
 }
 
 // Chapter navigation thumbnails
