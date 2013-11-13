@@ -38,7 +38,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-						<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
+							<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
 							<h1>{{ COPY.title.fullname }}</h1>
 							<h2>{{ COPY.title.chapter_subtitle }}</h2>
 							<button class="btn btn-play">{{ COPY.content.title_play_button_label }}</button>
@@ -48,25 +48,31 @@
 			</div><!-- /.titlecard --> 
 			
 			<div class="video-wrapper">
-			    <div class="video-inner-wrapper">
-			        <iframe src="" id="video-title" width="400" height="225" frameborder="0"></iframe>
-			    </div>
-			   
+				    <div class="video-inner-wrapper">
+				        <iframe src="" id="video-title" width="400" height="225" frameborder="0"></iframe>
+				    </div>
 			</div><!-- /.video-wrapper --> 
+			
+			<div class="index-nav">
+				   	<div class="touch-title">
+		   				<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
+						<h2>{{ COPY.title.fullname }}</h2>
+						<h3>{{ COPY.title.chapter_subtitle }}</h3>
+				   	</div>
+				   
+					<h4>Chapters</h4>
+					<ul>
+		        		<li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
+		                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
+		                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
+		                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
+		                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
+		                <li class="nav-about"><p>{{ COPY.content.about_title }}</p></li>
+		        	</ul>
+			</div><!-- /.index-nav -->
 
 		</div> <!-- /.layer-media -->
 		<div class="explainer">
-			 <div class="index-nav">
-                <h3>Chapters</h3>
-                <ul>
-                    <li class="nav-plants"><p>{{ COPY.plants.fullname }}</p></li>
-                    <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
-                    <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-                    <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
-                    <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
-                    <li class="nav-about"><p>{{ COPY.content.about_title }}</p></li>
-                </ul>
-			</div><!-- /.index-nav -->
 		</div>
     </section>
 
