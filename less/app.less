@@ -451,13 +451,15 @@ nav {
   background-position: 50% 0%;
   position: relative;
   height: 120px;
-  opacity: .7;
-  @media @screen-small-above {height: 360px;}
+  opacity: 1;
+  @media @screen-small-above {
+  	height: 360px;
+  	}
   border-top: 4px solid #000;
   overflow: hidden;
   position: relative;
   z-index: 200;
-  opacity: 1;
+  
 }
 .next-chapter {
   @media @screen-small-above {background: rgba(0, 0, 0, 0.5);}
@@ -469,25 +471,39 @@ nav {
 .next-chapter .next-chapter-label {
   color: #fff;
   text-shadow: 3px 3px 2px #333;
+  text-transform: uppercase;
+  font-weight: bold;
+  position: relative;
+  font-size: 28px;
+  text-align: center;
+  
+  @media @screen-small-above {
   padding: 30px 0;
   padding-right: 40px;
   text-align: right;
   margin: 10px 20px 0 0;
-  text-transform: uppercase;
-  font-weight: bold;
   font-size: 36px;
-  position: relative;
+  }
+
 }
+
 .next-chapter .arrow-right {
-  background: transparent url("@{img-root}/arrow.png") no-repeat;
-  width: 18px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  top: 40px;
-  right: 10px;
+  display: none;
+  @media @screen-small-above {
+	background: transparent url("@{img-root}/arrow.png") no-repeat;
+	width: 18px;
+	height: 16px;
+	display: block;
+	position: absolute;
+	top: 40px;
+	right: 10px; 
+  }	
+	  
 }
 .next-chapter-label em {
+@media @screen-small {
+	display: block;
+}
   font-style: normal;
   font-size: 18px;
   line-height: 8px;
