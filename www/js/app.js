@@ -352,9 +352,7 @@ $(document).ready(function() {
                     else {
 	                    $nav_chapter_title.html('<strong>next chapter<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname']);
                     }
-                    
-                    
-                    $nav_chapter_title_prompt.text(COPY[this_chapter_name]['nav_prompt']);
+                    $nav_chapter_title_prompt.html(COPY[this_chapter_name]['nav_prompt'] + '<i class="ico-down-arrow"></i>');
                 } else {
                     $nav_chapter_title.text('');
                     $nav_chapter_title_prompt.text('');

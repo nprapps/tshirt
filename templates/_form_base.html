@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <title>{{ PROJECT_NAME }}</title>
+
+    <meta name="description" content="{{ PROJECT_DESCRIPTION }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="http://media.npr.org/favicon.ico" />
+
+    <!-- CHARTBEAT -->
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../../less/app.less" />
+    <!-- JS -->
+    <script type="text/javascript" src="../../js/app_config.js"></script>
+    <script type="text/javascript" src="../../js/copy.js"></script>
+    <script type="text/javascript" src="../../js/console.js"></script>
+    <script type="text/javascript" src="../../js/lib/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="../../js/lib/html5.js"></script>
+    <script type="text/javascript" src="../../js/lib/modernizr.js"></script>
+
+    {# Twitter #}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@nprapps">
+    <meta name="twitter:image" content="{{ TWITTER.IMAGE_URL }}" />
+
+    {# Facebook #}
+    <meta property="og:title" content="{{ FACEBOOK.TITLE }}" />
+    <meta property="og:url" content="{{ FACEBOOK.URL }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="{{ FACEBOOK.DESCRIPTION }}" />
+    <meta property="og:image" content="{{ FACEBOOK.IMAGE_URL }}" />
+    <meta property="og:site_name" content="NPR.org" />
+    <meta property="fb:app_id" content="{{ FACEBOOK.APP_ID }}" />
+
+    {# Google News #}
+    <meta name="thumbnail" content="{{ GOOGLE.IMAGE_URL }}" />
+
+    {% block extra_head %}
+    {% endblock extra_head %}
+</head>
+<body>
+    <a class="sr-only" href="#content">Skip To Content</a>
+
+
+    {% block outer_content %}
+    {% endblock outer_content %}
+
+
+
+    {% block extra_foot_js %}{% endblock extra_foot_js %}
+    <script type="text/javascript" src="../../js/lib/underscore.js"></script>
+    <script type="text/javascript" src="../../js/lib/moment.js"></script>
+    <script type="text/javascript" src="../../js/lib/waypoints.js"></script>
+    <script type="text/javascript" src="../../js/lib/signals.js"></script>
+    <script type="text/javascript" src="../../js/lib/hasher.js"></script>
+    <script type="text/javascript" src="../../js/lib/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="../../js/lib/jquery.smooth-scroll.js"></script>
+    <script type="text/javascript" src="../../js/lib/froogaloop.js"></script>
+    <script type="text/javascript" src="../../js/lib/d3.v3.min.js"></script>
+    <script type="text/javascript" src="../../js/templates.js"></script>
+    <script type="text/javascript" src="../../js/app.js"></script>
+
+    {% block extra_foot %}
+    {% endblock extra_foot %}
+
+    <!-- GOOGLE ANALYTICS -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '{{ GOOGLE_ANALYTICS_ID }}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+
+    <!-- CHARTBEAT -->
+    <script type="text/javascript">
+        var _sf_async_config={};
+        /** CONFIGURATION START **/
+        _sf_async_config.uid = 18888;
+        _sf_async_config.domain = "npr.org";
+        /** CONFIGURATION END **/
+        (function(){
+            function loadChartbeat() {
+                window._sf_endpt=(new Date()).getTime();
+                var e = document.createElement("script");
+                e.setAttribute("language", "javascript");
+                e.setAttribute("type", "text/javascript");
+                e.setAttribute("src",
+                    (("https:" == document.location.protocol) ?
+                     "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" :
+                     "http://static.chartbeat.com/") +
+                    "js/chartbeat.js");
+                document.body.appendChild(e);
+            }
+            var oldonload = window.onload;
+            window.onload = (typeof window.onload != "function") ?
+                loadChartbeat : function() { oldonload(); loadChartbeat(); };
+        })();
+    </script>
+</body>
+</html>

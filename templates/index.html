@@ -73,7 +73,6 @@
 
 		</div> <!-- /.layer-media -->
 		<div class="explainer">
-			 
 		</div>
     </section>
 
@@ -143,11 +142,19 @@
 </div>
 
 <nav id="chapter-nav" role="navigation">
-    <div class="nav-wrapper">
-        <h3 id="nav-chapter-title"></h3>
-        <h3 id="nav-chapter-title-prompt"></h3>
+    <div class="nav-wrapper container">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 class="btn-chapter"><i class="hamburger"></i> {{ COPY.content.nav_chapter_button_label }}</h3>
+            </div>
+            <div class="col-md-8 explainer-prompt">
+                <h3 id="nav-chapter-title-prompt"></h3>
+            </div>
+            <div class="col-md-10 next-chapter-prompt">
+                <h3 id="nav-chapter-title"></h3>
+            </div>
+        </div>
 
-        <h3 class="btn-chapter">{{ COPY.content.nav_chapter_button_label }} <i class="hamburger"></i></h3>
         <div class="nav-item-wrapper">
             <ul id="nav-secondary">
                 <li class="nav-title"><i class="home"></i> {{ COPY.content.nav_home_button_label }} </li>
