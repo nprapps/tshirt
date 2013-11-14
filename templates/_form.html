@@ -10,7 +10,7 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                   <div class="select-shirt form-group">
                                     <h3>1. Select a shirt</h3>
 
-                                    <select class="form-control" id="shirt">
+                                    <select class="form-control" id="x_shirt">
                                         <option selected="selected" value="">--</option>
                                         <option>Men's Small</option>
                                         <option>Men's Medium</option>
@@ -27,33 +27,58 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                       <h3>2. Shipping Information</h3>
                                       <p><em>All fields are required</em></p>
 
-                                      <label for="first_name">First Name</label>
-                                      <input id="first_name" type="text" class="form-control" name="x_first_name">
-                                      <label for="last_name">Last Name</label>
-                                      <input id="last_name" type="text" class="form-control" name="x_last_name">
-                                      <label for="email">Email</label>
-                                      <input id="email" type="text" class="form-control" name="x_email">
-                                      <label for="address">Address</label>
-                                      <input id="address" type="text" class="form-control" name="x_address">
-                                      <label for="city">City</label>
-                                      <input id="city" type="text" class="form-control" name="x_city">
-                                      <label for="state">State</label>
-                                      <input id="state" type="text" class="form-control" name="x_state">
-                                      <label for="name">Zip</label>
-                                      <input id="zip" type="text" class="form-control" name="x_zip">
-                                      <label id="country" for="name">Country</label>
-                                      <input id="country" type="text" class="form-control" name="x_country">
+                                      <label>Email</label>
+                                      <input id="x_email" type="text" class="form-control" name="x_email">
+
+                                      <h4>Billing</h4>
+                                      <label>First Name</label>
+                                      <input id="x_first_name" type="text" class="form-control" name="x_first_name">
+
+                                      <label>Last Name</label>
+                                      <input id="x_last_name" type="text" class="form-control" name="x_last_name">
+
+                                      <label>Address</label>
+                                      <input id="x_address" type="text" class="form-control" name="x_address">
+
+                                      <label>City</label>
+                                      <input id="x_city" type="text" class="form-control" name="x_city">
+
+                                      <label>State</label>
+                                      <input id="x_state" type="text" class="form-control" name="x_state">
+
+                                      <label>Zip</label>
+                                      <input id="x_zip" type="text" class="form-control" name="x_zip">
+
+                                      <h4>Shipping</h4>
+
+                                      <button class="btn btn-default" id="duplicate-fields">Duplicate billing address</button>
+
+                                      <label>First Name</label>
+                                      <input type="text" id="x_ship_to_first_name" name="x_ship_to_first_name" value=""></input>
+
+                                      <label>Last Name</label>
+                                      <input type="text" id="x_ship_to_last_name" name="x_ship_to_last_name" value=""></input>
+
+                                      <label>Address</label>
+                                      <input type="text" id="x_ship_to_address" name="x_ship_to_address" value=""></input>
+
+                                      <label>City</label>
+                                      <input type="text" id="x_ship_to_city" name="x_ship_to_city" value=""></input>
+
+                                      <label>State</label>
+                                      <input type="text" id="x_ship_to_state" name="x_ship_to_state" value=""></input>
+
+                                      <label>Zip</label>
+                                      <input type="text" id="x_ship_to_zip" name="x_ship_to_zip" value=""></input>
+
+                                      <p>U.S. orders only, please.</p>
+
                                   </div><!--/form-group-->
                                 </div><!--/col-->
                             </div><!--/row-->
 
-                                <input type="hidden" id="x_ship_to_first_name" name="x_ship_to_first_name" value=""></input>
-                                <input type="hidden" id="x_ship_to_last_name" name="x_ship_to_last_name" value=""></input>
-                                <input type="hidden" id="x_ship_to_address" name="x_ship_to_address" value=""></input>
-                                <input type="hidden" id="x_ship_to_city" name="x_ship_to_city" value=""></input>
-                                <input type="hidden" id="x_ship_to_state" name="x_ship_to_state" value=""></input>
-                                <input type="hidden" id="x_ship_to_zip" name="x_ship_to_zip" value=""></input>
-                                <input type="hidden" id="x_ship_to_country" name="x_ship_to_country" value=""></input>
+                                <input type="hidden" name="x_ship_to_country" value="US"></input>
+                                <input type="hidden" name="x_country" value="US">
 
                                 <input type="hidden" name="x_login" value="{{ x_login }}"></input>
                                 <input type="hidden" name="x_amount" value="{{ x_amount }}"></input>
@@ -62,8 +87,16 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                 <input type="hidden" name="x_fp_hash" value="{{ x_fp_hash }}"></input>
                                 <input type="hidden" name="x_show_form" value="PAYMENT_FORM"></input>
                                 <input type="hidden" name="x_type" value="AUTH_CAPTURE"></input>
-                                <input type="hidden" name="x_test_request" value="TRUE"></input>
                                 <input type="hidden" id="x_description" name="x_description" value=""></input>
+
+                                <input type="hidden" name="x_invoice_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
+                                <input type="hidden" name="x_po_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
+
+
+                                {% if DEPLOYMENT_TARGET not in ['production', 'staging'] %}
+                                <input type="hidden" name="x_test_request" value="TRUE"></input>
+                                {% endif %}
+
                             </form>
                             <div class="form-group station">
                                 <div class="row">
@@ -77,7 +110,7 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                     </div><!--/col-->
 
                                     <div class="col-md-4">
-                                        <button class="btn btn-default zip-code-find">Find</button>
+                                        <button class="btn btn-default" id="zip-code-find">Find</button>
                                     </div><!--/col-->
                                 </div><!--/row-->
                              </div><!--/form group-->
@@ -96,6 +129,6 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
 
                              </div><!--/form group-->
 
-                             <button type="submit" class="btn btn-default t-shirt-submit">Continue to billing</button>
+                             <button type="submit" class="btn btn-default" id="t-shirt-submit">Continue to billing</button>
                              {{ test_js|safe }}
                              <script type="text/javascript" src="../../js/form.js"></script>

@@ -52,7 +52,7 @@ def form_buy():
     context['x_login'] = os.environ.get('gge4_x_login', None)
 
     # Set the shirt amount.
-    context['x_amount'] = "0.01"
+    context['x_amount'] = "35.00"
 
     # A random sequence number. Think of this like a salt.
     context['x_fp_sequence'] = random.randrange(10000, 100000, 1)
@@ -103,7 +103,7 @@ def form_thanks():
 
     context['data'] = data
 
-    with open('data/orders.json', 'ab') as writefile:
+    with open('data/orders.json', 'wb') as writefile:
         writefile.write(json.dumps(data))
 
     if request.args.get('test', None):
@@ -116,6 +116,11 @@ def form_thanks():
 
     return render_template('form_thanks.html', **context)
 
+
+@app.route('/%s/form/json/' % app_config.PROJECT_SLUG, methods=['GET'])
+def form_json():
+    with open('data/orders.json', 'rb') as readfile:
+        return jsonify(json.loads(readfile.read()))
 
 # Render LESS files on-demand
 @app.route('/%s/less/<string:filename>' % app_config.PROJECT_SLUG)
