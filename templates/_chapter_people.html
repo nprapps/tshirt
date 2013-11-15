@@ -27,21 +27,20 @@
 
                         <h2>{{ COPY.people.nav_prompt }}</h2>
                         <p>This is the world behind our T-shirt:  A tiny concrete room shared by three people who dream of a better life for their family.</p>
-
-                        <div class="col-sm-5 related left">
-                            <p>
-                                <a href="{{ COPY.people.related_bangladesh_link }}" target="_blank"><img src="img/promo-people-bangladesh.jpg" alt="" /></a>
-                                <span>
-                                    <em>{{ COPY.people.related_bangladesh_leadin }}</em>
-                                    <a href="{{ COPY.people.related_bangladesh_link }}" target="_blank">{{ COPY.people.related_bangladesh_text }}</a>
-                                </span>
-                                </a>
-                            </p>
+                        
+                        <div class="row photo-row">
+                            <div class="col-md-12">
+                                <img src="img/people-shumi-800.jpg" alt="{{ COPY.people.related_bangladesh_caption }}" />
+                                <span class="caption">{{ COPY.people.related_bangladesh_caption }}</span>
+                            </div>
                         </div>
 
                         <p>Shumi and Minu are sisters who, like Jasmine, worked on our shirt. They live in this room with Minu’s husband, NAME TK. There’s a TV in the corner that Minu bought with her own money. She’s so proud that she couldn’t bear to throw away the box the TV came in, so it sits on a shelf, taking up valuable space. Shumi manages to save $6 a month, which she hopes will pay for her wedding someday.</p>
-                        <p>Like Jasmine -- and like millions of other Bangladeshi women -- Shumi and Minu left abject poverty in a rural village to work in a factory. Now they can send money home. Their younger siblings can go to school. Their family doesn’t go hungry anymore.</p>
-                        <p>But there’s not much room in this life for any mistakes; if either of the sisters lost her job, the family could quickly go back to not having enough to eat. And, of course, it’s still a life of deprivation. Minu and her husband sleep on the floor. The apartment has no running water, no kitchen. Another garment worker we met told us, because of her salary, she was able to send her son to school.  but her salary wasn’t enough to send both her children -- so she had to pull the older one out, because she couldn’t afford it. She had to pull her 11-year-old son out of school, because she couldn’t afford it. Yet another JASMINE? HARDSHIP TK.</p>
+
+                        <p class="promo-link">{{ COPY.people.related_bangladesh_leadin }}: <a href="{{ COPY.people.related_bangladesh_link }}" target="_blank">{{ COPY.people.related_bangladesh_text }}</a></p>
+
+                        <p>Like Jasmine &mdash; and like millions of other Bangladeshi women &mdash; Shumi and Minu left abject poverty in a rural village to work in a factory. Now they can send money home. Their younger siblings can go to school. Their family doesn’t go hungry anymore.</p>
+                        <p>But there’s not much room in this life for any mistakes; if either of the sisters lost her job, the family could quickly go back to not having enough to eat. And, of course, it’s still a life of deprivation. Minu and her husband sleep on the floor. The apartment has no running water, no kitchen. Another garment worker we met told us, because of her salary, she was able to send her son to school.  but her salary wasn’t enough to send both her children &mdash; so she had to pull the older one out, because she couldn’t afford it. She had to pull her 11-year-old son out of school, because she couldn’t afford it. Yet another JASMINE? HARDSHIP TK.</p>
                         <p>The global garment industry is flocking to Bangladesh for a simple reason: It’s the cheapest place in the world to make clothes. Shumi and Minu and Jasmine make about $80 a month. Many workers in the country make even less: The minimum wage is just $39 a month.</p>
 
                         <div class="graphic apparel-wages d3-chart">
@@ -117,8 +116,8 @@
                         </div>
                         
                         <p>The workers are part of a global wave that goes all the way back to the industrial revolution in England, when the first textile factories were created. Since then, making yarn, or fabric, or clothes has been the first step toward industrialization for dozens of countries.</p>
-                        <p>In country after country, the workers -- mostly women -- left subsistence farms to work in factories, where they often faced brutal, dangerous conditions. In 1911, a fire at the Triangle Shirtwaist Factory in New York killed over 100 workers, and prompted major reforms that improved working conditions. Last year, the Rana Plaza factory building in Bangladesh collapsed  and killed more than 1,000 workers, leading to huge protests around the country and increased global pressure on Bangladesh to improve working conditions. Any day now, the government is expected to announce a new, higher minimum wage.</p>
-                        <p>The main garment workers union is asking for the minimum wage to be raised to $105 a month -- still low by global standards, but roughly triple the current minimum. Factory owners say that if the minimum wage goes up to $105 a month, buyers from the developed world will pull up stakes and find someplace else to make T-shirts.</p>
+                        <p>In country after country, the workers &mdash; mostly women &mdash; left subsistence farms to work in factories, where they often faced brutal, dangerous conditions. In 1911, a fire at the Triangle Shirtwaist Factory in New York killed over 100 workers, and prompted major reforms that improved working conditions. Last year, the Rana Plaza factory building in Bangladesh collapsed  and killed more than 1,000 workers, leading to huge protests around the country and increased global pressure on Bangladesh to improve working conditions. Any day now, the government is expected to announce a new, higher minimum wage.</p>
+                        <p>The main garment workers union is asking for the minimum wage to be raised to $105 a month &mdash; still low by global standards, but roughly triple the current minimum. Factory owners say that if the minimum wage goes up to $105 a month, buyers from the developed world will pull up stakes and find someplace else to make T-shirts.</p>
 
                         <div class="col-sm-5 related right">
                             <p>
@@ -134,7 +133,7 @@
                         <p>For decades now, global T-shirt companies have chased cheap labor from country to country.  As wages rose in one place, buyers moved on, and the price of T-shirts in the developed world fell.</p>
                         <p>That era may be coming to an end, according to Marion Smith, a senior vice president at Jockey, the company that sold us the Planet Money T-shirt. Wages in China have doubled, and are likely to continue rising. Other low-wage countries are too small or don’t have the infrastructure in place to become the next tailor shop to the world, Smith says.</p>
                         <p>After Bangladesh, he says, there’s no obvious next place to go. “We’re getting down to the end of it,” Smith told us. “Bangladesh is going to go up, and who’s cheaper than Bangladesh?”</p>
-                        <p>Pay for workers like Jasmine and Shumi and Minu makes a up just a tiny fraction of the finished cost of a T-shirt. That means that, if Smith is right and the global garment industry stays put in Bangladesh,  prices for T-shirts may rise a little in the U.S. -- and wages for workers like Shumi, Minu and Jasmine may go up a lot.</p>
+                        <p>Pay for workers like Jasmine and Shumi and Minu makes a up just a tiny fraction of the finished cost of a T-shirt. That means that, if Smith is right and the global garment industry stays put in Bangladesh,  prices for T-shirts may rise a little in the U.S. &mdash; and wages for workers like Shumi, Minu and Jasmine may go up a lot.</p>
 
                     </div><!-- /.col --> 
                 </div><!-- /.row -->  
