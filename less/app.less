@@ -1421,6 +1421,25 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 }
 
+//home page
+.npr-logo {
+	width: 70px;
+	margin: 10px 0;
+	@media @screen-small-above { 
+	    width: 100px;
+		margin: 50px 0 15px 0;
+	}
+}
+
+//home page navigation for touch devices
+.index-nav {
+	display: none;
+}
+
+.touch .index-nav {
+	display: block;
+}
+
 
 //touch specific styles
 .touch {
@@ -1435,6 +1454,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     .titlecard {
         height: auto;
         z-index: 10;
+        
+        h1, h2 {
+        	color: #222;
+	        text-shadow: none;
+        }
         
     }
     
@@ -1454,32 +1478,13 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     
     .chapter-title .layer-media {height: 100%;}
     
-    .video-playing .titlecard {display: none;}
-    
     .explainer {padding-top: 0;}
     .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
     
     
 }//touch
 
-//home page
-.npr-logo {
-	width: 70px;
-	margin: 10px 0;
-	@media @screen-small-above { 
-	    width: 100px;
-		margin: 50px 0 15px 0;
-	}
-}
 
-//home page navigation for touch devices
-.index-nav {
-	display: none;
-}
-
-.touch .index-nav {
-	display: block;
-}
 
 /*
 .touch .chapter-title .layer-media, .touch #title {
@@ -1504,15 +1509,22 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		#chapter-nav {display: none;}
 	}
 	
+	.video-wrapper {
+		overflow: scroll;
+		background-color: #fff;
+		padding-top: 120px;
+		
+		.video-inner-wrapper {
+			width: 90% !important;
+			
+		}
+			
+	}
+	
 	#title {
 		.layer-media {overflow: scroll;}
 		
-		.titlecard  {
-			display: none;
-			
-		}
 		.video-wrapper {
-			overflow: scroll;
 			background-color: #000;
 			background-image: url('@{img-root}/squirrel-background.png');
 			background-position: 60% 70%;
@@ -1520,15 +1532,18 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
-			padding-top: 120px;
 			
 			.video-inner-wrapper {
-				width: 90% !important;
 				border: 2px solid #333;
 				
 			}
-			
+				
 		}
+		
+		.titlecard  {
+			display: none;
+		}
+		
 		
 		.explainer {
 			display: none;
