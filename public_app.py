@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import logging
+import hashlib
 import hmac
 import json
 from mimetypes import guess_type
@@ -14,6 +15,7 @@ from flask import Flask, render_template, Markup, abort, jsonify
 
 import app_config
 import copytext
+import models
 from render_utils import flatten_app_config, make_context
 
 app = Flask(app_config.PROJECT_NAME)
@@ -89,30 +91,97 @@ def form_thanks():
     The return reciept page from GGe4.
     Requires some bits from the POST or GET request.
     """
+
+    # Get our basic context.
     context = make_context()
 
+    # Get the request.
     from flask import request
 
-    if request.method == "POST":
-        data = dict(request.form)
+    # # If this is a POST, get the data from the form.
+    # if request.method == "POST":
+    #     data = dict(request.form)
 
-    elif request.method == "GET":
+    # If this is a GET, grab the data from
+    if request.method == "GET":
         data = dict(request.args)
 
+    for key, value in data.items():
+        data[key] = value[0]
+
+
+    for key, value in data.items():
+        print key, value
+
+    # Put the data into the template context.
     context['data'] = data
 
-    with open('data/orders.json', 'wb') as writefile:
-        writefile.write(json.dumps(data))
+    # Now, do the stuff that makes sure this is a legitimate transaction.
+    # 1.) Make sure we don't get spoofed transactions.
 
-    if request.args.get('test', None):
-        context['test_js'] = """
-            <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="../../js/templates.js"></script>
-        """
-        return render_template('_thanks.html', **context)
+    # The request should have the transaction_id and the amount. We need these things.
+    if data.get('x_trans_id', None) and data.get('x_amount', None):
 
-    return render_template('form_thanks.html', **context)
+        # Get the response key from our environment.
+        relay_response_key = os.environ.get('gge4_response_key', None)
+
+        # Get the login key from our environment.
+        login = os.environ.get('gge4_x_login', None)
+
+        # Get the transaction ID and the amount from the data.
+        transaction_id = data.get('x_trans_id', None)
+        amount = data.get('x_amount', None)
+
+        # Create a hash string from this known stuff.
+        hash_string = "%s%s%s%s" % (
+            relay_response_key,
+            login,
+            transaction_id,
+            amount
+        )
+
+        # Make an MD5 hash from this hash string. This is our verified (known good) hash.
+        verified_hash = hashlib.md5(hash_string).hexdigest()
+
+        # Get the unverified hash from the URL.
+        unverified_hash = data.get('x_MD5_Hash', None)
+
+        # The verified hash and the unverified hash should match.
+        if verified_hash == unverified_hash:
+
+            # 2. Now that we have a known hash, let's check to see if the transaction ID has already been used.
+            models.tshirt_db.connect()
+
+            order = models.Order.select().where(models.Order.x_trans_id == transaction_id)
+
+            if order.count() == 0:
+
+                try:
+                    models.Order(**data).save()
+
+                except:
+                    return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
+
+                if request.args.get('test', None):
+                    context['test_js'] = """
+                        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                        <script src="../../js/templates.js"></script>
+                    """
+                    return render_template('_thanks.html', **context)
+
+                return render_template('form_thanks.html', **context)
+
+            else:
+                return ("<h1>Precondition Failed</h1><br/>This transaction has already been recorded.", 412)
+
+        else:
+
+            # These are the spoofers and they must be chastened.
+            return ("<h1>Unauthorized</h1><br/>The URL hash does not match the expected result.", 401)
+
+    # These are requests missing a vital element.
+    return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
 
 
 @app.route('/%s/form/json/' % app_config.PROJECT_SLUG, methods=['GET'])
