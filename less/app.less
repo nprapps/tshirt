@@ -6,6 +6,7 @@
 // Global variables
 @img-root: "../img";
 @nav-height-desktop: 74px;
+@nav-height-mobile: 44px;
 
 
 // Breakpoints
@@ -129,14 +130,13 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
+    .clearfix();
 	
 	&.nav-reveal {
 		top:0;
 		bottom: auto;
 	}
 
-    .clearfix();
-	
 	.nav-wrapper { 
 		padding: 0 20px 5px 20px; 
 		.touch & {
@@ -145,8 +145,11 @@ nav {
 	}
 	.nav-upper-wrapper {
         position: relative;
-        height: @nav-height-desktop;
         overflow: hidden;
+        height: @nav-height-mobile;
+	    @media @screen-small-above { 
+            height: @nav-height-desktop;
+        }
 	}
 	.nav-item-wrapper { 
 	    display: none;
@@ -310,33 +313,25 @@ nav {
 .btn-chapter {
     position: absolute;
     top: 0;
-    left: 20px;
+    left: 0;
     overflow: hidden;
-    padding-left: 25px;
+    line-height: @nav-height-mobile;
 
     @media @screen-small-above { 
-        padding-left: 0;
-        left: 0;
         line-height: @nav-height-desktop;
     }
 }
 
 .ico-hamburger {
     background: transparent url('@{img-root}/hamburger.png') no-repeat center center;
-    display: block;
     width: 14px;
     height: 12px;
-    position: absolute;
-    top: 10px;
-    left: 0;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: center;
 
     @media @screen-small-above {
-        display: inline-block;
-        position: relative;
-        top: auto;
-        left: auto;
         margin-right: 11px;
-        vertical-align: center;
     }
 
     .slideInUp & { background-image: url('@{img-root}/close.png'); }
