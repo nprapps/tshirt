@@ -98,20 +98,17 @@ def form_thanks():
     # Get the request.
     from flask import request
 
-    # # If this is a POST, get the data from the form.
-    # if request.method == "POST":
-    #     data = dict(request.form)
-
-    # If this is a GET, grab the data from
+    # Get the data from the request URL params.
     if request.method == "GET":
         data = dict(request.args)
 
-    for key, value in data.items():
-        data[key] = value[0]
+        # Clean up the data elements.
+        for key, value in data.items():
+            data[key] = value[0]
 
-
-    for key, value in data.items():
-        print key, value
+    # Get the data from the POST form.
+    if request.method == "POST":
+        data = dict(request.form)
 
     # Put the data into the template context.
     context['data'] = data
@@ -152,16 +149,21 @@ def form_thanks():
             # 2. Now that we have a known hash, let's check to see if the transaction ID has already been used.
             models.tshirt_db.connect()
 
+            # Select orders with this transaction id.
             order = models.Order.select().where(models.Order.x_trans_id == transaction_id)
 
+            # If this thing doesn't exist, let's create it.
             if order.count() == 0:
 
                 try:
+                    # Try and create this order.
                     models.Order(**data).save()
 
                 except:
+                    # If it fails, return a bad request.
                     return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
 
+                # If this is the test environment, do some things.
                 if request.args.get('test', None):
                     context['test_js'] = """
                         <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
@@ -173,21 +175,20 @@ def form_thanks():
                 return render_template('form_thanks.html', **context)
 
             else:
+                # This else means that the order must already exist.
+                # Return an HTTP 412.
                 return ("<h1>Precondition Failed</h1><br/>This transaction has already been recorded.", 412)
 
         else:
-
+            # This means that the URL hash doesn't match the hash we've created.
             # These are the spoofers and they must be chastened.
+            # Return an HTTP 401.
             return ("<h1>Unauthorized</h1><br/>The URL hash does not match the expected result.", 401)
 
-    # These are requests missing a vital element.
+    # This means that the URL is missing one of the things we need to calculate the hash.
+    # Return a 400.
     return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
 
-
-@app.route('/%s/form/json/' % app_config.PROJECT_SLUG, methods=['GET'])
-def form_json():
-    with open('data/orders.json', 'rb') as readfile:
-        return jsonify(json.loads(readfile.read()))
 
 # Render LESS files on-demand
 @app.route('/%s/less/<string:filename>' % app_config.PROJECT_SLUG)
