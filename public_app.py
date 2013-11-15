@@ -6,7 +6,6 @@ import json
 from mimetypes import guess_type
 import os
 import random
-import requests
 import time
 import urllib
 
@@ -28,9 +27,8 @@ app.logger.setLevel(logging.INFO)
 
 @app.route('/%s/stations/<int:zip_code>/' % app_config.PROJECT_SLUG, methods=['GET'])
 def stations_json(zip_code):
-    r = requests.get("http://api.npr.org/stations?zip=%s&apiKey=%s&format=json" % (
-        zip_code, os.environ.get('NPR_API_KEY', None)))
-    return jsonify(json.loads(r.content))
+    with open('www/data/zips/%s.json' % zip_code, 'rb') as readfile:
+        return jsonify(json.loads(readfile.read()))
 
 
 @app.route('/%s/form/buy/' % app_config.PROJECT_SLUG, methods=['GET'])
