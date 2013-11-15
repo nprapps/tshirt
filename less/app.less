@@ -525,33 +525,44 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     }
 
     h2 {
-        font-weight: 700;
-        margin-bottom: 1em;
-        line-height: 1.5;
-        color: #121212;
+    	padding-bottom: 20px;
+        @media @screen-small-above {
+	        font-weight: 700;
+	        margin-bottom: 1em;
+	        line-height: 1.5;
+	        color: #121212;
+        }
         @media @screen-tiny { font-size: 22px; }
     }
     h3 {
-        margin: 2.6em 0 1em 0;
-        line-height: 1.5;
-        color: #121212;
-        font-weight: bold;
-        text-transform: uppercase;
+    	padding-bottom: 20px;
+    	@media @screen-small-above {
+	        margin: 2.6em 0 1em 0;
+	        line-height: 1.5;
+	        color: #121212;
+	        font-weight: bold;
+	        text-transform: uppercase;
+        }
     }
     h4 {
-        margin: 0 0 1.5em;
-        text-transform: uppercase;
-        color: #121212;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 1.5;
+    	margin: 0 0 1.5em;
+    	@media @screen-small-above {
+	        text-transform: uppercase;
+	        color: #121212;
+	        font-weight: 700;
+	        font-size: 16px;
+	        line-height: 1.5;
+        }
     }
     p,
     dl {
-        margin: 0 0 1.5em 0;
-        font-size: 20px;
-        line-height: 1.5;
-        color: #444;
+    	@media @screen-small-above {
+	    	margin: 0 0 1.5em 0;
+	        font-size: 20px;
+	        line-height: 1.5;
+	        color: #444;
+    	}
+        
     }
     
     dt {
@@ -1440,23 +1451,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	display: block;
 }
 
-
-//touch specific styles
-.touch {
-	
-    
-    
-    
-    
-}//touch
-
-
 .touch {
 
 	.titlecard {
         height: auto;
         z-index: 10;
-        background-color: #fff;
+        background-color: transparent;
         h1, h2 {color: #333; text-shadow: none;}
         border-top: 5px solid #111;
     }
@@ -1473,11 +1473,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		background-color: #fff;
 		overflow: scroll;
 		padding-top: 120px;
+		@media @screen-small-above {padding-top: 230px;}
 		margin: 0;
         position: relative;
 		
 		.video-inner-wrapper {
-			width: 90% !important;
+			@media @screen-small { width: 90% !important;}
 			margin-top: 0;
 			position: relative;
 			border: 2px solid #333;
