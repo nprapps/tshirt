@@ -448,7 +448,8 @@ nav {
   background-size: cover;
   background-position: 50% 0%;
   position: relative;
-  height: 360px;
+  height: 130px;
+  @media @screen-small-above{height: 360px;}
   border-top: 4px solid #000;
   overflow: hidden;
   position: relative;
@@ -463,23 +464,31 @@ nav {
 }
 .next-chapter .next-chapter-label {
   color: #fff;
-  padding: 30px 0;
-  padding-right: 40px;
   text-align: right;
+  @media @screen-small-above {
+  	padding: 30px 40px 30px 0;
+    }
+  
+  
   margin: 0 20px 0 0;
+  height: 130px;
+  @media @screen-small-above {height: auto;}
   text-transform: uppercase;
   font-weight: bold;
   font-size: 36px;
 position: relative;
 }
 .next-chapter .arrow-right {
-  background: transparent url("@{img-root}/arrow.png") no-repeat;
-  width: 18px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  top: 40px;
-  right: 10px;
+
+@media @screen-small-above {
+	  background: transparent url("@{img-root}/arrow.png") no-repeat;
+	  width: 18px;
+	  height: 16px;
+	  display: block;
+	  position: absolute;
+	  top: 40px;
+	  right: 10px;
+  }
 }
 .next-chapter-label em {
   font-style: normal;
