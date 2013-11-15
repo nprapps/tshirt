@@ -6,6 +6,7 @@
 // Global variables
 @img-root: "../img";
 @nav-height-desktop: 74px;
+@nav-height-small: 54px;
 
 
 // Breakpoints
@@ -124,7 +125,8 @@ nav {
 	right: 0;
 	width: 100%;
 	background: #000;
-	background: rgba(0,0,0,.8);
+	
+	@media @screen-small-above {background: rgba(0,0,0,.8);}
 	color: #fff;
 	display: block;
 	z-index: 100;
@@ -145,7 +147,10 @@ nav {
 	}
 	.nav-upper-wrapper {
         position: relative;
-        height: @nav-height-desktop;
+        height: @nav-height-small;
+        @media @screen-small-above {
+        	height: @nav-height-desktop;
+        }
         overflow: hidden;
 	}
 	.nav-item-wrapper { 
@@ -175,7 +180,10 @@ nav {
 	    @media @screen-small-above { 
 	        opacity: 1; 
 	        font-size: 14px; 
-	        line-height: @nav-height-desktop;
+	        line-height: @nav-height-small;
+			@media @screen-small-above {
+        		line-height: @nav-height-desktop;
+			}
 	    }
 	    
 	    &#nav-chapter-title { 
@@ -224,15 +232,18 @@ nav {
 	    list-style-type: none;
 	    
 	    &#nav-secondary {
-	        padding-top: 30px;
 	        float: left;
+	        border-bottom: 1px solid #ddd;
+	        padding-bottom: 5px;
+	        margin-bottom: 10px;
 
 	        @media @screen-small-above {
-	            padding-top: 0;
 	            float: right;
 	            position: absolute;
 	            top: -@nav-height-desktop;
 	            right: 0px;
+	            padding-bottom: 0;
+	            margin-bottom: 0;
 	        }
 	        
 	        > li {
@@ -309,14 +320,13 @@ nav {
 
 .btn-chapter {
     position: absolute;
-    top: 0;
-    left: 20px;
+    top: 15px;
+    left: 0;
     overflow: hidden;
     padding-left: 25px;
-
     @media @screen-small-above { 
         padding-left: 0;
-        left: 0;
+        top: 0;
         line-height: @nav-height-desktop;
     }
 }
