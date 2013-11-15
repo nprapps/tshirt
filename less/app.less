@@ -9,6 +9,7 @@
 @nav-height-small: 54px;
 
 
+
 // Breakpoints
 @screen-mega-above: ~"screen and (min-width: 1440px)";
 @screen-large-above: ~"screen and (min-width: 1201px)";
@@ -131,14 +132,13 @@ nav {
 	display: block;
 	z-index: 100;
 	overflow: hidden;
+    .clearfix();
 	
 	&.nav-reveal {
 		top:0;
 		bottom: auto;
 	}
 
-    .clearfix();
-	
 	.nav-wrapper { 
 		padding: 0 20px 5px 20px; 
 		.touch & {
@@ -323,30 +323,23 @@ nav {
     top: 15px;
     left: 0;
     overflow: hidden;
-    padding-left: 25px;
+    padding-left: 0;
     @media @screen-small-above { 
         padding-left: 0;
         top: 0;
-        line-height: @nav-height-desktop;
     }
 }
 
 .ico-hamburger {
     background: transparent url('@{img-root}/hamburger.png') no-repeat center center;
-    display: block;
     width: 14px;
     height: 12px;
-    position: absolute;
-    top: 10px;
-    left: 0;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: center;
 
     @media @screen-small-above {
-        display: inline-block;
-        position: relative;
-        top: auto;
-        left: auto;
         margin-right: 11px;
-        vertical-align: center;
     }
 
     .slideInUp & { background-image: url('@{img-root}/close.png'); }
