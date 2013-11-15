@@ -126,8 +126,7 @@ nav {
 	right: 0;
 	width: 100%;
 	background: #000;
-	
-	@media @screen-small-above {background: rgba(0,0,0,.8);}
+	@media @screen-small-above { background: rgba(0,0,0,.8); }
 	color: #fff;
 	display: block;
 	z-index: 100;
@@ -139,19 +138,15 @@ nav {
 		bottom: auto;
 	}
 
-	.nav-wrapper { 
-		padding: 0 20px 5px 20px; 
-		.touch & {
-			@media @screen-small-above { padding: 0 22px 22px 22px; }
-		}
-	}
+	.nav-wrapper { padding: 0 20px 5px 20px; }
+
 	.nav-upper-wrapper {
+        overflow: hidden;
         position: relative;
         height: @nav-height-small;
-        @media @screen-small-above {
-        	height: @nav-height-desktop;
+        @media @screen-small-above { 
+            height: @nav-height-desktop;
         }
-        overflow: hidden;
 	}
 	.nav-item-wrapper { 
 	    display: none;
@@ -180,21 +175,32 @@ nav {
 	    @media @screen-small-above { 
 	        opacity: 1; 
 	        font-size: 14px; 
-	        line-height: @nav-height-small;
-			@media @screen-small-above {
-        		line-height: @nav-height-desktop;
-			}
+            line-height: @nav-height-desktop;
 	    }
 	    
+        &.btn-chapter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            line-height: @nav-height-small;
+
+            @media @screen-small-above { 
+                line-height: @nav-height-desktop;
+            }
+        }
+
 	    &#nav-chapter-title { 
 	        float: left;
 	        font-weight: bold;
 	        text-transform: uppercase;
 	        display: none;
+
 	        @media @screen-small-above { 
 				position: absolute;
 				right: 0;
 				top: 0;
+				line-height: @nav-height-desktop;
 
 				&.waypoint-show { display: block; }
 			}
@@ -209,6 +215,7 @@ nav {
 			display: none;
 			@media @screen-small-above { 
 				display: block;
+				line-height: @nav-height-desktop;
 
 				&.waypoint-hide {display: none;}
 			}
@@ -244,6 +251,7 @@ nav {
 	            right: 0px;
 	            padding-bottom: 0;
 	            margin-bottom: 0;
+	            border-bottom: none;
 	        }
 	        
 	        > li {
@@ -251,6 +259,7 @@ nav {
 	            	padding-top: 0;
 		            display: inline-block;
 		            margin-right: 12px;
+		            margin-bottom: 0;
 		            line-height: @nav-height-desktop;
 		        }
 	
@@ -316,18 +325,6 @@ nav {
 	        display: none;
 	    }
 	}
-}
-
-.btn-chapter {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    overflow: hidden;
-    padding-left: 0;
-    @media @screen-small-above { 
-        padding-left: 0;
-        top: 0;
-    }
 }
 
 .ico-hamburger {
