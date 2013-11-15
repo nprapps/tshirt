@@ -4,10 +4,14 @@ import os
 
 from peewee import *
 
-psql_user = os.environ.get('tshirt_psql_user', None)
-psql_pass = os.environ.get('tshirt_psql_pass', None)
 
-tshirt_db = PostgresqlDatabase('tshirt', user=psql_user, password=psql_pass)
+tshirt_db = PostgresqlDatabase(
+    database='tshirt',
+    user=os.environ.get('tshirt_psql_user', None),
+    password=os.environ.get('tshirt_psql_pass', None),
+    host=os.environ.get('tshirt_psql_host', None),
+    port="5432"
+)
 
 class PsqlModel(Model):
     class Meta:
