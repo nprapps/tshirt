@@ -27,7 +27,7 @@ $(document).ready(function() {
     var chapters = [ 'title', 'plants', 'machines', 'people', 'boxes', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 248;
-    var small_nav_height = 44;
+    var small_nav_height = 54;
     var small_nav_height_open = 328;
     var video_advance_cuepoint = 5;
     
