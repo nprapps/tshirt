@@ -34,11 +34,11 @@ DEPLOYMENT
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 STAGING_S3_BUCKETS = ['stage-apps.npr.org']
 
-PRODUCTION_SERVERS = ['cron.nprapps.org']
+PRODUCTION_SERVERS = ['54.214.41.128']
 STAGING_SERVERS = ['50.112.92.131']
 
 # Should code be deployed to the web/cron servers?
-DEPLOY_TO_SERVERS = False
+DEPLOY_TO_SERVERS = True
 
 SERVER_USER = 'ubuntu'
 SERVER_PYTHON = 'python2.7'
@@ -52,7 +52,7 @@ DEPLOY_CRONTAB = False
 
 # Should the service configurations be installed on the servers?
 # If True, DEPLOY_TO_SERVERS must also be True
-DEPLOY_SERVICES = False
+DEPLOY_SERVICES = True
 
 UWSGI_SOCKET_PATH = '/tmp/%s.uwsgi.sock' % PROJECT_FILENAME
 UWSGI_LOG_PATH = '/var/log/%s.uwsgi.log' % PROJECT_FILENAME
@@ -88,7 +88,7 @@ SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 TWITTER = {
     'TEXT': PROJECT_NAME,
     'URL': SHARE_URL,
-    # Will be resized to 120x120, can't be larger than 1MB 
+    # Will be resized to 120x120, can't be larger than 1MB
     'IMAGE_URL': ''
 }
 
@@ -163,7 +163,7 @@ def configure_targets(deployment_target):
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
         DEBUG = True
     else:
-        S3_BUCKETS = [] 
+        S3_BUCKETS = []
         S3_BASE_URL = 'http://127.0.0.1:8000'
         SERVERS = []
         SERVER_BASE_URL = 'http://127.0.0.1:8001/%s' % PROJECT_SLUG

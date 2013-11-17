@@ -448,7 +448,8 @@ nav {
   background-size: cover;
   background-position: 50% 0%;
   position: relative;
-  height: 360px;
+  height: 130px;
+  @media @screen-small-above{height: 360px;}
   border-top: 4px solid #000;
   overflow: hidden;
   position: relative;
@@ -463,23 +464,31 @@ nav {
 }
 .next-chapter .next-chapter-label {
   color: #fff;
-  padding: 30px 0;
-  padding-right: 40px;
   text-align: right;
+  @media @screen-small-above {
+  	padding: 30px 40px 30px 0;
+    }
+  
+  
   margin: 0 20px 0 0;
+  height: 130px;
+  @media @screen-small-above {height: auto;}
   text-transform: uppercase;
   font-weight: bold;
   font-size: 36px;
 position: relative;
 }
 .next-chapter .arrow-right {
-  background: transparent url("@{img-root}/arrow.png") no-repeat;
-  width: 18px;
-  height: 16px;
-  display: block;
-  position: absolute;
-  top: 40px;
-  right: 10px;
+
+@media @screen-small-above {
+	  background: transparent url("@{img-root}/arrow.png") no-repeat;
+	  width: 18px;
+	  height: 16px;
+	  display: block;
+	  position: absolute;
+	  top: 40px;
+	  right: 10px;
+  }
 }
 .next-chapter-label em {
   font-style: normal;
@@ -525,43 +534,48 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     }
 
     h2 {
-        font-weight: 700;
-        margin-bottom: 33px;
-        line-height: 1.5;
-        color: #121212;
+    	padding-bottom: 20px;
+        @media @screen-small-above {
+	        font-weight: 700;
+	        margin-bottom: 1em;
+	        line-height: 1.5;
+	        color: #121212;
+        }
         @media @screen-tiny { font-size: 22px; }
     }
     h3 {
-        margin: 66px 0 33px 0;
-        line-height: 1.5;
-        color: #121212;
-        font-weight: bold;
-        text-transform: uppercase;
+    	padding-bottom: 20px;
+    	@media @screen-small-above {
+	        margin: 2.6em 0 1em 0;
+	        line-height: 1.5;
+	        color: #121212;
+	        font-weight: bold;
+	        text-transform: uppercase;
+        }
     }
     h4 {
-        margin: 0 0 33px 0;
-        text-transform: uppercase;
-        color: #121212;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 1.5;
+    	margin: 0 0 1.5em;
+    	@media @screen-small-above {
+	        text-transform: uppercase;
+	        color: #121212;
+	        font-weight: 700;
+	        font-size: 16px;
+	        line-height: 1.5;
+        }
     }
     p,
     dl {
-        margin: 0 0 33px 0;
-        font-size: 20px;
-        line-height: 1.5;
-        color: #444;
-    }
-    
-    p.promo-link {
-        color: #666;
-        font-size: 14px;
-        font-weight: bold;
+    	@media @screen-small-above {
+	    	margin: 0 0 1.5em 0;
+	        font-size: 20px;
+	        line-height: 1.5;
+	        color: #444;
+    	}
+        
     }
     
     dt {
-        margin-top: 33px;
+        margin-top: 1.5em;
         &:first-child { margin-top: 0; }
     }
     
@@ -576,16 +590,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     }
     
     .graphic {
-        margin: 0 0 33px 0;
+        margin: 1.25em 0 2.75em 0;
         border-top: 1px solid #eee;
         border-bottom: 1px solid #eee;
-        padding: 22px 0;
+        padding: 1.25em 0;
         
         dl {
             margin: 0;
 
             dt {
-                margin: 33px 0 11px 0;
+                margin: 1.5em 0 .5em 0;
                 font-size: 16px;
                 
                 &:first-child { margin-top: 0; }
@@ -599,7 +613,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         h5 {
             font-weight: normal;
             color: #666;
-            margin: -33px 0 33px 0;
+            margin: -1.5em 0 1.5em 0;
             font-size: 14px;
             line-height: 1.4;
         }
@@ -609,12 +623,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
             line-height: 1.4;
             font-weight: bold;
             color: #333;
-            margin: 0 0 33px 0;
+            margin: 0 0 1.5em 0;
         }
         
         img {
             display: block;
-            margin-bottom: 11px;
+            margin-bottom: 1em;
 
             &.chart {
                 max-width: 100%;
@@ -628,7 +642,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
             font-size: 14px;
             line-height: 1.4;
             width: 100%;
-            margin-bottom: 33px;
+            margin-bottom: 1.5em;
             
             td,
             th {
@@ -673,7 +687,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         &.d3-chart {
             svg {
                 font-family: Arial, Helvetica, sans-serif;
-                margin-bottom: 22px;
+                margin-bottom: 1em;
             }
             .axis {
                 font-size: 12px;
@@ -861,11 +875,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
             .cotton b         { background-position: 0 -200px; }
 
             dl {
-                margin-bottom: 11px;
+                margin-bottom: 2em;
             }
             dt {
                 border-top: 1px dotted #eee;
-                padding-top: 33px; 
+                padding-top: 1.5em; 
                 
                 &:first-child {
                     border-top: none;
@@ -1427,47 +1441,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	.explainer {visibility: hidden; position: absolute; bottom: -100px; left: 0; height: 0;}
 }
 
-
-//touch specific styles
-.touch {
-	.video-wrapper,
-    .video-inner-wrapper {
-        margin-top: 0;
-        position: relative;
-        
-        iframe { visibility: visible; }
-    }
-    
-    .titlecard {
-        height: auto;
-        z-index: 10;
-        
-    }
-    
-    .chapter-title .titlecard {
-        display: block;
-    }
-    
-    .title-video{
-        display: none;
-    }
-    
-    #nav-chapter-title-prompt {
-	    display: none;
-    }
-    
-    .layer-media {height: auto;}
-    
-    .chapter-title .layer-media {height: 100%;}
-    
-    .video-playing .titlecard {display: none;}
-    
-    .explainer {padding-top: 0;}
-    .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
-    
-    
-}//touch
-
 //home page
 .npr-logo {
 	width: 70px;
@@ -1487,21 +1460,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	display: block;
 }
 
-/*
-.touch .chapter-title .layer-media, .touch #title {
-	width: 100%;
-    height: 100%;
-	background-color: #000;
-	background-image: url('@{img-root}/home-title.jpg');
-	background-position: 60% 70%;
-    -webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-    background-size: cover;
-	overflow: hidden;
-}*/
-
 .touch {
+
+	.titlecard {
+        height: auto;
+        z-index: 10;
+        background-color: transparent;
+        h1, h2 {color: #333; text-shadow: none;}
+        border-top: 5px solid #111;
+    }
+	
 	.btn-play {
 	  display: none;
 	}
@@ -1510,31 +1478,69 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		#chapter-nav {display: none;}
 	}
 	
+	.video-wrapper {
+		background-color: #fff;
+		overflow: scroll;
+		padding-top: 120px;
+		@media @screen-small-above {padding-top: 230px;}
+		margin: 0;
+        position: relative;
+		
+		.video-inner-wrapper {
+			@media @screen-small { width: 90% !important;}
+			margin-top: 0;
+			position: relative;
+			border: 2px solid #333;
+		}
+		
+		iframe { visibility: visible; }
+			
+	}
+	
+	
+    
+    .chapter-title .titlecard {
+        display: block;
+    }
+    
+    .title-video{
+        display: none;
+    }
+    
+    #nav-chapter-title-prompt {
+	    display: none;
+    }
+    
+    .layer-media {height: auto;}
+    
+    .chapter-title .layer-media {height: 100%;}
+    
+    .explainer {padding-top: 0;}
+    .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
+	
 	#title {
 		.layer-media {overflow: scroll;}
 		
-		.titlecard  {
-			display: none;
-			
-		}
 		.video-wrapper {
-			overflow: scroll;
 			background-color: #000;
-			background-image: url('@{img-root}/mobile-titlecard.jpg');
+			background-image: url('@{img-root}/squirrel-background.png');
 			background-position: 60% 70%;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
 			background-size: cover;
-			padding-top: 120px;
 			
 			.video-inner-wrapper {
-				width: 90% !important;
 				border: 2px solid #333;
 				
 			}
-			
+				
 		}
+		
+		.titlecard  {
+			display: none;
+		}
+		
 		
 		.explainer {
 			display: none;
@@ -1612,7 +1618,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		text-align: center;
 		color: #efefef;
 		text-shadow: none;
-		background-color: rgba(65,65,65,0.5);
+		background-color: rgba(65,65,65,0.8);
 		list-style-type: none;
 		background-image: none !important;
 		font-weight: bold;
