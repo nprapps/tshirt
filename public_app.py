@@ -11,7 +11,7 @@ import time
 import urllib
 
 import envoy
-from flask import Flask, render_template, Markup, abort, jsonify
+from flask import Flask, render_template, Markup, abort, jsonify, redirect
 
 import app_config
 import copytext
@@ -27,6 +27,10 @@ app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
 
+@app.errorhandler(403)
+def card_not_authorized(e):
+    return redirect('/%s/form/buy/?authorized=false' % app_config.PROJECT_SLUG, code=302)
+
 @app.route('/%s/stations/<int:zip_code>/' % app_config.PROJECT_SLUG, methods=['GET'])
 def stations_json(zip_code):
     with open('www/data/zips/%s.json' % zip_code, 'rb') as readfile:
@@ -41,6 +45,11 @@ def form_buy():
     https://firstdata.zendesk.com/entries/407522-First-Data-Global-Gateway-e4-Hosted-Payment-Pages-Integration-Manual
     """
     context = make_context()
+
+    from flask import request
+
+    context['authorized'] = request.args.get('authorized', None)
+
     context['test_js'] = ''
 
     # Decide on the form URL to use.
@@ -72,18 +81,12 @@ def form_buy():
     # Make the md5 hash with our gge4 key.
     context['x_fp_hash'] = hmac.new(os.environ.get('gge4_transaction_key', None), hash_string).hexdigest()
 
-    # Return the form.
-    from flask import request
-
-    if request.args.get('test', None):
-        context['test_js'] = """
-            <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="../../js/templates.js"></script>
-        """
-        return render_template('_form.html', **context)
-
-    return render_template('form_buy.html', **context)
+    context['test_js'] = """
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../../js/templates.js"></script>
+    """
+    return render_template('_form.html', **context)
 
 
 @app.route('/%s/form/thanks/' % app_config.PROJECT_SLUG, methods=['POST', 'GET'])
@@ -114,81 +117,100 @@ def form_thanks():
     # Put the data into the template context.
     context['data'] = data
 
-    # Now, do the stuff that makes sure this is a legitimate transaction.
-    # 1.) Make sure we don't get spoofed transactions.
+    # A series of checks. Will return if there are failures.
+    _check_hash(data)
+    _check_response_code(data)
+    _check_transaction(data)
 
-    # The request should have the transaction_id and the amount. We need these things.
-    if data.get('x_trans_id', None) and data.get('x_amount', None):
+    try:
+        # Try and create this order.
+        order = models.Order(**data)
+        order.save()
 
-        # Get the response key from our environment.
-        relay_response_key = os.environ.get('gge4_response_key', None)
+    except:
+        # If it fails, return a bad request.
+        abort(400)
 
-        # Get the login key from our environment.
-        login = os.environ.get('gge4_x_login', None)
+    context['order'] = order
 
-        # Get the transaction ID and the amount from the data.
-        transaction_id = data.get('x_trans_id', None)
-        amount = data.get('x_amount', None)
+    # If this is the test environment, do some things.
+    context['test_js'] = """
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="../../js/templates.js"></script>
+    """
+    return render_template('_thanks.html', **context)
 
-        # Create a hash string from this known stuff.
-        hash_string = "%s%s%s%s" % (
-            relay_response_key,
-            login,
-            transaction_id,
-            amount
-        )
 
-        # Make an MD5 hash from this hash string. This is our verified (known good) hash.
-        verified_hash = hashlib.md5(hash_string).hexdigest()
+def _check_hash(data):
+    """
+    Acceptable payments will pass an MD5 hash that should
+    match a certain recipe of known items.
+    """
 
-        # Get the unverified hash from the URL.
-        unverified_hash = data.get('x_MD5_Hash', None)
+    # The request should have a transaction ID. This is important for calculating the hash.
+    if not data.get('x_trans_id', None):
+        abort(400)
 
-        # The verified hash and the unverified hash should match.
-        if verified_hash == unverified_hash:
+    # The request should have an amount. This is also important for calculating the hash.
+    if not data.get('x_amount', None):
+        abort(400)
 
-            # 2. Now that we have a known hash, let's check to see if the transaction ID has already been used.
-            models.tshirt_db.connect()
+    # Get the response key from our environment.
+    relay_response_key = os.environ.get('gge4_response_key', None)
 
-            # Select orders with this transaction id.
-            order = models.Order.select().where(models.Order.x_trans_id == transaction_id)
+    # Get the login key from our environment.
+    login = os.environ.get('gge4_x_login', None)
 
-            # If this thing doesn't exist, let's create it.
-            if order.count() == 0:
+    # Get the transaction ID and the amount from the data.
+    transaction_id = data.get('x_trans_id', None)
+    amount = data.get('x_amount', None)
 
-                try:
-                    # Try and create this order.
-                    models.Order(**data).save()
+    # Create a hash string from this known stuff.
+    hash_string = "%s%s%s%s" % (
+        relay_response_key,
+        login,
+        transaction_id,
+        amount
+    )
 
-                except:
-                    # If it fails, return a bad request.
-                    return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
+    # Make an MD5 hash from this hash string. This is our verified (known good) hash.
+    verified_hash = hashlib.md5(hash_string).hexdigest()
 
-                # If this is the test environment, do some things.
-                # if request.args.get('test', None):
-                context['test_js'] = """
-                    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-                    <script src="../../js/templates.js"></script>
-                """
-                return render_template('_thanks.html', **context)
+    # Get the unverified hash from the URL.
+    unverified_hash = data.get('x_MD5_Hash', None)
 
-                # return render_template('form_thanks.html', **context)
+    if verified_hash != unverified_hash:
+        # This means that the URL hash doesn't match the hash we've created.
+        # These are the spoofers and they must be chastened.
+        # Return an HTTP 401.
+        abort(401)
 
-            else:
-                # This else means that the order must already exist.
-                # Return an HTTP 412.
-                return ("<h1>Precondition Failed</h1><br/>This transaction has already been recorded.", 412)
 
-        else:
-            # This means that the URL hash doesn't match the hash we've created.
-            # These are the spoofers and they must be chastened.
-            # Return an HTTP 401.
-            return ("<h1>Unauthorized</h1><br/>The URL hash does not match the expected result.", 401)
+def _check_response_code(data):
+    """
+    Check the response code to make sure this payment was authorized.
+    Unauthorized payments should still have a valid hash.
+    """
+    response_code = data.get('x_response_code', None)
 
-    # This means that the URL is missing one of the things we need to calculate the hash.
-    # Return a 400.
-    return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
+    if response_code != "1":
+        abort(403)
+
+
+def _check_transaction(data):
+    """
+    We need to defend against replay attacks. Make sure nobody is reusing an existing
+    transaction to get more t-shirts.
+    """
+    #Check to see if the transaction ID has already been used.
+    models.tshirt_db.connect()
+
+    # Select orders with this transaction id.
+    order = models.Order.select().where(models.Order.x_trans_id == data.get('x_trans_id', None))
+
+    if order.count() > 0:
+        abort(412)
 
 
 # Render LESS files on-demand
