@@ -559,13 +559,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     h4 {
     	margin: 0 0 1.5em;
     	font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        line-height: 1.5;
-        color: #121212;
-
     	@media @screen-small-above {
+	        text-transform: uppercase;
+	        color: #121212;
+	        font-weight: 700;
 	        font-size: 16px;
+	        line-height: 1.5;
         }
     }
     p,
@@ -619,7 +618,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         h5 {
             font-weight: normal;
             color: #666;
-            margin: -1em 0 1.5em 0;
+            margin: -1.5em 0 1.5em 0;
             font-size: 14px;
             line-height: 1.4;
         }
@@ -663,56 +662,13 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
                 border-bottom: 2px solid #ccc;
                 padding-top: 0;
             }
-            
+
             tr { 
                 vertical-align: top;
                 
                 &.shadedrow td {
                     background-color: #f7f7f7;
                     font-weight: bold;
-                }
-            }
-
-            @media @screen-tiny { 
-                display: block;
-                font-size: 12px;
-                
-                th { display: none; }
-
-                td {
-                    display: block;
-                    padding: 2px 10px;
-                    text-align: left;
-                    white-space: normal;
-                    border: none;
-                    
-                    &:empty { display: none; }
-                    &.amt { text-align: left; }
-                    &:nth-child(1) {
-                        padding-top: 10px;
-                        border-top: 2px solid #eee;
-                    }
-                    &:nth-child(4) {
-                        padding-bottom: 10px;
-                    }
-                }
-                
-                th[data-title]:before,
-                td[data-title]:before {
-                    content: attr(data-title) ":\00A0";
-                    font-weight: bold;
-                    display: inline-block;
-                    width: 70px;
-                }
-                
-                tfoot {
-                    td { display: none; }
-                    td[data-title='TOTAL'] { 
-                        display: block;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        border-top: 2px solid #eee;
-                    }
                 }
             }
         }
@@ -1507,11 +1463,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 }
 
 //home page navigation for touch devices
-.index-nav {
+.index-nav, .touch-title {
 	display: none;
 }
 
-.touch .index-nav {
+.touch .index-nav, .touch .touch-title {
 	display: block;
 }
 
@@ -1617,6 +1573,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			z-index: 10;
 			color: #fff;
 			text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+			
 			
 			img {
 				width: 40px;

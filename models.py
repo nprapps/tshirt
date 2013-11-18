@@ -13,11 +13,7 @@ tshirt_db = PostgresqlDatabase(
     port="5432"
 )
 
-class PsqlModel(Model):
-    class Meta:
-        database = tshirt_db
-
-class Order(PsqlModel):
+class Order(Model):
     x_trans_id = TextField()
     x_login = TextField()
     x_MD5_Hash = TextField()
@@ -76,3 +72,6 @@ class Order(PsqlModel):
 
     def __unicode__(self):
         return self.x_trans_id
+
+    class Meta:
+        database = tshirt_db
