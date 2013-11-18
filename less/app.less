@@ -124,6 +124,7 @@ nav {
 	position: fixed;
 	bottom: 0;
 	right: 0;
+	.touch & {bottom: auto; top: 0;}
 	width: 100%;
 	background: #000;
 	@media @screen-small-above { background: rgba(0,0,0,.8); }
@@ -530,16 +531,20 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
     h2 {
     	padding-bottom: 20px;
+    	font-size: 17px;
+    	line-height: 1.1;
+    	font-weight: bold;
         @media @screen-small-above {
 	        font-weight: 700;
 	        margin-bottom: 1em;
 	        line-height: 1.5;
 	        color: #121212;
         }
-        @media @screen-tiny { font-size: 22px; }
+        
     }
     h3 {
     	padding-bottom: 20px;
+    	font-size: 17px;
     	@media @screen-small-above {
 	        margin: 2.6em 0 1em 0;
 	        line-height: 1.5;
@@ -550,6 +555,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     }
     h4 {
     	margin: 0 0 1.5em;
+    	font-size: 13px;
     	@media @screen-small-above {
 	        text-transform: uppercase;
 	        color: #121212;
@@ -560,6 +566,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     }
     p,
     dl {
+    	font-size: 13px;
     	@media @screen-small-above {
 	    	margin: 0 0 1.5em 0;
 	        font-size: 20px;
@@ -1464,10 +1471,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 .touch {
 
 	.titlecard {
-        height: auto;
+        height: 140px;
         z-index: 10;
-        background-color: transparent;
-        h1, h2 {color: #333; text-shadow: none;}
+        padding-top: 65px;
+        padding-bottom: 20px;
+        background-color: #333;
+        //background-color: #487261;
+        //border-bottom: 2px solid #43564e;
+        h1, h2 {text-align: left; margin: 0; color: #ddd; text-shadow: none;}
+        h1 {font-size: 22px; margin-bottom: 5px;}
+        h2 {font-size: 12px;}
         border-top: 5px solid #111;
     }
 	
@@ -1482,7 +1495,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	.video-wrapper {
 		background-color: #fff;
 		overflow: scroll;
-		padding-top: 120px;
+		padding-top: 170px;
 		@media @screen-small-above {padding-top: 230px;}
 		margin: 0;
         position: relative;
@@ -1523,6 +1536,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		.layer-media {overflow: scroll;}
 		
 		.video-wrapper {
+			padding-top: 120px;
 			background-color: #000;
 			background-image: url('@{img-root}/squirrel-background.png');
 			background-position: 60% 70%;
