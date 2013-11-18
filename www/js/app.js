@@ -127,8 +127,6 @@ $(document).ready(function() {
     function waypoint_explainer() {
         //toggle next chapter nav and explainer prompt
         $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
-            var cnav = document.getElementById('chapter-nav');
-        
             if (direction == 'down') {
                 console.log(current_chapter + ' waypoint down');
                 $nav_chapter_title_prompt.addClass('waypoint-hide');
@@ -163,6 +161,8 @@ $(document).ready(function() {
 				var $this_player = $f($this_iframe);
 				
 				$this_player.api('play');
+                $chapter.removeClass('video-loaded').addClass('video-playing');
+
 				if (!is_touch) {
     				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
     			}
@@ -257,10 +257,6 @@ $(document).ready(function() {
                     text_scrolled = false;
                 });
         
-                $player.addEvent('play', function() {
-                    $('section.show').removeClass('video-loaded').addClass('video-playing');
-                });
-
                 if (autoplay_video && !is_touch) {
                     $('section.show').find('.btn-play').trigger('click');
                     autoplay_video = false;
