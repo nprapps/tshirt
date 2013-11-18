@@ -11,7 +11,7 @@ import time
 import urllib
 
 import envoy
-from flask import Flask, render_template, Markup, abort, jsonify, redirect
+from flask import Flask, render_template, Markup, abort, redirect
 
 import app_config
 import copytext
@@ -30,11 +30,6 @@ app.logger.setLevel(logging.INFO)
 @app.errorhandler(403)
 def card_not_authorized(e):
     return redirect('/%s/form/buy/?authorized=false' % app_config.PROJECT_SLUG, code=302)
-
-@app.route('/%s/stations/<int:zip_code>/' % app_config.PROJECT_SLUG, methods=['GET'])
-def stations_json(zip_code):
-    with open('www/data/zips/%s.json' % zip_code, 'rb') as readfile:
-        return jsonify(json.loads(readfile.read()))
 
 
 @app.route('/%s/form/buy/' % app_config.PROJECT_SLUG, methods=['GET'])
@@ -89,7 +84,7 @@ def form_buy():
     return render_template('_form.html', **context)
 
 
-@app.route('/%s/form/thanks/' % app_config.PROJECT_SLUG, methods=['POST', 'GET'])
+@app.route('/%s/form/thanks/' % app_config.PROJECT_SLUG, methods=['GET'])
 def form_thanks():
     """
     The return reciept page from GGe4.
@@ -109,10 +104,6 @@ def form_thanks():
         # Clean up the data elements.
         for key, value in data.items():
             data[key] = value[0]
-
-    # Get the data from the POST form.
-    if request.method == "POST":
-        data = dict(request.form)
 
     # Put the data into the template context.
     context['data'] = data

@@ -43,3 +43,4 @@ confs/rendered/*
 data/copy.xls
 tumblr-theme.html
 data/orders.json
+.coverage-html/
