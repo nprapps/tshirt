@@ -127,18 +127,17 @@ $(document).ready(function() {
     function waypoint_explainer() {
         //toggle next chapter nav and explainer prompt
         $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
-                if (direction == 'down') {
-                           console.log(current_chapter + ' waypoint down');
-                                $( '#nav-chapter-title-prompt' ).addClass( "waypoint-hide" );
-                                $( '#nav-chapter-title' ).addClass( "waypoint-show" );
-                                $( '#chapter-nav' ).addClass( "nav-reveal animated fadeInDown" );
-                        } else {
-                                $( '#nav-chapter-title-prompt' ).removeClass( "waypoint-hide" );
-                                $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
-                                $( '#chapter-nav' ).removeClass( "nav-reveal" );
-                        }
-                }, { offset: 600 }
-                );
+            if (direction == 'down') {
+                console.log(current_chapter + ' waypoint down');
+                $('#nav-chapter-title-prompt').addClass('waypoint-hide');
+                $('#nav-chapter-title').addClass('waypoint-show');
+                $('#chapter-nav').removeClass('animated fadeInUp').addClass('animated fadeInUp');
+            } else {
+                $('#nav-chapter-title-prompt').removeClass('waypoint-hide');
+                $('#nav-chapter-title').removeClass('waypoint-show');
+                $('#chapter-nav').removeClass('animated fadeInUp').addClass('animated fadeInUp');
+            }
+        }, { offset: '85%' } );
     }
     
     /*
