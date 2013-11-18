@@ -1452,7 +1452,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 }
 
 //home page navigation for touch devices
-.index-nav {
+.index-nav, .touch-title {
 	display: none;
 }
 
@@ -1466,7 +1466,8 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         height: auto;
         z-index: 10;
         background-color: transparent;
-        h1, h2 {color: #333; text-shadow: none;}
+        h1, h2 {color: #333; text-shadow: none; text-align: left; margin: 0;}
+        h1 {margin-top: 10px;}
         border-top: 5px solid #111;
     }
 	
@@ -1481,7 +1482,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	.video-wrapper {
 		background-color: #fff;
 		overflow: scroll;
-		padding-top: 120px;
+		padding-top: 110px;
 		@media @screen-small-above {padding-top: 230px;}
 		margin: 0;
         position: relative;
@@ -1547,6 +1548,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		}
 		
 		.touch-title {
+			display: block;
 			position: absolute;
 			top: 0;
 			left: 0;
