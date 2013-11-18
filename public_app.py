@@ -45,8 +45,9 @@ def form_buy():
 
     # Decide on the form URL to use.
     context['form_url'] = "https://demo.globalgatewaye4.firstdata.com/payment"
-    if app_config.DEPLOYMENT_TARGET in ['production', 'staging']:
-        context['form_url'] = "https://checkout.globalgatewaye4.firstdata.com/payment"
+
+    # if app_config.DEPLOYMENT_TARGET in ['production', 'staging']:
+    #     context['form_url'] = "https://checkout.globalgatewaye4.firstdata.com/payment"
 
     # Get our login token.
     context['x_login'] = os.environ.get('gge4_x_login', None)
