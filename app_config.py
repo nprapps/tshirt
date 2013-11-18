@@ -35,7 +35,8 @@ PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 STAGING_S3_BUCKETS = ['stage-apps.npr.org']
 
 PRODUCTION_SERVERS = ['54.214.41.128']
-STAGING_SERVERS = ['50.112.92.131']
+STAGING_SERVERS = ['54.214.41.128']
+# STAGING_SERVERS = ['50.112.92.131']
 
 # Should code be deployed to the web/cron servers?
 DEPLOY_TO_SERVERS = True
@@ -132,7 +133,7 @@ def get_secrets():
         'gge4_response_key',
         'tshirt_psql_user',
         'tshirt_psql_pass',
-        'thsirt_psql_host',
+        'tshirt_psql_host',
     ]
 
     secrets_dict = {}

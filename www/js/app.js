@@ -24,7 +24,7 @@ $(document).ready(function() {
     var graphic_aspect_height = 6;
     var filmstrip_cotton_aspect_width = 720;
     var filmstrip_cotton_aspect_height = 528;
-    var chapters = [ 'title', 'plants', 'machines', 'people', 'boxes', 'you', 'about', 'buy' ];
+    var chapters = [ 'title', 'cotton', 'machines', 'people', 'boxes', 'you', 'about', 'buy' ];
     var nav_height = 74;
     var nav_height_open = 248;
     var small_nav_height = 54;
@@ -158,7 +158,6 @@ $(document).ready(function() {
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'about' && chapter != 'buy') {
-			
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
@@ -171,17 +170,9 @@ $(document).ready(function() {
 				close_nav();
 			});
 			
-						
 			$btn_explain.on('click', function() {
 				scroll_to_explainer();
 			});
-
-		/*} else if (chapter == 'title') {
-			$btn_play.on('click', function() {
-			    autoplay_video = true;
-			    hasher.setHash(chapters[1]);
-				close_nav();
-			});*/
 		} else { // about or buy
 		    // do something else?
 		}
@@ -424,8 +415,6 @@ $(document).ready(function() {
 	
 	function goto_next_chapter() {
         var next_chapter = chapters[( current_chapter_id + 1)];
-	    autoplay_video = true;
-
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
     }
@@ -524,7 +513,7 @@ $(document).ready(function() {
             d3_cotton_exports_data.forEach(function(d) {
                 d.year = d3.time.format('%Y').parse(d.year);
             });
-            if (current_chapter == 'plants') {
+            if (current_chapter == 'cotton') {
                 draw_cotton_exports_graph();
             }
         });
@@ -737,7 +726,7 @@ $(document).ready(function() {
         // 1) the current chapter 
         // 2) if the data has actually loaded
 	    switch(current_chapter) {
-	        case 'plants':
+	        case 'cotton':
 	            if (d3_cotton_exports_data != undefined) {
                     draw_cotton_exports_graph();
                 }
