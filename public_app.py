@@ -165,15 +165,15 @@ def form_thanks():
                     return ("<h1>Bad Request</h1><br/>The URL is missing necessary parameters.", 400)
 
                 # If this is the test environment, do some things.
-                if request.args.get('test', None):
-                    context['test_js'] = """
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
-                        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-                        <script src="../../js/templates.js"></script>
-                    """
-                    return render_template('_thanks.html', **context)
+                # if request.args.get('test', None):
+                context['test_js'] = """
+                    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+                    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+                    <script src="../../js/templates.js"></script>
+                """
+                return render_template('_thanks.html', **context)
 
-                return render_template('form_thanks.html', **context)
+                # return render_template('form_thanks.html', **context)
 
             else:
                 # This else means that the order must already exist.
