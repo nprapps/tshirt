@@ -4,7 +4,6 @@ import os
 
 from peewee import *
 
-test_db = SqliteDatabase('test.db')
 
 tshirt_db = PostgresqlDatabase(
     database='tshirt',
