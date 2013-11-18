@@ -104,7 +104,7 @@ var on_zip_click = function() {
   */
 
   // Fetch station JSON from our proxy.
-  $.getJSON('/tshirt/stations/' + $station_zip.val(), function(data){
+  $.getJSON('/tshirt/stations/' + $station_zip.val() + '.json', function(data){
 
     // Empty the station target.
     $station_target.empty();
