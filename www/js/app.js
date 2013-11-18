@@ -158,7 +158,6 @@ $(document).ready(function() {
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
     	if (chapter != 'about' && chapter != 'buy') {
-			
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
@@ -171,17 +170,9 @@ $(document).ready(function() {
 				close_nav();
 			});
 			
-						
 			$btn_explain.on('click', function() {
 				scroll_to_explainer();
 			});
-
-		/*} else if (chapter == 'title') {
-			$btn_play.on('click', function() {
-			    autoplay_video = true;
-			    hasher.setHash(chapters[1]);
-				close_nav();
-			});*/
 		} else { // about or buy
 		    // do something else?
 		}
@@ -424,8 +415,6 @@ $(document).ready(function() {
 	
 	function goto_next_chapter() {
         var next_chapter = chapters[( current_chapter_id + 1)];
-	    autoplay_video = true;
-
 	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
     }
