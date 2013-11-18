@@ -127,14 +127,18 @@ def get_secrets():
     A method for accessing our secrets.
     """
     secrets = [
-        'EXAMPLE_SECRET'
+        'gge4_x_login',
+        'gge4_transaction_key',
+        'gge4_response_key',
+        'tshirt_psql_user',
+        'tshirt_psql_pass',
+        'thsirt_psql_host',
     ]
 
     secrets_dict = {}
 
     for secret in secrets:
-        name = '%s_%s' % (PROJECT_FILENAME, secret)
-        secrets_dict[secret] = os.environ.get(name, None)
+        secrets_dict[secret] = os.environ.get(secret, None)
 
     return secrets_dict
 
