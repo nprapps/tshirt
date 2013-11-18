@@ -133,7 +133,7 @@ def get_secrets():
         'gge4_response_key',
         'tshirt_psql_user',
         'tshirt_psql_pass',
-        'thsirt_psql_host',
+        'tshirt_psql_host',
     ]
 
     secrets_dict = {}
