@@ -181,7 +181,7 @@ $(document).ready(function() {
             if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
                 var video_tag = '';
         
-                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted" loop>';
+                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted">';
                 video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
                 video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
                 video_tag += '</video>';
