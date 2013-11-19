@@ -266,9 +266,21 @@ $(document).ready(function() {
 	 */
 	function setup_chapter_nav(chapter, id) {
         $('.nav-' + chapter).on('click', function() {
-            hasher.setHash(chapters[id]);
+            // if this is the chapter you're currently on
+            if (chapter == current_chapter) {
+                // pause the video
+				var $this_iframe = $('#video-' + current_chapter)[0];
+				var $this_player = $f($this_iframe);
+				$this_player.api('pause');
+
+                // restore the title card
+                $('section.show').removeClass('video-playing').addClass('video-loaded');
+            } else {
+                // otherwise, proceed
+                hasher.setHash(chapters[id]);
+			}
             close_nav();
-			scroll_to_top();
+            scroll_to_top();
         });
 	}
 	
@@ -330,8 +342,9 @@ $(document).ready(function() {
                 $b.addClass(this_chapter_class);
 
                 if (this_chapter_name != 'title' && this_chapter_name != 'about') {
-                    if (this_chapter_name == 'you'){ $nav_chapter_title.html(''); }
-                    else {
+                    if (this_chapter_name == 'you'){ 
+                        $nav_chapter_title.html('');
+                    } else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
