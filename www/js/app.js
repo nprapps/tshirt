@@ -765,8 +765,8 @@ $(document).ready(function() {
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-            .interpolate('basis')
-            .defined(function(d) { return d.exports != null; })
+            .defined(function(d) { console.log(d.exports); return (d.exports != null && d.exports != 0); })
+//            .interpolate('basis')
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
         
