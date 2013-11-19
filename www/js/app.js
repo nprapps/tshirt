@@ -138,7 +138,7 @@ $(document).ready(function() {
         }, { offset: '85%' } );
     }
     
-    /*
+    
     function goodbye_waypoint() {
     	console.log('goodbye');
 	    $('#' + current_chapter + ' .explainer').waypoint('disable');
@@ -147,7 +147,7 @@ $(document).ready(function() {
     function hello_waypoint() {
     	console.log('hello');
 	    $('#' + current_chapter + ' .explainer').waypoint('enable');
-    }*/
+    }
     
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
@@ -341,6 +341,7 @@ $(document).ready(function() {
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
                     console.log(COPY[this_chapter_name]['nav_prompt']);
+                    waypoint_explainer();
                 } else {
                     $nav_chapter_title.html('');
                     $nav_chapter_title_prompt.find('h4').text('');
@@ -786,7 +787,7 @@ $(document).ready(function() {
         
         //initialize waypoint
         if (!is_touch){
-            waypoint_explainer();
+            
         }
         
     }
