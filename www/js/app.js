@@ -518,7 +518,6 @@ $(document).ready(function() {
                 d.year = d3.time.format('%Y').parse(d.year);
             });
             if (current_chapter == 'people') {
-                console.log('draw_tshirt_phase_graph!'); 
                 draw_tshirt_phase_graph();
             }
         });
@@ -609,7 +608,6 @@ $(document).ready(function() {
     }
     
     function draw_tshirt_phase_graph() {
-        console.log('draw_tshirt_phase_graph');
         var margin = {top: 0, right: 15, bottom: 25, left: 50};
         var width = $d3_tshirt_phase.width() - margin.left - margin.right;
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
@@ -644,7 +642,7 @@ $(document).ready(function() {
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-            .defined(function(d) { console.log(d.exports); return (d.exports != null && d.exports != 0); })
+            .defined(function(d) { return (d.exports != null && d.exports != 0); })
             .interpolate('monotone')
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
