@@ -191,6 +191,7 @@ nav {
 	        float: left;
 	        font-weight: bold;
 	        text-transform: uppercase;
+	        
 	        display: none;
 
 	        @media @screen-small-above { 
@@ -214,24 +215,42 @@ nav {
 	#nav-chapter-title-prompt {
 	
 		&.waypoint-hide {display: none;}
-	
+		
+		top: 0;
+		left: 0;
+		width: 100%;
+		text-align: center;
+		
 		h4 {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			text-align: center;
-			font-size: 12px;
+			padding: 18px 0 8px 0;
+			line-height: 1;
+			font-size: 20px;
+			font-weight: normal;
+			color: #ddd;
+			max-width: 800px;
+			margin: 0 auto;
+			
+			&:hover {
+				color: #fff;
+				cursor: pointer;
+			}
 		}
+	
+		h5 {
+			font-size: 12px;
+			color: #ccc;
+			text-transform: uppercase;
+			max-width: 200px;
+			margin: 0 auto;
 
-		h3 {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			text-align: center;
-			font-size: 18px;
-			float: none;
+		}
+		
+		.ico-chevron {
+		    display: inline-block;
+		    background: transparent url('@{img-root}/small-chevron.png') no-repeat center center;
+		    width: 35px;
+		    height: 16px;
+		    vertical-align: text-top;
 		}
 		
 	}
