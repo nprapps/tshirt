@@ -440,9 +440,9 @@ $(document).ready(function() {
         $.smoothScroll({
         	speed: 10,
             scrollTarget: scroll_target,
-            afterScroll: function() {
+            /*afterScroll: function() {
 				console.log('after scroll');
-			}
+			}*/
         });
     }
 
