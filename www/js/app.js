@@ -138,7 +138,7 @@ $(document).ready(function() {
         }, { offset: '85%' } );
     }
     
-    /*
+    
     function goodbye_waypoint() {
     	console.log('goodbye');
 	    $('#' + current_chapter + ' .explainer').waypoint('disable');
@@ -147,7 +147,7 @@ $(document).ready(function() {
     function hello_waypoint() {
     	console.log('hello');
 	    $('#' + current_chapter + ' .explainer').waypoint('enable');
-    }*/
+    }
     
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
@@ -181,7 +181,7 @@ $(document).ready(function() {
             if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
                 var video_tag = '';
         
-                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted" loop>';
+                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted">';
                 video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
                 video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
                 video_tag += '</video>';
@@ -341,6 +341,7 @@ $(document).ready(function() {
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
                     console.log(COPY[this_chapter_name]['nav_prompt']);
+                    waypoint_explainer();
                 } else {
                     $nav_chapter_title.html('');
                     $nav_chapter_title_prompt.find('h4').text('');
@@ -784,7 +785,7 @@ $(document).ready(function() {
         
         //initialize waypoint
         if (!is_touch){
-            waypoint_explainer();
+            
         }
         
     }
