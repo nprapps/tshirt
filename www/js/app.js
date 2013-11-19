@@ -766,7 +766,7 @@ $(document).ready(function() {
         
         var line = d3.svg.line()
             .defined(function(d) { console.log(d.exports); return (d.exports != null && d.exports != 0); })
-//            .interpolate('basis')
+            .interpolate('monotone')
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
         
