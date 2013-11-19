@@ -22,7 +22,7 @@
      });
 </script>
 
-<!--[if lte IE 9]>
+<!--[if lte IE 8]>
 <p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to experience this story.</p>
 <![endif]-->
 {% endblock extra_head %}
@@ -137,10 +137,6 @@
     <section id="about" class="layer">
         {% include '_chapter_about.html' %}
     </section>
-    
-    <section id="buy" class="layer">
-        {% include '_chapter_buy.html' %}
-    </section>
 </div>
 
 <nav id="chapter-nav" role="navigation">
@@ -158,7 +154,7 @@
             <ul id="nav-secondary">
                 <li class="nav-title"><i class="home"></i> {{ COPY.content.nav_home_button_label }} </li>
                 <li class="nav-about"><i class="about"></i> {{ COPY.content.about_title }}</li>
-                <li class="nav-buy"><i class="buy"></i> Buy a T-shirt</li>
+                <li class="buy-shirt"><i class="buy"></i> Buy a T-shirt</li>
             </ul>
             <ul id="nav-primary">
                 <li class="nav-cotton"><p>{{ COPY.cotton.fullname }}</p></li>
