@@ -42,10 +42,12 @@ $(document).ready(function() {
     var window_height;
 
     // data vars
-    var $d3_cotton_exports = $('#cotton-exports-d3');
     var $d3_apparel_wages = $('#apparel-wages-d3');
-    var d3_cotton_exports_data;
+    var $d3_cotton_exports = $('#cotton-exports-d3');
+    var $d3_tshirt_phase = $('#tshirt-phase-d3');
     var d3_apparel_wages_data;
+    var d3_cotton_exports_data;
+    var d3_tshirt_phase_data;
     
     //breakpoints
     var screen_small = 768;
@@ -503,6 +505,13 @@ $(document).ready(function() {
      * D3 Charts
      */
     function load_graphics() {
+        d3.tsv("data/apparel-wages.tsv", function(error, data) {
+            d3_apparel_wages_data = data;
+            if (current_chapter == 'people') {
+                draw_apparel_wages_graph();
+            }
+        });
+
         d3.tsv("data/cotton-exports.tsv", function(error, data) {
             d3_cotton_exports_data = data;
             d3_cotton_exports_data.forEach(function(d) {
@@ -513,12 +522,100 @@ $(document).ready(function() {
             }
         });
 
-        d3.tsv("data/apparel-wages.tsv", function(error, data) {
-            d3_apparel_wages_data = data;
+        d3.csv("data/tshirt-phase.csv", function(error, data) {
+            d3_tshirt_phase_data = data;
+            d3_tshirt_phase_data.forEach(function(d) {
+                d.year = d3.time.format('%Y').parse(d.year);
+            });
             if (current_chapter == 'people') {
-                draw_apparel_wages_graph();
+                console.log('draw_tshirt_phase_graph!'); 
+                draw_tshirt_phase_graph();
             }
         });
+    }
+    
+    function draw_apparel_wages_graph() {
+        var bar_height = 25;
+        var bar_gap = 10;
+        var num_bars = d3_apparel_wages_data.length;
+        var margin = {top: 0, right: 50, bottom: 25, left: 80};
+        var width = $d3_apparel_wages.width() - margin.left - margin.right;
+        var height = ((bar_height + bar_gap) * num_bars);
+        
+        // clear out existing graphics
+        reset_charts();
+
+        // remove placeholder table if it exists
+        $d3_apparel_wages.find('table').remove();
+        
+        var x = d3.scale.linear()
+            .domain([0, d3.max(d3_apparel_wages_data, function(d) { return parseInt(d.min_wage); })])
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .range([height, 0]);
+        
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom")
+            .ticks(5);
+            
+        var x_axis_grid = function() { return xAxis; }
+
+        var svg = d3.select('#apparel-wages-d3').append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        
+        svg.append('g')
+            .attr('class', 'x axis')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(xAxis);
+
+        svg.append('g')
+            .attr('class', 'x grid')
+            .attr('transform', 'translate(0,' + height + ')')
+            .call(x_axis_grid()
+                .tickSize(-height, 0, 0)
+                .tickFormat('')
+            );
+
+        svg.append('g')
+            .attr('class', 'bars')
+            .selectAll('rect')
+                .data(d3_apparel_wages_data)
+            .enter().append('rect')
+                .attr("y", function(d, i) { return i * (bar_height + bar_gap); })
+                .attr("width", function(d){ return x(d.min_wage); })
+                .attr("height", bar_height)
+                .attr('class', function(d) { return d.country.toLowerCase() });
+        
+        svg.append('g')
+            .attr('class', 'amounts')
+            .selectAll('text')
+                .data(d3_apparel_wages_data)
+            .enter().append('text')
+                .attr('x', function(d) { return x(parseInt(d.min_wage)) })
+                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
+                .attr('dx', 6)
+                .attr('dy', 17)
+                .attr('text-anchor', 'start')
+                .attr('class', function(d) { return d.country.toLowerCase() })
+                .text(function(d) { return '$' + d.min_wage });
+        
+        svg.append('g')
+            .attr('class', 'country')
+            .selectAll('text')
+                .data(d3_apparel_wages_data)
+            .enter().append('text')
+                .attr('x', 0)
+                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
+                .attr('dx', -6)
+                .attr('dy', 17)
+                .attr('text-anchor', 'end')
+                .attr('class', function(d) { return d.country.toLowerCase() })
+                .text(function(d) { return d.country });
     }
     
     function draw_cotton_exports_graph() {
@@ -632,27 +729,28 @@ $(document).ready(function() {
             .style('stroke', function(d) { return color(d.country); });
     }
     
-    function draw_apparel_wages_graph() {
-        var bar_height = 25;
-        var bar_gap = 10;
-        var num_bars = d3_apparel_wages_data.length;
-        var margin = {top: 0, right: 50, bottom: 25, left: 80};
-        var width = $d3_apparel_wages.width() - margin.left - margin.right;
-        var height = ((bar_height + bar_gap) * num_bars);
-        
+    function draw_tshirt_phase_graph() {
+        console.log('draw_tshirt_phase_graph');
+        var margin = {top: 0, right: 15, bottom: 25, left: 50};
+        var width = $d3_tshirt_phase.width() - margin.left - margin.right;
+        var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
+
         // clear out existing graphics
         reset_charts();
 
-        // remove placeholder table if it exists
-        $d3_apparel_wages.find('table').remove();
-        
-        var x = d3.scale.linear()
-            .domain([0, d3.max(d3_apparel_wages_data, function(d) { return parseInt(d.min_wage); })])
+        // remove placeholder image if it exists
+        $d3_tshirt_phase.find('img').remove();
+
+        var x = d3.time.scale()
             .range([0, width]);
 
         var y = d3.scale.linear()
             .range([height, 0]);
-        
+
+        var color = d3.scale.category10()
+            .domain(d3.keys(d3_tshirt_phase_data[0]).filter(function(key) { return key !== 'year'; }));
+        // more: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
+
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
@@ -660,16 +758,64 @@ $(document).ready(function() {
             
         var x_axis_grid = function() { return xAxis; }
 
-        var svg = d3.select('#apparel-wages-d3').append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append('g')
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
         
+        var y_axis_grid = function() { return yAxis; }
+        
+        var line = d3.svg.line()
+            .interpolate('basis')
+            .defined(function(d) { return d.exports != null; })
+            .x(function(d) { return x(d.year); })
+            .y(function(d) { return y(d.exports); });
+        
+        var legend = d3.select('#tshirt-phase-d3').append('ul')
+                .attr('class', 'key')
+            .selectAll('g')
+                .data(color.domain().slice())
+            .enter().append('li')
+                .attr('class', function(d, i) { return 'key-item key-' + i; });
+
+        legend.append('b')
+            .style('background-color', color);
+
+        legend.append('label')
+            .text(function(d) { return d; });
+
+        var svg = d3.select('#tshirt-phase-d3').append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            
+        var countries = color.domain().map(function(country) {
+            return {
+                country: country,
+                values: d3_tshirt_phase_data.map(function(d) {
+                    return {
+                        year: d.year, 
+                        exports: +d[country]
+                    };
+                })
+            };
+        });
+
+        x.domain(d3.extent(d3_tshirt_phase_data, function(d) { return d.year; }));
+
+        y.domain([
+            d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.exports; }); }),
+            d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.exports; }); })
+        ]);
+
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')')
             .call(xAxis);
+
+        svg.append('g')
+            .attr('class', 'y axis')
+            .call(yAxis);
 
         svg.append('g')
             .attr('class', 'x grid')
@@ -680,40 +826,21 @@ $(document).ready(function() {
             );
 
         svg.append('g')
-            .attr('class', 'bars')
-            .selectAll('rect')
-                .data(d3_apparel_wages_data)
-            .enter().append('rect')
-                .attr("y", function(d, i) { return i * (bar_height + bar_gap); })
-                .attr("width", function(d){ return x(d.min_wage); })
-                .attr("height", bar_height)
-                .attr('class', function(d) { return d.country.toLowerCase() });
-        
-        svg.append('g')
-            .attr('class', 'amounts')
-            .selectAll('text')
-                .data(d3_apparel_wages_data)
-            .enter().append('text')
-                .attr('x', function(d) { return x(parseInt(d.min_wage)) })
-                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
-                .attr('dx', 6)
-                .attr('dy', 17)
-                .attr('text-anchor', 'start')
-                .attr('class', function(d) { return d.country.toLowerCase() })
-                .text(function(d) { return '$' + d.min_wage });
-        
-        svg.append('g')
-            .attr('class', 'country')
-            .selectAll('text')
-                .data(d3_apparel_wages_data)
-            .enter().append('text')
-                .attr('x', 0)
-                .attr('y', function(d, i) { return i * (bar_height + bar_gap); })
-                .attr('dx', -6)
-                .attr('dy', 17)
-                .attr('text-anchor', 'end')
-                .attr('class', function(d) { return d.country.toLowerCase() })
-                .text(function(d) { return d.country });
+            .attr('class', 'y grid')
+            .call(y_axis_grid()
+                .tickSize(-width, 0, 0)
+                .tickFormat('')
+            );
+
+        var country = svg.selectAll('.country')
+            .data(countries)
+            .enter().append('g')
+            .attr('class', 'country');
+
+        country.append('path')
+            .attr('class', 'line')
+            .attr('d', function(d) { return line(d.values); })
+            .style('stroke', function(d) { return color(d.country); });
     }
     
     function draw_charts() {
@@ -730,6 +857,9 @@ $(document).ready(function() {
 	            if (d3_apparel_wages_data != undefined) {
                     draw_apparel_wages_graph();
                 }
+	            if (d3_tshirt_phase_data != undefined) {
+                    draw_tshirt_phase_graph();
+                }
 	            break;
 	    }
     }
@@ -742,6 +872,10 @@ $(document).ready(function() {
 
         if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
             d3.select('#apparel-wages-d3').selectAll('svg').remove();
+        }
+
+        if (d3.select('#tshirt-phase-d3').select('svg')[0][0] != null) {
+            d3.select('#tshirt-phase-d3').selectAll('svg').remove();
         }
     }
 	
@@ -764,7 +898,6 @@ $(document).ready(function() {
         // css animations
         setup_css_animations();
 
-        
         load_graphics();
 
         $(window).on('resize', on_resize);
