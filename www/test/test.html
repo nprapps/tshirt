@@ -63,9 +63,9 @@
      });
 </script>
 
-
-	<link rel="stylesheet" type="text/css" href="css/legacy.css" />
-
+<!--[if lte IE 8]>
+<p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to experience this story.</p>
+<![endif]-->
 
 </head>
 <body>
@@ -154,7 +154,7 @@
                         <h2>Three Reasons U.S. Cotton Is Still King</h2>
                         <p>You can grow cotton in places where land and labor are cheap. You can grow it in places that are close to the countries &mdash; Colombia, Indonesia, Bangladesh &mdash; where the Planet Money T-shirt was made. Yet most of the cotton in the Planet Money T-shirts was grown in the U.S. In fact, the U.S. exports more cotton than any country in the world. Here are three reasons why.</p>
 
-                        <h3>Technology</h3>
+                        <h3>1. Technology</h3>
                         <p>The U.S. has perfected cotton by treating it as a high-tech product.</p>
 
                         <div class="graphic cotton-yields">
@@ -232,7 +232,7 @@
                         <p>Like the seeds, the pickers get more productive every year as the technology improves. The newest John Deere picker needs just one guy to do what it took five guys to do a couple years ago. One driver can pick a hundred acres of cotton a day &mdash; and he barely needs to touch the steering wheel, because the machine largely drives itself.</p>
                         <p>Toto Latrell Jones, a cotton picker at Bowen Flowers’s farm, says the machine lets him pick more in a day than his grandfather could have picked in a lifetime.</p>
 
-                        <h3>Report Cards</h3>
+                        <h3>2. Report Cards</h3>
                         <p>Every year, the USDA tests all 17 million bales of cotton harvested in the U.S. The farmers pay for the testing, and the USDA figures out exactly how fine, long, strong and stretchy every bale of cotton is. Anyone, anywhere in the world can get a report card that tells them everything they need to know about every bale of U.S. cotton.</p>
                         <p>Here are a few key specs for a sample from Bowen Flowers’s crop.</p>
 
@@ -273,7 +273,7 @@
                         <p>A factory manager there told us  that, when he orders U.S. cotton, he knows exactly what he’s getting before he ever sees or touches the cotton. The spinners have a special recipe for their yarn, and they need exactly the right cotton &mdash; exactly the right color, exactly the right length, exactly the right fineness. No surprises.</p>
                         <p>The USDA testing means a cotton buyer in Indonesia can order a bale of U.S. cotton that's guaranteed to match his exact specifications, every time.</p>
 
-                        <h3>Subsidies</h3>
+                        <h3>3. Subsidies</h3>
                         <p>U.S. cotton farmers benefit from a bunch of government subsidy programs. (Other countries subsidize their cotton farmers as well, by the way.) The government gives taxpayer money directly to cotton farmers, and subsidizes insurance that protects farmers if their harvest is weak or cotton prices fall.</p>
                     
                         <div class="graphic cotton-subsidies">
@@ -582,13 +582,14 @@
 
                         <div class="graphic tshirt-phase d3-chart">
                             <h4>The T-Shirt Phase</h4>
-                            <h5>Lorem Ipsum Dolor Sit Amet</h5>
+                            <h5>Textiles and clothing as a share of a country's total manufacturing exports</h5>
 
-                            <div id="tshirt-phase-d3"></div>
+                            <div id="tshirt-phase-d3">
+                                <img src="img/gr-people-tshirt-phase.gif" alt="Graph: The United Kingdom, Japan, South Korea and China have all experienced sharp rises and then drops in their apparel industries. Bangladesh is still on the rise." />
+                            </div>
 
-                            <p class="credit">
-                                Sources: For years 1980-2012: World Trade Organization. For prior years: Young-Il Park and Kym Anderson, "The Experience of Japan," in Kym Anderson, Ed., New Silk Roads, Cambridge University Press, 1992. Kym Anderson and Young-Il Park. "Effects of China's Dramatic Reforms on Its Neighbors and on World Markets," in Kym Anderson, New Silk Roads, Cambridge University Press, 1992.
-                            </p>
+                            <p class="footnote">Notes: Inconsistent data available prior to 1980. Figures for the United Kingdom refer to textiles and clothing as a share of all exports (rather than manufacturing exports).</p>
+                            <p class="credit">Sources: For years 1980-2012: World Trade Organization. For prior years: Young-Il Park and Kym Anderson, "The Experience of Japan," in Kym Anderson, Ed., New Silk Roads, Cambridge University Press, 1992. Kym Anderson and Young-Il Park. "Effects of China's Dramatic Reforms on Its Neighbors and on World Markets," in Kym Anderson, New Silk Roads, Cambridge University Press, 1992.</p>
                         </div>
 
                         <p>In 1911, a fire at the Triangle Shirtwaist Factory in New York killed over 100 workers, and prompted major reforms that improved working conditions. Last year, the Rana Plaza factory building in Bangladesh collapsed  and killed more than 1,000 workers, leading to huge protests around the country and increased global pressure on Bangladesh to improve working conditions. Any day now, the government is expected to announce a new, higher minimum wage.</p>
@@ -926,163 +927,6 @@
             </div><!-- /.container -->
         </div><!-- /.explainer -->
     </section>
-    
-    <section id="buy" class="layer">
-                <div class="layer-media">
-            <div class="titlecard">
-                 <div class="container">
-
-                    <div class="row">
-                        <div class="col-md-9">
-                        <h2>Buy A T-Shirt</h2>
-                            <h3>Support your favorite station by buying a Planet Money T-shirt. <em>Note: only one shirt per order.</em></h3>
-                        </div><!--/col-->
-                    </div><!--/row-->
-
-                    <div class="row">
-
-                        <div class="col-md-5  col-md-push-7"><img src="../../img/tshirt-sample.jpg" class="img-responsive shirt-preview" /><img src="../../img/tshirt-sample.jpg" class="img-responsive shirt-preview" /></div>
-
-                        <div class="col-md-7 col-md-pull-5">
-
-<a href="http://www.amazon.com/dp/0470287160?tag=npr-5-20">
-The Travels of a T-Shirt in the Global Economy: An Economist Examines the Markets, Power, and Politics of World Trade
-</a>
-
-                            <form role="form" id="t-shirt-form" action="" method="post">
-
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                  <div class="select-shirt form-group">
-                                    <h3>1. Select a shirt</h3>
-
-                                    <select class="form-control" id="x_shirt">
-                                      <option>Women's Sheer Rose, S</option>
-                                      <option>Women's Sheer Rose, M</option>
-                                      <option>Women's Sheer Rose, L</option>
-                                      <option>Women's Sheer Rose, XL</option>
-                                      <option>Men's Lantern Grey, S</option>
-                                      <option>Men's Lantern Grey, M</option>
-                                      <option>Men's Lantern Grey, L</option>
-                                      <option>Men's Lantern Grey, XL</option>
-                                    </select>
-
-                                  </div><!--/form-group-->
-
-                                  <div class="form-group">
-                                      <h3>2. Shipping Information</h3>
-                                      <p><em>All fields are required</em></p>
-
-                                      <label>Email</label>
-                                      <input id="x_email" type="text" class="form-control" name="x_email">
-
-                                      <h4>Billing</h4>
-                                      <label>First Name</label>
-                                      <input id="x_first_name" type="text" class="form-control" name="x_first_name">
-
-                                      <label>Last Name</label>
-                                      <input id="x_last_name" type="text" class="form-control" name="x_last_name">
-
-                                      <label>Address</label>
-                                      <input id="x_address" type="text" class="form-control" name="x_address">
-
-                                      <label>City</label>
-                                      <input id="x_city" type="text" class="form-control" name="x_city">
-
-                                      <label>State</label>
-                                      <input id="x_state" type="text" class="form-control" name="x_state">
-
-                                      <label>Zip</label>
-                                      <input id="x_zip" type="text" class="form-control" name="x_zip">
-
-                                      <h4>Shipping</h4>
-
-                                      <button class="btn btn-default" id="duplicate-fields">Duplicate billing address</button>
-
-                                      <label>First Name</label>
-                                      <input type="text" id="x_ship_to_first_name" name="x_ship_to_first_name" value=""></input>
-
-                                      <label>Last Name</label>
-                                      <input type="text" id="x_ship_to_last_name" name="x_ship_to_last_name" value=""></input>
-
-                                      <label>Address</label>
-                                      <input type="text" id="x_ship_to_address" name="x_ship_to_address" value=""></input>
-
-                                      <label>City</label>
-                                      <input type="text" id="x_ship_to_city" name="x_ship_to_city" value=""></input>
-
-                                      <label>State</label>
-                                      <input type="text" id="x_ship_to_state" name="x_ship_to_state" value=""></input>
-
-                                      <label>Zip</label>
-                                      <input type="text" id="x_ship_to_zip" name="x_ship_to_zip" value=""></input>
-
-                                      <p>U.S. orders only, please.</p>
-
-                                  </div><!--/form-group-->
-                                </div><!--/col-->
-                            </div><!--/row-->
-
-                                <input type="hidden" name="x_ship_to_country" value="US"></input>
-                                <input type="hidden" name="x_country" value="US">
-
-                                <input type="hidden" name="x_login" value=""></input>
-                                <input type="hidden" name="x_amount" value=""></input>
-                                <input type="hidden" name="x_fp_sequence" value=""></input>
-                                <input type="hidden" name="x_fp_timestamp" value=""></input>
-                                <input type="hidden" name="x_fp_hash" value=""></input>
-                                <input type="hidden" name="x_show_form" value="PAYMENT_FORM"></input>
-                                <input type="hidden" name="x_type" value="AUTH_CAPTURE"></input>
-                                <input type="hidden" id="x_description" name="x_description" value=""></input>
-
-                                <input type="hidden" name="x_invoice_num" value="*"></input>
-                                <input type="hidden" name="x_po_num" value="*"></input>
-
-
-                                
-
-                            </form>
-                            <div class="form-group station">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3>3. Find your favorite station</h3>
-                                        <p>Language that explains that the proceeds from this purchase will go to the station.</p>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <input type="text" id="station-zip" class="form-control" placeholder="enter zip">
-                                    </div><!--/col-->
-
-                                    <div class="col-md-4">
-                                        <button class="btn btn-default" id="zip-code-find">Find</button>
-                                    </div><!--/col-->
-                                </div><!--/row-->
-                             </div><!--/form group-->
-                             <div class="form-group station-results">
-                                <div id="station-target"></div>
-                                <div class="station row">
-                                    <div class="col-md-12">
-                                        <div class="radio">
-                                          <label>
-                                            <input type="radio" name="optionsRadios" value="NOTHANKS">
-                                            I do not want to select a station.
-                                          </label>
-                                        </div>
-                                    </div><!--/col-->
-                                </div><!-- /station row -->
-
-                             </div><!--/form group-->
-
-                             <button type="submit" class="btn btn-default" id="t-shirt-submit">Continue to billing</button>
-                             
-                             <script type="text/javascript" src="../../js/form.js"></script></div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container -->
-            </div><!-- /.titlecard -->
-        </div><!-- /.layer-media -->
-        <div class="explainer"></div><!-- /.explainer -->
-    </section>
 </div>
 
 <nav id="chapter-nav" role="navigation">
@@ -1100,7 +944,7 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
             <ul id="nav-secondary">
                 <li class="nav-title"><i class="home"></i> Home </li>
                 <li class="nav-about"><i class="about"></i> How We Did This</li>
-                <li class="nav-buy"><i class="buy"></i> Buy a T-shirt</li>
+                <li class="buy-shirt"><i class="buy"></i> Buy a T-shirt</li>
             </ul>
             <ul id="nav-primary">
                 <li class="nav-cotton"><p>Cotton</p></li>
