@@ -1,0 +1,6 @@
+.video-wrapper {display: none !important;}
+.layer {position: relative !important; display: block !important; width: auto;
+	height: auto; top: auto; left: auto;
+}
+
+nav {display: none;}
