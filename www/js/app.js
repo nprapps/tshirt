@@ -511,19 +511,6 @@ $(document).ready(function() {
             }
         });
 
-<<<<<<< HEAD
-        d3.tsv("data/cotton-exports.tsv", function(error, data) {
-            d3_cotton_exports_data = data;
-            d3_cotton_exports_data.forEach(function(d) {
-                d.year = d3.time.format('%Y').parse(d.year);
-            });
-            if (current_chapter == 'cotton') {
-                draw_cotton_exports_graph();
-            }
-        });
-
-=======
->>>>>>> 633fd46413e5042474e680604fac17ec52d1485d
         d3.csv("data/tshirt-phase.csv", function(error, data) {
             d3_tshirt_phase_data = data;
             d3_tshirt_phase_data.forEach(function(d) {
