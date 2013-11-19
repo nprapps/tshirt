@@ -98,10 +98,7 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                 <input type="hidden" name="x_invoice_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
                                 <input type="hidden" name="x_po_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
 
-
-                                {% if DEPLOYMENT_TARGET not in ['production', 'staging'] %}
                                 <input type="hidden" name="x_test_request" value="TRUE"></input>
-                                {% endif %}
 
                             </form>
                             <div class="form-group station">

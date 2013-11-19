@@ -27,6 +27,15 @@ app.logger.addHandler(file_handler)
 app.logger.setLevel(logging.INFO)
 
 
+@app.route('/%s/orders/' % app_config.PROJECT_SLUG, methods=['GET'])
+
+def order_list():
+    models.tshirt_db.connect()
+    context = make_context()
+    context['orders'] = models.Order.select()
+
+    return render_template('order_list.html', **context)
+
 @app.errorhandler(403)
 def card_not_authorized(e):
     return redirect('/%s/form/buy/?authorized=false' % app_config.PROJECT_SLUG, code=302)
