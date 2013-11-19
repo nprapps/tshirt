@@ -1,6 +1,9 @@
 {% if authorized %}
   {% if authorized == "false" %}
-    <h1>Your card was not authorized. Try it again?</h1>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Something went wrong</strong> We were unable to charge your card. Can we try it again?
+    </div>
   {% endif %}
 {% endif %}
 
