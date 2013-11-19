@@ -1,11 +1,5 @@
 {% extends '_base.html' %}
 
-{% block extra_css %}
-{% endblock extra_css %}
-
-{% block extra_head_js %}
-{% endblock extra_head_js %}
-
 {% block extra_head %}
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
 <script>
@@ -21,162 +15,21 @@
          timeout: 10000
      });
 </script>
-
-<!--[if lte IE 8]>
-<p style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; font-size: 50px; text-align: center; z-index: 1000;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to experience this story.</p>
-<![endif]-->
 {% endblock extra_head %}
 
 
 {% block outer_content %}
-
-
-<div id="top">
-
-    <section id="title" class="layer animated fadeIn">
-    	<div class="layer-media">
-    		
-    	
-			<div class="titlecard">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
-							<h1>{{ COPY.title.fullname }}</h1>
-							<h2>{{ COPY.title.chapter_subtitle }}</h2>
-							<button class="btn btn-play">{{ COPY.content.title_play_button_label }}</button>
-						</div><!-- /.col --> 
-					</div><!-- /.row -->
-				</div><!-- /.container -->
-			</div><!-- /.titlecard --> 
-			
-			<div class="video-wrapper">
-				    <div class="video-inner-wrapper">
-				        <iframe src="" id="video-title" width="400" height="225" frameborder="0"></iframe>
-				    </div>
-				    
-				    <div class="touch-title">
-		   				<img src="img/npr-logo.png" class="npr-logo" alt="npr-logo" >
-						<h2>{{ COPY.title.fullname }}</h2>
-						<h3>{{ COPY.title.chapter_subtitle }}</h3>
-					</div>
-				    
-				    <div class="index-nav">
-					<h4>Chapters</h4>
-					<ul>
-		        		<li class="nav-cotton"><p>{{ COPY.cotton.fullname }}</p></li>
-		                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
-		                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-		                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
-		                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
-		                <li class="nav-about"><p>{{ COPY.content.about_title }}</p></li>
-		        	</ul>
-			</div><!-- /.index-nav -->
-			</div><!-- /.video-wrapper --> 
-		</div> <!-- /.layer-media -->
-		
-    </section>
-
-    <section id="cotton" class="layer">
-
-        {% include '_chapter_cotton.html' %}
-
-        <div class="btn-next-chapter">
-            <!--<video class="footer-video" preload="metadata" autoplay="autoplay" loop="loop" muted="muted">
-                <source src="http://pd.npr.org/npr-mp4/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.mp4" type="video/mp4">
-                <source src="http://pd.npr.org/17354/npr-webm/npr/pmvid/2013/10/20131025_pmvid_cottonloop7.webm" type="video/webm">
-            </video> -->
-            <div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.machines.fullname }} <i class="arrow-right"></i> </h3>
-            </div>
-        </div><!-- /.btn-next-chapter -->
-        
-    </section>
-
-    <section id="machines" class="layer">
-
-        {% include '_chapter_machines.html' %}
-
-		<div class="btn-next-chapter">
-            <div class="next-chapter">
-            <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.people.fullname }} <i class="arrow-right"></i> </h3>
-            </div>
-		</div><!-- /.btn-next-chapter -->
-
-    </section>
-
-    <section id="people" class="layer">
-
-        {% include '_chapter_people.html' %}
-
-        <div class="btn-next-chapter">
-			<div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.boxes.fullname }} <i class="arrow-right"></i> </h3>
-			</div>
-        </div><!-- /.btn-next-chapter -->
-
-    </section>
-
-    <section id="boxes" class="layer">
-
-        {% include '_chapter_boxes.html' %}
-
-		<div class="btn-next-chapter">
-            <div class="next-chapter">
-                <h3 class="next-chapter-label"><em>Next Chapter</em> {{ COPY.you.fullname }} <i class="arrow-right"></i> </h3>
-            </div>
-		</div><!-- /.btn-next-chapter -->
-
-    </section>
-
-    <section id="you" class="layer">
-        {% include '_chapter_you.html' %}
-    </section>
-    
-    <section id="about" class="layer">
-        {% include '_chapter_about.html' %}
-    </section>
-</div>
-
-<nav id="chapter-nav" role="navigation">
-    <div class="nav-wrapper">
-        <div class="nav-upper-wrapper">
-            <h3 class="btn-chapter"><i class="ico-hamburger"></i> {{ COPY.content.nav_chapter_button_label }}</h3>
-            <h3 id="nav-chapter-title"></h3>
-			<div id="nav-chapter-title-prompt">
-				<h4></h4>
-				<h5><i class="ico-chevron"></i> Scroll to read <i class="ico-chevron"></i></h5>
-			</div>
-        </div>
-
-        <div class="nav-item-wrapper">
-            <ul id="nav-secondary">
-                <li class="nav-title"><i class="home"></i> {{ COPY.content.nav_home_button_label }} </li>
-                <li class="nav-about"><i class="about"></i> {{ COPY.content.about_title }}</li>
-                <li class="buy-shirt"><i class="buy"></i> Buy a T-shirt</li>
-            </ul>
-            <ul id="nav-primary">
-                <li class="nav-cotton"><p>{{ COPY.cotton.fullname }}</p></li>
-                <li class="nav-machines"><p>{{ COPY.machines.fullname }}</p></li>
-                <li class="nav-people"><p>{{ COPY.people.fullname }}</p></li>
-                <li class="nav-boxes"><p>{{ COPY.boxes.fullname }}</p></li>
-                <li class="nav-you"><p>{{ COPY.you.fullname }}</p></li>
-            </ul>
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <h1>Planet Money Makes A T-Shirt</h1>
         </div>
     </div>
-</nav>
-
+</div>
 {% endblock %}
 
 
 {% block extra_foot_js %}
-{{ JS.push('js/lib/signals.js') }}
-{{ JS.push('js/lib/hasher.js') }}
 {{ JS.push('js/lib/jquery.fitvids.js') }}
 {{ JS.push('js/lib/jquery.smooth-scroll.js') }}
-{{ JS.push('js/lib/froogaloop.js') }}
 {% endblock extra_foot_js %}
-
-{% block extra_foot %}
-<script src="js/lib/d3.v3.min.js"></script>
-{% endblock extra_foot %}
