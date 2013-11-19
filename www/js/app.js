@@ -24,7 +24,7 @@ $(document).ready(function() {
     var graphic_aspect_height = 6;
     var filmstrip_cotton_aspect_width = 720;
     var filmstrip_cotton_aspect_height = 528;
-    var chapters = [ 'title', 'cotton', 'machines', 'people', 'boxes', 'you', 'about', 'buy' ];
+    var chapters = [ 'title', 'cotton', 'machines', 'people', 'boxes', 'you', 'about' ];
     var nav_height = 74;
     var nav_height_open = 248;
     var small_nav_height = 54;
@@ -156,7 +156,7 @@ $(document).ready(function() {
 		var $btn_play = $chapter.find('.btn-play');
 		var $btn_explain = $chapter.find('.btn-explainer-prompt');
 
-    	if (chapter != 'about' && chapter != 'buy') {
+    	if (chapter != 'about') {
 			$btn_play.on('click', function() {
 				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
@@ -174,7 +174,7 @@ $(document).ready(function() {
 			$btn_explain.on('click', function() {
 				scroll_to_explainer();
 			});
-		} else { // about or buy
+		} else { // about
 		    // do something else?
 		}
 		
@@ -219,7 +219,7 @@ $(document).ready(function() {
 
         text_scrolled = false;
         
-        if (chapter != 'about' && chapter != 'buy') {
+        if (chapter != 'about') {
         	// add new video (if this is a chapter that has video
             var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             replace_iframe('video-' + chapter, video_path);
@@ -335,7 +335,7 @@ $(document).ready(function() {
 	        if (i == new_chapter_id) {
                 $b.addClass(this_chapter_class);
 
-                if (this_chapter_name != 'title' && this_chapter_name != 'about' && this_chapter_name != 'buy') {
+                if (this_chapter_name != 'title' && this_chapter_name != 'about') {
                     if (this_chapter_name == 'you'){ $nav_chapter_title.text(''); }
                     else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
