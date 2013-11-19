@@ -543,7 +543,7 @@ $(document).ready(function() {
         var height = ((bar_height + bar_gap) * num_bars);
         
         // clear out existing graphics
-        reset_charts();
+        reset_charts('apparel-wages');
 
         // remove placeholder table if it exists
         $d3_apparel_wages.find('table').remove();
@@ -624,7 +624,7 @@ $(document).ready(function() {
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
         // clear out existing graphics
-        reset_charts();
+        reset_charts('cotton-exports');
 
         // remove placeholder image if it exists
         $d3_cotton_exports.find('img').remove();
@@ -736,7 +736,7 @@ $(document).ready(function() {
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
         // clear out existing graphics
-        reset_charts();
+        reset_charts('tshirt-phase');
 
         // remove placeholder image if it exists
         $d3_tshirt_phase.find('img').remove();
@@ -864,18 +864,23 @@ $(document).ready(function() {
 	    }
     }
     
-    function reset_charts() {
+    function reset_charts(caller) {
         if (d3.select('#cotton-exports-d3').select('svg')[0][0] != null) {
             d3.select('#cotton-exports-d3').selectAll('svg').remove();
             d3.select('#cotton-exports-d3').selectAll('.key').remove();
         }
 
-        if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
-            d3.select('#apparel-wages-d3').selectAll('svg').remove();
+        if (caller != 'tshirt-phase') {
+        // ^ clumsy, but i'm trying to keep graphs on the same page from zeroing each other out
+            if (d3.select('#apparel-wages-d3').select('svg')[0][0] != null) {
+                d3.select('#apparel-wages-d3').selectAll('svg').remove();
+            }
         }
-
-        if (d3.select('#tshirt-phase-d3').select('svg')[0][0] != null) {
-            d3.select('#tshirt-phase-d3').selectAll('svg').remove();
+        
+        if (caller != 'apparel-wages') {
+            if (d3.select('#tshirt-phase-d3').select('svg')[0][0] != null) {
+                d3.select('#tshirt-phase-d3').selectAll('svg').remove();
+            }
         }
     }
 	
