@@ -335,14 +335,15 @@ $(document).ready(function() {
                 $b.addClass(this_chapter_class);
 
                 if (this_chapter_name != 'title' && this_chapter_name != 'about') {
-                    if (this_chapter_name == 'you'){ $nav_chapter_title.text(''); }
+                    if (this_chapter_name == 'you'){ $nav_chapter_title.html(''); }
                     else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
-                    $nav_chapter_title_prompt.find('h4').html(COPY[this_chapter_name]['nav_prompt']);
+                    $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
+                    console.log(COPY[this_chapter_name]['nav_prompt']);
                 } else {
-                    $nav_chapter_title.text('');
-                    $nav_chapter_title_prompt.text('');
+                    $nav_chapter_title.html('');
+                    $nav_chapter_title_prompt.find('h4').text('');
                 }
 
             } else {
@@ -777,7 +778,6 @@ $(document).ready(function() {
         on_resize();
         
         //add hash change listener
-        hasher.changed.add(goto_chapter);
         hasher.changed.add(goto_chapter);
         //add initialized listener (to grab initial value in case it is already set)
         hasher.initialized.add(goto_chapter);
