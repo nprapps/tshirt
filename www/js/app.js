@@ -522,6 +522,19 @@ $(document).ready(function() {
             }
         });
 
+/*
+        d3.csv("data/tshirt-phase.csv", function(error, data) {
+            d3_tshirt_phase_data = data;
+            d3_tshirt_phase_data.forEach(function(d) {
+                d.year = d3.time.format('%Y').parse(d.year);
+            });
+            if (current_chapter == 'people') {
+                console.log('draw_tshirt_phase_graph!'); 
+                draw_tshirt_phase_graph();
+            }
+        });
+*/
+
         d3.csv("data/tshirt-phase.csv", function(error, data) {
             d3_tshirt_phase_data = data;
             d3_tshirt_phase_data.forEach(function(d) {
@@ -730,8 +743,7 @@ $(document).ready(function() {
     }
     
     function draw_tshirt_phase_graph() {
-        console.log('draw_tshirt_phase_graph');
-        var margin = {top: 0, right: 15, bottom: 25, left: 50};
+        var margin = {top: 0, right: 15, bottom: 25, left: 35};
         var width = $d3_tshirt_phase.width() - margin.left - margin.right;
         var height = Math.ceil((width * graphic_aspect_height) / graphic_aspect_width) - margin.top - margin.bottom;
 
@@ -740,16 +752,14 @@ $(document).ready(function() {
 
         // remove placeholder image if it exists
         $d3_tshirt_phase.find('img').remove();
-
+        
         var x = d3.time.scale()
             .range([0, width]);
 
         var y = d3.scale.linear()
             .range([height, 0]);
-
-        var color = d3.scale.category10()
-            .domain(d3.keys(d3_tshirt_phase_data[0]).filter(function(key) { return key !== 'year'; }));
-        // more: https://github.com/mbostock/d3/wiki/Ordinal-Scales#wiki-category10
+            
+        var formatAsPercentage = d3.formatPrefix('%',0);
 
         var xAxis = d3.svg.axis()
             .scale(x)
@@ -760,59 +770,59 @@ $(document).ready(function() {
 
         var yAxis = d3.svg.axis()
             .scale(y)
-            .orient("left");
+            .orient('left')
+            .tickFormat(function(d, i) {
+                return d + '%';
+            });
         
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-            .defined(function(d) { console.log(d.exports); return (d.exports != null && d.exports != 0); })
             .interpolate('monotone')
             .x(function(d) { return x(d.year); })
-            .y(function(d) { return y(d.exports); });
+            .y(function(d) { return y(d.count); });
         
+        // parse data into columns
+        var lines = {};
+        for (var column in d3_tshirt_phase_data[0]) {
+            if (column == 'year') continue;
+            lines[column] = d3_tshirt_phase_data.map(function(d) {
+                return { 'year': d.year, 'count': d[column] };
+            }).filter(function(d) {
+                return d.count.length;
+            });
+        }
+
         var legend = d3.select('#tshirt-phase-d3').append('ul')
                 .attr('class', 'key')
             .selectAll('g')
-                .data(color.domain().slice())
+                .data(d3.entries(lines))
             .enter().append('li')
-                .attr('class', function(d, i) { return 'key-item key-' + i; });
-
-        legend.append('b')
-            .style('background-color', color);
-
+                .attr('class', function(d, i) { return 'key-item key-' + i + ' ' + d.key.replace(' ', '-').toLowerCase(); });
+        legend.append('b');
         legend.append('label')
-            .text(function(d) { return d; });
-
+            .text(function(d) { 
+                return d.key;
+            });
+        
         var svg = d3.select('#tshirt-phase-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             
-        var countries = color.domain().map(function(country) {
-            return {
-                country: country,
-                values: d3_tshirt_phase_data.map(function(d) {
-                    return {
-                        year: d.year, 
-                        exports: +d[country]
-                    };
-                })
-            };
-        });
-
         x.domain(d3.extent(d3_tshirt_phase_data, function(d) { return d.year; }));
 
         y.domain([
-            d3.min(countries, function(c) { return d3.min(c.values, function(v) { return v.exports; }); }),
-            d3.max(countries, function(c) { return d3.max(c.values, function(v) { return v.exports; }); })
+            d3.min(d3.entries(lines), function(c) { return d3.min(c.value, function(v) { return v.count; }); }),
+            d3.max(d3.entries(lines), function(c) { return d3.max(c.value, function(v) { return v.count; }); })
         ]);
 
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')')
             .call(xAxis);
-
+        
         svg.append('g')
             .attr('class', 'y axis')
             .call(yAxis);
@@ -832,17 +842,18 @@ $(document).ready(function() {
                 .tickFormat('')
             );
 
-        var country = svg.selectAll('.country')
-            .data(countries)
-            .enter().append('g')
-            .attr('class', 'country');
-
-        country.append('path')
-            .attr('class', 'line')
-            .attr('d', function(d) { return line(d.values); })
-            .style('stroke', function(d) { return color(d.country); });
+        svg.append('g').selectAll('path')
+            .data(d3.entries(lines))
+            .enter()
+            .append('path')
+                .attr('class', function(d, i) {
+                    return 'line line-' + i + ' ' + d.key.replace(' ', '-').toLowerCase();
+                })
+                .attr('d', function(d) {
+                    return line(d.value);
+                });
     }
-    
+
     function draw_charts() {
         // only draw charts for:
         // 1) the current chapter 
@@ -880,6 +891,7 @@ $(document).ready(function() {
         if (caller != 'apparel-wages') {
             if (d3.select('#tshirt-phase-d3').select('svg')[0][0] != null) {
                 d3.select('#tshirt-phase-d3').selectAll('svg').remove();
+                d3.select('#tshirt-phase-d3').selectAll('.key').remove();
             }
         }
     }
