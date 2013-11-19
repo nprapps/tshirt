@@ -1,7 +1,0 @@
-<ul>{% for order in orders %}
-    <li>
-        <ul>{% for item in order.__dict__['_data'] %}
-            <li>{{ item }}: {{ order[item] }}</li>
-        {% endfor %}</ul>
-    </li>
-{% endfor %}</ul>
