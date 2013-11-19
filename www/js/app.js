@@ -340,7 +340,7 @@ $(document).ready(function() {
                     else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
-                    $nav_chapter_title_prompt.find('h3').html(COPY[this_chapter_name]['nav_prompt']);
+                    $nav_chapter_title_prompt.find('h4').html(COPY[this_chapter_name]['nav_prompt']);
                 } else {
                     $nav_chapter_title.text('');
                     $nav_chapter_title_prompt.text('');
@@ -432,7 +432,7 @@ $(document).ready(function() {
         });
     }
 
-    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
+    $nav_chapter_title_prompt.find('h4').on('click', scroll_to_explainer);
 
     function scroll_to_top() {
         var scroll_target = '#' + current_chapter;
