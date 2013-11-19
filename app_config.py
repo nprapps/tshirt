@@ -34,12 +34,11 @@ DEPLOYMENT
 PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
 STAGING_S3_BUCKETS = ['stage-apps.npr.org']
 
-PRODUCTION_SERVERS = ['54.214.41.128']
-STAGING_SERVERS = ['54.214.41.128']
-# STAGING_SERVERS = ['50.112.92.131']
+PRODUCTION_SERVERS = ['54.245.114.14']
+STAGING_SERVERS = ['50.112.92.131']
 
 # Should code be deployed to the web/cron servers?
-DEPLOY_TO_SERVERS = True
+DEPLOY_TO_SERVERS = False
 
 SERVER_USER = 'ubuntu'
 SERVER_PYTHON = 'python2.7'
@@ -53,7 +52,7 @@ DEPLOY_CRONTAB = False
 
 # Should the service configurations be installed on the servers?
 # If True, DEPLOY_TO_SERVERS must also be True
-DEPLOY_SERVICES = True
+DEPLOY_SERVICES = False
 
 UWSGI_SOCKET_PATH = '/tmp/%s.uwsgi.sock' % PROJECT_FILENAME
 UWSGI_LOG_PATH = '/var/log/%s.uwsgi.log' % PROJECT_FILENAME
@@ -127,14 +126,7 @@ def get_secrets():
     """
     A method for accessing our secrets.
     """
-    secrets = [
-        'gge4_x_login',
-        'gge4_transaction_key',
-        'gge4_response_key',
-        'tshirt_psql_user',
-        'tshirt_psql_pass',
-        'tshirt_psql_host',
-    ]
+    secrets = ['EXAMPLE',]
 
     secrets_dict = {}
 
