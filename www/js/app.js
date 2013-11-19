@@ -111,15 +111,6 @@ $(document).ready(function() {
 	     // resize the cotton filmstrip
 	     size_filmstrip();
 
-		 /* if (is_touch){
-            $nav.removeAttr('data-spy').removeClass('affix');
-        } else {
-            $nav.attr('data-spy', 'affix');
-            
-            $nav.attr('data-offset-top', (window_height - nav_height));
-        }
-        */
-        
         // redraw the charts
         draw_charts();
     }
