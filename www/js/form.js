@@ -133,4 +133,6 @@ $(function(){
   $('#t-shirt-submit').on('click', on_form_submit);
   $('#duplicate-fields').on('click', on_duplicate_fields);
 
+  setTimeout(function(){ location.reload(); }, 840000);
+
 });

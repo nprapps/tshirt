@@ -1,6 +1,9 @@
 {% if authorized %}
   {% if authorized == "false" %}
-    <h1>Your card was not authorized. Try it again?</h1>
+    <div class="alert alert-warning alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Something went wrong</strong> We were unable to charge your card. Can we try it again?
+    </div>
   {% endif %}
 {% endif %}
 
@@ -98,10 +101,7 @@ The Travels of a T-Shirt in the Global Economy: An Economist Examines the Market
                                 <input type="hidden" name="x_invoice_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
                                 <input type="hidden" name="x_po_num" value="{{ x_fp_timestamp }}*{{ x_fp_sequence }}"></input>
 
-
-                                {% if DEPLOYMENT_TARGET not in ['production', 'staging'] %}
                                 <input type="hidden" name="x_test_request" value="TRUE"></input>
-                                {% endif %}
 
                             </form>
                             <div class="form-group station">

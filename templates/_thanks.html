@@ -1,2 +1,5 @@
 <h3>Thanks!</h3>
-{{ order }}
+
+<ul>{% for item in order.__dict__['_data'] %}
+    <li>order.{{ item }}: {{ order[item] }}</li>
+{% endfor %}</ul>
