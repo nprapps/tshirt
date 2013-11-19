@@ -252,9 +252,13 @@ $(document).ready(function() {
                     console.log('video finished');
                     if (chapter == 'title') {
                         hasher.setHash(chapters[1]);
+                    } else {
+                        // restore the title card
+                        $('section.show').removeClass('video-playing').addClass('video-loaded');
+
+                        // reset so that the autoscroll will work if the video is played again
+                        text_scrolled = false;
                     }
-                    // reset so that the autoscroll will work if the video is played again
-                    text_scrolled = false;
                 });
         
                 if (autoplay_video && !is_touch) {
