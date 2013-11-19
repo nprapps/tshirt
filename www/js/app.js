@@ -340,7 +340,7 @@ $(document).ready(function() {
                     else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
-                    $nav_chapter_title_prompt.find('h3').html(COPY[this_chapter_name]['nav_prompt']);
+                    $nav_chapter_title_prompt.find('h4').html(COPY[this_chapter_name]['nav_prompt']);
                 } else {
                     $nav_chapter_title.text('');
                     $nav_chapter_title_prompt.text('');
@@ -432,7 +432,7 @@ $(document).ready(function() {
         });
     }
 
-    $nav_chapter_title_prompt.on('click', scroll_to_explainer);
+    $nav_chapter_title_prompt.find('h4').on('click', scroll_to_explainer);
 
     function scroll_to_top() {
         var scroll_target = '#' + current_chapter;
@@ -440,9 +440,9 @@ $(document).ready(function() {
         $.smoothScroll({
         	speed: 10,
             scrollTarget: scroll_target,
-            afterScroll: function() {
+            /*afterScroll: function() {
 				console.log('after scroll');
-			}
+			}*/
         });
     }
 
@@ -765,8 +765,8 @@ $(document).ready(function() {
         var y_axis_grid = function() { return yAxis; }
         
         var line = d3.svg.line()
-            .interpolate('basis')
-            .defined(function(d) { return d.exports != null; })
+            .defined(function(d) { console.log(d.exports); return (d.exports != null && d.exports != 0); })
+            .interpolate('monotone')
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.exports); });
         
