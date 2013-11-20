@@ -547,6 +547,35 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     .touch & { display: none; }
 }
 
+.filmstrip1-outer-wrapper {
+            width: 100%;
+            margin-bottom: 1em;
+
+            .filmstrip1-wrapper {
+                width: 720px;
+                height: 528px;
+            }
+
+            .filmstrip1 {
+                width: 100%;
+                height: 100%;
+                background-size: 100% 2500%;
+                background-image: url('@{img-root}/filmstrip-cotton-archive-480.jpg');
+                @media @screen-small-above { 
+                    background-image: url('@{img-root}/filmstrip-cotton-archive.jpg');
+                }
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+                backface-visibility: hidden;
+
+                &.animated {
+                    -webkit-animation: filmstrip 4s infinite;
+                    -moz-animation: filmstrip 4s infinite;
+                    animation: filmstrip 4s infinite;
+                }
+            }
+        }
+
 // Explainer text
 .explainer {
 	background-color: #fff;
@@ -1241,6 +1270,8 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 //titlecard
 .title-video {
 	opacity: .5;
+	
+	
 }
 
 .titlecard {

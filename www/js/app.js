@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
     // cached objects
     var $b = $('body');
@@ -32,10 +34,15 @@ $(document).ready(function() {
     var video_advance_cuepoint = 5;
     
     // status vars
+    Modernizr.addTest('firefox', function () {
+	 return !!navigator.userAgent.match(/firefox/i);
+	});
+    
     var autoplay_video = false;
     var current_chapter_id = 0;
     var current_chapter = chapters[current_chapter_id];
     var is_touch = Modernizr.touch;
+    var is_firefox = Modernizr.firefox;
     var supports_html5_video = Modernizr.video;
     var text_scrolled = false;
     var window_width;
@@ -51,7 +58,8 @@ $(document).ready(function() {
     var screen_small = 768;
     var screen_medium = 992;
     var screen_large = 1200;
-
+    
+    
 
     function on_resize() {
         var w;
@@ -167,20 +175,25 @@ $(document).ready(function() {
 		    // do something else?
 		}
 		
-		// append titlecard videos, where applicable
-        if (COPY[chapter] != undefined) {
-            if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
-                var video_tag = '';
-        
-                video_tag += '<video class="title-video" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="metadata" autoplay="autoplay" muted="muted">';
-                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
-                video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
-                video_tag += '</video>';
+		//firefox check
+        if (!is_firefox){
             
-                $chapter.find('.layer-media').prepend(video_tag);
-                $chapter.find('.title-video').get(0).pause();
-            }
+            // append titlecard videos, where applicable poster="' + COPY[chapter]['loop_video_poster'] + '"
+	        if (COPY[chapter] != undefined) {
+	            if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
+	                var video_tag = '';
+	        
+	                video_tag += '<video class="title-video" preload="auto" loop="">';
+	                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
+	                video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
+	                video_tag += '</video>';
+	            
+	                $chapter.find('.layer-media').prepend(video_tag);
+	                $chapter.find('.title-video').get(0).pause();
+	            }
+	        }
         }
+		
     }
     
     function replace_iframe(video, url) {
@@ -221,6 +234,12 @@ $(document).ready(function() {
             $player.addEvent('ready', function() {
                 console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
+                
+                // pause looping video when vimeo plays
+                
+                $player.addEvent('play', function() {
+	                $('section.show').find('.title-video')[0].pause();
+                });
             
                 // check play progress
                 if (chapter != 'title') {
@@ -246,6 +265,8 @@ $(document).ready(function() {
                     } else {
                         // restore the title card
                         $('section.show').removeClass('video-playing').addClass('video-loaded');
+    	                $('section.show').find('.title-video')[0].play();
+
 
                         // reset so that the autoscroll will work if the video is played again
                         text_scrolled = false;
@@ -275,6 +296,7 @@ $(document).ready(function() {
 
                 // restore the title card
                 $('section.show').removeClass('video-playing').addClass('video-loaded');
+                $('section.show').find('.title-video')[0].play();
             } else {
                 // otherwise, proceed
                 hasher.setHash(chapters[id]);
@@ -790,11 +812,6 @@ $(document).ready(function() {
         hasher.initialized.add(goto_chapter);
         //initialize hasher (start listening for history changes)
         hasher.init();
-        
-        //initialize waypoint
-        if (!is_touch){
-            
-        }
         
     }
     setup();
