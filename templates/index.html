@@ -1,5 +1,8 @@
 {% extends '_base.html' %}
 
+{% block extra_head_js %}
+{% endblock extra_head_js %}
+
 {% block extra_head %}
 <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.10/webfont.js"></script>
 <script>
@@ -23,36 +26,36 @@
     <div class="row title">
         <div class="col-sm-10 col-sm-offset-1">
             <h1>Planet Money<br />Makes A T-Shirt</h1>
-            <h2>Coming December 2</h2>
-        </div>
-    </div>
-    <div class="row triptych">
-        <h2>Do You Have A Planet Money T-Shirt?</h2>
-
-        <div class="col-md-2 col-md-offset-3">
-            <img src="img/about-container-eric.jpg" alt="" />
-            <p>Andrew: Homebrews his own beer. #seedtoshirt</p>
-        </div>
-        <div class="col-md-2">
-            <img src="img/about-cotton-jess.jpg" alt="" />
-            <p>Rebecca: Runs five triathlons a year. #seedtoshirt</p>
-        </div>
-        <div class="col-md-2">
-            <img src="img/about-bangladesh-gopro.jpg" alt="" />
-            <p>Lee: Thinks breakfast is the best meal of the day. #seedtoshirt</p>
         </div>
     </div>
     <div class="row seedtoselfie">
-        <div class="col-sm-6 col-sm-offset-3">
-            <p>We'd like to get to know a little about YOU &mdash; the people who chipped in, spread the word and made this project possible. Join in:</p>
-            <p>1) Take a photo of yourself wearing your Planet Money T-shirt.</p>
-            <p>2) Share your photo on Twitter or Instagram, with your name and an interesting fact about yourself as the caption / tweet. (Keep it clean.) Tag it #seedtoshirt.</p>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="row triptych">
+                <div class="col-sm-4">
+                    <img src="http://31.media.tumblr.com/1768553049f79ef1ad06ad2af00b17e3/tumblr_mse9f2ifdz1roz3d6o1_1280.jpg" alt="" />
+                    <p>Lily: Commutes by bicycle. #seedtoshirt</p>
+                </div>
+                <div class="col-sm-4 hidden-xs">
+                    <img src="http://24.media.tumblr.com/871eb661dd09485874fec489d8bfe649/tumblr_mudlwur3Ql1roz3d6o1_1280.jpg" alt="" />
+                    <p>Rebecca: Runs five triathlons a year. #seedtoshirt</p>
+                </div>
+                <div class="col-sm-4 hidden-xs">
+                    <img src="http://31.media.tumblr.com/34ba84e93056d483968647015a8c9f8d/tumblr_msdy59uTkw1sfx63fo1_1280.jpg" alt="" />
+                    <p>Lee: Thinks breakfast is the best meal of the day. #seedtoshirt</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Seed To Selfie</h2>
+            <p>Take a photo of yourself wearing your Planet Money T-shirt. Share it on Instagram, with your name and an interesting fact about yourself. <strong>Tag it #seedtoshirt.</strong></p>
         </div>
     </div>
     <div class="row video">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-sm-8 col-sm-offset-2">
             <h2>Watch The Trailer</h2>
-            <iframe width="600" height="338" src="http://www.npr.org/templates/event/embeddedVideo.php?storyId=245218626&mediaId=245220685" frameborder="0" scrolling="no"></iframe>
+            <div class="video-container">
+                <iframe width="600" height="338" src="http://www.npr.org/templates/event/embeddedVideo.php?storyId=245218626&mediaId=245220685" frameborder="0" scrolling="no"></iframe>
+            </div>
             <p>Beginning <strong>Monday, December 2</strong>, we will tell the story of our shirt's creation &mdash; here and on NPR's <em>Morning Edition</em> and <em>All Things Considered</em>.</p>
         </div>
     </div>
@@ -62,5 +65,4 @@
 
 {% block extra_foot_js %}
 {{ JS.push('js/lib/jquery.fitvids.js') }}
-{{ JS.push('js/lib/jquery.smooth-scroll.js') }}
 {% endblock extra_foot_js %}

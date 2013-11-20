@@ -38,6 +38,9 @@ body { background-color: #fff; }
 
 
 // Content
+#content {
+    padding: 0 15px;
+}
 img { 
     max-width: 100%;
     height: auto;
@@ -48,39 +51,60 @@ img {
     padding-top: 33px;
     padding-bottom: 33px;
     
+    h2 {
+        text-transform: uppercase;
+        margin: 0 0 22px 0;
+        font-weight: bold;
+        font-size: 24px;
+        text-align: left;
+        
+        @media @screen-medium-above { font-size: 36px; }
+        @media @screen-tiny-above { text-align: center; }
+    }
+    p { 
+        margin: 0 0 22px 0;
+        font-size: 18px;
+        text-align: left;
+
+        @media @screen-medium-above { font-size: 20px; }
+        @media @screen-tiny-above { text-align: center; }
+    }
+
     &.title {
 //        background: #222 url('../img/you-title.jpg') no-repeat;
         background: #333;
         background-size: cover;
         background-position: 50% 50%;
+
+        @media @screen-medium-above { padding-top: 66px; }
         
         h1 {
             font-weight: bold;
-            font-size: 64px;
-            margin: 66px 0 22px 0;
+            margin: 0;
             text-transform: uppercase;
             color: #fff;
             text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
-        }
-        h2 {
-            margin: 0;
             font-size: 24px;
-            color: #fff;
-            text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+            
+            @media @screen-medium-above { font-size: 64px; }
+            @media @screen-medium { font-size: 56px; }
+            @media @screen-small { font-size: 32px; }
+            @media @screen-tiny { font-size: 24px; }
         }
     }
     
+    &.seedtoselfie {
+        background-color: #e2e2e2;
+    }
+
     &.triptych {
         border-bottom: none;
-        padding-bottom: 0;
-        background-color: #f5f5f5;
+        padding-top: 0;
+        background-color: #e2e2e2;
         
-        img { display: block; }
-        h2 {
-            text-transform: uppercase;
-            margin: 0 0 22px 0;
-            font-weight: bold;
-            font-size: 28px;
+        img { 
+            display: block;
+            margin: 0 auto;
         }
         p {
             margin: 5px 0 0 0;
@@ -90,18 +114,13 @@ img {
         }
     }
 
-    &.seedtoselfie {
-        padding-top: 0;
+    &.video {
         background-color: #f5f5f5;
     }
-    &.video {
-        h2 {
-            text-transform: uppercase;
-            margin: 0 0 22px 0;
-            font-weight: bold;
-            font-size: 28px;
-        }
-    }
+}
+
+.video-container {
+    margin-bottom: 22px;
 }
 
 
