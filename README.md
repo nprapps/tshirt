@@ -26,7 +26,9 @@ tshirt
 What is this?
 -------------
 
-**Describe tshirt here.**
+This branch -- **landing-page** -- is for the placeholder page that will appear on our t-shirt site before the full application launches. It announces the launch date, asks our Kickstarter backers (and t-shirt purchasers) to send us photos and features the project trailer.
+
+**DO NOT** merge it with "master." I presume bad things will happen.
 
 Assumptions
 -----------
