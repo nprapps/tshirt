@@ -104,12 +104,15 @@ section { background-color: #fff; }
 }
 
 //navigation
-.backer,
-nav .nav-item-wrapper.backer,
+.backer, 
 .video-wrapper.backer {
 	@media @screen-small-above { 
     	display: block;
     }
+}
+
+nav .nav-item-wrapper.backer {
+	display: block;
 }
 
 //touch navigation
@@ -147,17 +150,6 @@ nav {
 	.nav-item-wrapper { 
 	    display: none;
 	    position: relative;
-	}
-	
-	@media @screen-medium {
-	    .container.explainer-prompt { 
-	        max-width: none;
-	        margin-left: 112px;
-	        
-	        .col-md-10 {
-	            .clearfix();
-	        }
-	    }
 	}
 	
 	h3 {
@@ -228,6 +220,9 @@ nav {
 			color: #ddd;
 			max-width: 800px;
 			margin: 0 auto;
+			display: none;
+			
+			@media @screen-small-above {display: block;}
 			
 			&:hover {
 				color: #fff;
@@ -240,7 +235,8 @@ nav {
 			color: #ccc;
 			text-transform: uppercase;
 			max-width: 200px;
-			margin: 0 auto;
+			margin: 20px auto 0 auto;
+			@media @screen-small-above {margin-top: 0;}
 			display: none;
 			.chapter-cotton & {display: block;}
 			.chapter-machines & {display: block;}
@@ -283,10 +279,14 @@ nav {
 	        }
 	        
 	        > li {
+	        	float: left;
+	        	font-size: 11px;
+	        	margin-right: 12px;
+	        	.touch & {float: none; font-size: 12px; margin-right: 0;}
 	            @media @screen-small-above {
 	            	padding-top: 0;
 		            display: inline-block;
-		            margin-right: 12px;
+		            
 		            margin-bottom: 0;
 		            line-height: @nav-height-desktop;
 		        }
@@ -1603,7 +1603,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			
 	}
 	
-	
     
     .chapter-title .titlecard {
         display: block;
@@ -1621,7 +1620,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     
     .chapter-title .layer-media {height: 100%;}
     
-    .explainer {padding-top: 0;}
+    .chapter-about .explainer {padding-top: 50px;}
+    
+    .explainer {
+    	padding-top: 0;
+    }
     .explainer h2, .explainer h3 {margin: 15px 0 0 0;}
 	
 	#title {
@@ -1639,7 +1642,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			
 			.video-inner-wrapper {
 				border: 2px solid #333;
-				
 			}
 				
 		}
@@ -1740,12 +1742,4 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		}
 	  
 	}
-}// more touch
-
-@media @screen-medium {
-	
-}//992
-
-@media @screen-large {
-
-}//1200
+}// touch
