@@ -25,6 +25,7 @@
 // General styles
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Gotham SSm", helvetica, arial, sans-serif;
+	text-align: center;
 }
 a { color: #51A09E; }
 a:hover, a:focus { 
@@ -33,23 +34,73 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
-
 body { background-color: #fff; }
-section { background-color: #fff; }
 
-//navigation
-.backer,
-nav .nav-item-wrapper.backer,
-.video-wrapper.backer {
-	@media @screen-small-above { 
-    	display: block;
-    }
+
+// Content
+img { 
+    max-width: 100%;
+    height: auto;
 }
+.row {
+    background-color: #fff;
+    border-bottom: 2px solid #fff;
+    padding-top: 33px;
+    padding-bottom: 33px;
+    
+    &.title {
+        background: #222 url('../img/you-title.jpg') no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+        
+        h1 {
+            font-weight: bold;
+            font-size: 64px;
+            margin: 66px 0 22px 0;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+        }
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+        }
+    }
+    
+    &.triptych {
+        border-bottom: none;
+        padding-bottom: 0;
+        background-color: #f5f5f5;
+        
+        img { display: block; }
+        h2 {
+            text-transform: uppercase;
+            margin: 0 0 22px 0;
+            font-weight: bold;
+            font-size: 28px;
+        }
+        p {
+            margin: 5px 0 0 0;
+            color: #555;
+            font-size: 12px;
+            font-style: italics;
+        }
+    }
 
-//touch navigation
-.touch .backer,
-.touch nav .nav-item-wrapper.backer {
-	display: block;
+    &.seedtoselfie {
+        padding-top: 0;
+        background-color: #f5f5f5;
+    }
+    &.video {
+        h2 {
+            text-transform: uppercase;
+            margin: 0 0 22px 0;
+            font-weight: bold;
+            font-size: 28px;
+        }
+    }
 }
 
 
