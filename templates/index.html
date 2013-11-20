@@ -26,16 +26,20 @@
     <div class="row title">
         <div class="col-sm-10 col-sm-offset-1">
             <h1>Planet Money<br />Makes A T-Shirt</h1>
+            <p>
+                On <strong>Monday, December 2</strong>, we will tell the story of our shirt's creation. 
+                <nobr>In the meantime:</nobr>
+            </p>
         </div>
     </div>
     <div class="row seedtoselfie">
         <div class="col-md-10 col-md-offset-1">
             <div class="row triptych">
-                <div class="col-sm-4">
-                    <img src="img/selfie1-480.jpg" alt="" />
-                    <p>Lily: Commutes by bicycle. #seedtoshirt</p>
-                </div>
                 <div class="col-sm-4 hidden-xs">
+                    <img src="img/selfie1-480.jpg" alt="" />
+                    <p>Danny: Commutes by bicycle. #seedtoshirt</p>
+                </div>
+                <div class="col-sm-4">
                     <img src="img/selfie2-480.jpg" alt="" />
                     <p>Rebecca: Runs five triathlons a year. #seedtoshirt</p>
                 </div>
@@ -56,13 +60,30 @@
             <div class="video-container">
                 <iframe width="600" height="338" src="http://www.npr.org/templates/event/embeddedVideo.php?storyId=245218626&mediaId=245220685" frameborder="0" scrolling="no"></iframe>
             </div>
-            <p>Beginning <strong>Monday, December 2</strong>, we will tell the story of our shirt's creation &mdash; here and on NPR's <em>Morning Edition</em> and <em>All Things Considered</em>.</p>
+            <p>Starting <strong>Monday, December 2</strong>, we will tell our story here, on the <a href="http://www.npr.org/blogs/money/">Planet Money blog</a> and on NPR's <em>Morning Edition</em> and <em>All Things Considered</em>.</p>
+        </div>
+    </div>
+    <div class="row about">
+        <div class="col-sm-8 col-sm-offset-2">
+            <h2>About This Project</h2>
+            <p>The simplest shirt is touched by people and machines all over the planet &mdash; from highly paid researchers in seed laboratories to factory workers who earn a few dollars a day.</p>
+            <p>The Planet Money team <a href="http://seedtoshirt.tumblr.com">traveled the world</a> to report this story. <a href="http://www.npr.org/templates/archives/archive.php?thingId=190719989">Here are the stories we've done so far.</a></p>
         </div>
     </div>
 </div>
+
+<footer>
+    <ul class="list-inline">
+        <li>&copy; 2013 NPR</li>
+        <li><a href="http://help.npr.org/npr/includes/customer/npr/custforms/contactus.aspx">Contact</a></li>
+        <li><a href="http://www.npr.org/about-npr/179876898/terms-of-use">Terms of Use</a></li>
+        <li><a href="http://www.npr.org/about-npr/179878450/privacy-policy">Privacy</a></li>
+    </ul>
+</div>
+</footer>
 {% endblock %}
 
 
 {% block extra_foot_js %}
 {{ JS.push('js/lib/jquery.fitvids.js') }}
-{% endblock extra_foot_js %}
+{% endblock extra_foot_js %} 
