@@ -608,12 +608,14 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     	font-size: 17px;
     	line-height: 1.1;
     	font-weight: bold;
+
         @media @screen-small-above {
         	font-size: 36px;
 	        font-weight: 700;
-	        margin-bottom: 1em;
+	        margin-bottom: .75em;
 	        line-height: 1.5;
 	        color: #121212;
+	        padding-bottom: 0;
         }
         
     }
@@ -652,7 +654,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	    	margin: 0 0 1.5em 0;
 	        font-size: 20px;
     	}
-        
+    	
+    	&.promo-link {
+    	    font-size: 14px;
+    	    font-weight: bold;
+    	    border-left: 4px solid #e2e2e2;
+    	    padding-left: 15px;
+    	    margin-bottom: 2em;
+    	    
+    	    a { padding-left: 6px; }
+    	}
     }
     
     dt {
