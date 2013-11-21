@@ -115,7 +115,6 @@ nav {
 	}
 	width: 100%;
 	background: #000;
-	@media @screen-small-above { background: rgba(0,0,0,.8); }
 	color: #fff;
 	display: block;
 	z-index: 100;
@@ -299,14 +298,8 @@ nav {
 	        clear: both;
 	        
         	> li {
-	            &:hover {
-	                cursor: pointer;
-	                
-	            }
-				
-				p {
-					text-transform: uppercase;
-				}
+	            &:hover { cursor: pointer; }
+				p { text-transform: uppercase; }
 	        }
 	        
 	        @media @screen-small-above {
@@ -325,7 +318,6 @@ nav {
 		            border-left: 2px solid #000;
 		            height: 100px;
 		            
-		            
 		            &:first-child { border-left: none; }
 		            &:hover { cursor: pointer; }
 					
@@ -337,18 +329,14 @@ nav {
 		        }
 	        }
 	        
-	        
-	        @media @screen-large-above {
-				li {
+	        li {
+                @media @screen-large-above {
 					border-left: 20px solid #000;
 					background-position: 0 0;
-					}
-			}
-			
-			@media @screen-mega-above {
-				li {
+				}
+                @media @screen-mega-above {
 					border-left: 40px solid #000;
-					}
+				}
 			}
 	    }
 	}
@@ -397,26 +385,11 @@ nav {
 
 // Chapter navigation thumbnails
 @media @screen-small-above {
-
-	.nav-cotton {
-			background: url('@{img-root}/plants-thumb.jpg');
-		}
-		
-		.nav-machines {
-			background: url('@{img-root}/robots-thumb.jpg');
-		}
-		
-		.nav-people {
-			background: url('@{img-root}/humans-thumb.jpg');
-		}
-		
-		.nav-boxes {
-			background: url('@{img-root}/ship-thumb.jpg');
-		}
-		
-		.nav-you {
-			background: url('@{img-root}/you-thumb.jpg');
-		}
+	.nav-cotton   { background: url('@{img-root}/plants-thumb.jpg'); }
+	.nav-machines { background: url('@{img-root}/robots-thumb.jpg'); }
+	.nav-people   { background: url('@{img-root}/humans-thumb.jpg'); }
+	.nav-boxes    { background: url('@{img-root}/ship-thumb.jpg'); }
+	.nav-you      { background: url('@{img-root}/you-thumb.jpg'); }
 }
 
 .home {
