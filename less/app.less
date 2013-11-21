@@ -166,8 +166,7 @@ nav {
 	        float: left;
 	        font-weight: bold;
 	        text-transform: uppercase;
-	        
-	        display: none;
+	        visibility: hidden;
 
 	        @media @screen-small-above { 
 				position: absolute;
@@ -175,12 +174,16 @@ nav {
 				top: 0;
 				line-height: @nav-height-desktop;
 
-				&.waypoint-show { display: block; }
+				body.scrolling & { 
+				    visibility: visible;
+                    .animation-fill-mode(both);
+                    .animation-duration(1s);
+                    .animation-name(fadeIn);
+				}
+				body.scrolling-off & { visibility: hidden; }
 			}
 	    }
-		
-	    
-	
+
 	    &:hover {
 	        cursor: pointer;
 	        opacity: 1;
@@ -188,13 +191,20 @@ nav {
 	}
 	
 	#nav-chapter-title-prompt {
-		&.waypoint-hide {display: none;}
-		
 		top: 0;
 		left: 0;
 		width: 100%;
 		text-align: center;
+		visibility: hidden;
 		
+	    body.scrolling & { visibility: hidden; }
+	    body.scrolling-off & {
+            visibility: visible;
+            .animation-fill-mode(both);
+            .animation-duration(1s);
+            .animation-name(fadeIn);
+	    }
+
 		h4 {
 			padding: 18px 0 8px 0;
 			line-height: 1;

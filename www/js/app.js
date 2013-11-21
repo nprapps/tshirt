@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     // cached objects
     var $b = $('body');
@@ -59,8 +57,7 @@ $(document).ready(function() {
     var screen_small = 768;
     var screen_medium = 992;
     var screen_large = 1200;
-    
-    
+
 
     function on_resize() {
         var w;
@@ -123,49 +120,6 @@ $(document).ready(function() {
         // redraw the charts
         draw_charts();
     }
-    
-	/*
-
-    $(window).bind("scrollstop", function() {
-    	console.log('scrollstop!');
-
-       	var c = $('#cotton .explainer');
-        console.log('viewport: ' + c.is(':within-viewport'));
-
-    	if (c.is(':within-viewport')) {
-    		console.log('wv triggered');
-	    	$nav_chapter_title_prompt.addClass('waypoint-hide');
-            $nav_chapter_title.addClass('waypoint-show animated fadeIn');
-    	}
-	});
-	*/
-   
-    function setup_waypoint_explainer(chapter) {
-    	console.log("setup_waypoint_explainer: " + chapter);
-        $('#' + chapter + ' .explainer').waypoint(function(direction) {
-            if (direction == 'down') {
-                console.log(chapter + ' waypoint down');
-                $nav_chapter_title_prompt.addClass('waypoint-hide');
-                $nav_chapter_title.addClass('waypoint-show animated fadeIn');
-            } else {
-                console.log(chapter + ' waypoint up?');
-                $nav_chapter_title_prompt.removeClass('waypoint-hide');
-                $nav_chapter_title.removeClass('waypoint-show animated fadeIn');
-            }
-        }, { offset: '85%' } );
-    }
-    
-    /*
-    function goodbye_waypoint() {
-    	console.log('goodbye');
-	    $('#' + current_chapter + ' .explainer').waypoint('disable');
-    }
-    
-    function hello_waypoint() {
-    	console.log('hello');
-	    $('#' + current_chapter + ' .explainer').waypoint('enable');
-    } */
-    
     
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
@@ -370,8 +324,6 @@ $(document).ready(function() {
 	    // goto that chapter
 	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
-	    $( '#nav-chapter-title' ).removeClass( "waypoint-show" );
-	    
 	        
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
@@ -389,7 +341,6 @@ $(document).ready(function() {
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
                     console.log(COPY[this_chapter_name]['nav_prompt']);
-                    //waypoint_explainer();
                 } else {
                     $nav_chapter_title.html('');
                     $nav_chapter_title_prompt.find('h4').text('');
@@ -435,8 +386,6 @@ $(document).ready(function() {
         // close the chapter nav
         close_nav();
         
-        setup_waypoint_explainer(new_chapter_name);
-
 	    // scroll page to the top
         scroll_to_top();        
 	}
@@ -531,6 +480,11 @@ $(document).ready(function() {
             keyframes += '@' + prefixes[i] + 'keyframes fadeIn {';
             keyframes += '0% { opacity: 0; }';
             keyframes += '100% { opacity: 1; }';
+            keyframes += '}';
+            
+            keyframes += '@' + prefixes[i] + 'keyframes fadeOut {';
+            keyframes += '0% { opacity: 1; }';
+            keyframes += '100% { opacity: 0; }';
             keyframes += '}';
             
             var filmstrip = '';
@@ -880,6 +834,15 @@ $(document).ready(function() {
             $tooltip.empty().removeClass('animated fadeIn');
         });
     }
+    
+    function on_scroll() {
+        var scroll_position = $b.scrollTop();
+        if (scroll_position >= nav_height) {
+            $b.addClass('scrolling').removeClass('scrolling-off');
+        } else {
+            $b.addClass('scrolling-off').removeClass('scrolling');
+        }
+    }
 
 	
 	/* 
@@ -905,7 +868,11 @@ $(document).ready(function() {
         
         setup_grid();
 
-        $(window).on('resize', on_resize);
+        if (!is_touch) {
+            $w.on('scrollstop', on_scroll);
+//            $w.on('scroll', on_scroll);
+        }
+        $w.on('resize', on_resize);
         on_resize();
         
         //add hash change listener
