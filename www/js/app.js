@@ -14,6 +14,7 @@ $(document).ready(function() {
     var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
     var $nav_chapter_title = $('#nav-chapter-title');
     var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
+    var $seedtoselfie = $('#seedtoselfie');
     var $titlecard = $('.titlecard');
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
@@ -35,7 +36,7 @@ $(document).ready(function() {
     
     // status vars
     Modernizr.addTest('firefox', function () {
-	 return !!navigator.userAgent.match(/firefox/i);
+        return !!navigator.userAgent.match(/firefox/i);
 	});
     
     var autoplay_video = false;
@@ -781,6 +782,33 @@ $(document).ready(function() {
             }
         }
     }
+    
+    // YOU photo grid
+    function setup_grid() {
+        var $photos = $seedtoselfie.find('.photo');
+        var $tooltip = $('#selfie-tooltip');
+        
+        $photos.on('mouseenter', function() {
+            var $img = $(this).find('img:eq(0)');
+            var img_src = $img.attr('src');
+            var img_width = $img.width();
+            var img_position = $img.position();
+            var tt_width = $tooltip.width();
+            var tt_offset = (tt_width - img_width) / 2;
+            var tt_content = '<img src="' + img_src + '" alt="" />';
+
+            $tooltip.empty().html(tt_content);
+            $tooltip.css('top', (img_position.top - tt_offset) + 'px');
+            $tooltip.css('left', (img_position.left - tt_offset) + 'px');
+            $tooltip.addClass('animated fadeIn');
+            $tooltip.find('img').addClass('animated fadeIn');
+        });
+        
+        $tooltip.on('mouseleave', function() {
+            $tooltip.empty().removeClass('animated fadeIn');
+        });
+    }
+
 	
 	/* 
 	 * Setup functions 
@@ -802,6 +830,8 @@ $(document).ready(function() {
         setup_css_animations();
 
         load_graphics();
+        
+        setup_grid();
 
         $(window).on('resize', on_resize);
         on_resize();
