@@ -785,23 +785,57 @@ $(document).ready(function() {
     
     // YOU photo grid
     function setup_grid() {
-        var $photos = $seedtoselfie.find('.photo');
+        var $photos;
         var $tooltip = $('#selfie-tooltip');
+        
+        var photo_grid = '';
+        
+        for (var i = 0; i < 20; i++) {
+            var new_item = '<div class="photo">';
+            new_item += '<img src="img/selfie2-480.jpg" alt="Kiana: May or may not reek of cocoa butter and kittens." />';
+            new_item += '</div>';
+            photo_grid += new_item;
+        }
+        $seedtoselfie.prepend(photo_grid);
+        $photos = $seedtoselfie.find('.photo');
         
         $photos.on('mouseenter', function() {
             var $img = $(this).find('img:eq(0)');
             var img_src = $img.attr('src');
+            var img_caption = $img.attr('alt');
             var img_width = $img.width();
             var img_position = $img.position();
+            var tt_content = '';
             var tt_width = $tooltip.width();
             var tt_offset = (tt_width - img_width) / 2;
-            var tt_content = '<img src="' + img_src + '" alt="" />';
+            var tt_left;
+            var tt_top;
+
+            tt_content += '<img src="' + img_src + '" alt="" />';
+            tt_content += '<p>' + img_caption + '</p>';
 
             $tooltip.empty().html(tt_content);
-            $tooltip.css('top', (img_position.top - tt_offset) + 'px');
-            $tooltip.css('left', (img_position.left - tt_offset) + 'px');
+            
+            tt_left = img_position.top - tt_offset;
+            if (tt_left < 0) {
+                tt_left = 0;
+            }
+            if ((tt_left + tt_width) > $seedtoselfie.width()) {
+                tt_left = tt_left + tt_width;
+            }
+            
+            tt_top = img_position.left - tt_offset;
+            if (tt_top < 0) {
+                tt_top = 0;
+            }
+            if ((tt_top + $tooltip.height()) > $seedtoselfie.height()) {
+                tt_top = tt_top + $tooltip.height();
+            }
+
+            $tooltip.css('top', tt_left + 'px');
+            $tooltip.css('left', tt_top + 'px');
+
             $tooltip.addClass('animated fadeIn');
-            $tooltip.find('img').addClass('animated fadeIn');
         });
         
         $tooltip.on('mouseleave', function() {
