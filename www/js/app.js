@@ -261,7 +261,7 @@ $(document).ready(function() {
                 });
             
                 // check play progress
-                if (chapter != 'title') {
+                if (chapter != 'title' && !is_touch) {
                     $player.addEvent('playProgress', function() {
                         // skip ahead to the explainer text at a particular cuepoint
                         $player.api('getCurrentTime', function(time) {
@@ -285,7 +285,6 @@ $(document).ready(function() {
                         // restore the title card
                         $('section.show').removeClass('video-playing').addClass('video-loaded');
     	                $('section.show').find('.title-video')[0].play();
-
 
                         // reset so that the autoscroll will work if the video is played again
                         text_scrolled = false;
