@@ -509,6 +509,11 @@ $(document).ready(function() {
             keyframes += '100% { height: ' + this_nav_height_open + 'px; }';
             keyframes += '}';
             
+            keyframes += '@' + prefixes[i] + 'keyframes fadeIn {';
+            keyframes += '0% { opacity: 0; }';
+            keyframes += '100% { opacity: 1; }';
+            keyframes += '}';
+            
             var filmstrip = '';
             for (var f = 0; f < filmstrip_steps; f++) {
                 var current_pct = f * (100/filmstrip_steps);

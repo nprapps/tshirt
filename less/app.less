@@ -2,7 +2,7 @@
 @import "less/lib/prefixer";
 
 //css3 animations
-@import "less/lib/animate";
+//@import "less/lib/animate";
 
 
 // Global variables
@@ -57,6 +57,11 @@ section { background-color: #fff; }
 }
 
 // Animations
+.animated {
+    .animation-fill-mode(both);
+    .animation-duration(1s);
+}
+
 .slideInUp {
     /* keyframes for this are defined in app.js */
     
@@ -77,8 +82,13 @@ section { background-color: #fff; }
 	@media @screen-small-above { 
         .animation-duration(0.5s);
 	}
-	
 }
+
+.fadeIn {
+    /* keyframes for this are defined in app.js */
+    .animation-name(fadeIn);
+}
+
 
 //navigation
 .backer, 
