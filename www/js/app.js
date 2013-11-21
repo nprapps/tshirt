@@ -209,9 +209,10 @@ $(document).ready(function() {
                 $('section.show').addClass('video-loaded');
                 
                 // pause looping video when vimeo plays
-                
                 $player.addEvent('play', function() {
-	                $('section.show').find('.title-video')[0].pause();
+                    if ($('section.show').find('.title-video').length > 0) {
+                        $('section.show').find('.title-video')[0].pause();
+                    }
                 });
             
                 // check play progress
@@ -238,7 +239,9 @@ $(document).ready(function() {
                     } else {
                         // restore the title card
                         $('section.show').removeClass('video-playing').addClass('video-loaded');
-    	                $('section.show').find('.title-video')[0].play();
+                        if ($('section.show').find('.title-video').length > 0) {
+                            $('section.show').find('.title-video')[0].play();
+                        }
 
                         // reset so that the autoscroll will work if the video is played again
                         text_scrolled = false;
