@@ -1336,20 +1336,17 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
     .photo {
         margin-bottom: 11px;
-        opacity: 0.8;
+        cursor: pointer;
+        width: 50%;
+        float: left;
 
         @media @screen-tiny-above {
-            width: 33%;
-            float: left;
+            width: 20%;
+            opacity: 0.5;
         }
-        @media @screen-small-above { width: 25%; }
-        @media @screen-medium-above { width: 20%; }
+        @media @screen-small-above { width: 20%; }
+        @media @screen-medium-above { width: 16.6%; }
         @media @screen-large-above { width: 12.5%; }
-        
-        &:hover {
-            cursor: pointer;
-            opacity: 1;
-        }
         
         img { padding-right: 11px; }
     }
@@ -1370,11 +1367,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         @media @screen-large-above { width: 20%; }
         
         &.animated {
-            -webkit-animation-duration: .2s;
-            -moz-animation-duration: .2s;
-            -ms-animation-duration: .2s;
-            -o-animation-duration: .2s;
-            animation-duration: .2s;
+            -webkit-animation-duration: .5s;
+            -moz-animation-duration: .5s;
+            -ms-animation-duration: .5s;
+            -o-animation-duration: .5s;
+            animation-duration: .5s;
             visibility: visible;
         }
         

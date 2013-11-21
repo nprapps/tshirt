@@ -790,10 +790,21 @@ $(document).ready(function() {
         
         var photo_grid = '';
         
-        for (var i = 0; i < 20; i++) {
-            var new_item = '<div class="photo">';
+        for (var i = 0; i < 10; i++) {
+            var new_item = '';
+
+            new_item += '<div class="photo">';
+            new_item += '<img src="img/selfie1-480.jpg" alt="Danny: Blesses the rains down in Africa. #toto" />';
+            new_item += '</div>';
+
+            new_item += '<div class="photo">';
             new_item += '<img src="img/selfie2-480.jpg" alt="Kiana: May or may not reek of cocoa butter and kittens." />';
             new_item += '</div>';
+
+            new_item += '<div class="photo">';
+            new_item += '<img src="img/selfie3-480.jpg" alt="Paula: Likes to say &quot;thank you&quot; in Japanese." />';
+            new_item += '</div>';
+
             photo_grid += new_item;
         }
         $seedtoselfie.prepend(photo_grid);
@@ -810,30 +821,33 @@ $(document).ready(function() {
             var tt_offset = (tt_width - img_width) / 2;
             var tt_left;
             var tt_top;
+            var tt_padding = parseInt($tooltip.css('paddingTop'));
 
             tt_content += '<img src="' + img_src + '" alt="" />';
             tt_content += '<p>' + img_caption + '</p>';
 
             $tooltip.empty().html(tt_content);
             
-            tt_left = img_position.top - tt_offset;
+            tt_left = img_position.left - tt_offset - tt_padding;
             if (tt_left < 0) {
-                tt_left = 0;
+                tt_left = 0 - tt_padding;
             }
             if ((tt_left + tt_width) > $seedtoselfie.width()) {
-                tt_left = tt_left + tt_width;
+                tt_left = $seedtoselfie.width() - tt_width - tt_padding;
             }
             
-            tt_top = img_position.left - tt_offset;
+            tt_top = img_position.top - tt_offset - tt_padding;
+            /*
             if (tt_top < 0) {
-                tt_top = 0;
+                tt_top = 0 - tt_padding;
             }
             if ((tt_top + $tooltip.height()) > $seedtoselfie.height()) {
                 tt_top = tt_top + $tooltip.height();
             }
-
-            $tooltip.css('top', tt_left + 'px');
-            $tooltip.css('left', tt_top + 'px');
+            */
+            
+            $tooltip.css('top', tt_top + 'px');
+            $tooltip.css('left', tt_left + 'px');
 
             $tooltip.addClass('animated fadeIn');
         });
