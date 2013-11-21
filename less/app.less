@@ -1162,24 +1162,26 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     .photo-row {
         margin-bottom: 2em;
 
-        h4 {
-            margin-bottom: 11px;
-        }
+        h4 { margin-bottom: 11px; }
         img {
             max-width: 100%;
             height: auto;
             margin: 0 auto;
             display: block;
+            float: none;
         }
         .caption {
             display: block;
-            margin-top: 11px;
             color: #787878;
             
             strong { 
                 color: #555;
                 margin-right: 5px;
             }
+        }
+        img + .caption,
+        a + .caption { 
+            margin-top: 11px;
         }
         body.chapter-about & {
             .photo1,
