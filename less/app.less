@@ -1625,7 +1625,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 }
 
 .touch {
-	section {padding-top: 150px;}
+
+	#top {
+		section {padding-top: 150px;}
+		#title {padding-top: 0;}
+		#about {padding-top: 60px;}
+	}
 	
 	@media @screen-medium {
 		section {padding-top: 0;}
@@ -1652,7 +1657,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 	
 	.video-wrapper {
 		background-color: #fff;
-		overflow: scroll;
+		//overflow-y: scroll;
 		//padding-top: 170px;
 		@media @screen-small-above {padding-top: 230px;}
 		margin: 0;
