@@ -233,7 +233,7 @@ $(document).ready(function() {
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
-                    if (chapter == 'title') {
+                    if (chapter == 'title' && !is_touch) {
                         hasher.setHash(chapters[1]);
                     } else {
                         // restore the title card
