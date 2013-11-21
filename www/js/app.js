@@ -124,21 +124,38 @@ $(document).ready(function() {
         draw_charts();
     }
     
-    function waypoint_explainer() {
-        //toggle next chapter nav and explainer prompt
-        $('#' + current_chapter + ' .explainer').waypoint(function(direction) {
+	/*
+
+    $(window).bind("scrollstop", function() {
+    	console.log('scrollstop!');
+
+       	var c = $('#cotton .explainer');
+        console.log('viewport: ' + c.is(':within-viewport'));
+
+    	if (c.is(':within-viewport')) {
+    		console.log('wv triggered');
+	    	$nav_chapter_title_prompt.addClass('waypoint-hide');
+            $nav_chapter_title.addClass('waypoint-show animated fadeIn');
+    	}
+	});
+	*/
+   
+    function setup_waypoint_explainer(chapter) {
+    	console.log("setup_waypoint_explainer: " + chapter);
+        $('#' + chapter + ' .explainer').waypoint(function(direction) {
             if (direction == 'down') {
-                console.log(current_chapter + ' waypoint down');
+                console.log(chapter + ' waypoint down');
                 $nav_chapter_title_prompt.addClass('waypoint-hide');
                 $nav_chapter_title.addClass('waypoint-show animated fadeIn');
             } else {
+                console.log(chapter + ' waypoint up?');
                 $nav_chapter_title_prompt.removeClass('waypoint-hide');
                 $nav_chapter_title.removeClass('waypoint-show animated fadeIn');
             }
         }, { offset: '85%' } );
     }
     
-    
+    /*
     function goodbye_waypoint() {
     	console.log('goodbye');
 	    $('#' + current_chapter + ' .explainer').waypoint('disable');
@@ -147,7 +164,8 @@ $(document).ready(function() {
     function hello_waypoint() {
     	console.log('hello');
 	    $('#' + current_chapter + ' .explainer').waypoint('enable');
-    }
+    } */
+    
     
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
@@ -372,7 +390,7 @@ $(document).ready(function() {
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
                     console.log(COPY[this_chapter_name]['nav_prompt']);
-                    waypoint_explainer();
+                    //waypoint_explainer();
                 } else {
                     $nav_chapter_title.html('');
                     $nav_chapter_title_prompt.find('h4').text('');
@@ -415,11 +433,13 @@ $(document).ready(function() {
 
 	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
 	    
-	    // scroll page to the top
-        scroll_to_top();
-        
         // close the chapter nav
         close_nav();
+        
+        setup_waypoint_explainer(new_chapter_name);
+
+	    // scroll page to the top
+        scroll_to_top();        
 	}
 
 	function close_nav() {
@@ -895,8 +915,6 @@ $(document).ready(function() {
         hasher.initialized.add(goto_chapter);
         //initialize hasher (start listening for history changes)
         hasher.init();
-        
     }
     setup();
-
 });

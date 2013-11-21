@@ -55,7 +55,10 @@
     {% block outer_content %}
     {% endblock outer_content %}
 
-
+<!--
+	{{ JS.push('js/lib/scrollstop.js') }}
+    {{ JS.push('js/lib/withinViewport.js') }}
+    {{ JS.push('js/lib/jquery.withinViewport.js') }}  -->
     {{ JS.push('js/lib/waypoints.js') }}
     {% block extra_foot_js %}{% endblock extra_foot_js %}
     {{ JS.push('js/templates.js') }}
