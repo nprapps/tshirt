@@ -28,16 +28,13 @@ $(document).ready(function() {
     }
 
     function on_resize() {
-        console.log('on_resize');
         var new_width = $('.video-container').width();
         var new_height = Math.floor(new_width * 9 / 16);
-        console.log(new_width, new_height);
 
         $video.width(new_width + 'px').height(new_height + 'px');
         $('#trailer_wrapper').width(new_width + 'px').height(new_height + 'px');
     }
     $(window).resize(on_resize);
-    
     
     // setup
     on_resize();

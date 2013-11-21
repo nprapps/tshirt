@@ -82,14 +82,14 @@ COPY_GOOGLE_DOC_KEY = '0Ala-N4Y4VPXIdG5sUTJQYm1RRXFhZWRqZ2J6ZnBRNlE'
 """
 SHARING
 """
-PROJECT_DESCRIPTION = 'Planet Money followed a t-shirt from seed to shirt.'
+PROJECT_DESCRIPTION = 'The simplest shirt is touched by people and machines all over the planet. Starting December 2, we\'ll tell the story of our t-shirt.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 TWITTER = {
     'TEXT': PROJECT_NAME,
     'URL': SHARE_URL,
     # Will be resized to 120x120, can't be larger than 1MB
-    'IMAGE_URL': ''
+    'IMAGE_URL': 'http://apps.npr.org/tshirt/img/thumb_social.jpg'
 }
 
 FACEBOOK = {
