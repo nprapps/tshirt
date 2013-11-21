@@ -1,6 +1,7 @@
 $(document).ready(function() {
     // cached objects
     var $b = $('body');
+    var $d = $(document);
     var $w = $(window);
     var $btn_next = $('.btn-next-chapter');
     var $filmstrip_cotton = $('#boxes').find('.filmstrip-wrapper');
@@ -839,7 +840,7 @@ $(document).ready(function() {
     }
     
     function on_scroll() {
-        var scroll_position = $b.scrollTop();
+        var scroll_position = $d.scrollTop();
         if (scroll_position >= nav_height) {
             $b.addClass('scrolling').removeClass('scrolling-off');
         } else {
