@@ -110,7 +110,9 @@ nav {
 	position: fixed;
 	bottom: 0;
 	right: 0;
-	.touch & {bottom: auto; top: 0;}
+	.touch & {
+		@media @screen-small {bottom: auto; top: 0;}
+	}
 	width: 100%;
 	background: #000;
 	@media @screen-small-above { background: rgba(0,0,0,.8); }
@@ -166,7 +168,6 @@ nav {
 	        float: left;
 	        font-weight: bold;
 	        text-transform: uppercase;
-	        
 	        display: none;
 
 	        @media @screen-small-above { 
@@ -1625,27 +1626,44 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 }
 
 .touch {
+	.layer-media {background-color: #fff;}
 
 	#top {
-		section {padding-top: 150px;}
+		section {
+			padding-top: 150px;
+			}
 		#title {padding-top: 0;}
 		#about {padding-top: 60px;}
 	}
 	
-	@media @screen-medium {
-		section {padding-top: 0;}
+	@media @screen-small-above {
+		#top section {padding-top: 0;}
 	}
 	.titlecard {
         height: 140px;
         z-index: 10;
         padding-top: 65px;
+        @media @screen-small-above {
+        	padding-top: 20px;
+        	border-bottom: 4px solid #111;
+        }
         padding-bottom: 20px;
         background-color: #333;
         //background-color: #487261;
         //border-bottom: 2px solid #43564e;
         h1, h2 {text-align: left; margin: 0; color: #ddd; text-shadow: none;}
-        h1 {font-size: 22px; margin-bottom: 5px;}
-        h2 {font-size: 12px;}
+        h1 {
+        	font-size: 22px; 
+        	margin-bottom: 5px;
+        	@media @screen-small-above {font-size: 50px;}
+        }
+        h2 {
+        	font-size: 12px;
+        	@media @screen-small-above {
+        		font-size: 19px;
+        		max-width: none;
+        	}
+        }
         border-top: 5px solid #111;
     }
 	
@@ -1659,12 +1677,14 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		background-color: #fff;
 		//overflow-y: scroll;
 		//padding-top: 170px;
-		@media @screen-small-above {padding-top: 230px;}
 		margin: 0;
         position: relative;
-		
+        @media @screen-small-above {
+        	padding-top: 140px;
+        }
+        
 		.video-inner-wrapper {
-			@media @screen-small { width: 90% !important;}
+			width: 95% !important;
 			margin-top: 0;
 			position: relative;
 			//border: 2px solid #333;
@@ -1677,9 +1697,21 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         display: block;
     }
     
+    .chapter-title .video-wrapper {
+        @media @screen-small-above {
+        	margin-top: 0;
+        }
+    }
+    
     .title-video { display: none; }
     
-    #nav-chapter-title-prompt { display: none; }
+    #nav-chapter-title-prompt { 
+    	display: none;
+    }
+    #nav-chapter-title { 
+    	display: none;
+    	&.waypoint-show {display: none;}
+    }
     
     .layer-media {height: auto;}
     
@@ -1697,13 +1729,13 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 		.layer-media {overflow: scroll;}
 		
 		.video-wrapper {
-			padding-top: 120px;
+			padding-top: 130px;
+			@media @screen-small-above {padding-top: 160px;}
 			background-color: #000;
 			background-image: url('@{img-root}/squirrel-background.png');
 			background-position: 60% 70%;
 			.background-size(cover);
 			
-			.video-inner-wrapper { border: 2px solid #333; }
 		}
 		
 		.titlecard  { display: none; }
@@ -1719,12 +1751,15 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			color: #fff;
 			text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
 			
-			img {
+			.npr-logo {
 				width: 40px;
-				margin: 10px auto 0 auto;
+				margin: 30px auto 0 auto;
 				display: block;
 				text-align: center;
+				@media @screen-small-above {
+					width: 75px;
 				}
+			}
 			
 			h2 {
 				text-transform: uppercase;
@@ -1733,6 +1768,10 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 				text-align: center;
 				margin: 5px 0 0 0;
 				padding: 0 40px;
+				@media @screen-small-above {
+					margin: 15px 0 0 0;
+					font-size: 36px;
+				}
 			}
 			h3 {
 				text-transform: uppercase;
@@ -1743,6 +1782,9 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 				margin: 5px 0 0 0;
 				padding: 0 60px;
 				text-align: center;
+				@media @screen-small-above {
+					font-size: 22px;
+				}
 			}
 		}
 	}
