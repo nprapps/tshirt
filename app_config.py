@@ -84,7 +84,7 @@ COPY_GOOGLE_DOC_KEY = '0Ala-N4Y4VPXIdG5sUTJQYm1RRXFhZWRqZ2J6ZnBRNlE'
 """
 SHARING
 """
-PROJECT_DESCRIPTION = 'Planet Money followed a t-shirt from seed to shirt.'
+PROJECT_DESCRIPTION = 'The world behind a simple shirt, in five chapters.'
 SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 TWITTER = {
