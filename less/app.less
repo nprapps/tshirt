@@ -448,7 +448,7 @@ nav {
   cursor: pointer;
 }
 .btn-next-chapter {
-    background: #000000 url("@{img-root}/machines-thumb-footer-1.jpg");
+    background-color: #000000;
     .background-size(cover);
     background-position: 50% 0%;
     position: relative;
@@ -458,6 +458,22 @@ nav {
     overflow: hidden;
     position: relative;
     z-index: 200;
+	
+	.chapter-cotton & {
+		background-image: url('@{img-root}/footer-machines.jpg');
+	}
+	
+	.chapter-machines & {
+		background-image: url('@{img-root}/footer-people.jpg');
+	}
+	
+	.chapter-people & {
+		background-image: url('@{img-root}/footer-boxes.jpg');
+	}
+	
+	.chapter-boxes & {
+		background-image: url('@{img-root}/footer-you.jpg');
+	}
 }
 .next-chapter {
     background: rgba(0, 0, 0, 0.5);
