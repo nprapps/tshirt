@@ -16,7 +16,7 @@
     <!-- CSS -->
     {% block extra_css %}{% endblock extra_css %}
     {{ CSS.push('less/app.less') }}
-    {{ CSS.render('css/app.min.css') }}
+    {{ CSS.render('css/app-preview.min.css') }}
 
     <!-- JS -->
     {{ JS.push('js/app_config.js') }}
@@ -26,7 +26,7 @@
     {{ JS.push('js/lib/html5.js') }}
     {{ JS.push('js/lib/modernizr.custom.82260.js') }}
     {% block extra_head_js %}{% endblock extra_head_js %}
-    {{ JS.render('js/app-header.min.js') }}
+    {{ JS.render('js/app-preview-header.min.js') }}
 
     {# Twitter #}
     <meta name="twitter:card" content="summary">
@@ -59,7 +59,7 @@
     {% block extra_foot_js %}{% endblock extra_foot_js %}
     {{ JS.push('js/templates.js') }}
     {{ JS.push('js/app.js') }}
-    {{ JS.render('js/app-footer.min.js') }}
+    {{ JS.render('js/app-preview-footer.min.js') }}
 
     {% block extra_foot %}
     {% endblock extra_foot %}
