@@ -44,6 +44,7 @@ $(document).ready(function() {
     var current_chapter_id = 0;
     var current_chapter = chapters[current_chapter_id];
     var is_touch = Modernizr.touch;
+    var is_ie = $.browser.msie;
     var is_firefox = Modernizr.firefox;
     var supports_html5_video = Modernizr.video;
     var text_scrolled = false;
@@ -792,18 +793,30 @@ $(document).ready(function() {
         }
         $seedtoselfie.prepend(photo_grid);
         $photos = $seedtoselfie.find('.photo');
+        if (!is_ie) {
+            $selfie_tooltip.css('pointerEvents', 'none');
+        }
         
         if (!is_touch && window_width > screen_tiny) {
             $photos.on('mouseenter', show_selfie);
-            $selfie_tooltip.on('mouseleave', hide_selfie);
+            if (!is_ie) {
+                $photos.on('mouseleave', hide_selfie);
+            } else {
+                $selfie_tooltip.on('mouseleave', hide_selfie);
+            }
         } else {
             // mobile/small screen
             $photos.on('click', show_selfie);
-            $selfie_modal.on('click', hide_selfie);
+            if (!is_ie) {
+                $photos.on('click', hide_selfie);
+            } else {
+                $selfie_modal.on('click', hide_selfie);
+            }
         }
     }
     
     function show_selfie() {
+        console.log('show selfie');
         var $img = $(this).find('img:eq(0)');
         var img_src = $img.attr('src');
         var img_caption = $img.attr('alt');

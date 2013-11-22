@@ -1355,9 +1355,8 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
 #seedtoselfie {
     .clearfix();
-    @media @screen-tiny-above { 
-        position: relative;
-    }
+
+    @media @screen-tiny-above { position: relative; }
 
     img {
         display: block;
@@ -1385,11 +1384,10 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
 #selfie-tooltip {
     position: absolute;
-    background: #333;
     cursor: pointer;
     visibility: hidden;
+    display: none;
     width: 40%;
-    padding: 2px;
 
     @media @screen-small-above { width: 35%; }
     @media @screen-medium-above { width: 30%; }
@@ -1398,6 +1396,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     &.animated {
         .animation-duration(0.5s);
         visibility: visible;
+        display: block;
     }
     
     p {
@@ -1405,12 +1404,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         text-align: center;
         background: #333;
         background: rgba(40, 40, 40, .9);
-        margin: 0 2px 0 2px;
         padding: 6px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
     }
 }
 
