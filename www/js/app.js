@@ -14,6 +14,8 @@ $(document).ready(function() {
     var $nav_chapter_title = $('#nav-chapter-title');
     var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
     var $seedtoselfie = $('#seedtoselfie');
+    var $selfie_modal = $('#selfie-modal');
+    var $selfie_tooltip = $('#selfie-tooltip');
     var $titlecard = $('.titlecard');
     var $video_wrapper = $('.video-wrapper');
     var $video_inner_wrapper = $('.video-inner-wrapper');
@@ -55,6 +57,7 @@ $(document).ready(function() {
     var d3_tshirt_phase_data;
     
     //breakpoints
+    var screen_tiny = 480;
     var screen_small = 768;
     var screen_medium = 992;
     var screen_large = 1200;
@@ -768,7 +771,6 @@ $(document).ready(function() {
     // YOU photo grid
     function setup_grid() {
         var $photos;
-        var $tooltip = $('#selfie-tooltip');
         
         var photo_grid = '';
         
@@ -792,24 +794,40 @@ $(document).ready(function() {
         $seedtoselfie.prepend(photo_grid);
         $photos = $seedtoselfie.find('.photo');
         
-        $photos.on('mouseenter', function() {
-            var $img = $(this).find('img:eq(0)');
-            var img_src = $img.attr('src');
-            var img_caption = $img.attr('alt');
-            var img_width = $img.width();
-            var img_position = $img.position();
-            var tt_content = '';
-            var tt_width = $tooltip.width();
+        if (!is_touch && window_width > screen_tiny) {
+            $photos.on('mouseenter', show_selfie);
+            $selfie_tooltip.on('mouseleave', hide_selfie);
+        } else {
+            // mobile/small screen
+            $photos.on('click', show_selfie);
+            $selfie_modal.on('click', hide_selfie);
+        }
+    }
+    
+    function show_selfie() {
+        var $img = $(this).find('img:eq(0)');
+        var img_src = $img.attr('src');
+        var img_caption = $img.attr('alt');
+        var img_width = $img.width();
+        var img_position = $img.position();
+        var tt_content = '';
+
+        tt_content += '<img src="' + img_src + '" alt="" />';
+        tt_content += '<p>' + img_caption + '</p>';
+
+        if (is_touch || window_width <= screen_tiny) {
+            tt_content += '<p class="prompt">Tap screen to close</p>';
+            $selfie_modal.empty().html(tt_content);
+            $selfie_modal.addClass('animated fadeIn');
+        } else {
+            var tt_width = $selfie_tooltip.width();
             var tt_offset = (tt_width - img_width) / 2;
             var tt_left;
             var tt_top;
-            var tt_padding = parseInt($tooltip.css('paddingTop'));
+            var tt_padding = parseInt($selfie_tooltip.css('paddingTop'));
 
-            tt_content += '<img src="' + img_src + '" alt="" />';
-            tt_content += '<p>' + img_caption + '</p>';
+            $selfie_tooltip.empty().html(tt_content);
 
-            $tooltip.empty().html(tt_content);
-            
             tt_left = img_position.left - tt_offset - tt_padding;
             if (tt_left < 0) {
                 tt_left = 0 - tt_padding;
@@ -817,26 +835,21 @@ $(document).ready(function() {
             if ((tt_left + tt_width) > $seedtoselfie.width()) {
                 tt_left = $seedtoselfie.width() - tt_width - tt_padding;
             }
-            
             tt_top = img_position.top - tt_offset - tt_padding;
-            /*
-            if (tt_top < 0) {
-                tt_top = 0 - tt_padding;
-            }
-            if ((tt_top + $tooltip.height()) > $seedtoselfie.height()) {
-                tt_top = tt_top + $tooltip.height();
-            }
-            */
-            
-            $tooltip.css('top', tt_top + 'px');
-            $tooltip.css('left', tt_left + 'px');
+    
+            $selfie_tooltip.css('top', tt_top + 'px');
+            $selfie_tooltip.css('left', tt_left + 'px');
+            $selfie_tooltip.addClass('animated fadeIn');
+        }
 
-            $tooltip.addClass('animated fadeIn');
-        });
-        
-        $tooltip.on('mouseleave', function() {
-            $tooltip.empty().removeClass('animated fadeIn');
-        });
+    }
+    
+    function hide_selfie() {
+        if (is_touch || window_width <= screen_tiny) {
+            $selfie_modal.removeClass('animated fadeIn');
+        } else {
+            $selfie_tooltip.empty().removeClass('animated fadeIn');
+        }
     }
     
     function on_scroll() {
