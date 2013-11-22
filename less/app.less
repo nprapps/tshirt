@@ -1406,17 +1406,21 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         background: rgba(40, 40, 40, .9);
         padding: 6px;
     }
+    
+    @media @screen-tiny {
+        .touch & { display: none; }
+    }
 }
 
 #selfie-modal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     z-index: 1000;
     background: #333;
-    background: rgba(40, 40, 40, .9);
+    background: rgba(40, 40, 40, .95);
     color: #e2e2e2;
     cursor: pointer;
     visibility: hidden;
@@ -1443,6 +1447,13 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
             font-style: italic;
             font-size: 12px;
             color: #666;
+        }
+    }
+    
+    @media @screen-tiny-above {
+        .no-touch & { 
+            display: none; 
+            visibility: hidden;
         }
     }
 }

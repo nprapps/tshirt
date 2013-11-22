@@ -13,6 +13,7 @@ $(document).ready(function() {
     var $nav_item_wrapper = $nav.find('.nav-item-wrapper');
     var $nav_chapter_title = $('#nav-chapter-title');
     var $nav_chapter_title_prompt = $('#nav-chapter-title-prompt');
+    var $photos;
     var $seedtoselfie = $('#seedtoselfie');
     var $selfie_modal = $('#selfie-modal');
     var $selfie_tooltip = $('#selfie-tooltip');
@@ -124,6 +125,28 @@ $(document).ready(function() {
 
         // redraw the charts
         draw_charts();
+        
+        // YOU selfie events
+        $photos.unbind('mouseenter', show_selfie);
+        $photos.unbind('mouseleave', hide_selfie);
+        $photos.unbind('click', show_selfie);
+        $selfie_modal.unbind('click', hide_selfie);
+        $selfie_tooltip.unbind('mouseleave', hide_selfie);
+        
+        if (!is_touch && window_width > screen_tiny) {
+            $photos.on('mouseenter', show_selfie);
+            if (!is_ie) {
+                $photos.on('mouseleave', hide_selfie);
+            } else {
+                $selfie_tooltip.on('mouseleave', hide_selfie);
+            }
+        } else {
+            // mobile/small screen
+            $photos.on('click', show_selfie);
+            $selfie_modal.on('click', hide_selfie);
+        }
+
+
     }
     
     function setup_chapters(chapter) {
@@ -770,8 +793,6 @@ $(document).ready(function() {
     
     // YOU photo grid
     function setup_grid() {
-        var $photos;
-        
         var photo_grid = '';
         
         for (var i = 0; i < 10; i++) {
