@@ -844,7 +844,6 @@ $(document).ready(function() {
         tt_content += '<p>' + img_caption + '</p>';
 
         if (is_touch || window_width <= screen_tiny) {
-            console.log('screen_tiny!');
             tt_content += '<p class="prompt">Tap screen to close</p>';
             $selfie_modal.empty().html(tt_content);
             $selfie_modal.addClass('animated fadeIn');
