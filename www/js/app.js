@@ -807,16 +807,11 @@ $(document).ready(function() {
         } else {
             // mobile/small screen
             $photos.on('click', show_selfie);
-            if (!is_ie) {
-                $photos.on('click', hide_selfie);
-            } else {
-                $selfie_modal.on('click', hide_selfie);
-            }
+            $selfie_modal.on('click', hide_selfie);
         }
     }
     
     function show_selfie() {
-        console.log('show selfie');
         var $img = $(this).find('img:eq(0)');
         var img_src = $img.attr('src');
         var img_caption = $img.attr('alt');
@@ -828,6 +823,7 @@ $(document).ready(function() {
         tt_content += '<p>' + img_caption + '</p>';
 
         if (is_touch || window_width <= screen_tiny) {
+            console.log('screen_tiny!');
             tt_content += '<p class="prompt">Tap screen to close</p>';
             $selfie_modal.empty().html(tt_content);
             $selfie_modal.addClass('animated fadeIn');
