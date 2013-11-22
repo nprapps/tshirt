@@ -18,6 +18,7 @@ PROJECT_NAME = 'Planet Money Makes A T-Shirt'
 
 # Project name in urls
 # Use dashes, not underscores!
+#PROJECT_SLUG = 'temporary-tshirt-preview'
 PROJECT_SLUG = 'tshirt'
 
 # The name of the repository containing the source
@@ -26,6 +27,7 @@ REPOSITORY_URL = 'git@github.com:nprapps/%s.git' % REPOSITORY_NAME
 REPOSITORY_ALT_URL = None # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
 # The name to be used in paths on the server
+#PROJECT_FILENAME = 'temporary-tshirt-preview'
 PROJECT_FILENAME = 'tshirt'
 
 """
