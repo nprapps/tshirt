@@ -162,7 +162,6 @@ $(document).ready(function() {
 	        
 	                video_tag += '<video class="title-video animated" preload="auto" loop="">';
 	                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
-	                video_tag += '<source src="' + COPY[chapter]['loop_video_webm'] + '" type="video/webm">';
 	                video_tag += '</video>';
 	            
 	                $chapter.find('.layer-media').prepend(video_tag);
