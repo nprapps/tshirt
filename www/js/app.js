@@ -350,6 +350,9 @@ $(document).ready(function() {
 	    // set global vars
 	    current_chapter = new_chapter_name;
 	    current_chapter_id = new_chapter_id;
+        
+	    // scroll page to the top
+        scroll_to_top();        
 
 	    // goto that chapter
 	    $layers.removeClass('show');
@@ -411,13 +414,8 @@ $(document).ready(function() {
                 break;
         }
 
-	    //reset the prompt for each chapter $( '#nav-chapter-title-prompt' ).css( 'display', 'block' );
-	    
         // close the chapter nav
         close_nav();
-        
-	    // scroll page to the top
-        scroll_to_top();        
 	}
 
 	function close_nav() {
@@ -465,14 +463,9 @@ $(document).ready(function() {
     $nav_chapter_title_prompt.find('h4').on('click', scroll_to_explainer);
 
     function scroll_to_top() {
-        var scroll_target = '#' + current_chapter;
-
         $.smoothScroll({
         	speed: 10,
-            scrollTarget: scroll_target,
-            /*afterScroll: function() {
-				console.log('after scroll');
-			}*/
+            scrollTarget: '#top'
         });
     }
 
