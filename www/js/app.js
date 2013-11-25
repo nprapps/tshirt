@@ -179,12 +179,12 @@ $(document).ready(function() {
 		//firefox check
         if (!is_firefox){
             
-            // append titlecard videos, where applicable poster="' + COPY[chapter]['loop_video_poster'] + '"
+            // append titlecard videos, where applicable 
 	        if (COPY[chapter] != undefined) {
 	            if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
 	                var video_tag = '';
 	        
-	                video_tag += '<video class="title-video animated" preload="auto" loop="">';
+	                video_tag += '<video class="title-video animated" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="auto" loop="">';
 	                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
 	                video_tag += '</video>';
 	            
