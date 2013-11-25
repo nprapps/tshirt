@@ -44,3 +44,5 @@ data/copy.xls
 tumblr-theme.html
 data/orders.json
 .coverage-html/
+www/data/photos.json
+data/photos.csv
