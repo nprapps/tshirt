@@ -588,8 +588,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
     @media @screen-tiny { padding-top: 22px; }
 	@media @screen-small-above {
-        body.chapter-about &,
-        body.chapter-buy & {
+        body.chapter-about {
             padding-bottom: 88px;
         }
     }
@@ -1747,6 +1746,8 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 
 .touch {
 	.layer-media {background-color: #fff;}
+	
+	#you .layer-media, #you {background-color: #000;}
 
 	#top {
 		section {
@@ -1769,7 +1770,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			background-image: url('@{img-root}/touch-title-background1.jpg');
 			background-position: 20% 60%;
 			.background-size(cover);
-        //.gradient(#eee,#fff,#fff);
         @media @screen-small-above {
         	padding-top: 20px;
         	//border-bottom: 4px solid #111;
