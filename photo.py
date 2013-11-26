@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from bs4 import BeautifulSoup
 import csv
 import json
 
@@ -14,7 +13,18 @@ class Photo(object):
         for field in FIELDNAMES:
             if kwargs[field]:
                 setattr(self, field, kwargs[field])
-        setattr(self, 'local_img_url', self.remote_img_url.split(u's3.amazonaws.com/')[1].replace('_8.jpg', '.jpg'))
+        setattr(
+            self,
+            'local_img_id',
+            self.remote_img_url\
+                .split(u's3.amazonaws.com/')[1]\
+                .replace('_8.jpg', '.jpg'))
+        setattr(
+            self,
+            'local_img_url',
+            '/tshirt/img/s2s-instagram-%s' % self.remote_img_url\
+                .split(u's3.amazonaws.com/')[1]\
+                .replace('_8.jpg', '.jpg'))
 
 def get_photo_csv():
     r = requests.get('https://docs.google.com/spreadsheet/pub?key=0Aga89cI2jWk5dFdqZmp0YXQ5RDBNWlNaTV90cXFYQWc&output=csv')
@@ -35,7 +45,7 @@ def parse_photo_csv():
             if r.status_code == 200:
                 p = Photo(**photo)
                 payload.append(p.__dict__)
-                with open('www/img/s2s-instagram-%s' % p.local_img_url, 'wb') as writefile:
+                with open('www/img/s2s-instagram-%s' % p.local_img_id, 'wb') as writefile:
                     writefile.write(r.content)
             else:
                 print "! Error: Photo %s does not have an image file." % (photo['url'])

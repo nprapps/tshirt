@@ -426,6 +426,9 @@ def deploy(remote='origin'):
     """
     require('settings', provided_by=[production, staging])
 
+    photo.get_photo_csv()
+    photo.parse_photo_csv()
+
     if app_config.DEPLOY_TO_SERVERS:
         require('branch', provided_by=[stable, master, branch])
 
@@ -456,20 +459,6 @@ def cron_test():
     require('settings', provided_by=[production, staging])
 
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
-
-
-"""
-App-specific tasks
-"""
-def deploy_data():
-    """
-    Deploy the latest data to S3.
-    """
-    require('settings', provided_by=[production, staging])
-    photo.get_photo_csv()
-    photo.parse_photo_csv()
-    _gzip('www', '.gzip')
-    _deploy_to_s3()
 
 
 """
