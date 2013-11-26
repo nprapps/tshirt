@@ -584,6 +584,46 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     
     body.chapter-about & {
 	    padding-top: 0;
+	    
+	    .how-header {
+			img {
+			width: 100%;
+			height: auto;
+		    }
+		
+			p {
+				display: none;
+				 @media @screen-small-above {
+					 display: block;
+					 padding: 5px;
+					 margin: 0;
+					 font-size: 11px;
+					 color: #888;
+					 text-align: right;
+					 background-color: #222;
+				}
+				
+			}
+	    }
+	    
+	    .about-tshirt {
+			width: 240px;
+			margin: 10px 0 40px 40px;
+			border-bottom: 3px solid #000;
+			
+			p {
+				font-size: 11px;
+			}
+			
+			@media @screen-small-above {
+				float: right;
+				p {
+					font-size: 16px;
+				}
+			}
+		}
+
+
     }
     
     body.chapter-you & {
