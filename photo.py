@@ -46,6 +46,7 @@ def parse_photo_csv():
     with open('www/data/photos.json', 'wb') as writefile:
         writefile.write(json.dumps(payload))
 
+
 if __name__ == "__main__":
     get_photo_csv()
     parse_photo_csv()

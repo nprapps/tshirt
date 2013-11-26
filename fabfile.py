@@ -10,6 +10,7 @@ from jinja2 import Template
 import app
 import app_config
 from etc import github
+import photo
 
 """
 Base configuration
@@ -455,6 +456,21 @@ def cron_test():
     require('settings', provided_by=[production, staging])
 
     local('echo $DEPLOYMENT_TARGET > /tmp/cron_test.txt')
+
+
+"""
+App-specific tasks
+"""
+def deploy_data():
+    """
+    Deploy the latest data to S3.
+    """
+    require('settings', provided_by=[production, staging])
+    photo.get_photo_csv()
+    photo.parse_photo_csv()
+    _gzip('www', '.gzip')
+    _deploy_to_s3()
+
 
 """
 Destruction
