@@ -448,6 +448,18 @@ def deploy(remote='origin'):
     _gzip('www', '.gzip')
     _deploy_to_s3()
 
+
+def deploy_photo():
+    """
+    Deploy instagram photos.
+    """
+
+    require('settings', provided_by=[production, staging])
+    photo.get_photo_csv()
+    photo.parse_photo_csv()
+    _gzip('www', '.gzip')
+    _deploy_to_s3()
+
 """
 Cron jobs
 """
