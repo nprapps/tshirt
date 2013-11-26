@@ -1547,9 +1547,16 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         border-radius: 0;
         background-color: #fff;
         text-transform: uppercase;
-        font: bold 18px "Gotham SSm", helvetica, arial, sans-serif;
-        padding: 0 22px;
-        line-height: 44px;
+        font: bold 14px "Gotham SSm", helvetica, arial, sans-serif;
+        padding: 0 10px;
+        margin-top: 10px;
+        line-height: 30px;
+        @media @screen-small-above {
+        	font-size: 18px;
+	        padding: 0 22px;
+	        margin-top: 0;
+	        line-height: 44px;
+        }
         
         &:hover {
             background-color: #000;
