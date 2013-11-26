@@ -153,6 +153,8 @@ $(document).ready(function() {
 				
 				$this_player.api('play');
                 $chapter.removeClass('video-loaded').addClass('video-playing');
+                
+                _gaq.push(['_trackEvent', 'Video', 'Click Play Button', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 
 				if (!is_touch) {
     				$('#' + current_chapter).find('.video-wrapper').addClass('animated fadeIn backer');
@@ -161,6 +163,7 @@ $(document).ready(function() {
 			});
 			
 			$btn_explain.on('click', function() {
+			    _gaq.push(['_trackEvent', 'Navigation', 'Click Explainer Prompt In Navbar', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 				scroll_to_explainer();
 			});
 		} else { // about
@@ -252,6 +255,9 @@ $(document).ready(function() {
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
                     console.log('video finished');
+
+                    _gaq.push(['_trackEvent', 'Video', 'Finish Video', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
+
                     if (chapter == 'title' && !is_touch) {
                         hasher.setHash(chapters[1]);
                     } else {
@@ -293,6 +299,7 @@ $(document).ready(function() {
             } else {
                 // otherwise, proceed
                 hasher.setHash(chapters[id]);
+                _gaq.push(['_trackEvent', 'Navigation', 'Click Chapter Nav', APP_CONFIG.PROJECT_NAME, id]);
 			}
             close_nav();
             scroll_to_top();
@@ -341,6 +348,9 @@ $(document).ready(function() {
 	    // set global vars
 	    current_chapter = new_chapter_name;
 	    current_chapter_id = new_chapter_id;
+	    
+	    // analytics tracking
+	    _gaq.push(['_trackEvent', 'Navigation', 'Load Chapter', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
         
 	    // scroll page to the top
         scroll_to_top();        
@@ -440,8 +450,15 @@ $(document).ready(function() {
 	    hasher.setHash(next_chapter);
     }
 	
-	$btn_next.on('click', goto_next_chapter);
-	$nav_chapter_title.on('click', goto_next_chapter);
+	$btn_next.on('click', function() {
+	    _gaq.push(['_trackEvent', 'Navigation', 'Click Footer', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
+	    goto_next_chapter()
+	});
+
+	$nav_chapter_title.on('click', function() {
+        _gaq.push(['_trackEvent', 'Navigation', 'Click Next Chapter In Navbar', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
+	    goto_next_chapter();
+	});
 	
 
 	/*
@@ -456,7 +473,10 @@ $(document).ready(function() {
         });
     }
 
-    $nav_chapter_title_prompt.find('h4').on('click', scroll_to_explainer);
+    $nav_chapter_title_prompt.find('h4').on('click', function() {
+        _gaq.push(['_trackEvent', 'Navigation', 'Click Explainer Prompt In Navbar', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
+        scroll_to_explainer();
+    });
 
     function scroll_to_top() {
         $.smoothScroll({
