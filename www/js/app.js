@@ -57,6 +57,7 @@ $(document).ready(function() {
     var $d3_tshirt_phase = $('#tshirt-phase-d3');
     var d3_apparel_wages_data;
     var d3_tshirt_phase_data;
+    var selfie_data;
     
     //breakpoints
     var screen_tiny = 480;
@@ -127,28 +128,18 @@ $(document).ready(function() {
         draw_charts();
         
         // YOU selfie events
-        $photos.unbind('mouseenter', show_selfie);
-        $photos.unbind('mouseleave', hide_selfie);
-        $photos.unbind('click', show_selfie);
-        $selfie_modal.unbind('click', hide_selfie);
-        $selfie_tooltip.unbind('mouseleave', hide_selfie);
-        
-        if (!is_touch && window_width > screen_tiny) {
-            $photos.on('mouseenter', show_selfie);
-            if (!is_ie) {
-                $photos.on('mouseleave', hide_selfie);
-            } else {
-                $selfie_tooltip.on('mouseleave', hide_selfie);
-            }
-        } else {
-            // mobile/small screen
-            $photos.on('click', show_selfie);
-            $selfie_modal.on('click', hide_selfie);
-        }
-
-
+        reset_selfie_interactions();
     }
     
+    function on_scroll() {
+        var scroll_position = $d.scrollTop();
+        if (scroll_position >= nav_height) {
+            $b.addClass('scrolling').removeClass('scrolling-off');
+        } else {
+            $b.addClass('scrolling-off').removeClass('scrolling');
+        }
+    }
+
     function setup_chapters(chapter) {
 		var $chapter = $('#' + chapter);
 		var $btn_play = $chapter.find('.btn-play');
@@ -373,7 +364,6 @@ $(document).ready(function() {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
                     }
                     $nav_chapter_title_prompt.find('h4').text(COPY[this_chapter_name]['nav_prompt']);
-                    console.log(COPY[this_chapter_name]['nav_prompt']);
                 } else {
                     $nav_chapter_title.html('');
                     $nav_chapter_title_prompt.find('h4').text('');
@@ -784,44 +774,61 @@ $(document).ready(function() {
         }
     }
     
-    // YOU photo grid
-    function setup_grid() {
+    /*
+     * SEED TO SELFIE - (YOU photo grid)
+     */
+    function load_photo_grid() {
+        $.getJSON('data/photos.json', function(data) {
+            selfie_data = data;
+            setup_photo_grid();
+        });
+    }
+
+    function setup_photo_grid() {
         var photo_grid = '';
+        var num_photos = selfie_data.length;
         
-        for (var i = 0; i < 10; i++) {
+        for (var p = 0; p < num_photos; p++) {
             var new_item = '';
+            var this_photo = selfie_data[p];
 
             new_item += '<div class="photo">';
-            new_item += '<img src="img/selfie1-480.jpg" alt="Danny: Blesses the rains down in Africa. #toto" />';
-            new_item += '</div>';
-
-            new_item += '<div class="photo">';
-            new_item += '<img src="img/selfie2-480.jpg" alt="Kiana: May or may not reek of cocoa butter and kittens." />';
-            new_item += '</div>';
-
-            new_item += '<div class="photo">';
-            new_item += '<img src="img/selfie3-480.jpg" alt="Paula: Likes to say &quot;thank you&quot; in Japanese." />';
+//            new_item += '<img src="http://stage-apps.npr.org' + this_photo.local_img_url + '" alt="' + this_photo.caption + '" />';
+            new_item += '<img src="' + this_photo.local_img_url + '" alt="' + this_photo.caption + '" />';
             new_item += '</div>';
 
             photo_grid += new_item;
         }
+        
         $seedtoselfie.prepend(photo_grid);
         $photos = $seedtoselfie.find('.photo');
         if (!is_ie) {
             $selfie_tooltip.css('pointerEvents', 'none');
         }
         
-        if (!is_touch && window_width > screen_tiny) {
-            $photos.on('mouseenter', show_selfie);
-            if (!is_ie) {
-                $photos.on('mouseleave', hide_selfie);
+        reset_selfie_interactions();
+    }
+    
+    function reset_selfie_interactions() {
+        if($photos != undefined) {
+            $photos.unbind('mouseenter', show_selfie);
+            $photos.unbind('mouseleave', hide_selfie);
+            $photos.unbind('click', show_selfie);
+            $selfie_modal.unbind('click', hide_selfie);
+            $selfie_tooltip.unbind('mouseleave', hide_selfie);
+        
+            if (!is_touch && window_width > screen_tiny) {
+                $photos.on('mouseenter', show_selfie);
+                if (!is_ie) {
+                    $photos.on('mouseleave', hide_selfie);
+                } else {
+                    $selfie_tooltip.on('mouseleave', hide_selfie);
+                }
             } else {
-                $selfie_tooltip.on('mouseleave', hide_selfie);
+                // mobile/small screen
+                $photos.on('click', show_selfie);
+                $selfie_modal.on('click', hide_selfie);
             }
-        } else {
-            // mobile/small screen
-            $photos.on('click', show_selfie);
-            $selfie_modal.on('click', hide_selfie);
         }
     }
     
@@ -872,15 +879,6 @@ $(document).ready(function() {
             $selfie_tooltip.empty().removeClass('animated fadeIn');
         }
     }
-    
-    function on_scroll() {
-        var scroll_position = $d.scrollTop();
-        if (scroll_position >= nav_height) {
-            $b.addClass('scrolling').removeClass('scrolling-off');
-        } else {
-            $b.addClass('scrolling-off').removeClass('scrolling');
-        }
-    }
 
 	
 	/* 
@@ -904,8 +902,8 @@ $(document).ready(function() {
 
         load_graphics();
         
-        setup_grid();
-
+        load_photo_grid();
+        
         if (!is_touch) {
             $w.on('scrollstop', on_scroll);
 //            $w.on('scroll', on_scroll);

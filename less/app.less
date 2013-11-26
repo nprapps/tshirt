@@ -571,8 +571,11 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
     padding-top: 33px;
     
     body.chapter-you & {
+        padding-bottom: 99px;
+        padding-left: 15px;
+        padding-right: 15px;
         background-color: #121212;
-        
+
         h2 {
             color: #e2e2e2;
             margin-bottom: 0.25em;
@@ -595,12 +598,6 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         }
     }
     
-    body.chapter-you & { 
-        padding-bottom: 99px;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
     h2 {
     	padding-bottom: 20px;
     	font-size: 17px;
@@ -1354,7 +1351,10 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 #seedtoselfie {
     .clearfix();
 
-    @media @screen-tiny-above { position: relative; }
+    @media @screen-tiny-above { 
+        position: relative;
+        padding-bottom: 200px;
+    }
 
     img {
         display: block;
