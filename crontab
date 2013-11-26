@@ -1,1 +1,1 @@
-* * * * */5 bash /home/ubuntu/apps/app-template/repository/run_on_server.sh fab $DEPLOYMENT_TARGET $BRANCH deploy >/var/log/tshirt-crontab.log 2>&1
+* * * * */5 ubuntu bash /home/ubuntu/apps/app-template/repository/run_on_server.sh fab $DEPLOYMENT_TARGET $BRANCH deploy >/var/log/tshirt-crontab.log 2>&1
