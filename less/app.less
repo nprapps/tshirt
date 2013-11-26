@@ -283,12 +283,24 @@ nav {
 	        	float: none; 
 	        	font-size: 12px; 
 	        	margin-right: 5px;
+	        	color: #888;
 	        	}
 	            @media @screen-small-above {
 	            	padding-top: 0;
 		            display: inline-block;
 		            margin-bottom: 0;
 		            line-height: @nav-height-desktop;
+		            color: #fff;
+		        }
+		        
+		        a {
+		        	.touch & {
+			        	color: #888;
+			        	@media @screen-small-above {
+			        		color: #fff;
+			        	}
+			        }
+			        
 		        }
 	
 	            &:hover {
