@@ -91,7 +91,7 @@ TWITTER = {
     'TEXT': PROJECT_NAME,
     'URL': SHARE_URL,
     # Will be resized to 120x120, can't be larger than 1MB
-    'IMAGE_URL': ''
+    'IMAGE_URL': 'http://apps.npr.org/tshirt/img/social-thumb.jpg'
 }
 
 FACEBOOK = {
@@ -110,7 +110,7 @@ GOOGLE = {
 }
 
 NPR_DFP = {
-    'STORY_ID': '203618536',
+    'STORY_ID': '246744370',
     'TARGET': 'News_Business_Your_Money',
     'ENVIRONMENT': 'NPRTEST',
     'TESTSERVER': 'true'
