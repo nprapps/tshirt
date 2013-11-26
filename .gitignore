@@ -46,3 +46,4 @@ data/orders.json
 .coverage-html/
 www/data/photos.json
 data/photos.csv
+www/img/s2s-instagram-*
