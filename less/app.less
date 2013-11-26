@@ -604,6 +604,9 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 				}
 				
 			}
+			.touch & {
+				p {display: none;}
+			}
 	    }
 	    
 	    .about-callout {
@@ -1278,7 +1281,7 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
         img {
             max-width: 100%;
             height: auto;
-            margin: 0 auto;
+            @media @screen-medium-above { margin: 0 auto;}
             display: block;
         }
         .caption {
@@ -1742,7 +1745,12 @@ body.chapter-title nav ul#nav-secondary > li.nav-title { display: none; }
 			padding-top: 150px;
 			}
 		#title {padding-top: 0;}
-		#about {padding-top: 60px;}
+		#about {
+			padding-top: 60px;
+			@media @screen-small-above {
+				padding-top: 0;
+			}
+		}
 	}
 	
 	@media @screen-small-above {
