@@ -47,6 +47,7 @@ $(document).ready(function() {
     var is_touch = Modernizr.touch;
     var is_ie = $.browser.msie;
     var is_firefox = Modernizr.firefox;
+    var selfies_loaded = false;
     var supports_html5_video = Modernizr.video;
     var text_scrolled = false;
     var window_width;
@@ -57,7 +58,6 @@ $(document).ready(function() {
     var $d3_tshirt_phase = $('#tshirt-phase-d3');
     var d3_apparel_wages_data;
     var d3_tshirt_phase_data;
-    var selfie_data;
     
     //breakpoints
     var screen_tiny = 480;
@@ -397,10 +397,16 @@ $(document).ready(function() {
             }
         });
         
-        // make sure the filmstrips are the right size
         switch(new_chapter_name) {
+            // make sure the filmstrips are the right size
             case 'boxes':
                 size_filmstrip()
+                break;
+            // load selfie photo grid
+            case 'you':
+                if (!selfies_loaded) {
+                    load_photo_grid();
+                }
                 break;
         }
 
@@ -779,18 +785,18 @@ $(document).ready(function() {
      */
     function load_photo_grid() {
         $.getJSON('data/photos.json', function(data) {
-            selfie_data = data;
-            setup_photo_grid();
+            selfies_loaded = true;
+            setup_photo_grid(data);
         });
     }
 
-    function setup_photo_grid() {
+    function setup_photo_grid(data) {
         var photo_grid = '';
-        var num_photos = selfie_data.length;
+        var num_photos = data.length;
         
         for (var p = 0; p < num_photos; p++) {
             var new_item = '';
-            var this_photo = selfie_data[p];
+            var this_photo = data[p];
 
             new_item += '<div class="photo">';
 //            new_item += '<img src="http://stage-apps.npr.org' + this_photo.local_img_url + '" alt="' + this_photo.caption + '" />';
@@ -901,8 +907,6 @@ $(document).ready(function() {
         setup_css_animations();
 
         load_graphics();
-        
-        load_photo_grid();
         
         if (!is_touch) {
             $w.on('scrollstop', on_scroll);
