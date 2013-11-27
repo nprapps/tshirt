@@ -352,9 +352,6 @@ $(document).ready(function() {
 	    // analytics tracking
 	    _gaq.push(['_trackEvent', 'Navigation', 'Load Chapter', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
         
-	    // scroll page to the top
-        scroll_to_top();        
-
 	    // goto that chapter
 	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
@@ -384,11 +381,11 @@ $(document).ready(function() {
             }
 	    }
 	    
+	    // scroll page to the top
+        scroll_to_top();
+
 	    // init video
         setup_video(new_chapter_name);
-	    
-	    // load graphics for this particular chapter
-	    draw_charts();
 	    
 	    // reset the layers, stop any video that's playing
 	    if (!is_touch) {
@@ -407,6 +404,9 @@ $(document).ready(function() {
             }
         });
         
+	    // load graphics for this particular chapter
+	    draw_charts();
+	    
         switch(new_chapter_name) {
             // make sure the filmstrips are the right size
             case 'boxes':
@@ -422,6 +422,9 @@ $(document).ready(function() {
 
         // close the chapter nav
         close_nav();
+        
+        // trigger chapter nav prompts
+        on_scroll();
 	}
 
 	function close_nav() {
@@ -479,10 +482,7 @@ $(document).ready(function() {
     });
 
     function scroll_to_top() {
-        $.smoothScroll({
-        	speed: 10,
-            scrollTarget: '#top'
-        });
+        $w.scrollTop(0);
     }
 
 
