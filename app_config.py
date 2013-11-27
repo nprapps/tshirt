@@ -18,8 +18,8 @@ PROJECT_NAME = 'Planet Money Makes A T-Shirt'
 
 # Project name in urls
 # Use dashes, not underscores!
-PROJECT_SLUG = 'temporary-tshirt-preview'
-#PROJECT_SLUG = 'tshirt'
+#PROJECT_SLUG = 'temporary-tshirt-preview'
+PROJECT_SLUG = 'tshirt'
 
 # The name of the repository containing the source
 REPOSITORY_NAME = 'tshirt'
