@@ -814,7 +814,8 @@ $(document).ready(function() {
         var photo_grid = '';
         var num_photos = data.length;
         
-        for (var p = 0; p < num_photos; p++) {
+        // reversing the loop for reverse cron
+        for (var p = num_photos - 1; p >= 0 ; p--) {
             var new_item = '';
             var this_photo = data[p];
 
