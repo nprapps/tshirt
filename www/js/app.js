@@ -147,7 +147,7 @@ $(document).ready(function() {
 
     	if (chapter != 'about') {
 			$btn_play.on('click', function() {
-				console.log(chapter + ' play button clicked');
+//				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
 				var $this_player = $f($this_iframe);
 				
@@ -226,7 +226,7 @@ $(document).ready(function() {
             var player_ready = false;
             
             $player.addEvent('ready', function() {
-                console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
+//                console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
                 
                 // pause looping video when vimeo plays
@@ -244,7 +244,7 @@ $(document).ready(function() {
                             $player.api('getDuration', function(duration) {
                                 if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false ) {
                                     scroll_to_explainer();
-                                    console.log(time + '/' + duration);
+//                                    console.log(time + '/' + duration);
                                     text_scrolled = true;
                                 }
                             });
@@ -254,7 +254,7 @@ $(document).ready(function() {
                 
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
-                    console.log('video finished');
+//                    console.log('video finished');
 
                     _gaq.push(['_trackEvent', 'Video', 'Finish Video', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 
@@ -343,7 +343,7 @@ $(document).ready(function() {
             }
         }
         
-        console.log('new chapter: ' + new_chapter_name);
+//        console.log('new chapter: ' + new_chapter_name);
 
 	    // set global vars
 	    current_chapter = new_chapter_name;
@@ -398,7 +398,7 @@ $(document).ready(function() {
             
             if (this_title_chapter == new_chapter_name) {
                 v.play();
-                console.log(this_title_chapter);
+//                console.log(this_title_chapter);
             } else {
                 v.pause();
             }
@@ -449,7 +449,7 @@ $(document).ready(function() {
 	
 	function goto_next_chapter() {
         var next_chapter = chapters[( current_chapter_id + 1)];
-	    console.log('advancing to chapter: ' + next_chapter);
+//	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
     }
 	
