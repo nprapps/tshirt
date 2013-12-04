@@ -26,7 +26,16 @@ tshirt
 What is this?
 -------------
 
-**Describe tshirt here.**
+NPR's Planet Money wanted to see the hidden world behind clothes sold in this country, so they decided to make a T-shirt. They wanted to make an ordinary shirt like the vast majority of the shirts sold in this country &mdash; not organic cotton, not hand-sewn in the United States.
+
+See the live app &mdash; combining video, text, photos and graphics &mdash; here: [http://apps.npr.org/tshirt/](http://apps.npr.org/tshirt/)
+
+This is a single-page app, using the following key libraries:
+* [Hasher](https://github.com/millermedeiros/hasher/) to manage page state
+* [Froogaloop](https://github.com/vimeo/player-api/tree/master/javascript) to interface with the Vimeo API
+* [D3](http://d3js.org/) for charts
+* [SmoothScroll](https://github.com/kswedberg/jquery-smooth-scroll) for page scrolling
+* [FitVids.js](http://fitvidsjs.com) for video resizing
 
 Assumptions
 -----------
