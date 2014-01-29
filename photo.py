@@ -43,10 +43,13 @@ def parse_photo_csv():
         if photo['moderated'] != '':
             r = requests.get(photo['remote_img_url'])
             if r.status_code == 200:
-                p = Photo(**photo)
-                payload.append(p.__dict__)
-                with open('www/img/s2s-instagram-%s' % p.local_img_id, 'wb') as writefile:
-                    writefile.write(r.content)
+                try:
+                    p = Photo(**photo)
+                    payload.append(p.__dict__)
+                    with open('www/img/s2s-instagram-%s' % p.local_img_id, 'wb') as writefile:
+                        writefile.write(r.content)
+                except IndexError:
+                    print "! Error: Photo %s has issues with image location." % (photo['url'])
             else:
                 print "! Error: Photo %s does not have an image file." % (photo['url'])
         else:
