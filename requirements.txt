@@ -3,7 +3,7 @@ Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
 cssmin==0.1.4
-dulwich==0.8.7
+dulwich
 envoy==0.0.2
 nose==1.2.1
 odict==1.5.1
