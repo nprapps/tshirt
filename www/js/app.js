@@ -242,7 +242,8 @@ $(document).ready(function() {
                         // skip ahead to the explainer text at a particular cuepoint
                         $player.api('getCurrentTime', function(time) {
                             $player.api('getDuration', function(duration) {
-                                if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false ) {
+                                if ((duration - time <= video_advance_cuepoint) && (duration > 0) && text_scrolled == false && (duration !== time)) {
+                                    console.log(duration, time, video_advance_cuepoint)
                                     scroll_to_explainer();
 //                                    console.log(time + '/' + duration);
                                     text_scrolled = true;
@@ -470,10 +471,12 @@ $(document).ready(function() {
     function scroll_to_explainer() {
         var scroll_target = '#' + current_chapter + ' .explainer';
 
-        $.smoothScroll({
-        	speed: 2100,
-            scrollTarget: scroll_target
-        });
+        if (!text_scrolled) {
+            $.smoothScroll({
+                speed: 2100,
+                scrollTarget: scroll_target
+            });
+        }
     }
 
     $nav_chapter_title_prompt.find('h4').on('click', function() {
