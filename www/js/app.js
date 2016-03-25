@@ -35,12 +35,12 @@ $(document).ready(function() {
     var small_nav_height = 54;
     var small_nav_height_open = 328;
     var video_advance_cuepoint = 5;
-    
+
     // status vars
     Modernizr.addTest('firefox', function () {
         return !!navigator.userAgent.match(/firefox/i);
 	});
-    
+
     var autoplay_video = false;
     var current_chapter_id = 0;
     var current_chapter = chapters[current_chapter_id];
@@ -58,7 +58,7 @@ $(document).ready(function() {
     var $d3_tshirt_phase = $('#tshirt-phase-d3');
     var d3_apparel_wages_data;
     var d3_tshirt_phase_data;
-    
+
     //breakpoints
     var screen_tiny = 480;
     var screen_small = 768;
@@ -77,16 +77,16 @@ $(document).ready(function() {
         var h_video;
         var w_video_optimal;
         var h_video_optimal;
-        
+
         window_width = $w.width();
         window_height = $w.height();
-        
+
         // calculate optimal width if height is constrained to window height
         w_optimal = (window_height * video_aspect_width) / video_aspect_height;
-        
+
         // calculate optimal height if width is constrained to window width
         h_optimal = (window_width * video_aspect_height) / video_aspect_width;
-        
+
         // decide whether to go with optimal height or width
         if (w_optimal > window_width) {
             w = w_optimal;
@@ -97,10 +97,10 @@ $(document).ready(function() {
         }
         w_offset = (window_width - w) / 2;
         h_offset = (window_height - h) / 2;
-        
+
 		$title_video.width(w + 'px').height(h + 'px');
 		$title_video.css('margin', h_offset + 'px ' + w_offset + 'px');
-		
+
         // size the chapter video: must be fully visible onscreen -- no negative margins
         w_video_optimal = ((window_height - nav_height) * video_aspect_width) / video_aspect_height;
         h_video_optimal = (window_width * video_aspect_height) / video_aspect_width;
@@ -120,17 +120,17 @@ $(document).ready(function() {
 	        $video_inner_wrapper.width(w_video + 'px').height(h_video + 'px');
 			$layer_media.height(window_height);
 	     }
-	     
+
 	     // resize the cotton filmstrip
 	     size_filmstrip();
 
         // redraw the charts
         draw_charts();
-        
+
         // YOU selfie events
         reset_selfie_interactions();
     }
-    
+
     function on_scroll() {
         var scroll_position = $d.scrollTop();
         if (scroll_position >= nav_height) {
@@ -150,10 +150,10 @@ $(document).ready(function() {
 //				console.log(chapter + ' play button clicked');
 				var $this_iframe = $('#video-' + current_chapter)[0];
 				var $this_player = $f($this_iframe);
-				
+
 				$this_player.api('play');
                 $chapter.removeClass('video-loaded').addClass('video-playing');
-                
+
                 _gaq.push(['_trackEvent', 'Video', 'Click Play Button', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 
 				if (!is_touch) {
@@ -161,7 +161,7 @@ $(document).ready(function() {
     			}
 				close_nav();
 			});
-			
+
 			$btn_explain.on('click', function() {
 			    _gaq.push(['_trackEvent', 'Navigation', 'Click Explainer Prompt In Navbar', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 				scroll_to_explainer();
@@ -169,27 +169,27 @@ $(document).ready(function() {
 		} else { // about
 		    // do something else?
 		}
-		
+
 		//firefox check
         if (!is_firefox){
-            
-            // append titlecard videos, where applicable 
+
+            // append titlecard videos, where applicable
 	        if (COPY[chapter] != undefined) {
 	            if (COPY[chapter]['loop_video_mp4'].length > 0 && !is_touch && supports_html5_video) { // desktops only
 	                var video_tag = '';
-	        
+
 	                video_tag += '<video class="title-video animated" poster="' + COPY[chapter]['loop_video_poster'] + '" preload="auto" loop="">';
 	                video_tag += '<source src="' + COPY[chapter]['loop_video_mp4'] + '" type="video/mp4">';
 	                video_tag += '</video>';
-	            
+
 	                $chapter.find('.layer-media').prepend(video_tag);
 	                $chapter.find('.title-video').get(0).pause();
 	            }
 	        }
         }
-		
+
     }
-    
+
     function replace_iframe(video, url) {
         /* feature detection: http://stackoverflow.com/questions/700499/change-iframe-source-in-ie-using-javascript */
         var this_video = document.getElementById(video);
@@ -204,38 +204,38 @@ $(document).ready(function() {
             }
         }
     }
-    
+
     function setup_video(chapter) {
         // remove existing videos
         $layers.removeClass('video-loaded').removeClass('video-playing');
         for (var i = 0; i < chapters.length; i++) {
             replace_iframe('video-' + chapters[i], '');
-            
+
         }
 
         text_scrolled = false;
-        
+
         if (chapter != 'about') {
         	// add new video (if this is a chapter that has video
-            var video_path = 'http://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
+            var video_path = 'https://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
             replace_iframe('video-' + chapter, video_path);
 
             var $iframe = $('#video-' + chapter)[0];
             var $player = $f($iframe);
-            
+
             var player_ready = false;
-            
+
             $player.addEvent('ready', function() {
 //                console.log(chapter + ' player ready. autoplay: ' + autoplay_video);
                 $('section.show').addClass('video-loaded');
-                
+
                 // pause looping video when vimeo plays
                 $player.addEvent('play', function() {
                     if ($('section.show').find('.title-video').length > 0) {
                         $('section.show').find('.title-video')[0].pause();
                     }
                 });
-            
+
                 // check play progress
                 if (chapter != 'title' && !is_touch) {
                     $player.addEvent('playProgress', function() {
@@ -251,7 +251,7 @@ $(document).ready(function() {
                         });
                     });
                 }
-                
+
                 //show question at the end of a video
                 $player.addEvent('finish', function() {
 //                    console.log('video finished');
@@ -271,7 +271,7 @@ $(document).ready(function() {
                         text_scrolled = false;
                     }
                 });
-        
+
                 if (autoplay_video && !is_touch) {
                     $('section.show').find('.btn-play').trigger('click');
                     autoplay_video = false;
@@ -280,7 +280,7 @@ $(document).ready(function() {
             $('#' + chapter).find('.video-wrapper').fitVids();
         }
     }
-    
+
 	/*
 	 * Chapter navigation
 	 */
@@ -305,10 +305,10 @@ $(document).ready(function() {
             scroll_to_top();
         });
 	}
-	
+
 	function get_chapter_id(chapter_name) {
 	    var chapter_id;
-	    
+
         for (var i = 0; i < chapters.length; i++) {
             if (chapter_name == chapters[i]) {
                 chapter_id = i;
@@ -317,15 +317,15 @@ $(document).ready(function() {
         }
         return chapter_id;
 	}
-	
+
 	function get_chapter_name(chapter_id) {
 	    return chapters[chapter_id];
 	}
-	
+
     function goto_chapter(new_hash){
         var new_chapter_id;
         var new_chapter_name;
-        
+
         if (new_hash.length == 0) {
             new_chapter_id = 0;
             new_chapter_name = chapters[new_chapter_id];
@@ -333,7 +333,7 @@ $(document).ready(function() {
         } else {
             // check if this is a legit hash
             new_chapter_id = get_chapter_id(new_hash);
-            
+
             if (new_chapter_id != null && new_chapter_id != undefined) {
                 new_chapter_name = new_hash;
             } else {
@@ -342,20 +342,20 @@ $(document).ready(function() {
                 hasher.replaceHash(chapters[new_chapter_id]);
             }
         }
-        
+
 //        console.log('new chapter: ' + new_chapter_name);
 
 	    // set global vars
 	    current_chapter = new_chapter_name;
 	    current_chapter_id = new_chapter_id;
-	    
+
 	    // analytics tracking
 	    _gaq.push(['_trackEvent', 'Navigation', 'Load Chapter', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
-        
+
 	    // goto that chapter
 	    $layers.removeClass('show');
 	    $('#' + new_chapter_name).addClass('show');
-	        
+
 	    // add a class to the body tag indicating what chapter we're in
 	    for (var i = 0; i < chapters.length; i++) {
 	        var this_chapter_name = chapters[i];
@@ -365,7 +365,7 @@ $(document).ready(function() {
                 $b.addClass(this_chapter_class);
 
                 if (this_chapter_name != 'title' && this_chapter_name != 'about') {
-                    if (this_chapter_name == 'you'){ 
+                    if (this_chapter_name == 'you'){
                         $nav_chapter_title.html('');
                     } else {
 	                    $nav_chapter_title.html('<strong>next chapter:<\/strong> ' + COPY[chapters[(new_chapter_id + 1)]]['fullname'] + '<i class="ico-right-arrow"></i>');
@@ -380,22 +380,22 @@ $(document).ready(function() {
                 $b.removeClass(this_chapter_class);
             }
 	    }
-	    
+
 	    // scroll page to the top
         scroll_to_top();
 
 	    // init video
         setup_video(new_chapter_name);
-	    
+
 	    // reset the layers, stop any video that's playing
 	    if (!is_touch) {
             $video_wrapper.removeClass('animated').removeClass('fadeOut').removeClass('backer');
         }
-        
+
         // stop titlecard videos for all chapters but this one
         $('.title-video').each(function(k, v) {
             var this_title_chapter = $('.title-video:eq(' + k + ')').parents('section').attr('id');
-            
+
             if (this_title_chapter == new_chapter_name) {
                 v.play();
 //                console.log(this_title_chapter);
@@ -403,10 +403,10 @@ $(document).ready(function() {
                 v.pause();
             }
         });
-        
+
 	    // load graphics for this particular chapter
 	    draw_charts();
-	    
+
         switch(new_chapter_name) {
             // make sure the filmstrips are the right size
             case 'boxes':
@@ -422,7 +422,7 @@ $(document).ready(function() {
 
         // close the chapter nav
         close_nav();
-        
+
         // trigger chapter nav prompts
         on_scroll();
 	}
@@ -433,12 +433,12 @@ $(document).ready(function() {
             $nav_item_wrapper.removeClass('backer');
         }
 	}
-	
+
 	function open_nav() {
         $nav.removeClass('slideOutDown').addClass('animated slideInUp backer');
         $nav_item_wrapper.addClass('backer');
 	}
-	
+
 	$nav_btn.on('click', function() {
 	    if ($nav.hasClass('slideInUp')) {
 	        close_nav();
@@ -446,13 +446,13 @@ $(document).ready(function() {
             open_nav();
 	    }
 	});
-	
+
 	function goto_next_chapter() {
         var next_chapter = chapters[( current_chapter_id + 1)];
 //	    console.log('advancing to chapter: ' + next_chapter);
 	    hasher.setHash(next_chapter);
     }
-	
+
 	$btn_next.on('click', function() {
 	    _gaq.push(['_trackEvent', 'Navigation', 'Click Footer', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 	    goto_next_chapter()
@@ -462,7 +462,7 @@ $(document).ready(function() {
         _gaq.push(['_trackEvent', 'Navigation', 'Click Next Chapter In Navbar', APP_CONFIG.PROJECT_NAME, current_chapter_id]);
 	    goto_next_chapter();
 	});
-	
+
 
 	/*
 	 * Explainer text
@@ -493,10 +493,10 @@ $(document).ready(function() {
         var prefixes = [ '-webkit-', '-moz-', '-o-', '' ];
         var keyframes = '';
         var filmstrip_steps = 25;
-        
+
         var this_nav_height;
         var this_nav_height_open;
-        
+
         if (window_width < screen_small && is_touch){
         	this_nav_height = small_nav_height;
         	this_nav_height_open = small_nav_height_open;
@@ -504,7 +504,7 @@ $(document).ready(function() {
         	this_nav_height = nav_height;
         	this_nav_height_open = nav_height_open;
         }
-        
+
     	for (var i = 0; i < prefixes.length; i++) {
             keyframes += '@' + prefixes[i] + 'keyframes slideOutDown {';
             keyframes += '0% { height: ' + this_nav_height_open + 'px; }';
@@ -515,17 +515,17 @@ $(document).ready(function() {
             keyframes += '0% { height: ' + this_nav_height + 'px; }';
             keyframes += '100% { height: ' + this_nav_height_open + 'px; }';
             keyframes += '}';
-            
+
             keyframes += '@' + prefixes[i] + 'keyframes fadeIn {';
             keyframes += '0% { opacity: 0; }';
             keyframes += '100% { opacity: 1; }';
             keyframes += '}';
-            
+
             keyframes += '@' + prefixes[i] + 'keyframes fadeOut {';
             keyframes += '0% { opacity: 1; }';
             keyframes += '100% { opacity: 0; }';
             keyframes += '}';
-            
+
             var filmstrip = '';
             for (var f = 0; f < filmstrip_steps; f++) {
                 var current_pct = f * (100/filmstrip_steps);
@@ -533,23 +533,23 @@ $(document).ready(function() {
             }
             keyframes += '@' + prefixes[i] + 'keyframes filmstrip {' + filmstrip + '}';
 		}
-        
+
         var s = document.createElement('style');
         s.innerHTML = keyframes;
         $('head').append(s);
     }
-    
-    
-    /* 
-     * Filmstrip(s) 
+
+
+    /*
+     * Filmstrip(s)
      */
     function size_filmstrip() {
         var filmstrip_cotton_width = $filmstrip_cotton_wrapper.width();
         var filmstrip_cotton_height = Math.ceil((filmstrip_cotton_width * filmstrip_cotton_aspect_height) / filmstrip_cotton_aspect_width);
         $filmstrip_cotton.width(filmstrip_cotton_width + 'px').height(filmstrip_cotton_height + 'px');
     }
-    
-    
+
+
     /*
      * D3 Charts
      */
@@ -571,7 +571,7 @@ $(document).ready(function() {
             }
         });
     }
-    
+
     function draw_apparel_wages_graph() {
         var bar_height = 25;
         var bar_gap = 10;
@@ -579,25 +579,25 @@ $(document).ready(function() {
         var margin = {top: 0, right: 50, bottom: 25, left: 80};
         var width = $d3_apparel_wages.width() - margin.left - margin.right;
         var height = ((bar_height + bar_gap) * num_bars);
-        
+
         // clear out existing graphics
         reset_charts('apparel-wages');
 
         // remove placeholder table if it exists
         $d3_apparel_wages.find('table').remove();
-        
+
         var x = d3.scale.linear()
             .domain([0, d3.max(d3_apparel_wages_data, function(d) { return parseInt(d.min_wage); })])
             .range([0, width]);
 
         var y = d3.scale.linear()
             .range([height, 0]);
-        
+
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
             .ticks(5);
-            
+
         var x_axis_grid = function() { return xAxis; }
 
         var svg = d3.select('#apparel-wages-d3').append('svg')
@@ -605,7 +605,7 @@ $(document).ready(function() {
             .attr('height', height + margin.top + margin.bottom)
             .append('g')
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
+
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')')
@@ -628,7 +628,7 @@ $(document).ready(function() {
                 .attr("width", function(d){ return x(d.min_wage); })
                 .attr("height", bar_height)
                 .attr('class', function(d) { return d.country.toLowerCase() });
-        
+
         svg.append('g')
             .attr('class', 'amounts')
             .selectAll('text')
@@ -641,7 +641,7 @@ $(document).ready(function() {
                 .attr('text-anchor', 'start')
                 .attr('class', function(d) { return d.country.toLowerCase() })
                 .text(function(d) { return '$' + d.min_wage });
-        
+
         svg.append('g')
             .attr('class', 'country')
             .selectAll('text')
@@ -655,7 +655,7 @@ $(document).ready(function() {
                 .attr('class', function(d) { return d.country.toLowerCase() })
                 .text(function(d) { return d.country });
     }
-    
+
     function draw_tshirt_phase_graph() {
         var margin = {top: 0, right: 15, bottom: 25, left: 35};
         var width = $d3_tshirt_phase.width() - margin.left - margin.right;
@@ -666,20 +666,20 @@ $(document).ready(function() {
 
         // remove placeholder image if it exists
         $d3_tshirt_phase.find('img').remove();
-        
+
         var x = d3.time.scale()
             .range([0, width]);
 
         var y = d3.scale.linear()
             .range([height, 0]);
-            
+
         var formatAsPercentage = d3.formatPrefix('%',0);
 
         var xAxis = d3.svg.axis()
             .scale(x)
             .orient("bottom")
             .ticks(5);
-            
+
         var x_axis_grid = function() { return xAxis; }
 
         var yAxis = d3.svg.axis()
@@ -688,14 +688,14 @@ $(document).ready(function() {
             .tickFormat(function(d, i) {
                 return d + '%';
             });
-        
+
         var y_axis_grid = function() { return yAxis; }
-        
+
         var line = d3.svg.line()
             .interpolate('monotone')
             .x(function(d) { return x(d.year); })
             .y(function(d) { return y(d.count); });
-        
+
         // parse data into columns
         var lines = {};
         for (var column in d3_tshirt_phase_data[0]) {
@@ -715,16 +715,16 @@ $(document).ready(function() {
                 .attr('class', function(d, i) { return 'key-item key-' + i + ' ' + d.key.replace(' ', '-').toLowerCase(); });
         legend.append('b');
         legend.append('label')
-            .text(function(d) { 
+            .text(function(d) {
                 return d.key;
             });
-        
+
         var svg = d3.select('#tshirt-phase-d3').append('svg')
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            
+
         x.domain(d3.extent(d3_tshirt_phase_data, function(d) { return d.year; }));
 
         y.domain([
@@ -736,7 +736,7 @@ $(document).ready(function() {
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + height + ')')
             .call(xAxis);
-        
+
         svg.append('g')
             .attr('class', 'y axis')
             .call(yAxis);
@@ -766,11 +766,11 @@ $(document).ready(function() {
                 .attr('d', function(d) {
                     return line(d.value);
                 });
-    } 
-   
+    }
+
     function draw_charts() {
         // only draw charts for:
-        // 1) the current chapter 
+        // 1) the current chapter
         // 2) if the data has actually loaded
 	    switch(current_chapter) {
 	        case 'people':
@@ -783,7 +783,7 @@ $(document).ready(function() {
 	            break;
 	    }
     }
-    
+
     function reset_charts(caller) {
         if (caller != 'tshirt-phase') {
         // ^ clumsy, but i'm trying to keep graphs on the same page from zeroing each other out
@@ -791,7 +791,7 @@ $(document).ready(function() {
                 d3.select('#apparel-wages-d3').selectAll('svg').remove();
             }
         }
-        
+
         if (caller != 'apparel-wages') {
             if (d3.select('#tshirt-phase-d3').select('svg')[0][0] != null) {
                 d3.select('#tshirt-phase-d3').selectAll('svg').remove();
@@ -799,7 +799,7 @@ $(document).ready(function() {
             }
         }
     }
-    
+
     /*
      * SEED TO SELFIE - (YOU photo grid)
      */
@@ -813,7 +813,7 @@ $(document).ready(function() {
     function setup_photo_grid(data) {
         var photo_grid = '';
         var num_photos = data.length;
-        
+
         // reversing the loop for reverse cron
         for (var p = num_photos - 1; p >= 0 ; p--) {
             var new_item = '';
@@ -826,16 +826,16 @@ $(document).ready(function() {
 
             photo_grid += new_item;
         }
-        
+
         $seedtoselfie.prepend(photo_grid);
         $photos = $seedtoselfie.find('.photo');
         if (!is_ie) {
             $selfie_tooltip.css('pointerEvents', 'none');
         }
-        
+
         reset_selfie_interactions();
     }
-    
+
     function reset_selfie_interactions() {
         if($photos != undefined) {
             $photos.unbind('mouseenter', show_selfie);
@@ -843,7 +843,7 @@ $(document).ready(function() {
             $photos.unbind('click', show_selfie);
             $selfie_modal.unbind('click', hide_selfie);
             $selfie_tooltip.unbind('mouseleave', hide_selfie);
-        
+
             if (!is_touch && window_width > screen_tiny) {
                 $photos.on('mouseenter', show_selfie);
                 if (!is_ie) {
@@ -858,7 +858,7 @@ $(document).ready(function() {
             }
         }
     }
-    
+
     function show_selfie() {
         var $img = $(this).find('img:eq(0)');
         var img_src = $img.attr('src');
@@ -891,14 +891,14 @@ $(document).ready(function() {
                 tt_left = $seedtoselfie.width() - tt_width - tt_padding;
             }
             tt_top = img_position.top - tt_offset - tt_padding;
-    
+
             $selfie_tooltip.css('top', tt_top + 'px');
             $selfie_tooltip.css('left', tt_left + 'px');
             $selfie_tooltip.addClass('animated fadeIn');
         }
 
     }
-    
+
     function hide_selfie() {
         if (is_touch || window_width <= screen_tiny) {
             $selfie_modal.removeClass('animated fadeIn');
@@ -907,9 +907,9 @@ $(document).ready(function() {
         }
     }
 
-	
-	/* 
-	 * Setup functions 
+
+	/*
+	 * Setup functions
 	 */
     function setup() {
         window_width = $w.width();
@@ -923,19 +923,19 @@ $(document).ready(function() {
             setup_chapter_nav(chapters[i], i);
         }
         $title_video = $('.title-video');
-        
+
         // css animations
         setup_css_animations();
 
         load_graphics();
-        
+
         if (!is_touch) {
             $w.on('scrollstop', on_scroll);
 //            $w.on('scroll', on_scroll);
         }
         $w.on('resize', on_resize);
         on_resize();
-        
+
         //add hash change listener
         hasher.changed.add(goto_chapter);
         //add initialized listener (to grab initial value in case it is already set)
