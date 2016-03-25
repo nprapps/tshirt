@@ -100,19 +100,19 @@ def less():
         name = os.path.splitext(filename)[0]
         out_path = 'www/css/%s.less.css' % name
 
-        local('node_modules/bin/lessc %s %s' % (path, out_path))
+        local('node_modules/less/bin/lessc %s %s' % (path, out_path))
 
 def jst():
     """
     Render Underscore templates to a JST package.
     """
-    local('node_modules/bin/jst --template underscore jst www/js/templates.js')
+    local('node_modules/universal-jst/bin/jst.js --template underscore jst www/js/templates.js')
 
 def download_copy():
     """
     Downloads a Google Doc as an .xls file.
     """
-    base_url = 'https://docs.google.com/spreadsheet/pub?key=%s&output=xls'
+    base_url = 'https://docs.google.com/spreadsheets/d/%s/pub?output=xls'
     doc_url = base_url % app_config.COPY_GOOGLE_DOC_KEY
     local('curl -o data/copy.xls "%s"' % doc_url)
 

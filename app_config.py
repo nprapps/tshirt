@@ -78,7 +78,7 @@ DEBUG = True
 """
 COPY EDITING
 """
-COPY_GOOGLE_DOC_KEY = '0Ala-N4Y4VPXIdG5sUTJQYm1RRXFhZWRqZ2J6ZnBRNlE'
+COPY_GOOGLE_DOC_KEY = '1fWjzRN_tEu33xsKqUo_SnB12cFLjrWY_874gbks8s58'
 
 """
 SHARING
@@ -175,4 +175,3 @@ Run automated configuration
 DEPLOYMENT_TARGET = os.environ.get('DEPLOYMENT_TARGET', None)
 
 configure_targets(DEPLOYMENT_TARGET)
-
