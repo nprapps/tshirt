@@ -426,8 +426,8 @@ def deploy(remote='origin'):
     """
     require('settings', provided_by=[production, staging])
 
-    photo.get_photo_csv()
-    photo.parse_photo_csv()
+    # photo.get_photo_csv()
+    # photo.parse_photo_csv()
 
     if app_config.DEPLOY_TO_SERVERS:
         require('branch', provided_by=[stable, master, branch])
