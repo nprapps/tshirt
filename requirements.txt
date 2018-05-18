@@ -2,7 +2,7 @@ Fabric==1.4.3
 Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
-cssmin==0.1.4
+cssmin==0.2.0
 dulwich
 envoy==0.0.2
 nose==1.2.1
