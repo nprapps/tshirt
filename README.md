@@ -45,6 +45,7 @@ The following things are assumed to be true in this documentation.
 * You are running OSX.
 * You are using Python 2.7. (Probably the version that came OSX.)
 * You have [virtualenv](https://pypi.python.org/pypi/virtualenv) and [virtualenvwrapper](https://pypi.python.org/pypi/virtualenvwrapper) installed and working.
+* You have NPR's AWS credentials stored as environment variables locally.
 
 For more details on the technology stack used with the app-template, see our [development environment blog post](http://blog.apps.npr.org/2013/06/06/how-to-setup-a-developers-environment.html).
 
@@ -53,24 +54,26 @@ What's in here?
 
 The project contains the following folders and important files:
 
-* ``confs`` -- Server configuration files for nginx and uwsgi. Edit the templates then ``fab <ENV> render_confs``, don't edit anything in ``confs/rendered`` directly.
+* ``confs`` -- Server configuration files for nginx and uwsgi. Edit the templates then ``fab <ENV> servers.render_confs``, don't edit anything in ``confs/rendered`` directly.
 * ``data`` -- Data files, such as those used to generate HTML.
+* ``fabfile`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands for automating setup, deployment, data processing, etc.
 * ``etc`` -- Miscellaneous scripts and metadata for project bootstrapping.
 * ``jst`` -- Javascript ([Underscore.js](http://documentcloud.github.com/underscore/#template)) templates.
 * ``less`` -- [LESS](http://lesscss.org/) files, will be compiled to CSS and concatenated for deployment.
 * ``templates`` -- HTML ([Jinja2](http://jinja.pocoo.org/docs/)) templates, to be compiled locally.
 * ``tests`` -- Python unit tests.
 * ``www`` -- Static and compiled assets to be deployed. (a.k.a. "the output")
+* ``www/assets`` -- A symlink to an S3 bucket containing binary assets (images, audio).
 * ``www/live-data`` -- "Live" data deployed to S3 via cron jobs or other mechanisms. (Not deployed with the rest of the project.)
 * ``www/test`` -- Javascript tests and supporting files.
 * ``app.py`` -- A [Flask](http://flask.pocoo.org/) app for rendering the project locally.
 * ``app_config.py`` -- Global project configuration for scripts, deployment, etc.
 * ``copytext.py`` -- Code supporting the [Editing workflow](#editing-workflow)
 * ``crontab`` -- Cron jobs to be installed as part of the project.
-* ``fabfile.py`` -- [Fabric](http://docs.fabfile.org/en/latest/) commands automating setup and deployment.
 * ``public_app.py`` -- A [Flask](http://flask.pocoo.org/) app for running server-side code.
 * ``render_utils.py`` -- Code supporting template rendering.
 * ``requirements.txt`` -- Python requirements.
+* ``static.py`` -- Static Flask views used in both ``app.py`` and ``public_app.py``.
 
 Install requirements
 --------------------
@@ -86,20 +89,25 @@ Then install the project requirements:
 
 ```
 cd tshirt
-npm install less universal-jst -g --prefix node_modules
-mkvirtualenv --no-site-packages tshirt
+mkvirtualenv tshirt
 pip install -r requirements.txt
+npm install
+fab update
 ```
+
+**Problems installing requirements?** You may need to run the pip command as ``ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future pip install -r requirements.txt`` to work around an issue with OSX.
 
 Project secrets
 ---------------
 
 Project secrets should **never** be stored in ``app_config.py`` or anywhere else in the repository. They will be leaked to the client if you do. Instead, always store passwords, keys, etc. in environment variables and document that they are needed here in the README.
 
+Any environment variable that starts with ``$PROJECT_SLUG_`` will be automatically loaded when ``app_config.get_secrets()`` is called.
+
 Adding a template/view
 ----------------------
 
-A site can have any number of rendered templates (i.e. pages). Each will need a corresponding view. To create a new one:
+A site can have any number of rendered pages, each with a corresponding template and view. To create a new one:
 
 * Add a template to the ``templates`` directory. Ensure it extends ``_base.html``.
 * Add a corresponding view function to ``app.py``. Decorate it with a route to the page name, i.e. ``@app.route('/filename.html')``
@@ -112,7 +120,7 @@ A flask app is used to run the project locally. It will automatically recompile 
 
 ```
 workon tshirt
-python app.py
+fab app
 ```
 
 Visit [localhost:8000](http://localhost:8000) in your browser.
@@ -120,26 +128,65 @@ Visit [localhost:8000](http://localhost:8000) in your browser.
 Editing workflow
 -------------------
 
-The app is rigged up to Google Docs for a simple key/value store that provides an editing workflow.
+### COPY configuration
 
-View the sample copy spreadsheet [here](https://docs.google.com/spreadsheet/pub?key=0AlXMOHKxzQVRdHZuX1UycXplRlBfLVB0UVNldHJYZmc#gid=0). A few things to note:
+This app uses a Google Spreadsheet for a simple key/value store that provides an editing workflow.
+
+To access the Google doc, you'll need to create a Google API project via the [Google developer console](http://console.developers.google.com).
+
+Enable the Drive API for your project and create a "web application" client ID.
+
+For the redirect URIs use:
+
+* `http://localhost:8000/authenticate/`
+* `http://127.0.0.1:8000/authenticate`
+* `http://localhost:8888/authenticate/`
+* `http://127.0.0.1:8888/authenticate`
+
+For the Javascript origins use:
+
+* `http://localhost:8000`
+* `http://127.0.0.1:8000`
+* `http://localhost:8888`
+* `http://127.0.0.1:8888`
+
+You'll also need to set some environment variables:
+
+```
+export GOOGLE_OAUTH_CLIENT_ID="something-something.apps.googleusercontent.com"
+export GOOGLE_OAUTH_CONSUMER_SECRET="bIgLonGStringOfCharacT3rs"
+export AUTHOMATIC_SALT="jAmOnYourKeyBoaRd"
+```
+
+Note that `AUTHOMATIC_SALT` can be set to any random string. It's just cryptographic salt for the authentication library we use.
+
+Once set up, run `fab app` and visit `http://localhost:8000` in your browser. If authentication is not configured, you'll be asked to allow the application for read-only access to Google drive, the account profile, and offline access on behalf of one of your Google accounts. This should be a one-time operation across all app-template projects.
+
+It is possible to grant access to other accounts on a per-project basis by changing `GOOGLE_OAUTH_CREDENTIALS_PATH` in `app_config.py`.
+
+
+### COPY editing
+
+View the [sample copy spreadsheet](https://docs.google.com/spreadsheet/pub?key=0AlXMOHKxzQVRdHZuX1UycXplRlBfLVB0UVNldHJYZmc#gid=0).
+
+This document is specified in ``app_config`` with the variable ``COPY_GOOGLE_DOC_KEY``. To use your own spreadsheet, change this value to reflect your document's key. (The long string of random looking characters in your Google Docs URL. For example: ``1DiE0j6vcCm55Dyj_sV5OJYoNXRRhn_Pjsndba7dVljo``)
+
+A few things to note:
 
 * If there is a column called ``key``, there is expected to be a column called ``value`` and rows will be accessed in templates as key/value pairs
 * Rows may also be accessed in templates by row index using iterators (see below)
 * You may have any number of worksheets
 * This document must be "published to the web" using Google Docs' interface
 
-This document is specified in ``app_config`` with the variable ``COPY_GOOGLE_DOC_KEY``. To use your own spreadsheet, change this value to reflect your document's key (found in the Google Docs URL after ``&key=``).
-
 The app template is outfitted with a few ``fab`` utility functions that make pulling changes and updating your local data easy.
 
 To update the latest document, simply run:
 
 ```
-fab update_copy
+fab text.update
 ```
 
-Note: ``update_copy`` runs automatically whenever ``fab render`` is called.
+Note: ``text.update`` runs automatically whenever ``fab render`` is called.
 
 At the template level, Jinja maintains a ``COPY`` object that you can use to access your values in the templates. Using our example sheet, to use the ``byline`` key in ``templates/index.html``:
 
@@ -160,6 +207,18 @@ You may also access rows using iterators. In this case, the column headers of th
 {{ row.column_one_header }}
 {{ row.column_two_header }}
 {% endfor %}
+```
+
+When naming keys in the COPY document, please attempt to group them by common prefixes and order them by appearance on the page. For instance:
+
+```
+title
+byline
+about_header
+about_body
+about_url
+download_label
+download_url
 ```
 
 Run Javascript tests
@@ -240,7 +299,7 @@ To install your crontab set `INSTALL_CRONTAB` to `True` in `app_config.py`. Cron
 Install web services
 ---------------------
 
-Web services are configured in the `confs/` folder. 
+Web services are configured in the `confs/` folder.
 
 Running ``fab setup_server`` will deploy your confs if you have set ``DEPLOY_TO_SERVERS`` and ``DEPLOY_WEB_SERVICES`` both to ``True`` at the top of ``app_config.py``.
 
