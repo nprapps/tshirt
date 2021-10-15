@@ -1,47 +1,61 @@
 #!/usr/bin/env python
+# _*_ coding:utf-8 _*_
+import codecs
+from datetime import datetime
+import json
+import logging
+import time
+import urllib
+import subprocess
 
-from cssmin import cssmin
 from flask import Markup, g, render_template, request
 from slimit import minify
+from smartypants import smartypants
 
 import app_config
 import copytext
 
-CSS_HEADER = '''
-/*
- * Looking for the full, uncompressed source? Try here:
- *
- * https://github.com/nprapps/%s
- */
-''' % app_config.REPOSITORY_NAME
+logging.basicConfig(format=app_config.LOG_FORMAT)
+logger = logging.getLogger(__name__)
+logger.setLevel(app_config.LOG_LEVEL)
 
-JS_HEADER = '''
-/*
- * Looking for the full, uncompressed source? Try here:
- *
- * https://github.com/nprapps/%s
- */
-''' % app_config.REPOSITORY_NAME
+class BetterJSONEncoder(json.JSONEncoder):
+    """
+    A JSON encoder that intelligently handles datetimes.
+    """
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            encoded_object = obj.isoformat()
+        else:
+            encoded_object = json.JSONEncoder.default(self, obj)
+
+        return encoded_object
 
 class Includer(object):
     """
     Base class for Javascript and CSS psuedo-template-tags.
+
+    See `make_context` for an explanation of `asset_depth`.
     """
-    def __init__(self):
+    def __init__(self, asset_depth=0):
         self.includes = []
         self.tag_string = None
+        self.asset_depth = asset_depth
 
     def push(self, path):
-            self.includes.append(path)
+        self.includes.append(path)
 
-            return ""
+        return ''
 
     def _compress(self):
         raise NotImplementedError()
 
     def _relativize_path(self, path):
         relative_path = path
-        depth = len(request.path.split('/')) - 2
+        if relative_path.startswith('www/'):
+            relative_path = relative_path[4:]
+
+        depth = len(request.path.split('/')) - (2 + self.asset_depth)
 
         while depth > 0:
             relative_path = '../%s' % relative_path
@@ -51,18 +65,24 @@ class Includer(object):
 
     def render(self, path):
         if getattr(g, 'compile_includes', False):
-            out_filename = 'www/%s' % path
+            if path in g.compiled_includes:
+                timestamp_path = g.compiled_includes[path]
+            else:
+                # Add a querystring to the rendered filename to prevent caching
+                timestamp_path = '%s?%i' % (path, int(time.time()))
 
-            if out_filename not in g.compiled_includes:
-                print 'Rendering %s' % out_filename
+                out_path = 'www/%s' % path
 
-                with open(out_filename, 'w') as f:
-                    f.write(self._compress())
+                if path not in g.compiled_includes:
+                    logger.info('Rendering %s' % out_path)
 
-            # See "fab render"
-            g.compiled_includes.append(out_filename)
+                    with codecs.open(out_path, 'w', encoding='utf-8') as f:
+                        f.write(self._compress())
 
-            markup = Markup(self.tag_string % self._relativize_path(path))
+                # See "fab render"
+                g.compiled_includes[path] = timestamp_path
+
+            markup = Markup(self.tag_string % self._relativize_path(timestamp_path))
         else:
             response = ','.join(self.includes)
 
@@ -80,8 +100,8 @@ class JavascriptIncluder(Includer):
     """
     Psuedo-template tag that handles collecting Javascript and serving appropriate clean or compressed versions.
     """
-    def __init__(self):
-        Includer.__init__(self)
+    def __init__(self, *args, **kwargs):
+        Includer.__init__(self, *args, **kwargs)
 
         self.tag_string = '<script type="text/javascript" src="%s"></script>'
 
@@ -92,15 +112,19 @@ class JavascriptIncluder(Includer):
         for src in self.includes:
             src_paths.append('www/%s' % src)
 
-            with open('www/%s' % src) as f:
-                print '- compressing %s' % src
-                output.append(minify(f.read()))
+            with codecs.open('www/%s' % src, encoding='utf-8') as f:
+                if not src.endswith('.min.js'):
+                    logger.info('- compressing %s' % src)
+                    output.append(minify(f.read()))
+                else:
+                    logger.info('- appending already compressed %s' % src)
+                    output.append(f.read())
 
         context = make_context()
         context['paths'] = src_paths
 
-        header = render_template('_js_header.js', **context) 
-        output.insert(0, header) 
+        header = render_template('_js_header.js', **context)
+        output.insert(0, header)
 
         return '\n'.join(output)
 
@@ -108,8 +132,8 @@ class CSSIncluder(Includer):
     """
     Psuedo-template tag that handles collecting CSS and serving appropriate clean or compressed versions.
     """
-    def __init__(self):
-        Includer.__init__(self)
+    def __init__(self, *args, **kwargs):
+        Includer.__init__(self, *args, **kwargs)
 
         self.tag_string = '<link rel="stylesheet" type="text/css" href="%s" />'
 
@@ -120,22 +144,20 @@ class CSSIncluder(Includer):
 
         for src in self.includes:
 
-            if src.endswith('less'):
-                src_paths.append('%s' % src)
-                src = src.replace('less', 'css') # less/example.less -> css/example.css
-                src = '%s.less.css' % src[:-4]   # css/example.css -> css/example.less.css
-            else:
-                src_paths.append('www/%s' % src)
+            src_paths.append('%s' % src)
 
-            with open('www/%s' % src) as f:
-                print '- compressing %s' % src
-                output.append(cssmin(f.read()))
+            try:
+                compressed_src = subprocess.check_output(["node_modules/less/bin/lessc", "-x", src])
+                output.append(compressed_src)
+            except:
+                logger.error('It looks like "lessc" isn\'t installed. Try running: "npm install"')
+                raise
 
         context = make_context()
         context['paths'] = src_paths
 
-        header = render_template('_css_header.css', **context) 
-        output.insert(0, header) 
+        header = render_template('_css_header.css', **context)
+        output.insert(0, header)
 
 
         return '\n'.join(output)
@@ -154,16 +176,60 @@ def flatten_app_config():
 
     return config
 
-def make_context():
+def make_context(asset_depth=0):
     """
     Create a base-context for rendering views.
     Includes app_config and JS/CSS includers.
+
+    `asset_depth` indicates how far into the url hierarchy
+    the assets are hosted. If 0, then they are at the root.
+    If 1 then at /foo/, etc.
     """
     context = flatten_app_config()
 
-    context['COPY'] = copytext.Copy()
-    context['JS'] = JavascriptIncluder()
-    context['CSS'] = CSSIncluder()
+    try:
+        context['COPY'] = copytext.Copy(app_config.COPY_PATH)
+    except copytext.CopyException:
+        pass
+
+    context['JS'] = JavascriptIncluder(asset_depth=asset_depth)
+    context['CSS'] = CSSIncluder(asset_depth=asset_depth)
 
     return context
 
+def urlencode_filter(s):
+    """
+    Filter to urlencode strings.
+    """
+    if type(s) == 'Markup':
+        s = s.unescape()
+
+    # Evaulate COPY elements
+    if type(s) is not unicode:
+        s = unicode(s)
+
+    s = s.encode('utf8')
+    s = urllib.quote_plus(s)
+
+    return Markup(s)
+
+def smarty_filter(s):
+    """
+    Filter to smartypants strings.
+    """
+    if type(s) == 'Markup':
+        s = s.unescape()
+
+    # Evaulate COPY elements
+    if type(s) is not unicode:
+        s = unicode(s)
+
+
+    s = s.encode('utf-8')
+    s = smartypants(s)
+
+    try:
+        return Markup(s)
+    except:
+        logger.error('This string failed to encode: %s' % s)
+        return Markup(s)

@@ -8,12 +8,7 @@ They will be exposed to users. Use environment variables instead.
 See get_secrets() below for a fast way to access them.
 """
 
-import logging
 import os
-
-from authomatic.providers import oauth2
-from authomatic import Authomatic
-
 
 """
 NAMES
@@ -21,26 +16,25 @@ NAMES
 # Project name used for display
 PROJECT_NAME = 'Planet Money Makes A T-Shirt'
 
-# Project name to be used in urls
+# Project name in urls
 # Use dashes, not underscores!
 #PROJECT_SLUG = 'temporary-tshirt-preview'
 PROJECT_SLUG = 'tshirt'
-
-# Project name to be used in file paths
-PROJECT_FILENAME = 'tshirt'
 
 # The name of the repository containing the source
 REPOSITORY_NAME = 'tshirt'
 REPOSITORY_URL = 'git@github.com:nprapps/%s.git' % REPOSITORY_NAME
 REPOSITORY_ALT_URL = None # 'git@bitbucket.org:nprapps/%s.git' % REPOSITORY_NAME'
 
-# Project name used for assets rig
-# Should stay the same, even if PROJECT_SLUG changes
-ASSETS_SLUG = 'tshirt'
+# The name to be used in paths on the server
+PROJECT_FILENAME = 'tshirt'
 
 """
 DEPLOYMENT
 """
+PRODUCTION_S3_BUCKETS = ['apps.npr.org', 'apps2.npr.org']
+STAGING_S3_BUCKETS = ['stage-apps.npr.org']
+
 PRODUCTION_S3_BUCKET = {
     'bucket_name': 'apps.npr.org',
     'region': 'us-east-1'
@@ -51,18 +45,8 @@ STAGING_S3_BUCKET = {
     'region': 'us-east-1'
 }
 
-ASSETS_S3_BUCKET = {
-    'bucket_name': 'assets.apps.npr.org',
-    'region': 'us-east-1'
-}
-
-DEFAULT_MAX_AGE = 20
-
-# PRODUCTION_SERVERS = ['54.245.114.14']
-# STAGING_SERVERS = ['50.112.92.131']
-
-PRODUCTION_SERVERS = ['cron.nprapps.org']
-STAGING_SERVERS = ['cron-staging.nprapps.org']
+PRODUCTION_SERVERS = ['54.245.114.14']
+STAGING_SERVERS = ['50.112.92.131']
 
 # Should code be deployed to the web/cron servers?
 DEPLOY_TO_SERVERS = False
@@ -82,6 +66,8 @@ DEPLOY_CRONTAB = False
 DEPLOY_SERVICES = False
 
 UWSGI_SOCKET_PATH = '/tmp/%s.uwsgi.sock' % PROJECT_FILENAME
+UWSGI_LOG_PATH = '/var/log/%s.uwsgi.log' % PROJECT_FILENAME
+APP_LOG_PATH = '/var/log/%s.app.log' % PROJECT_FILENAME
 
 # Services are the server-side services we want to enable and configure.
 # A three-tuple following this format:
@@ -93,25 +79,24 @@ SERVER_SERVICES = [
 ]
 
 # These variables will be set at runtime. See configure_targets() below
-S3_BUCKET = None
-S3_BASE_URL = None
-S3_DEPLOY_URL = None
+S3_BUCKETS = []
+S3_BASE_URL = ''
 SERVERS = []
-SERVER_BASE_URL = None
-SERVER_LOG_PATH = None
+SERVER_BASE_URL = ''
 DEBUG = True
+
+DEFAULT_MAX_AGE = 20
 
 """
 COPY EDITING
 """
 COPY_GOOGLE_DOC_KEY = '1fWjzRN_tEu33xsKqUo_SnB12cFLjrWY_874gbks8s58'
-COPY_PATH = 'data/copy.xlsx'
 
 """
 SHARING
 """
 PROJECT_DESCRIPTION = 'The world behind a simple shirt, in five chapters.'
-SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKET['bucket_name'], PROJECT_SLUG)
+SHARE_URL = 'http://%s/%s/' % (PRODUCTION_S3_BUCKETS[0], PROJECT_SLUG)
 
 TWITTER = {
     'TEXT': PROJECT_NAME,
@@ -135,10 +120,6 @@ GOOGLE = {
     'IMAGE_URL': TWITTER['IMAGE_URL']
 }
 
-"""
-ADS
-"""
-
 NPR_DFP = {
     'STORY_ID': '246744370',
     'TARGET': 'News_Business_Your_Money',
@@ -149,42 +130,7 @@ NPR_DFP = {
 """
 SERVICES
 """
-NPR_GOOGLE_ANALYTICS = {
-    'ACCOUNT_ID': 'UA-5828686-4',
-    'DOMAIN': PRODUCTION_S3_BUCKET['bucket_name'],
-    'TOPICS': '[1003,1013]',
-}
-
-VIZ_GOOGLE_ANALYTICS = {
-    'ACCOUNT_ID': 'UA-5828686-75'
-}
-
-# DISQUS_API_KEY = 'tIbSzEhGBE9NIptbnQWn4wy1gZ546CsQ2IHHtxJiYAceyyPoAkDkVnQfCifmCaQW'
-# DISQUS_UUID = '$NEW_DISQUS_UUID'
-
-"""
-OAUTH
-"""
-
-GOOGLE_OAUTH_CREDENTIALS_PATH = '~/.google_oauth_credentials'
-
-authomatic_config = {
-    'google': {
-        'id': 1,
-        'class_': oauth2.Google,
-        'consumer_key': os.environ.get('GOOGLE_OAUTH_CLIENT_ID'),
-        'consumer_secret': os.environ.get('GOOGLE_OAUTH_CONSUMER_SECRET'),
-        'scope': ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/userinfo.email'],
-        'offline': True,
-    },
-}
-
-authomatic = Authomatic(authomatic_config, os.environ.get('AUTHOMATIC_SALT'))
-
-"""
-Logging
-"""
-LOG_FORMAT = '%(levelname)s:%(name)s:%(asctime)s: %(message)s'
+GOOGLE_ANALYTICS_ID = 'UA-5828686-4'
 
 """
 Utilities
@@ -193,12 +139,12 @@ def get_secrets():
     """
     A method for accessing our secrets.
     """
+    secrets = ['EXAMPLE',]
+
     secrets_dict = {}
 
-    for k,v in os.environ.items():
-        if k.startswith(PROJECT_SLUG):
-            k = k[len(PROJECT_SLUG) + 1:]
-            secrets_dict[k] = v
+    for secret in secrets:
+        secrets_dict[secret] = os.environ.get(secret, None)
 
     return secrets_dict
 
@@ -207,47 +153,31 @@ def configure_targets(deployment_target):
     Configure deployment targets. Abstracted so this can be
     overriden for rendering before deployment.
     """
-    global S3_BUCKET
+    global S3_BUCKETS
     global S3_BASE_URL
-    global S3_DEPLOY_URL
     global SERVERS
     global SERVER_BASE_URL
-    global SERVER_LOG_PATH
     global DEBUG
     global DEPLOYMENT_TARGET
-    global LOG_LEVEL
-    global ASSETS_MAX_AGE
 
     if deployment_target == 'production':
-        S3_BUCKET = PRODUCTION_S3_BUCKET
-        S3_BASE_URL = '//%s/%s' % (S3_BUCKET, PROJECT_SLUG)
-        S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET, PROJECT_SLUG)
+        S3_BUCKETS = PRODUCTION_S3_BUCKETS
+        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKETS[0], PROJECT_SLUG)
         SERVERS = PRODUCTION_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
-        SERVER_LOG_PATH = '/var/log/%s' % PROJECT_FILENAME
-        LOG_LEVEL = logging.WARNING
         DEBUG = False
-        ASSETS_MAX_AGE = 86400
     elif deployment_target == 'staging':
-        S3_BUCKET = STAGING_S3_BUCKET
-        S3_BASE_URL = '//%s/%s' % (S3_BUCKET, PROJECT_SLUG)
-        S3_DEPLOY_URL = 's3://%s/%s' % (S3_BUCKET, PROJECT_SLUG)
+        S3_BUCKETS = STAGING_S3_BUCKETS
+        S3_BASE_URL = 'http://%s/%s' % (S3_BUCKETS[0], PROJECT_SLUG)
         SERVERS = STAGING_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
-        SERVER_LOG_PATH = '/var/log/%s' % PROJECT_FILENAME
-        LOG_LEVEL = logging.DEBUG
         DEBUG = True
-        ASSETS_MAX_AGE = 20
     else:
-        S3_BUCKET = None
+        S3_BUCKETS = []
         S3_BASE_URL = 'http://127.0.0.1:8000'
-        S3_DEPLOY_URL = None
         SERVERS = []
         SERVER_BASE_URL = 'http://127.0.0.1:8001/%s' % PROJECT_SLUG
-        SERVER_LOG_PATH = '/tmp'
-        LOG_LEVEL = logging.DEBUG
         DEBUG = True
-        ASSETS_MAX_AGE = 20
 
     DEPLOYMENT_TARGET = deployment_target
 

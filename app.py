@@ -1,110 +1,51 @@
 #!/usr/bin/env python
+# _*_ coding:utf-8 _*_
+"""
+Example application views.
 
-import json
-from mimetypes import guess_type
-import urllib
-
-import envoy
-from flask import Flask, Markup, abort, render_template
+Note that `render_template` is wrapped with `make_response` in all application
+routes. While not necessary for most Flask apps, it is required in the
+App Template for static publishing.
+"""
 
 import app_config
-import copytext
-from render_utils import flatten_app_config, make_context
+import logging
+import oauth
+import static
 
-app = Flask(app_config.PROJECT_NAME)
+from flask import Flask, make_response, render_template
+from render_utils import make_context, smarty_filter, urlencode_filter
+from werkzeug.debug import DebuggedApplication
 
-# Example application views
+app = Flask(__name__)
+app.debug = app_config.DEBUG
+
+app.add_template_filter(smarty_filter, name='smarty')
+app.add_template_filter(urlencode_filter, name='urlencode')
+
+logging.basicConfig(format=app_config.LOG_FORMAT)
+logger = logging.getLogger(__name__)
+logger.setLevel(app_config.LOG_LEVEL)
+
 @app.route('/')
+@oauth.oauth_required
 def index():
     """
     Example view demonstrating rendering a simple HTML page.
     """
-    return render_template('index.html', **make_context())
+    context = make_context()
 
-@app.route('/widget.html')
-def widget():
-    """
-    Embeddable widget example page.
-    """
-    return render_template('widget.html', **make_context())
+    return make_response(render_template('index.html', **context))
 
-@app.route('/test_widget.html')
-def test_widget():
-    """
-    Example page displaying widget at different embed sizes.
-    """
-    return render_template('test_widget.html', **make_context())
+app.register_blueprint(static.static)
+app.register_blueprint(oauth.oauth)
 
-@app.route('/test/test.html')
-def test_dir():
-    return render_template('index.html', **make_context())
+# Enable Werkzeug debug pages
+if app_config.DEBUG:
+    wsgi_app = DebuggedApplication(app, evalex=False)
+else:
+    wsgi_app = app
 
-# Render LESS files on-demand
-@app.route('/less/<string:filename>')
-def _less(filename):
-    try:
-        with open('less/%s' % filename) as f:
-            less = f.read()
-    except IOError:
-        abort(404)
-
-    r = envoy.run('node_modules/less/bin/lessc -', data=less)
-
-    return r.std_out, 200, { 'Content-Type': 'text/css' }
-
-# Render JST templates on-demand
-@app.route('/js/templates.js')
-def _templates_js():
-    r = envoy.run('node_modules/less/bin/jst --template underscore jst')
-
-    return r.std_out, 200, { 'Content-Type': 'application/javascript' }
-
-# Render application configuration
-@app.route('/js/app_config.js')
-def _app_config_js():
-    config = flatten_app_config()
-    js = 'window.APP_CONFIG = ' + json.dumps(config)
-
-    return js, 200, { 'Content-Type': 'application/javascript' }
-
-# Render copytext
-@app.route('/js/copy.js')
-def _copy_js():
-    copy = 'window.COPY = ' + copytext.Copy().json()
-
-    return copy, 200, { 'Content-Type': 'application/javascript' }
-
-# Server arbitrary static files on-demand
-@app.route('/<path:path>')
-def _static(path):
-    try:
-        with open('www/%s' % path) as f:
-            return f.read(), 200, { 'Content-Type': guess_type(path)[0] }
-    except IOError:
-        abort(404)
-
-@app.template_filter('urlencode')
-def urlencode_filter(s):
-    """
-    Filter to urlencode strings.
-    """
-    if type(s) == 'Markup':
-        s = s.unescape()
-
-    s = s.encode('utf8')
-    s = urllib.quote_plus(s)
-
-    return Markup(s)
-
+# Catch attempts to run the app directly
 if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port')
-    args = parser.parse_args()
-    server_port = 8000
-
-    if args.port:
-        server_port = int(args.port)
-
-    app.run(host='0.0.0.0', port=server_port, debug=app_config.DEBUG)
+    logging.error('This command has been removed! Please run "fab app" instead!')
