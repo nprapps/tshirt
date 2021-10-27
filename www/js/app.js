@@ -218,7 +218,7 @@ $(document).ready(function() {
         if (chapter != 'about') {
         	// add new video (if this is a chapter that has video
             // var video_path = 'https://player.vimeo.com/video/' + COPY[chapter]['vimeo_id'] + '?title=0&amp;byline=0&amp;portrait=0&amp;loop=0&amp;api=1&amp;player_id=video-' + chapter;
-            var video_path = 'https://www.youtube.com/embed/' + COPY[chapter]['youtube_id'] + '?player_id=video-' + chapter;
+            var video_path = 'https://www.youtube.com/embed/' + COPY[chapter]['youtube_id'] + '?modestbranding=1&widget_referrer=apps.npr.org&iv_load_policy=3&autoplay=1&iv_load_policy=3&rel=0&player_id=video-' + chapter;
             replace_iframe('video-' + chapter, video_path);
 
             var $iframe = $('#video-' + chapter)[0];
